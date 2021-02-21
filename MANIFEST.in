@@ -1,0 +1,2 @@
+include README.rst
+include yoga_image_optimizer/data/ui/main-window.glade
