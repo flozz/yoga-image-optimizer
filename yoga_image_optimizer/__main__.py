@@ -1,4 +1,4 @@
-from .appliation import YogaImageOptimizerApplication
+from .application import YogaImageOptimizerApplication
 
 
 def main():
