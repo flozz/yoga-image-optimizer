@@ -30,6 +30,14 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self._prepare_treeview()
 
+        open_image_dialog = self._builder.get_object("open_image_dialog")
+        open_image_dialog.add_buttons(
+            Gtk.STOCK_CANCEL,
+            Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OPEN,
+            Gtk.ResponseType.OK,
+        )
+
     def _prepare_treeview(self):
         self.image_store = Gtk.ListStore(
                 GdkPixbuf.Pixbuf,   # Preview
@@ -96,3 +104,34 @@ class MainWindow(Gtk.ApplicationWindow):
         renderer_status = Gtk.CellRendererText()
         column_status = Gtk.TreeViewColumn("Status", renderer_status, text=6)
         treeview_images.append_column(column_status)
+
+    def _on_add_image_button_clicked(self, widget):
+        open_image_dialog = self._builder.get_object("open_image_dialog")
+        open_image_dialog.show_all()
+
+    def _on_remove_image_button_clicked(self, widget):
+        treeview_images = self._builder.get_object("treeview-images")
+        selection = treeview_images.get_selection()
+
+        if selection.count_selected_rows() == 0:
+            return
+
+        store, iter_ = selection.get_selected()
+        store.remove(iter_)
+
+    def _on_clear_images_button_clicked(self, widget):
+        self.image_store.clear()
+
+    def _on_optimize_button_clicked(self, widget):
+        print("> OPTIMIZE")  # TODO
+
+    def _on_stop_optimization_button_clicked(self, widget):
+        print("[] STOP")  # TODO
+
+    def _on_open_image_dialog_response(self, widget, response):
+        widget.hide()
+        app = self.get_application()
+        print("RESPONSE", response)
+        if response == Gtk.ResponseType.OK:
+            for file_ in widget.get_filenames():
+                app.add_image(file_)

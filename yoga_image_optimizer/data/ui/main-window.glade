@@ -23,23 +23,25 @@
     <property name="title" translatable="yes">YOGA Image Optimizer</property>
     <property name="show_close_button">True</property>
     <child>
-      <object class="GtkButton">
+      <object class="GtkButton" id="add_image_button">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="tooltip_text" translatable="yes">Add an image</property>
         <property name="image">image-add</property>
         <property name="always_show_image">True</property>
+        <signal name="clicked" handler="_on_add_image_button_clicked" swapped="no"/>
       </object>
     </child>
     <child>
-      <object class="GtkButton">
+      <object class="GtkButton" id="remove_image_button">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="tooltip_text" translatable="yes">Remove selected image</property>
         <property name="image">image-remove</property>
         <property name="always_show_image">True</property>
+        <signal name="clicked" handler="_on_remove_image_button_clicked" swapped="no"/>
       </object>
       <packing>
         <property name="position">1</property>
@@ -56,7 +58,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkButton">
+      <object class="GtkButton" id="clear_images_button">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
@@ -64,18 +66,20 @@
         <property name="image">image-clear</property>
         <property name="relief">none</property>
         <property name="always_show_image">True</property>
+        <signal name="clicked" handler="_on_clear_images_button_clicked" swapped="no"/>
       </object>
       <packing>
         <property name="position">3</property>
       </packing>
     </child>
     <child>
-      <object class="GtkButton">
+      <object class="GtkButton" id="optimize_button">
         <property name="label" translatable="yes">Optimize</property>
         <property name="name">button-optimize</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <signal name="clicked" handler="_on_optimize_button_clicked" swapped="no"/>
       </object>
       <packing>
         <property name="pack_type">end</property>
@@ -83,12 +87,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkButton">
+      <object class="GtkButton" id="stop_optimization_button">
         <property name="label">gtk-stop</property>
         <property name="name">button-stop</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="use_stock">True</property>
+        <signal name="clicked" handler="_on_stop_optimization_button_clicked" swapped="no"/>
         <style>
           <class name="destructive-action"/>
         </style>
@@ -97,6 +102,50 @@
         <property name="pack_type">end</property>
         <property name="position">5</property>
       </packing>
+    </child>
+  </object>
+  <object class="GtkFileFilter" id="image_filefilter">
+    <mime-types>
+      <mime-type>image/jpeg</mime-type>
+      <mime-type>image/png</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkFileChooserDialog" id="open_image_dialog">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Open Images</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">dialog</property>
+    <property name="create_folders">False</property>
+    <property name="filter">image_filefilter</property>
+    <property name="select_multiple">True</property>
+    <signal name="response" handler="_on_open_image_dialog_response" swapped="no"/>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
     </child>
   </object>
   <object class="GtkBox" id="main-window-content">
