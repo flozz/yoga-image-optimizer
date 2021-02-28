@@ -1,4 +1,8 @@
 import os
+import concurrent.futures
+import threading
+
+import yoga.image
 
 from . import APPLICATION_ID
 from .main_window import MainWindow
@@ -21,6 +25,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
         self.current_state = None
         self._main_window = None
+
+        self._executor = None
+        self._futures = []
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
@@ -71,11 +78,54 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
-        # TODO
+
+        self._executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+        self._futures = []
+
+        for row in self._main_window.image_store:
+            input_path = row[7]
+            output_path = row[8]
+            self._futures.append(self._executor.submit(
+                yoga.image.optimize,
+                input_path,
+                output_path))
+
+        self._update_optimization_status()
 
     def stop_optimization(self):
+        if self.current_state != self.STATE_OPTIMIZE:
+            return
+
+        self._executor.shutdown(wait=False)
+        for future in self._futures:
+            future.cancel()
+
         self.switch_state(self.STATE_MANAGE_IMAGES)
-        # TODO
 
     def on_quit(self, action, param):
+        self.stop_optimization()
         self.quit()
+
+    def _update_optimization_status(self):
+        if self.current_state != self.STATE_OPTIMIZE:
+            return
+
+        image_store = self._main_window.image_store
+        is_running = False
+
+        for i in range(len(self._futures)):
+            future = self._futures[i]
+
+            if future.running():
+                image_store[i][6] = "🔄️ Optimizing..."
+                is_running = True
+            elif future.done():
+                image_store[i][6] = "✅️ Done"
+            else:
+                image_store[i][6] = "⏸️ Pending"
+
+        if is_running:
+            timer = threading.Timer(0.1, self._update_optimization_status)
+            timer.start()
+        else:
+            self.stop_optimization()

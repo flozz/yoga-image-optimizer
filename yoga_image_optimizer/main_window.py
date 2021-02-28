@@ -38,6 +38,8 @@ class MainWindow(Gtk.ApplicationWindow):
             Gtk.ResponseType.OK,
         )
 
+        self.connect("destroy", self._on_main_window_destroyed)
+
     def switch_state(self, state):
         app = self.get_application()
 
@@ -156,3 +158,7 @@ class MainWindow(Gtk.ApplicationWindow):
         if response == Gtk.ResponseType.OK:
             for file_ in widget.get_filenames():
                 app.add_image(file_)
+
+    def _on_main_window_destroyed(self, widget):
+        app = self.get_application()
+        app.stop_optimization()
