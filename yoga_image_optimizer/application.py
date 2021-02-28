@@ -1,9 +1,11 @@
+import os
+
 from . import APPLICATION_ID
 from .main_window import MainWindow
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gio  # noqa: E402
+from gi.repository import Gtk, Gio, GdkPixbuf  # noqa: E402
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -12,8 +14,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
         Gtk.Application.__init__(
                 self,
                 application_id=APPLICATION_ID,
-                flags=Gio.ApplicationFlags.FLAGS_NONE)
-        self._mainWindow = None
+                flags=Gio.ApplicationFlags.HANDLES_OPEN)
+
+        self._main_window = None
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
@@ -23,11 +26,35 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self.add_action(action_quit)
 
     def do_activate(self):
-        if not self._mainWindow:
-            self._mainWindow = MainWindow(self)
+        if not self._main_window:
+            self._main_window = MainWindow(self)
 
-        self._mainWindow.show()
-        self._mainWindow.present()
+        self._main_window.show()
+        self._main_window.present()
+
+    def do_open(self, files, file_count, hint):
+        self.do_activate()
+
+        for file_ in files:
+            self.add_image(file_.get_path())
+
+    def add_image(self, path):
+        input_path = os.path.abspath(path)
+        output_path = "".join([
+                os.path.splitext(path)[0],
+                ".opti",
+                os.path.splitext(path)[1]])
+        preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
+        self._main_window.image_store.append([
+            preview,
+            os.path.basename(input_path),
+            "XXX",  # TODO
+            "➡️",
+            os.path.basename(output_path),
+            "XXX",  # TODO
+            "",
+            input_path,
+            output_path])
 
     def on_quit(self, action, param):
         self.quit()

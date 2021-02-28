@@ -31,18 +31,20 @@ class MainWindow(Gtk.ApplicationWindow):
         self._prepare_treeview()
 
     def _prepare_treeview(self):
-        self._image_store = Gtk.ListStore(
-                GdkPixbuf.Pixbuf,  # Preview
-                str,               # Input Image
-                str,               # Input Format
-                str,               # ->
-                str,               # Output File
-                str,               # Output Format
-                str,               # Status
+        self.image_store = Gtk.ListStore(
+                GdkPixbuf.Pixbuf,   # Preview
+                str,                # Input Image (filename)
+                str,                # Input Format
+                str,                # ->
+                str,                # Output File (filename)
+                str,                # Output Format
+                str,                # Status
+                str,                # Input absolute path
+                str,                # Output absolute path
                 )
 
         treeview_images = self._builder.get_object("treeview-images")
-        treeview_images.set_model(self._image_store)
+        treeview_images.set_model(self.image_store)
 
         # Preview
         renderer_prevew = Gtk.CellRendererPixbuf()
