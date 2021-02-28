@@ -38,6 +38,25 @@ class MainWindow(Gtk.ApplicationWindow):
             Gtk.ResponseType.OK,
         )
 
+    def switch_state(self, state):
+        app = self.get_application()
+
+        if state == app.STATE_MANAGE_IMAGES:
+            self._builder.get_object("add_image_button").set_sensitive(True)
+            self._builder.get_object("remove_image_button").set_sensitive(True)
+            self._builder.get_object("clear_images_button").set_sensitive(True)
+            self._builder.get_object("optimize_button").show()
+            self._builder.get_object("stop_optimization_button").hide()
+            self._builder.get_object("images_treeview").set_sensitive(True)
+        elif state == app.STATE_OPTIMIZE:
+            self._builder.get_object("add_image_button").set_sensitive(False)
+            self._builder.get_object("remove_image_button").set_sensitive(False)  # noqa: E501
+            self._builder.get_object("clear_images_button").set_sensitive(False)  # noqa: E501
+            self._builder.get_object("optimize_button").hide()
+            self._builder.get_object("stop_optimization_button").show()
+            self._builder.get_object("images_treeview").set_sensitive(False)
+            self._builder.get_object("open_image_dialog").hide()
+
     def _prepare_treeview(self):
         self.image_store = Gtk.ListStore(
                 GdkPixbuf.Pixbuf,   # Preview
@@ -51,7 +70,7 @@ class MainWindow(Gtk.ApplicationWindow):
                 str,                # Output absolute path
                 )
 
-        treeview_images = self._builder.get_object("treeview-images")
+        treeview_images = self._builder.get_object("images_treeview")
         treeview_images.set_model(self.image_store)
 
         # Preview
@@ -110,7 +129,7 @@ class MainWindow(Gtk.ApplicationWindow):
         open_image_dialog.show_all()
 
     def _on_remove_image_button_clicked(self, widget):
-        treeview_images = self._builder.get_object("treeview-images")
+        treeview_images = self._builder.get_object("images_treeview")
         selection = treeview_images.get_selection()
 
         if selection.count_selected_rows() == 0:
@@ -123,10 +142,12 @@ class MainWindow(Gtk.ApplicationWindow):
         self.image_store.clear()
 
     def _on_optimize_button_clicked(self, widget):
-        print("> OPTIMIZE")  # TODO
+        app = self.get_application()
+        app.optimize()
 
     def _on_stop_optimization_button_clicked(self, widget):
-        print("[] STOP")  # TODO
+        app = self.get_application()
+        app.stop_optimization()
 
     def _on_open_image_dialog_response(self, widget, response):
         widget.hide()

@@ -10,12 +10,16 @@ from gi.repository import Gtk, Gio, GdkPixbuf  # noqa: E402
 
 class YogaImageOptimizerApplication(Gtk.Application):
 
+    STATE_MANAGE_IMAGES = "manage"
+    STATE_OPTIMIZE = "optimize"
+
     def __init__(self):
         Gtk.Application.__init__(
                 self,
                 application_id=APPLICATION_ID,
                 flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
+        self.current_state = None
         self._main_window = None
 
     def do_startup(self):
@@ -28,6 +32,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def do_activate(self):
         if not self._main_window:
             self._main_window = MainWindow(self)
+            self.switch_state(self.STATE_MANAGE_IMAGES)
 
         self._main_window.show()
         self._main_window.present()
@@ -35,8 +40,16 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def do_open(self, files, file_count, hint):
         self.do_activate()
 
+        if self.current_state == self.STATE_OPTIMIZE:
+            # TODO display a message to inform the user we cannot add files now
+            return
+
         for file_ in files:
             self.add_image(file_.get_path())
+
+    def switch_state(self, state):
+        self.current_state = state
+        self._main_window.switch_state(state)
 
     def add_image(self, path):
         input_path = os.path.abspath(path)
@@ -55,6 +68,14 @@ class YogaImageOptimizerApplication(Gtk.Application):
             "",
             input_path,
             output_path])
+
+    def optimize(self):
+        self.switch_state(self.STATE_OPTIMIZE)
+        # TODO
+
+    def stop_optimization(self):
+        self.switch_state(self.STATE_MANAGE_IMAGES)
+        # TODO
 
     def on_quit(self, action, param):
         self.quit()
