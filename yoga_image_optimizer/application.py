@@ -5,6 +5,7 @@ import threading
 import yoga.image
 
 from . import APPLICATION_ID
+from . import helpers
 from .main_window import MainWindow
 
 import gi
@@ -17,6 +18,29 @@ class YogaImageOptimizerApplication(Gtk.Application):
     STATE_MANAGE_IMAGES = "manage"
     STATE_OPTIMIZE = "optimize"
 
+    STATUS_NONE = 0
+    STATUS_PENDING = 1
+    STATUS_IN_PROGRESS = 2
+    STATUS_DONE = 3
+
+    STORE_FIELDS = {
+        "input_file":            {"id":  0, "label": "",              "type": str},  # noqa: E501
+        "output_file":           {"id":  1, "label": "",              "type": str},  # noqa: E501
+        "input_file_display":    {"id":  2, "label": "Input Image",   "type": str},  # noqa: E501
+        "output_file_display":   {"id":  3, "label": "Output Image",  "type": str},  # noqa: E501
+        "input_size":            {"id":  4, "label": "",              "type": int},  # noqa: E501
+        "output_size":           {"id":  5, "label": "",              "type": int},  # noqa: E501
+        "input_size_display":    {"id":  6, "label": "Input Size",    "type": str},  # noqa: E501
+        "output_size_display":   {"id":  7, "label": "Output Size",   "type": str},  # noqa: E501
+        "input_format":          {"id":  8, "label": "Input Format",  "type": str},  # noqa: E501
+        "output_format":         {"id":  9, "label": "",              "type": str},  # noqa: E501
+        "output_format_display": {"id": 10, "label": "Output Format", "type": str},  # noqa: E501
+        "preview":               {"id": 11, "label": "",              "type": GdkPixbuf.Pixbuf},  # noqa: E501
+        "separator":             {"id": 12, "label": "",              "type": str},  # noqa: E501
+        "status":                {"id": 13, "label": "",              "type": int},  # noqa: E501
+        "status_display":        {"id": 14, "label": "Status",        "type": str},  # noqa: E501
+    }
+
     def __init__(self):
         Gtk.Application.__init__(
                 self,
@@ -24,8 +48,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
         self.current_state = None
-        self._main_window = None
 
+        store_fields = sorted(self.STORE_FIELDS.values(), key=lambda v: v["id"])  # noqa: E501
+        self.image_store = Gtk.ListStore(*[f["type"] for f in store_fields])
+        self._main_window = None
         self._executor = None
         self._futures = []
 
@@ -61,20 +87,33 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def add_image(self, path):
         input_path = os.path.abspath(path)
         output_path = "".join([
-                os.path.splitext(path)[0],
+                os.path.splitext(input_path)[0],
                 ".opti",
-                os.path.splitext(path)[1]])
+                os.path.splitext(input_path)[1]])
         preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
-        self._main_window.image_store.append([
-            preview,
-            os.path.basename(input_path),
-            "XXX",  # TODO
-            "➡️",
-            os.path.basename(output_path),
-            "XXX",  # TODO
-            "",
-            input_path,
-            output_path])
+
+        data = {
+            "input_file": input_path,
+            "output_file": output_path,
+            "input_file_display": os.path.basename(input_path),
+            "output_file_display": os.path.basename(output_path),
+            "input_size": 0,  # TODO
+            "output_size": 0,  # TODO
+            "input_size_display": "",  # TODO
+            "output_size_display": "",  # TODO
+            "input_format": "",  # TODO
+            "output_format": "",  # TODO
+            "output_format_display": "",  # TODO
+            "preview": preview,
+            "separator": "➡️",
+            "status": 0,
+            "status_display": "",
+        }
+
+        helpers.gtk_list_store_add_row(
+                self.image_store,
+                self.STORE_FIELDS,
+                data)
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
@@ -82,9 +121,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
         self._futures = []
 
-        for row in self._main_window.image_store:
-            input_path = row[7]
-            output_path = row[8]
+        for row in self.image_store:
+            input_path = row[self.STORE_FIELDS["input_file"]["id"]]
+            output_path = row[self.STORE_FIELDS["output_file"]["id"]]
             self._futures.append(self._executor.submit(
                 yoga.image.optimize,
                 input_path,
@@ -110,19 +149,39 @@ class YogaImageOptimizerApplication(Gtk.Application):
         if self.current_state != self.STATE_OPTIMIZE:
             return
 
-        image_store = self._main_window.image_store
         is_running = False
 
         for i in range(len(self._futures)):
             future = self._futures[i]
 
             if future.running():
-                image_store[i][6] = "🔄️ Optimizing..."
+                helpers.gtk_tree_model_row_update(
+                    self.image_store[i],
+                    self.STORE_FIELDS,
+                    {
+                        "status": self.STATUS_IN_PROGRESS,
+                        "status_display": "🔄️ In progress"
+                    }
+                )
                 is_running = True
             elif future.done():
-                image_store[i][6] = "✅️ Done"
+                helpers.gtk_tree_model_row_update(
+                    self.image_store[i],
+                    self.STORE_FIELDS,
+                    {
+                        "status": self.STATUS_DONE,
+                        "status_display": "✅️ Done"
+                    }
+                )
             else:
-                image_store[i][6] = "⏸️ Pending"
+                helpers.gtk_tree_model_row_update(
+                    self.image_store[i],
+                    self.STORE_FIELDS,
+                    {
+                        "status": self.STATUS_PENDING,
+                        "status_display": "⏸️ Pending"
+                    }
+                )
 
         if is_running:
             timer = threading.Timer(0.1, self._update_optimization_status)

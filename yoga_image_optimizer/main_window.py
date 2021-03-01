@@ -3,7 +3,7 @@ from .helpers import find_data_path
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GdkPixbuf  # noqa: E402
+from gi.repository import Gtk  # noqa: E402
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -14,7 +14,7 @@ class MainWindow(Gtk.ApplicationWindow):
             application=app,
             title=APPLICATION_NAME,
             # icon_name="TODO",
-            default_width=600,
+            default_width=800,
             default_height=500,
             resizable=True)
 
@@ -60,71 +60,61 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("open_image_dialog").hide()
 
     def _prepare_treeview(self):
-        self.image_store = Gtk.ListStore(
-                GdkPixbuf.Pixbuf,   # Preview
-                str,                # Input Image (filename)
-                str,                # Input Format
-                str,                # ->
-                str,                # Output File (filename)
-                str,                # Output Format
-                str,                # Status
-                str,                # Input absolute path
-                str,                # Output absolute path
-                )
+        app = self.get_application()
 
         treeview_images = self._builder.get_object("images_treeview")
-        treeview_images.set_model(self.image_store)
+        treeview_images.set_model(app.image_store)
+
+        # Status
+        treeview_images.append_column(Gtk.TreeViewColumn(
+                app.STORE_FIELDS["status_display"]["label"],
+                Gtk.CellRendererText(),
+                text=app.STORE_FIELDS["status_display"]["id"]))
 
         # Preview
         renderer_prevew = Gtk.CellRendererPixbuf()
         column_preview = Gtk.TreeViewColumn(None, renderer_prevew)
-        column_preview.add_attribute(renderer_prevew, "pixbuf", 0)
+        column_preview.add_attribute(
+                renderer_prevew,
+                "pixbuf",
+                app.STORE_FIELDS["preview"]["id"])
         treeview_images.append_column(column_preview)
 
         # Input Image
-        renderer_input_image = Gtk.CellRendererText()
-        column_input_image = Gtk.TreeViewColumn(
-                "Input Image",
-                renderer_input_image,
-                text=1)
-        treeview_images.append_column(column_input_image)
+        treeview_images.append_column(Gtk.TreeViewColumn(
+                app.STORE_FIELDS["input_file_display"]["label"],
+                Gtk.CellRendererText(),
+                text=app.STORE_FIELDS["input_file_display"]["id"]))
 
-        # Input Format
-        renderer_input_format = Gtk.CellRendererText()
-        column_input_format = Gtk.TreeViewColumn(
-                "Input Format",
-                renderer_input_format,
-                text=2)
-        treeview_images.append_column(column_input_format)
+        # Input Size
+        treeview_images.append_column(Gtk.TreeViewColumn(
+                app.STORE_FIELDS["input_size_display"]["label"],
+                Gtk.CellRendererText(),
+                text=app.STORE_FIELDS["input_size_display"]["id"]))
 
         # ->
-        renderer_separator = Gtk.CellRendererText()
-        column_separator = Gtk.TreeViewColumn(
-                None,
-                renderer_separator,
-                text=3)
-        treeview_images.append_column(column_separator)
+        treeview_images.append_column(Gtk.TreeViewColumn(
+                app.STORE_FIELDS["separator"]["label"],
+                Gtk.CellRendererText(),
+                text=app.STORE_FIELDS["separator"]["id"]))
 
         # Output Image
-        renderer_output_image = Gtk.CellRendererText()
-        column_output_image = Gtk.TreeViewColumn(
-                "Output Image",
-                renderer_output_image,
-                text=4)
-        treeview_images.append_column(column_output_image)
+        treeview_images.append_column(Gtk.TreeViewColumn(
+                app.STORE_FIELDS["output_file_display"]["label"],
+                Gtk.CellRendererText(),
+                text=app.STORE_FIELDS["output_file_display"]["id"]))
 
         # Output Format
-        renderer_output_format = Gtk.CellRendererText()
-        column_output_format = Gtk.TreeViewColumn(
-                "Output Format",
-                renderer_output_format,
-                text=5)
-        treeview_images.append_column(column_output_format)
+        treeview_images.append_column(Gtk.TreeViewColumn(
+                app.STORE_FIELDS["output_format_display"]["label"],
+                Gtk.CellRendererText(),
+                text=app.STORE_FIELDS["output_format_display"]["id"]))
 
-        # Status
-        renderer_status = Gtk.CellRendererText()
-        column_status = Gtk.TreeViewColumn("Status", renderer_status, text=6)
-        treeview_images.append_column(column_status)
+        # Output Size
+        treeview_images.append_column(Gtk.TreeViewColumn(
+                app.STORE_FIELDS["output_size_display"]["label"],
+                Gtk.CellRendererText(),
+                text=app.STORE_FIELDS["output_size_display"]["id"]))
 
     def _on_add_image_button_clicked(self, widget):
         open_image_dialog = self._builder.get_object("open_image_dialog")
@@ -141,7 +131,8 @@ class MainWindow(Gtk.ApplicationWindow):
         store.remove(iter_)
 
     def _on_clear_images_button_clicked(self, widget):
-        self.image_store.clear()
+        app = self.get_application()
+        app.image_store.clear()
 
     def _on_optimize_button_clicked(self, widget):
         app = self.get_application()
