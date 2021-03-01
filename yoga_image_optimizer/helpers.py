@@ -32,3 +32,49 @@ def gtk_tree_model_row_update(row, fields, data):
     """
     for field_name, value in data.items():
         row[fields[field_name]["id"]] = value
+
+
+def gtk_tree_model_row_get_data(row, fields):
+    """Get a data dict from a GTK TreeModelRow.
+
+    :param Gtk.TreeModelRow row: The GTK TreeModelRow.
+    :param dict fields: The fields definition
+            (``{"field_name": {"id": 0, "label": "", "type": str}}``).
+    :rtype": dict
+    :return: The data dict (e.g. ``{"field_name": "value"}``)
+    """
+    result = {}
+
+    for field_name, field_info in fields.items():
+        result[field_name] = row[field_info["id"]]
+
+    return result
+
+
+def human_readable_file_size(size):
+    """Returns human readable file size (e.g. "11.4 kiB").
+
+    .. NOTE::
+
+       This function do not supports size > 1024 GiB.
+
+    :param int size: File size in Bytes.
+    :rtype: str
+
+    >>> human_readable_file_size(123)
+    '123 Bytes'
+    >>> human_readable_file_size(1024)
+    '1.00 kiB'
+    >>> human_readable_file_size(1024 * 1024)
+    '1.00 MiB'
+    >>> human_readable_file_size(1024 * 1024 * 1024)
+    '1.00 GiB'
+    >>> human_readable_file_size(1024 + 512)
+    '1.50 kiB'
+    """
+    if size < 1024:
+        return "%i Bytes" % size
+    for u, d in [("kiB", 1024 ** 1), ("MiB", 1024 ** 2), ("GiB", 1024 ** 3)]:
+        if size / d < 1024:
+            return "%.2f %s" % (size / d, u)
+    return "∞"

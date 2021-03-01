@@ -91,16 +91,17 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 ".opti",
                 os.path.splitext(input_path)[1]])
         preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
+        input_size = os.stat(input_path).st_size
 
         data = {
             "input_file": input_path,
             "output_file": output_path,
             "input_file_display": os.path.basename(input_path),
             "output_file_display": os.path.basename(output_path),
-            "input_size": 0,  # TODO
-            "output_size": 0,  # TODO
-            "input_size_display": "",  # TODO
-            "output_size_display": "",  # TODO
+            "input_size": input_size,
+            "output_size": 0,
+            "input_size_display": helpers.human_readable_file_size(input_size),
+            "output_size_display": "",
             "input_format": "",  # TODO
             "output_format": "",  # TODO
             "output_format_display": "",  # TODO
@@ -160,17 +161,38 @@ class YogaImageOptimizerApplication(Gtk.Application):
                     self.STORE_FIELDS,
                     {
                         "status": self.STATUS_IN_PROGRESS,
-                        "status_display": "🔄️ In progress"
+                        "status_display": "🔄️ In progress",
+                        "output_size": 0,
+                        "output_size_display": "",
                     }
                 )
                 is_running = True
             elif future.done():
+                image_data = helpers.gtk_tree_model_row_get_data(
+                    self.image_store[i],
+                    self.STORE_FIELDS)
+
+                input_size = image_data["input_size"]
+                output_size = os.stat(image_data["output_file"]).st_size
+
+                size_delta = min(input_size, output_size) / max(input_size, output_size) * 100  # noqa: E501
+                if output_size <= input_size:
+                    size_delta = 100 - size_delta
+
+                output_size_display = "%s (%s%i %%)" % (
+                    helpers.human_readable_file_size(output_size),
+                    "-" if output_size <= output_size else "+",
+                    size_delta,
+                )
+
                 helpers.gtk_tree_model_row_update(
                     self.image_store[i],
                     self.STORE_FIELDS,
                     {
                         "status": self.STATUS_DONE,
-                        "status_display": "✅️ Done"
+                        "status_display": "✅️ Done",
+                        "output_size": output_size,
+                        "output_size_display": output_size_display,
                     }
                 )
             else:
@@ -179,7 +201,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
                     self.STORE_FIELDS,
                     {
                         "status": self.STATUS_PENDING,
-                        "status_display": "⏸️ Pending"
+                        "status_display": "⏸️ Pending",
+                        "output_size": 0,
+                        "output_size_display": "",
                     }
                 )
 
