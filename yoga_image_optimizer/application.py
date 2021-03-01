@@ -175,11 +175,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 input_size = image_data["input_size"]
                 output_size = os.stat(image_data["output_file"]).st_size
 
-                size_delta = min(input_size, output_size) / max(input_size, output_size) * 100  # noqa: E501
-                if output_size <= input_size:
-                    size_delta = 100 - size_delta
+                size_delta = 100 - min(input_size, output_size) / max(input_size, output_size) * 100  # noqa: E501
 
-                output_size_display = "%s (%s%i %%)" % (
+                output_size_display = "%s (%s%.1f %%)" % (
                     helpers.human_readable_file_size(output_size),
                     "-" if output_size <= output_size else "+",
                     size_delta,
