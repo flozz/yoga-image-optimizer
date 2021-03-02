@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.9]
 
     steps:
 
@@ -30,7 +30,3 @@ jobs:
       - name: Lint with flake8
         run: |
           python3 -m nox --session lint
-
-      - name: Test with pytest
-        run: |
-          python3 -m nox --session test-${{ matrix.python-version }}
