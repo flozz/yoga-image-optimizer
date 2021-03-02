@@ -32,6 +32,7 @@ setup(
         "dev": [
             "nox",
             "flake8",
+            "pytest",
         ]},
 
     entry_points={
