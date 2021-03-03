@@ -10,12 +10,17 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.9]
+        python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
 
       - name: Pull the repository
         uses: actions/checkout@v2
+
+      - name: Install OS Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
@@ -30,3 +35,7 @@ jobs:
       - name: Lint with flake8
         run: |
           python3 -m nox --session lint
+
+      - name: Test with pytest
+        run: |
+          python3 -m nox --session test-${{ matrix.python-version }}

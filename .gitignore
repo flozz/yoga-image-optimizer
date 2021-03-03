@@ -2,3 +2,6 @@ __env__
 *.egg-info
 __pycache__
 *~
+*#
+*.pyc
+images/

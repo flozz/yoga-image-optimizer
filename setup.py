@@ -27,6 +27,8 @@ setup(
 
     install_requires=[
         "yoga>=0.11.0",
+        "pycairo",
+        "PyGObject>=3.26",
         ],
     extras_require={
         "dev": [

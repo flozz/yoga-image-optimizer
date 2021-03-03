@@ -8,11 +8,8 @@ def lint(session):
 
 
 # NOTE All Gtk dependencies and introspection files must be installed for this
-# to work. You will also need the python3-gi package for the right Python3
-# version.
-@nox.session(
-        python=["3.6", "3.7", "3.8", "3.9"],
-        venv_params=["--system-site-packages"])
+# to work.
+@nox.session(python=["3.6", "3.7", "3.8", "3.9"])
 def test(session):
     session.install("pytest")
     session.install(".")
