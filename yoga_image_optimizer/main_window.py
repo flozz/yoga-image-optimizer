@@ -1,9 +1,11 @@
+import os
+
 from . import APPLICATION_NAME
-from .helpers import find_data_path
+from .helpers import find_data_path, gvfs_uri_to_local_path
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk  # noqa: E402
+from gi.repository import Gtk, Gdk  # noqa: E402
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -39,6 +41,16 @@ class MainWindow(Gtk.ApplicationWindow):
         )
 
         self.connect("destroy", self._on_main_window_destroyed)
+
+        # Drag & drop files
+        self.drag_dest_set(
+                Gtk.DestDefaults.ALL,
+                [Gtk.TargetEntry.new(
+                    "text/uri-list",
+                    Gtk.TargetFlags.OTHER_APP,
+                    0)],
+                Gdk.DragAction.COPY)
+        self.connect("drag-data-received", self._on_drag_data_received)
 
     def switch_state(self, state):
         app = self.get_application()
@@ -153,3 +165,11 @@ class MainWindow(Gtk.ApplicationWindow):
     def _on_main_window_destroyed(self, widget):
         app = self.get_application()
         app.stop_optimization()
+
+    def _on_drag_data_received(self, widget, drag_context, x, y, data, info, time):  # noqa: E501
+        app = self.get_application()
+        for uri in data.get_uris():
+            path = gvfs_uri_to_local_path(uri)
+            if not os.path.isfile(path):
+                continue
+            app.add_image(path)
