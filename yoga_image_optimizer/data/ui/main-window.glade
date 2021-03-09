@@ -180,7 +180,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkAlignment">
+      <object class="GtkAlignment" id="output_image_options">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="top_padding">12</property>
@@ -236,6 +236,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
+                        <signal name="changed" handler="_on_output_file_entry_changed" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

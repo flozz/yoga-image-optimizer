@@ -1,7 +1,7 @@
 import os
 
 from . import APPLICATION_NAME
-from .helpers import find_data_path, gvfs_uri_to_local_path
+from . import helpers
 
 import gi
 gi.require_version("Gtk", "3.0")
@@ -21,7 +21,7 @@ class MainWindow(Gtk.ApplicationWindow):
             resizable=True)
 
         self._builder = Gtk.Builder()
-        self._builder.add_from_file(find_data_path("ui/main-window.glade"))
+        self._builder.add_from_file(helpers.find_data_path("ui/main-window.glade"))
         self._builder.connect_signals(self)
 
         header = self._builder.get_object("main-window-header")
@@ -169,7 +169,7 @@ class MainWindow(Gtk.ApplicationWindow):
     def _on_drag_data_received(self, widget, drag_context, x, y, data, info, time):  # noqa: E501
         app = self.get_application()
         for uri in data.get_uris():
-            path = gvfs_uri_to_local_path(uri)
+            path = helpers.gvfs_uri_to_local_path(uri)
             if not os.path.isfile(path):
                 continue
             app.add_image(path)
@@ -178,11 +178,29 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
         image_store, iter_ = selection.get_selected()
         output_file_entry = self._builder.get_object("output_file_entry")
+        output_image_options = self._builder.get_object("output_image_options")
 
         if not iter_:
+            output_image_options.hide()
             return
+        else:
+            output_image_options.show()
 
         output_file = image_store[iter_][app.STORE_FIELDS["output_file"]["id"]]
 
         output_file_entry.set_text(output_file)
         print("selection changed", image_store[iter_][0])
+
+    def _on_output_file_entry_changed(self, entry):
+        app = self.get_application()
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+        image_store, iter_ = selection.get_selected()
+        row = image_store[iter_]
+
+        output_file = os.path.abspath(entry.get_text())
+        output_file_display = os.path.basename(output_file)
+        helpers.gtk_tree_model_row_update(row, app.STORE_FIELDS, {
+            "output_file": output_file,
+            "output_file_display": output_file_display,
+            })
