@@ -90,6 +90,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 os.path.splitext(input_path)[0],
                 ".opti",
                 os.path.splitext(input_path)[1]])
+        output_path_display = os.path.relpath(
+                output_path, start=os.path.dirname(input_path))
         preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
         input_size = os.stat(input_path).st_size
 
@@ -97,7 +99,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
             "input_file": input_path,
             "output_file": output_path,
             "input_file_display": os.path.basename(input_path),
-            "output_file_display": os.path.basename(output_path),
+            "output_file_display": output_path_display,
             "input_size": input_size,
             "output_size": 0,
             "input_size_display": helpers.human_readable_file_size(input_size),

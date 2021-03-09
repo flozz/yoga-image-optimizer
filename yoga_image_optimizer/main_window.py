@@ -198,8 +198,11 @@ class MainWindow(Gtk.ApplicationWindow):
         image_store, iter_ = selection.get_selected()
         row = image_store[iter_]
 
+        row_data = helpers.gtk_tree_model_row_get_data(row, app.STORE_FIELDS)
+
         output_file = os.path.abspath(entry.get_text())
-        output_file_display = os.path.basename(output_file)
+        output_file_display = os.path.relpath(
+                output_file, start=os.path.dirname(row_data["input_file"]))
         helpers.gtk_tree_model_row_update(row, app.STORE_FIELDS, {
             "output_file": output_file,
             "output_file_display": output_file_display,
