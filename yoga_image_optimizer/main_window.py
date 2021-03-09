@@ -173,3 +173,16 @@ class MainWindow(Gtk.ApplicationWindow):
             if not os.path.isfile(path):
                 continue
             app.add_image(path)
+
+    def _on_image_treeview_selection_changed(self, selection):
+        app = self.get_application()
+        image_store, iter_ = selection.get_selected()
+        output_file_entry = self._builder.get_object("output_file_entry")
+
+        if not iter_:
+            return
+
+        output_file = image_store[iter_][app.STORE_FIELDS["output_file"]["id"]]
+
+        output_file_entry.set_text(output_file)
+        print("selection changed", image_store[iter_][0])
