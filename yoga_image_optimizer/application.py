@@ -1,6 +1,5 @@
 import os
 import concurrent.futures
-import threading
 
 import yoga.image
 
@@ -10,7 +9,7 @@ from .main_window import MainWindow
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gio, GdkPixbuf  # noqa: E402
+from gi.repository import Gtk, GLib, Gio, GdkPixbuf  # noqa: E402
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -208,7 +207,6 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 )
 
         if is_running:
-            timer = threading.Timer(0.1, self._update_optimization_status)
-            timer.start()
+            GLib.timeout_add_seconds(0.1, self._update_optimization_status)
         else:
             self.stop_optimization()
