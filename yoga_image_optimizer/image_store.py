@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Gio, GdkPixbuf
+from gi.repository import Gtk, GdkPixbuf
 
 
 class ImageStore(object):

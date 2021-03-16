@@ -21,7 +21,7 @@ class MainWindow(Gtk.ApplicationWindow):
             resizable=True)
 
         self._builder = Gtk.Builder()
-        self._builder.add_from_file(helpers.find_data_path("ui/main-window.glade"))
+        self._builder.add_from_file(helpers.find_data_path("ui/main-window.glade"))  # noqa: E501
         self._builder.connect_signals(self)
 
         header = self._builder.get_object("main-window-header")
@@ -189,7 +189,6 @@ class MainWindow(Gtk.ApplicationWindow):
         output_file = image_store[iter_][app.STORE_FIELDS["output_file"]["id"]]
 
         output_file_entry.set_text(output_file)
-        print("selection changed", image_store[iter_][0])
 
     def _on_output_file_entry_changed(self, entry):
         app = self.get_application()
