@@ -99,6 +99,18 @@ class ImageStore(object):
 
         return result
 
+    def get_all(self):
+        """Get all rows of the store.
+
+        :rtype: generator
+
+        >>> image_store = ImageStore()
+        >>> image_store.get_all()
+        <generator object ImageStore.get_all at ...>
+        """
+        for i in range(self.length):
+            yield self.get(i)
+
     def remove(self, index, **kwargs):
         """Removes a row from the store.
 
