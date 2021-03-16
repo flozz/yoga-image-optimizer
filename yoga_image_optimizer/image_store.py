@@ -30,7 +30,7 @@ class ImageStore(object):
     @property
     def length(self):
         """The length of the store."""
-        pass  # TODO
+        return len(self.gtk_list_store)
 
     def append(self, **kwargs):
         """Appends a row to the image store.
@@ -51,7 +51,15 @@ class ImageStore(object):
             ...
         KeyError: "Invalid field 'foo'"
         """
-        pass  # TODO
+        row = [None] * len(self.FIELDS)
+
+        for key in kwargs:
+            if key not in self.FIELDS:
+                raise KeyError("Invalid field '%s'" % key)
+            field_info = self.FIELDS[key]
+            row[field_info["id"]] = kwargs[key]
+
+        self.gtk_list_store.append(row)
 
     def clear(self):
         """Clears the store.
@@ -64,7 +72,7 @@ class ImageStore(object):
         >>> image_store.length
         0
         """
-        pass  # TODO
+        self.gtk_list_store.clear()
 
     def get(self, index):
         """Gets row data.
@@ -72,18 +80,24 @@ class ImageStore(object):
         :param int,gtk.TreeIter index: The index of the row.
 
         :rtype: dict
-        :returns: The row data
+        :returns: The row data (e.g. ``{"field_name": "value"}``.
 
         >>> image_store = ImageStore()
         >>> image_store.append()
         >>> image_store.get(0)
-        { ... }
+        {...}
         >>> image_store.get(1)
         Traceback (most recent call last):
             ...
-        IndexError: "list index out of range"
+        IndexError: ...
         """
-        pass  # TODO
+        row = self.gtk_list_store[index]
+        result = {}
+
+        for field_name, field_info in self.FIELDS.items():
+            result[field_name] = row[field_info["id"]]
+
+        return result
 
     def remove(self, index, **kwargs):
         """Removes a row from the store.
@@ -100,9 +114,13 @@ class ImageStore(object):
         >>> image_store.remove(0)
         Traceback (most recent call last):
             ...
-        IndexError: "list index out of range"
+        IndexError: ...
         """
-        pass  # TODO
+        try:
+            iter_ = self.gtk_list_store.get_iter(index)
+        except ValueError as error:
+            raise IndexError(error)
+        self.gtk_list_store.remove(iter_)
 
     def update(self, index, **kwargs):
         """Updates a row.
@@ -124,6 +142,12 @@ class ImageStore(object):
         >>> image_store.update(1, output_file="ccc.png")
         Traceback (most recent call last):
             ...
-        IndexError: "list index out of range"
+        IndexError: ...
         """
-        pass  # TODO
+        row = self.gtk_list_store[index]
+
+        for key in kwargs:
+            if key not in self.FIELDS:
+                raise KeyError("Invalid field '%s'" % key)
+            field_info = self.FIELDS[key]
+            row[field_info["id"]] = kwargs[key]
