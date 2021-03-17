@@ -75,13 +75,13 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
 
         treeview_images = self._builder.get_object("images_treeview")
-        treeview_images.set_model(app.image_store)
+        treeview_images.set_model(app.image_store.gtk_list_store)
 
         # Status
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["status_display"]["label"],
+                app.image_store.FIELDS["status_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["status_display"]["id"]))
+                text=app.image_store.FIELDS["status_display"]["id"]))
 
         # Preview
         renderer_prevew = Gtk.CellRendererPixbuf()
@@ -89,44 +89,45 @@ class MainWindow(Gtk.ApplicationWindow):
         column_preview.add_attribute(
                 renderer_prevew,
                 "pixbuf",
-                app.STORE_FIELDS["preview"]["id"])
+                app.image_store.FIELDS["preview"]["id"])
         treeview_images.append_column(column_preview)
 
         # Input Image
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["input_file_display"]["label"],
+                app.image_store.FIELDS["input_file_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["input_file_display"]["id"]))
+                text=app.image_store.FIELDS["input_file_display"]["id"]))
 
         # Input Size
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["input_size_display"]["label"],
+                app.image_store.FIELDS["input_size_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["input_size_display"]["id"]))
+                text=app.image_store.FIELDS["input_size_display"]["id"]))
 
         # ->
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["separator"]["label"],
+
+                app.image_store.FIELDS["separator"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["separator"]["id"]))
+                text=app.image_store.FIELDS["separator"]["id"]))
 
         # Output Image
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["output_file_display"]["label"],
+                app.image_store.FIELDS["output_file_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["output_file_display"]["id"]))
+                text=app.image_store.FIELDS["output_file_display"]["id"]))
 
         # Output Format
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["output_format_display"]["label"],
+                app.image_store.FIELDS["output_format_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["output_format_display"]["id"]))
+                text=app.image_store.FIELDS["output_format_display"]["id"]))
 
         # Output Size
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["output_size_display"]["label"],
+                app.image_store.FIELDS["output_size_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["output_size_display"]["id"]))
+                text=app.image_store.FIELDS["output_size_display"]["id"]))
 
     def _on_add_image_button_clicked(self, widget):
         open_image_dialog = self._builder.get_object("open_image_dialog")
@@ -176,7 +177,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_image_treeview_selection_changed(self, selection):
         app = self.get_application()
-        image_store, iter_ = selection.get_selected()
+        _, iter_ = selection.get_selected()
         output_file_entry = self._builder.get_object("output_file_entry")
         output_image_options = self._builder.get_object("output_image_options")
 
@@ -186,23 +187,22 @@ class MainWindow(Gtk.ApplicationWindow):
         else:
             output_image_options.show()
 
-        output_file = image_store[iter_][app.STORE_FIELDS["output_file"]["id"]]
-
+        output_file = app.image_store.get(iter_)["output_file"]
         output_file_entry.set_text(output_file)
 
     def _on_output_file_entry_changed(self, entry):
         app = self.get_application()
         treeview_images = self._builder.get_object("images_treeview")
         selection = treeview_images.get_selection()
-        image_store, iter_ = selection.get_selected()
-        row = image_store[iter_]
+        _, iter_ = selection.get_selected()
 
-        row_data = helpers.gtk_tree_model_row_get_data(row, app.STORE_FIELDS)
+        image_data = app.image_store.get(iter_)
 
         output_file = os.path.abspath(entry.get_text())
         output_file_display = os.path.relpath(
-                output_file, start=os.path.dirname(row_data["input_file"]))
-        helpers.gtk_tree_model_row_update(row, app.STORE_FIELDS, {
-            "output_file": output_file,
-            "output_file_display": output_file_display,
-            })
+                output_file, start=os.path.dirname(image_data["input_file"]))
+
+        app.image_store.update(
+                iter_,
+                output_file=output_file,
+                output_file_display=output_file_display)
