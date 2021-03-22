@@ -111,7 +111,7 @@ class ImageStore(object):
         for i in range(self.length):
             yield self.get(i)
 
-    def remove(self, index, **kwargs):
+    def remove(self, index):
         """Removes a row from the store.
 
         :param int,gtk.TreeIter index: The index of the row.
