@@ -184,7 +184,9 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
         _, iter_ = selection.get_selected()
         output_image_options = self._builder.get_object("output_image_options")
-        output_format_combobox = self._builder.get_object("output_format_combobox")
+        output_format_combobox = self._builder.get_object(
+            "output_format_combobox"
+        )
         output_file_entry = self._builder.get_object("output_file_entry")
 
         if not iter_:
@@ -193,7 +195,9 @@ class MainWindow(Gtk.ApplicationWindow):
         else:
             output_image_options.show()
 
-        output_format_combobox.set_active(_COMBOBOX_FORMATS[app.image_store.get(iter_)["output_format"]])
+        output_format_combobox.set_active(
+            _COMBOBOX_FORMATS[app.image_store.get(iter_)["output_format"]]
+        )
 
         output_file = app.image_store.get(iter_)["output_file"]
         output_file_entry.set_text(output_file)
@@ -222,7 +226,8 @@ class MainWindow(Gtk.ApplicationWindow):
         selection = treeview_images.get_selection()
         _, iter_ = selection.get_selected()
 
-        output_format_combobox = self._builder.get_object("output_format_combobox")
+        output_format_combobox = self._builder.get_object(
+                "output_format_combobox")
 
         output_format_index = output_format_combobox.get_active()
         output_format = _COMBOBOX_FORMATS[output_format_index]

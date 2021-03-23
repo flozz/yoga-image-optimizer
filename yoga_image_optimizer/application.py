@@ -4,7 +4,6 @@ import concurrent.futures
 import yoga.image
 
 from . import APPLICATION_ID
-from . import helpers
 from .main_window import MainWindow
 from .image_store import ImageStore
 
