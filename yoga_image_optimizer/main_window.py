@@ -204,16 +204,12 @@ class MainWindow(Gtk.ApplicationWindow):
         selection = treeview_images.get_selection()
         _, iter_ = selection.get_selected()
 
-        image_data = app.image_store.get(iter_)
-
         output_file = os.path.abspath(entry.get_text())
-        output_file_display = os.path.relpath(
-                output_file, start=os.path.dirname(image_data["input_file"]))
 
         app.image_store.update(
-                iter_,
-                output_file=output_file,
-                output_file_display=output_file_display)
+            iter_,
+            output_file=output_file,
+        )
 
     def _on_output_format_combobox_changed(self, combobox):
         _COMBOBOX_FORMATS = {
@@ -232,6 +228,8 @@ class MainWindow(Gtk.ApplicationWindow):
         output_format = _COMBOBOX_FORMATS[output_format_index]
 
         app.image_store.update(
-                iter_,
-                output_format=output_format,
-                output_format_display=output_format)
+            iter_,
+            output_format=output_format,
+        )
+
+        self._on_image_treeview_selection_changed(selection)

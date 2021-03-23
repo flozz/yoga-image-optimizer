@@ -25,11 +25,6 @@ class YogaImageOptimizerApplication(Gtk.Application):
     STATE_MANAGE_IMAGES = "manage"
     STATE_OPTIMIZE = "optimize"
 
-    STATUS_NONE = 0
-    STATUS_PENDING = 1
-    STATUS_IN_PROGRESS = 2
-    STATUS_DONE = 3
-
     def __init__(self):
         Gtk.Application.__init__(
                 self,
@@ -78,8 +73,6 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 os.path.splitext(input_path)[0],
                 ".opti",
                 os.path.splitext(input_path)[1]])
-        output_path_display = os.path.relpath(
-                output_path, start=os.path.dirname(input_path))
         preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
         input_size = os.stat(input_path).st_size
 
@@ -88,19 +81,11 @@ class YogaImageOptimizerApplication(Gtk.Application):
         data = {
             "input_file": input_path,
             "output_file": output_path,
-            "input_file_display": os.path.basename(input_path),
-            "output_file_display": output_path_display,
             "input_size": input_size,
             "output_size": 0,
-            "input_size_display": helpers.human_readable_file_size(input_size),
-            "output_size_display": "",
             "input_format": _IMAGE_FORMATS[ext],
             "output_format":  _IMAGE_FORMATS[ext],
-            "output_format_display": _IMAGE_FORMATS[ext],
             "preview": preview,
-            "separator": "➡️",
-            "status": 0,
-            "status_display": "",
         }
 
         self.image_store.append(**data)
@@ -147,39 +132,26 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
             if future.running():
                 self.image_store.update(
-                        i,
-                        status=self.STATUS_IN_PROGRESS,
-                        status_display="🔄️ In progress",
-                        output_size=0,
-                        output_size_display="")
+                    i,
+                    status=self.image_store.STATUS_IN_PROGRESS,
+                    output_size=0,
+                )
                 is_running = True
             elif future.done():
                 image_data = self.image_store.get(i)
-
-                input_size = image_data["input_size"]
                 output_size = os.stat(image_data["output_file"]).st_size
 
-                size_delta = 100 - min(input_size, output_size) / max(input_size, output_size) * 100  # noqa: E501
-
-                output_size_display = "%s (%s%.1f %%)" % (
-                    helpers.human_readable_file_size(output_size),
-                    "-" if output_size <= output_size else "+",
-                    size_delta,
-                )
-
                 self.image_store.update(
-                        i,
-                        status=self.STATUS_DONE,
-                        status_display="✅️ Done",
-                        output_size=output_size,
-                        output_size_display=output_size_display)
+                    i,
+                    status=self.image_store.STATUS_DONE,
+                    output_size=output_size,
+                )
             else:
                 self.image_store.update(
-                        i,
-                        status=self.STATUS_PENDING,
-                        status_display="⏸️ Pending",
-                        output_size=0,
-                        output_size_display="")
+                    i,
+                    status=self.image_store.STATUS_PENDING,
+                    output_size=0,
+                )
 
         if is_running:
             GLib.timeout_add_seconds(0.1, self._update_optimization_status)
