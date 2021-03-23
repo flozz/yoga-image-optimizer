@@ -176,16 +176,24 @@ class MainWindow(Gtk.ApplicationWindow):
             app.add_image(path)
 
     def _on_image_treeview_selection_changed(self, selection):
+        _COMBOBOX_FORMATS = {
+            "JPEG": 0,
+            "PNG": 1,
+        }
+
         app = self.get_application()
         _, iter_ = selection.get_selected()
-        output_file_entry = self._builder.get_object("output_file_entry")
         output_image_options = self._builder.get_object("output_image_options")
+        output_format_combobox = self._builder.get_object("output_format_combobox")
+        output_file_entry = self._builder.get_object("output_file_entry")
 
         if not iter_:
             output_image_options.hide()
             return
         else:
             output_image_options.show()
+
+        output_format_combobox.set_active(_COMBOBOX_FORMATS[app.image_store.get(iter_)["output_format"]])
 
         output_file = app.image_store.get(iter_)["output_file"]
         output_file_entry.set_text(output_file)
@@ -206,3 +214,24 @@ class MainWindow(Gtk.ApplicationWindow):
                 iter_,
                 output_file=output_file,
                 output_file_display=output_file_display)
+
+    def _on_output_format_combobox_changed(self, combobox):
+        _COMBOBOX_FORMATS = {
+            0: "JPEG",
+            1: "PNG",
+        }
+
+        app = self.get_application()
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+        _, iter_ = selection.get_selected()
+
+        output_format_combobox = self._builder.get_object("output_format_combobox")
+
+        output_format_index = output_format_combobox.get_active()
+        output_format = _COMBOBOX_FORMATS[output_format_index]
+
+        app.image_store.update(
+                iter_,
+                output_format=output_format,
+                output_format_display=output_format)

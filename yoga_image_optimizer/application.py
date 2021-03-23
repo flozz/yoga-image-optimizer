@@ -13,6 +13,13 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Gio, GdkPixbuf  # noqa: E402
 
 
+_IMAGE_FORMATS = {
+    ".jpg": "JPEG",
+    ".jpeg": "JPEG",
+    ".png": "PNG",
+}
+
+
 class YogaImageOptimizerApplication(Gtk.Application):
 
     STATE_MANAGE_IMAGES = "manage"
@@ -76,6 +83,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
         preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
         input_size = os.stat(input_path).st_size
 
+        ext = os.path.splitext(input_path)[1].lower()
+
         data = {
             "input_file": input_path,
             "output_file": output_path,
@@ -85,9 +94,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
             "output_size": 0,
             "input_size_display": helpers.human_readable_file_size(input_size),
             "output_size_display": "",
-            "input_format": "",  # TODO
-            "output_format": "",  # TODO
-            "output_format_display": "",  # TODO
+            "input_format": _IMAGE_FORMATS[ext],
+            "output_format":  _IMAGE_FORMATS[ext],
+            "output_format_display": _IMAGE_FORMATS[ext],
             "preview": preview,
             "separator": "➡️",
             "status": 0,
@@ -106,7 +115,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
             self._futures.append(self._executor.submit(
                 yoga.image.optimize,
                 row["input_file"],
-                row["output_file"]))
+                row["output_file"],
+                {
+                    "output_format": row["output_format"].lower(),
+                }))
 
         self._update_optimization_status()
 
