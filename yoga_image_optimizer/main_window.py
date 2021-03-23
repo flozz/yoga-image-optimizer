@@ -1,7 +1,7 @@
 import os
 
 from . import APPLICATION_NAME
-from .helpers import find_data_path, gvfs_uri_to_local_path
+from . import helpers
 
 import gi
 gi.require_version("Gtk", "3.0")
@@ -21,7 +21,7 @@ class MainWindow(Gtk.ApplicationWindow):
             resizable=True)
 
         self._builder = Gtk.Builder()
-        self._builder.add_from_file(find_data_path("ui/main-window.glade"))
+        self._builder.add_from_file(helpers.find_data_path("ui/main-window.glade"))  # noqa: E501
         self._builder.connect_signals(self)
 
         header = self._builder.get_object("main-window-header")
@@ -75,13 +75,13 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
 
         treeview_images = self._builder.get_object("images_treeview")
-        treeview_images.set_model(app.image_store)
+        treeview_images.set_model(app.image_store.gtk_list_store)
 
         # Status
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["status_display"]["label"],
+                app.image_store.FIELDS["status_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["status_display"]["id"]))
+                text=app.image_store.FIELDS["status_display"]["id"]))
 
         # Preview
         renderer_prevew = Gtk.CellRendererPixbuf()
@@ -89,44 +89,45 @@ class MainWindow(Gtk.ApplicationWindow):
         column_preview.add_attribute(
                 renderer_prevew,
                 "pixbuf",
-                app.STORE_FIELDS["preview"]["id"])
+                app.image_store.FIELDS["preview"]["id"])
         treeview_images.append_column(column_preview)
 
         # Input Image
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["input_file_display"]["label"],
+                app.image_store.FIELDS["input_file_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["input_file_display"]["id"]))
+                text=app.image_store.FIELDS["input_file_display"]["id"]))
 
         # Input Size
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["input_size_display"]["label"],
+                app.image_store.FIELDS["input_size_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["input_size_display"]["id"]))
+                text=app.image_store.FIELDS["input_size_display"]["id"]))
 
         # ->
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["separator"]["label"],
+
+                app.image_store.FIELDS["separator"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["separator"]["id"]))
+                text=app.image_store.FIELDS["separator"]["id"]))
 
         # Output Image
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["output_file_display"]["label"],
+                app.image_store.FIELDS["output_file_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["output_file_display"]["id"]))
+                text=app.image_store.FIELDS["output_file_display"]["id"]))
 
         # Output Format
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["output_format_display"]["label"],
+                app.image_store.FIELDS["output_format_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["output_format_display"]["id"]))
+                text=app.image_store.FIELDS["output_format_display"]["id"]))
 
         # Output Size
         treeview_images.append_column(Gtk.TreeViewColumn(
-                app.STORE_FIELDS["output_size_display"]["label"],
+                app.image_store.FIELDS["output_size_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.STORE_FIELDS["output_size_display"]["id"]))
+                text=app.image_store.FIELDS["output_size_display"]["id"]))
 
     def _on_add_image_button_clicked(self, widget):
         open_image_dialog = self._builder.get_object("open_image_dialog")
@@ -169,7 +170,71 @@ class MainWindow(Gtk.ApplicationWindow):
     def _on_drag_data_received(self, widget, drag_context, x, y, data, info, time):  # noqa: E501
         app = self.get_application()
         for uri in data.get_uris():
-            path = gvfs_uri_to_local_path(uri)
+            path = helpers.gvfs_uri_to_local_path(uri)
             if not os.path.isfile(path):
                 continue
             app.add_image(path)
+
+    def _on_image_treeview_selection_changed(self, selection):
+        _COMBOBOX_FORMATS = {
+            "JPEG": 0,
+            "PNG": 1,
+        }
+
+        app = self.get_application()
+        _, iter_ = selection.get_selected()
+        output_image_options = self._builder.get_object("output_image_options")
+        output_format_combobox = self._builder.get_object(
+            "output_format_combobox"
+        )
+        output_file_entry = self._builder.get_object("output_file_entry")
+
+        if not iter_:
+            output_image_options.hide()
+            return
+        else:
+            output_image_options.show()
+
+        output_format_combobox.set_active(
+            _COMBOBOX_FORMATS[app.image_store.get(iter_)["output_format"]]
+        )
+
+        output_file = app.image_store.get(iter_)["output_file"]
+        output_file_entry.set_text(output_file)
+
+    def _on_output_file_entry_changed(self, entry):
+        app = self.get_application()
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+        _, iter_ = selection.get_selected()
+
+        output_file = os.path.abspath(entry.get_text())
+
+        app.image_store.update(
+            iter_,
+            output_file=output_file,
+        )
+
+    def _on_output_format_combobox_changed(self, combobox):
+        _COMBOBOX_FORMATS = {
+            0: "JPEG",
+            1: "PNG",
+        }
+
+        app = self.get_application()
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+        _, iter_ = selection.get_selected()
+
+        output_format_combobox = self._builder.get_object(
+                "output_format_combobox")
+
+        output_format_index = output_format_combobox.get_active()
+        output_format = _COMBOBOX_FORMATS[output_format_index]
+
+        app.image_store.update(
+            iter_,
+            output_format=output_format,
+        )
+
+        self._on_image_treeview_selection_changed(selection)

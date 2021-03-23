@@ -1,45 +1,28 @@
 import os
 import concurrent.futures
-import threading
 
 import yoga.image
 
 from . import APPLICATION_ID
-from . import helpers
 from .main_window import MainWindow
+from .image_store import ImageStore
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gio, GdkPixbuf  # noqa: E402
+from gi.repository import Gtk, GLib, Gio, GdkPixbuf  # noqa: E402
+
+
+_IMAGE_FORMATS = {
+    ".jpg": "JPEG",
+    ".jpeg": "JPEG",
+    ".png": "PNG",
+}
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
 
     STATE_MANAGE_IMAGES = "manage"
     STATE_OPTIMIZE = "optimize"
-
-    STATUS_NONE = 0
-    STATUS_PENDING = 1
-    STATUS_IN_PROGRESS = 2
-    STATUS_DONE = 3
-
-    STORE_FIELDS = {
-        "input_file":            {"id":  0, "label": "",              "type": str},  # noqa: E501
-        "output_file":           {"id":  1, "label": "",              "type": str},  # noqa: E501
-        "input_file_display":    {"id":  2, "label": "Input Image",   "type": str},  # noqa: E501
-        "output_file_display":   {"id":  3, "label": "Output Image",  "type": str},  # noqa: E501
-        "input_size":            {"id":  4, "label": "",              "type": int},  # noqa: E501
-        "output_size":           {"id":  5, "label": "",              "type": int},  # noqa: E501
-        "input_size_display":    {"id":  6, "label": "Input Size",    "type": str},  # noqa: E501
-        "output_size_display":   {"id":  7, "label": "Output Size",   "type": str},  # noqa: E501
-        "input_format":          {"id":  8, "label": "Input Format",  "type": str},  # noqa: E501
-        "output_format":         {"id":  9, "label": "",              "type": str},  # noqa: E501
-        "output_format_display": {"id": 10, "label": "Output Format", "type": str},  # noqa: E501
-        "preview":               {"id": 11, "label": "",              "type": GdkPixbuf.Pixbuf},  # noqa: E501
-        "separator":             {"id": 12, "label": "",              "type": str},  # noqa: E501
-        "status":                {"id": 13, "label": "",              "type": int},  # noqa: E501
-        "status_display":        {"id": 14, "label": "Status",        "type": str},  # noqa: E501
-    }
 
     def __init__(self):
         Gtk.Application.__init__(
@@ -48,9 +31,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
         self.current_state = None
+        self.image_store = ImageStore()
 
-        store_fields = sorted(self.STORE_FIELDS.values(), key=lambda v: v["id"])  # noqa: E501
-        self.image_store = Gtk.ListStore(*[f["type"] for f in store_fields])
         self._main_window = None
         self._executor = None
         self._futures = []
@@ -93,28 +75,19 @@ class YogaImageOptimizerApplication(Gtk.Application):
         preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
         input_size = os.stat(input_path).st_size
 
+        ext = os.path.splitext(input_path)[1].lower()
+
         data = {
             "input_file": input_path,
             "output_file": output_path,
-            "input_file_display": os.path.basename(input_path),
-            "output_file_display": os.path.basename(output_path),
             "input_size": input_size,
             "output_size": 0,
-            "input_size_display": helpers.human_readable_file_size(input_size),
-            "output_size_display": "",
-            "input_format": "",  # TODO
-            "output_format": "",  # TODO
-            "output_format_display": "",  # TODO
+            "input_format": _IMAGE_FORMATS[ext],
+            "output_format":  _IMAGE_FORMATS[ext],
             "preview": preview,
-            "separator": "➡️",
-            "status": 0,
-            "status_display": "",
         }
 
-        helpers.gtk_list_store_add_row(
-                self.image_store,
-                self.STORE_FIELDS,
-                data)
+        self.image_store.append(**data)
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
@@ -122,13 +95,14 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
         self._futures = []
 
-        for row in self.image_store:
-            input_path = row[self.STORE_FIELDS["input_file"]["id"]]
-            output_path = row[self.STORE_FIELDS["output_file"]["id"]]
+        for row in self.image_store.get_all():
             self._futures.append(self._executor.submit(
                 yoga.image.optimize,
-                input_path,
-                output_path))
+                row["input_file"],
+                row["output_file"],
+                {
+                    "output_format": row["output_format"].lower(),
+                }))
 
         self._update_optimization_status()
 
@@ -156,57 +130,29 @@ class YogaImageOptimizerApplication(Gtk.Application):
             future = self._futures[i]
 
             if future.running():
-                helpers.gtk_tree_model_row_update(
-                    self.image_store[i],
-                    self.STORE_FIELDS,
-                    {
-                        "status": self.STATUS_IN_PROGRESS,
-                        "status_display": "🔄️ In progress",
-                        "output_size": 0,
-                        "output_size_display": "",
-                    }
+                self.image_store.update(
+                    i,
+                    status=self.image_store.STATUS_IN_PROGRESS,
+                    output_size=0,
                 )
                 is_running = True
             elif future.done():
-                image_data = helpers.gtk_tree_model_row_get_data(
-                    self.image_store[i],
-                    self.STORE_FIELDS)
-
-                input_size = image_data["input_size"]
+                image_data = self.image_store.get(i)
                 output_size = os.stat(image_data["output_file"]).st_size
 
-                size_delta = 100 - min(input_size, output_size) / max(input_size, output_size) * 100  # noqa: E501
-
-                output_size_display = "%s (%s%.1f %%)" % (
-                    helpers.human_readable_file_size(output_size),
-                    "-" if output_size <= output_size else "+",
-                    size_delta,
-                )
-
-                helpers.gtk_tree_model_row_update(
-                    self.image_store[i],
-                    self.STORE_FIELDS,
-                    {
-                        "status": self.STATUS_DONE,
-                        "status_display": "✅️ Done",
-                        "output_size": output_size,
-                        "output_size_display": output_size_display,
-                    }
+                self.image_store.update(
+                    i,
+                    status=self.image_store.STATUS_DONE,
+                    output_size=output_size,
                 )
             else:
-                helpers.gtk_tree_model_row_update(
-                    self.image_store[i],
-                    self.STORE_FIELDS,
-                    {
-                        "status": self.STATUS_PENDING,
-                        "status_display": "⏸️ Pending",
-                        "output_size": 0,
-                        "output_size_display": "",
-                    }
+                self.image_store.update(
+                    i,
+                    status=self.image_store.STATUS_PENDING,
+                    output_size=0,
                 )
 
         if is_running:
-            timer = threading.Timer(0.1, self._update_optimization_status)
-            timer.start()
+            GLib.timeout_add_seconds(0.1, self._update_optimization_status)
         else:
             self.stop_optimization()

@@ -8,51 +8,6 @@ def find_data_path(path):
     return os.path.join(root, "data", path)
 
 
-def gtk_list_store_add_row(store, fields, data):
-    """Adds a row to a GTK ListStore.
-
-    :param Gtk.ListStore store: The GTK ListStore.
-    :param dict fields: The fields definition
-            (``{"field_name": {"id": 0, "label": "", "type": str}}``).
-    :param dict data: The data of the row (``{"field_name": "value"}``).
-    """
-    row = [None] * len(fields)
-    for field_name, field_info in fields.items():
-        if field_name not in data:
-            continue
-        row[field_info["id"]] = data[field_name]
-    store.append(row)
-
-
-def gtk_tree_model_row_update(row, fields, data):
-    """Updates columns of a GTK TreeModelRow.
-
-    :param Gtk.TreeModelRow row: The GTK TreeModelRow.
-    :param dict fields: The fields definition
-            (``{"field_name": {"id": 0, "label": "", "type": str}}``).
-    :param dict data: The fields to update (``{"field_name": "value"}``).
-    """
-    for field_name, value in data.items():
-        row[fields[field_name]["id"]] = value
-
-
-def gtk_tree_model_row_get_data(row, fields):
-    """Get a data dict from a GTK TreeModelRow.
-
-    :param Gtk.TreeModelRow row: The GTK TreeModelRow.
-    :param dict fields: The fields definition
-            (``{"field_name": {"id": 0, "label": "", "type": str}}``).
-    :rtype": dict
-    :return: The data dict (e.g. ``{"field_name": "value"}``)
-    """
-    result = {}
-
-    for field_name, field_info in fields.items():
-        result[field_name] = row[field_info["id"]]
-
-    return result
-
-
 def human_readable_file_size(size):
     """Returns human readable file size (e.g. "11.4 kiB").
 
