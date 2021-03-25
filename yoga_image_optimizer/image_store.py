@@ -8,6 +8,7 @@ from . import helpers
 
 class ImageStore(object):
 
+    # fmt: off
     FIELDS = {
         "input_file":            {"id":  0, "label": "",              "type": str, "default": ""},  # noqa: E501
         "output_file":           {"id":  1, "label": "",              "type": str, "default": ""},  # noqa: E501
@@ -25,6 +26,7 @@ class ImageStore(object):
         "status":                {"id": 13, "label": "",              "type": int, "default": 0},  # noqa: E501
         "status_display":        {"id": 14, "label": "Status",        "type": str, "default": ""},  # noqa: E501
     }
+    # fmt: on
 
     STATUS_NONE = 0
     STATUS_PENDING = 1
@@ -181,7 +183,7 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "input_file_display",
-                path.name
+                path.name,
             )
 
         if "output_format" in kwargs:
@@ -195,7 +197,7 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "output_format_display",
-                output_format
+                output_format,
             )
 
             output_file = Path(self.get(index)["output_file"])
@@ -203,7 +205,7 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "output_file",
-                output_file.with_suffix(_FORMATS[output_format]).as_posix()
+                output_file.with_suffix(_FORMATS[output_format]).as_posix(),
             )
 
         if "output_file" in kwargs or "output_format" in kwargs:
@@ -214,15 +216,17 @@ class ImageStore(object):
                 "output_file_display",
                 os.path.relpath(
                     output_file,
-                    start=input_file.parent
-                )
+                    start=input_file.parent,
+                ),
             )
 
         if "input_size" in kwargs:
             self._update_field(
                 index,
                 "input_size_display",
-                helpers.human_readable_file_size(self.get(index)["input_size"])
+                helpers.human_readable_file_size(
+                    self.get(index)["input_size"]
+                ),
             )
 
         if "output_size" in kwargs:
@@ -232,7 +236,12 @@ class ImageStore(object):
             output_size_display = ""
 
             if output_size > 0:
-                size_delta = 100 - min(input_size, output_size) / max(input_size, output_size) * 100  # noqa: E501
+                size_delta = (
+                    100
+                    - min(input_size, output_size)
+                    / max(input_size, output_size)
+                    * 100
+                )
                 output_size_display = "%s (%s%.1f %%)" % (
                     helpers.human_readable_file_size(output_size),
                     "-" if output_size <= output_size else "+",
@@ -242,7 +251,7 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "output_size_display",
-                output_size_display
+                output_size_display,
             )
 
         if "status" in kwargs:
@@ -255,7 +264,7 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "status_display",
-                _STATUS[self.get(index)["status"]]
+                _STATUS[self.get(index)["status"]],
             )
 
     def _update_field(self, index, field_name, value):

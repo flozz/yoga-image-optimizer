@@ -9,6 +9,7 @@ from .main_window import MainWindow
 from .image_store import ImageStore
 
 import gi
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Gio, GdkPixbuf  # noqa: E402
 
@@ -27,9 +28,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def __init__(self):
         Gtk.Application.__init__(
-                self,
-                application_id=APPLICATION_ID,
-                flags=Gio.ApplicationFlags.HANDLES_OPEN)
+            self,
+            application_id=APPLICATION_ID,
+            flags=Gio.ApplicationFlags.HANDLES_OPEN,
+        )
 
         self.current_state = None
         self.image_store = ImageStore()
@@ -71,7 +73,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
         input_path = Path(path).resolve()
         output_path = input_path.with_suffix(".opti%s" % input_path.suffix)
         preview = GdkPixbuf.Pixbuf.new_from_file_at_size(
-                    input_path.as_posix(), 64, 64)
+            input_path.as_posix(), 64, 64
+        )
         input_size = input_path.stat().st_size
 
         ext = input_path.suffix.lower()
@@ -82,7 +85,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
             "input_size": input_size,
             "output_size": 0,
             "input_format": _IMAGE_FORMATS[ext],
-            "output_format":  _IMAGE_FORMATS[ext],
+            "output_format": _IMAGE_FORMATS[ext],
             "preview": preview,
         }
 
@@ -95,13 +98,16 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._futures = []
 
         for row in self.image_store.get_all():
-            self._futures.append(self._executor.submit(
-                yoga.image.optimize,
-                row["input_file"],
-                row["output_file"],
-                {
-                    "output_format": row["output_format"].lower(),
-                }))
+            self._futures.append(
+                self._executor.submit(
+                    yoga.image.optimize,
+                    row["input_file"],
+                    row["output_file"],
+                    {
+                        "output_format": row["output_format"].lower(),
+                    },
+                )
+            )
 
         self._update_optimization_status()
 

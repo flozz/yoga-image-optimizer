@@ -4,12 +4,12 @@ from . import APPLICATION_NAME
 from . import helpers
 
 import gi
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk  # noqa: E402
 
 
 class MainWindow(Gtk.ApplicationWindow):
-
     def __init__(self, app):
         Gtk.ApplicationWindow.__init__(
             self,
@@ -18,10 +18,13 @@ class MainWindow(Gtk.ApplicationWindow):
             # icon_name="TODO",
             default_width=800,
             default_height=500,
-            resizable=True)
+            resizable=True,
+        )
 
         self._builder = Gtk.Builder()
-        self._builder.add_from_file(helpers.find_data_path("ui/main-window.glade"))  # noqa: E501
+        self._builder.add_from_file(
+            helpers.find_data_path("ui/main-window.glade")
+        )
         self._builder.connect_signals(self)
 
         header = self._builder.get_object("main-window-header")
@@ -44,17 +47,22 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # Drag & drop files
         self.drag_dest_set(
-                Gtk.DestDefaults.ALL,
-                [Gtk.TargetEntry.new(
+            Gtk.DestDefaults.ALL,
+            [
+                Gtk.TargetEntry.new(
                     "text/uri-list",
                     Gtk.TargetFlags.OTHER_APP,
-                    0)],
-                Gdk.DragAction.COPY)
+                    0,
+                )
+            ],
+            Gdk.DragAction.COPY,
+        )
         self.connect("drag-data-received", self._on_drag_data_received)
 
     def switch_state(self, state):
         app = self.get_application()
 
+        # fmt: off
         if state == app.STATE_MANAGE_IMAGES:
             self._builder.get_object("add_image_button").set_sensitive(True)
             self._builder.get_object("remove_image_button").set_sensitive(True)
@@ -70,6 +78,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("stop_optimization_button").show()
             self._builder.get_object("images_treeview").set_sensitive(False)
             self._builder.get_object("open_image_dialog").hide()
+        # fmt: on
 
     def _prepare_treeview(self):
         app = self.get_application()
@@ -78,56 +87,77 @@ class MainWindow(Gtk.ApplicationWindow):
         treeview_images.set_model(app.image_store.gtk_list_store)
 
         # Status
-        treeview_images.append_column(Gtk.TreeViewColumn(
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
                 app.image_store.FIELDS["status_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["status_display"]["id"]))
+                text=app.image_store.FIELDS["status_display"]["id"],
+            ),
+        )
 
         # Preview
         renderer_prevew = Gtk.CellRendererPixbuf()
         column_preview = Gtk.TreeViewColumn(None, renderer_prevew)
         column_preview.add_attribute(
-                renderer_prevew,
-                "pixbuf",
-                app.image_store.FIELDS["preview"]["id"])
+            renderer_prevew,
+            "pixbuf",
+            app.image_store.FIELDS["preview"]["id"],
+        )
         treeview_images.append_column(column_preview)
 
         # Input Image
-        treeview_images.append_column(Gtk.TreeViewColumn(
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
                 app.image_store.FIELDS["input_file_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["input_file_display"]["id"]))
+                text=app.image_store.FIELDS["input_file_display"]["id"],
+            ),
+        )
 
         # Input Size
-        treeview_images.append_column(Gtk.TreeViewColumn(
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
                 app.image_store.FIELDS["input_size_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["input_size_display"]["id"]))
+                text=app.image_store.FIELDS["input_size_display"]["id"],
+            ),
+        )
 
         # ->
-        treeview_images.append_column(Gtk.TreeViewColumn(
-
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
                 app.image_store.FIELDS["separator"]["label"],
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["separator"]["id"]))
+                text=app.image_store.FIELDS["separator"]["id"],
+            ),
+        )
 
         # Output Image
-        treeview_images.append_column(Gtk.TreeViewColumn(
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
                 app.image_store.FIELDS["output_file_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_file_display"]["id"]))
+                text=app.image_store.FIELDS["output_file_display"]["id"],
+            ),
+        )
 
         # Output Format
-        treeview_images.append_column(Gtk.TreeViewColumn(
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
                 app.image_store.FIELDS["output_format_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_format_display"]["id"]))
+                text=app.image_store.FIELDS["output_format_display"]["id"],
+            ),
+        )
 
         # Output Size
-        treeview_images.append_column(Gtk.TreeViewColumn(
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
                 app.image_store.FIELDS["output_size_display"]["label"],
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_size_display"]["id"]))
+                text=app.image_store.FIELDS["output_size_display"]["id"],
+            ),
+        )
 
     def _on_add_image_button_clicked(self, widget):
         open_image_dialog = self._builder.get_object("open_image_dialog")
@@ -167,7 +197,9 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
         app.stop_optimization()
 
-    def _on_drag_data_received(self, widget, drag_context, x, y, data, info, time):  # noqa: E501
+    def _on_drag_data_received(
+        self, widget, drag_context, x, y, data, info, time
+    ):
         app = self.get_application()
         for uri in data.get_uris():
             path = Path(helpers.gvfs_uri_to_local_path(uri))
@@ -227,7 +259,8 @@ class MainWindow(Gtk.ApplicationWindow):
         _, iter_ = selection.get_selected()
 
         output_format_combobox = self._builder.get_object(
-                "output_format_combobox")
+            "output_format_combobox"
+        )
 
         output_format_index = output_format_combobox.get_active()
         output_format = _COMBOBOX_FORMATS[output_format_index]

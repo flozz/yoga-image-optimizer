@@ -12,12 +12,13 @@ def main(args=sys.argv):
         "-v",
         "--version",
         action="version",
-        version=VERSION)
+        version=VERSION,
+    )
     cli_parser.add_argument(
         "image",
         nargs="*",
         help="Input image",
-        )
+    )
     cli_parser.parse_args(args[1:])
 
     # GTK Application
