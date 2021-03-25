@@ -1,11 +1,11 @@
-import os
-
 from gi.repository import Gio
+from pathlib import Path
 
 
 def find_data_path(path):
-    root = os.path.abspath(os.path.dirname(__file__))
-    return os.path.join(root, "data", path)
+    path_file = Path(__file__)
+    root = path_file.parent.resolve()
+    return root.joinpath("data", path).as_posix()
 
 
 def human_readable_file_size(size):

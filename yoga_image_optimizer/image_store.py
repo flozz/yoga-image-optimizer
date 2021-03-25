@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from gi.repository import Gtk, GdkPixbuf
 
@@ -176,10 +177,11 @@ class ImageStore(object):
             self._update_field(index, key, kwargs[key])
 
         if "input_file" in kwargs:
+            path = Path(self.get(index)["input_file"])
             self._update_field(
                 index,
                 "input_file_display",
-                os.path.basename(self.get(index)["input_file"])
+                path.name
             )
 
         if "output_format" in kwargs:
@@ -196,22 +198,23 @@ class ImageStore(object):
                 output_format
             )
 
-            output_file = self.get(index)["output_file"]
-            pre, ext = os.path.splitext(output_file)
+            output_file = Path(self.get(index)["output_file"])
 
             self._update_field(
                 index,
                 "output_file",
-                pre + _FORMATS[output_format]
+                output_file.with_suffix(_FORMATS[output_format]).as_posix()
             )
 
         if "output_file" in kwargs or "output_format" in kwargs:
+            output_file = Path(self.get(index)["output_file"])
+            input_file = Path(self.get(index)["input_file"])
             self._update_field(
                 index,
                 "output_file_display",
                 os.path.relpath(
-                    self.get(index)["output_file"],
-                    start=os.path.dirname(self.get(index)["input_file"])
+                    output_file,
+                    start=input_file.parent
                 )
             )
 

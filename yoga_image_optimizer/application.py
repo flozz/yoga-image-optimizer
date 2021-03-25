@@ -1,5 +1,6 @@
 import os
 import concurrent.futures
+from pathlib import Path
 
 import yoga.image
 
@@ -67,19 +68,17 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._main_window.switch_state(state)
 
     def add_image(self, path):
-        input_path = os.path.abspath(path)
-        output_path = "".join([
-                os.path.splitext(input_path)[0],
-                ".opti",
-                os.path.splitext(input_path)[1]])
-        preview = GdkPixbuf.Pixbuf.new_from_file_at_size(input_path, 64, 64)
-        input_size = os.stat(input_path).st_size
+        input_path = Path(path).resolve()
+        output_path = input_path.with_suffix(".opti%s" % input_path.suffix)
+        preview = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                    input_path.as_posix(), 64, 64)
+        input_size = input_path.stat().st_size
 
-        ext = os.path.splitext(input_path)[1].lower()
+        ext = input_path.suffix.lower()
 
         data = {
-            "input_file": input_path,
-            "output_file": output_path,
+            "input_file": input_path.as_posix(),
+            "output_file": output_path.as_posix(),
             "input_size": input_size,
             "output_size": 0,
             "input_format": _IMAGE_FORMATS[ext],

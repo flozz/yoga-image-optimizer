@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 from . import APPLICATION_NAME
 from . import helpers
@@ -170,8 +170,8 @@ class MainWindow(Gtk.ApplicationWindow):
     def _on_drag_data_received(self, widget, drag_context, x, y, data, info, time):  # noqa: E501
         app = self.get_application()
         for uri in data.get_uris():
-            path = helpers.gvfs_uri_to_local_path(uri)
-            if not os.path.isfile(path):
+            path = Path(helpers.gvfs_uri_to_local_path(uri))
+            if not path.is_file():
                 continue
             app.add_image(path)
 
@@ -208,11 +208,11 @@ class MainWindow(Gtk.ApplicationWindow):
         selection = treeview_images.get_selection()
         _, iter_ = selection.get_selected()
 
-        output_file = os.path.abspath(entry.get_text())
+        output_file = Path(entry.get_text())
 
         app.image_store.update(
             iter_,
-            output_file=output_file,
+            output_file=output_file.resolve().as_posix(),
         )
 
     def _on_output_format_combobox_changed(self, combobox):
