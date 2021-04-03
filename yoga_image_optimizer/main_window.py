@@ -30,10 +30,10 @@ class MainWindow(Gtk.ApplicationWindow):
         )
         self._builder.connect_signals(self)
 
-        header = self._builder.get_object("main-window-header")
+        header = self._builder.get_object("main_window_header")
         self.set_titlebar(header)
 
-        content = self._builder.get_object("main-window-content")
+        content = self._builder.get_object("main_window_content")
         self.add(content)
 
         self._prepare_treeview()
@@ -73,15 +73,15 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("clear_images_button").set_sensitive(True)
             self._builder.get_object("optimize_button").show()
             self._builder.get_object("stop_optimization_button").hide()
-            self._builder.get_object("images_treeview").set_sensitive(True)
+            self._builder.get_object("output_image_options").set_sensitive(True)
         elif state == app.STATE_OPTIMIZE:
             self._builder.get_object("add_image_button").set_sensitive(False)
             self._builder.get_object("remove_image_button").set_sensitive(False)
             self._builder.get_object("clear_images_button").set_sensitive(False)
             self._builder.get_object("optimize_button").hide()
             self._builder.get_object("stop_optimization_button").show()
-            self._builder.get_object("images_treeview").set_sensitive(False)
             self._builder.get_object("open_image_dialog").hide()
+            self._builder.get_object("output_image_options").set_sensitive(False)
         # fmt: on
 
     def _prepare_treeview(self):
@@ -187,6 +187,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_image_treeview_selection_changed(self, selection):
         app = self.get_application()
+
         _, iter_ = selection.get_selected()
         output_image_options = self._builder.get_object("output_image_options")
         output_format_combobox = self._builder.get_object(
