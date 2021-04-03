@@ -25,6 +25,7 @@ class ImageStore(object):
         "separator":             {"id": 12, "label": "",              "type": str,              "default": "➡️"},
         "status":                {"id": 13, "label": "",              "type": int,              "default": 0},
         "status_display":        {"id": 14, "label": "Status",        "type": str,              "default": ""},
+        "jpeg_quality":          {"id": 15, "label": "",              "type": int,              "default": 90},
     }
     # fmt: on
 
@@ -186,7 +187,7 @@ class ImageStore(object):
                 path.name,
             )
 
-        if "output_format" in kwargs:
+        if "output_format" in kwargs or "jpeg_quality" in kwargs:
             _FORMATS = {
                 "JPEG": ".jpg",
                 "PNG": ".png",
@@ -194,11 +195,13 @@ class ImageStore(object):
 
             output_format = self.get(index)["output_format"]
 
-            self._update_field(
-                index,
-                "output_format_display",
-                output_format,
-            )
+            if output_format == "JPEG":
+                text = "JPEG (%i%%)" % self.get(index)["jpeg_quality"]
+                self._update_field(index, "output_format_display", text)
+            else:
+                self._update_field(
+                    index, "output_format_display", output_format
+                )
 
             output_file = Path(self.get(index)["output_file"])
 

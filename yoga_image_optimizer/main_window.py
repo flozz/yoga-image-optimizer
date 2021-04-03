@@ -74,6 +74,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("optimize_button").show()
             self._builder.get_object("stop_optimization_button").hide()
             self._builder.get_object("output_image_options").set_sensitive(True)
+            self._builder.get_object("jpeg_options").set_sensitive(True)
         elif state == app.STATE_OPTIMIZE:
             self._builder.get_object("add_image_button").set_sensitive(False)
             self._builder.get_object("remove_image_button").set_sensitive(False)
@@ -82,6 +83,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("stop_optimization_button").show()
             self._builder.get_object("open_image_dialog").hide()
             self._builder.get_object("output_image_options").set_sensitive(False)
+            self._builder.get_object("jpeg_options").set_sensitive(False)
         # fmt: on
 
     def _prepare_treeview(self):
@@ -166,7 +168,6 @@ class MainWindow(Gtk.ApplicationWindow):
     def _on_open_image_dialog_response(self, widget, response):
         widget.hide()
         app = self.get_application()
-        print("RESPONSE", response)
         if response == Gtk.ResponseType.OK:
             for file_ in widget.get_filenames():
                 app.add_image(file_)
@@ -187,26 +188,43 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_image_treeview_selection_changed(self, selection):
         app = self.get_application()
-
-        _, iter_ = selection.get_selected()
         output_image_options = self._builder.get_object("output_image_options")
+        jpeg_options = self._builder.get_object("jpeg_options")
+
+        # Reset output options visibilité (hide everything)
+        output_image_options.hide()
+        jpeg_options.hide()
+
+        # Get selected image
+        _, iter_ = selection.get_selected()
+
+        # No image selected, stop here
+        if not iter_:
+            return
+
+        output_format = app.image_store.get(iter_)["output_format"]
+
+        # Update and show output image options
         output_format_combobox = self._builder.get_object(
             "output_format_combobox"
         )
-        output_file_entry = self._builder.get_object("output_file_entry")
-
-        if not iter_:
-            output_image_options.hide()
-            return
-        else:
-            output_image_options.show()
-
-        output_format_combobox.set_active(
-            OUTPUT_FORMATS.index(app.image_store.get(iter_)["output_format"])
-        )
+        output_format_combobox.set_active(OUTPUT_FORMATS.index(output_format))
 
         output_file = app.image_store.get(iter_)["output_file"]
+        output_file_entry = self._builder.get_object("output_file_entry")
         output_file_entry.set_text(output_file)
+
+        output_image_options.show()
+
+        # [JPEG] Update and show jpeg options
+        if output_format == "JPEG":
+            jpeg_quality_adjustment = self._builder.get_object(
+                "jpeg_quality_adjustment"
+            )
+            jpeg_quality_adjustment.set_value(
+                app.image_store.get(iter_)["jpeg_quality"]
+            )
+            jpeg_options.show()
 
     def _on_output_file_entry_changed(self, entry):
         app = self.get_application()
@@ -223,6 +241,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_output_format_combobox_changed(self, combobox):
         app = self.get_application()
+
         treeview_images = self._builder.get_object("images_treeview")
         selection = treeview_images.get_selection()
         _, iter_ = selection.get_selected()
@@ -232,10 +251,15 @@ class MainWindow(Gtk.ApplicationWindow):
         )
 
         output_format = OUTPUT_FORMATS[output_format_combobox.get_active()]
-
-        app.image_store.update(
-            iter_,
-            output_format=output_format,
-        )
+        app.image_store.update(iter_, output_format=output_format)
 
         self._on_image_treeview_selection_changed(selection)
+
+    def _on_jpeg_quality_adjustement_value_changed(self, adjustement):
+        app = self.get_application()
+
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+        _, iter_ = selection.get_selected()
+
+        app.image_store.update(iter_, jpeg_quality=adjustement.get_value())

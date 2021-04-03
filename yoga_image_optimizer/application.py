@@ -97,6 +97,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
                     row["output_file"],
                     {
                         "output_format": row["output_format"].lower(),
+                        "jpeg_quality": row["jpeg_quality"] / 100,
                     },
                 )
             )
