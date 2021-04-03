@@ -1,6 +1,8 @@
 YOGA Image Optimizer
 ====================
 
+|Github| |Discord| |Github Actions| |License|
+
 **YOGA Image Optimizer** is a graphical user interface for `YOGA Image <https://github.com/wanadev/yoga>`_ that **optimizes JPEGs and PNGs**.
 
 **THIS PROJECT IS WORK IN PROGRESS**, there is no public release available yet. 😊️
@@ -16,7 +18,7 @@ As this is an early development version:
 
 * Only JPEG and PNG are supported as input file. This will be improved in the future to allow opening any image format supported by `Pillow <https://pillow.readthedocs.io/en/stable/>`_.
 
-* PNG Optimization is very, very, **VERY** slow due to too unbalanced ZoppfliPNG optimization options set by YOGA, this will be improved in the future.
+* PNG Optimization is very, very, **VERY** slow due to unbalanced ZoppfliPNG optimization options set by YOGA, this will be improved in the future.
 
 
 Requirements
@@ -109,3 +111,16 @@ To run the tests only for a specific Python version, you can use following comma
     nox --session test-3.7
     nox --session test-3.8
     nox --session test-3.9
+
+
+.. |Github| image:: https://img.shields.io/github/stars/flozz/yoga-image-optimizer?label=Github&logo=github
+   :target: https://github.com/flozz/yoga-image-optimizer
+
+.. |Discord| image:: https://img.shields.io/badge/chat-Discord-8c9eff?logo=discord&logoColor=ffffff
+   :target: https://discord.gg/P77sWhuSs4
+
+.. |Github Actions| image:: https://github.com/flozz/yoga-image-optimizer/actions/workflows/python-ci.yml/badge.svg
+   :target: https://github.com/flozz/yoga-image-optimizer/actions
+
+.. |License| image:: https://img.shields.io/github/license/flozz/yoga-image-optimizer
+   :target: https://github.com/flozz/yoga-image-optimizer/blob/master/COPYING
