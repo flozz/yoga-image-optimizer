@@ -26,5 +26,5 @@ def black_fix(session):
 @nox.session(python=["3.6", "3.7", "3.8", "3.9"], reuse_venv=True)
 def test(session):
     session.install("pytest")
-    session.install(".")
+    session.install("-e", ".")
     session.run("pytest", "--doctest-modules", "yoga_image_optimizer")

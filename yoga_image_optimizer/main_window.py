@@ -3,10 +3,7 @@ from pathlib import Path
 from . import APPLICATION_NAME
 from . import helpers
 
-import gi
-
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GdkPixbuf  # noqa: E402
+from gi.repository import Gtk, Gdk, GdkPixbuf
 
 
 OUTPUT_FORMATS = [
