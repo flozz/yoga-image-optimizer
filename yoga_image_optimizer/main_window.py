@@ -9,6 +9,12 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk  # noqa: E402
 
 
+OUTPUT_FORMATS = [
+    "JPEG",
+    "PNG",
+]
+
+
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, app):
         Gtk.ApplicationWindow.__init__(
@@ -34,6 +40,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.add(content)
 
         self._prepare_treeview()
+        self._prepare_format_combobox()
 
         open_image_dialog = self._builder.get_object("open_image_dialog")
         open_image_dialog.add_buttons(
@@ -159,6 +166,14 @@ class MainWindow(Gtk.ApplicationWindow):
             ),
         )
 
+    def _prepare_format_combobox(self):
+        output_format_combobox = self._builder.get_object(
+            "output_format_combobox"
+        )
+
+        for output_format in OUTPUT_FORMATS:
+            output_format_combobox.append_text(output_format)
+
     def _on_add_image_button_clicked(self, widget):
         open_image_dialog = self._builder.get_object("open_image_dialog")
         open_image_dialog.show_all()
@@ -208,11 +223,6 @@ class MainWindow(Gtk.ApplicationWindow):
             app.add_image(path)
 
     def _on_image_treeview_selection_changed(self, selection):
-        _COMBOBOX_FORMATS = {
-            "JPEG": 0,
-            "PNG": 1,
-        }
-
         app = self.get_application()
         _, iter_ = selection.get_selected()
         output_image_options = self._builder.get_object("output_image_options")
@@ -228,7 +238,7 @@ class MainWindow(Gtk.ApplicationWindow):
             output_image_options.show()
 
         output_format_combobox.set_active(
-            _COMBOBOX_FORMATS[app.image_store.get(iter_)["output_format"]]
+            OUTPUT_FORMATS.index(app.image_store.get(iter_)["output_format"])
         )
 
         output_file = app.image_store.get(iter_)["output_file"]
@@ -248,11 +258,6 @@ class MainWindow(Gtk.ApplicationWindow):
         )
 
     def _on_output_format_combobox_changed(self, combobox):
-        _COMBOBOX_FORMATS = {
-            0: "JPEG",
-            1: "PNG",
-        }
-
         app = self.get_application()
         treeview_images = self._builder.get_object("images_treeview")
         selection = treeview_images.get_selection()
@@ -262,8 +267,7 @@ class MainWindow(Gtk.ApplicationWindow):
             "output_format_combobox"
         )
 
-        output_format_index = output_format_combobox.get_active()
-        output_format = _COMBOBOX_FORMATS[output_format_index]
+        output_format = OUTPUT_FORMATS[output_format_combobox.get_active()]
 
         app.image_store.update(
             iter_,
