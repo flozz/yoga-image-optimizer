@@ -196,7 +196,7 @@ class ImageStore(object):
             output_format = self.get(index)["output_format"]
 
             if output_format == "JPEG":
-                text = "JPEG (%i%%)" % self.get(index)["jpeg_quality"]
+                text = "JPEG (%i %%)" % self.get(index)["jpeg_quality"]
                 self._update_field(index, "output_format_display", text)
             else:
                 self._update_field(
