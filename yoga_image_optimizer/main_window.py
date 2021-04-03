@@ -6,7 +6,7 @@ from . import helpers
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk  # noqa: E402
+from gi.repository import Gtk, Gdk, GdkPixbuf  # noqa: E402
 
 
 OUTPUT_FORMATS = [
@@ -90,81 +90,47 @@ class MainWindow(Gtk.ApplicationWindow):
     def _prepare_treeview(self):
         app = self.get_application()
 
+        DISPLAYED_FIELDS = [
+            "status_display",
+            "preview",
+            "input_file_display",
+            "input_size_display",
+            "separator",
+            "output_file_display",
+            "output_format_display",
+            "output_size_display",
+        ]
+
         treeview_images = self._builder.get_object("images_treeview")
         treeview_images.set_model(app.image_store.gtk_list_store)
 
-        # Status
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["status_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["status_display"]["id"],
-            ),
-        )
+        for field_name in DISPLAYED_FIELDS:
+            field_type = app.image_store.FIELDS[field_name]["type"]
 
-        # Preview
-        renderer_prevew = Gtk.CellRendererPixbuf()
-        column_preview = Gtk.TreeViewColumn(None, renderer_prevew)
-        column_preview.add_attribute(
-            renderer_prevew,
-            "pixbuf",
-            app.image_store.FIELDS["preview"]["id"],
-        )
-        treeview_images.append_column(column_preview)
-
-        # Input Image
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["input_file_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["input_file_display"]["id"],
-            ),
-        )
-
-        # Input Size
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["input_size_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["input_size_display"]["id"],
-            ),
-        )
-
-        # ->
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["separator"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["separator"]["id"],
-            ),
-        )
-
-        # Output Image
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["output_file_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_file_display"]["id"],
-            ),
-        )
-
-        # Output Format
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["output_format_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_format_display"]["id"],
-            ),
-        )
-
-        # Output Size
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["output_size_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_size_display"]["id"],
-            ),
-        )
+            if field_type is str:
+                treeview_images.append_column(
+                    Gtk.TreeViewColumn(
+                        app.image_store.FIELDS[field_name]["label"],
+                        Gtk.CellRendererText(),
+                        text=app.image_store.FIELDS[field_name]["id"],
+                    ),
+                )
+            elif field_type is GdkPixbuf.Pixbuf:
+                pixbuf = Gtk.CellRendererPixbuf()
+                column = Gtk.TreeViewColumn(
+                    app.image_store.FIELDS[field_name]["label"],
+                    pixbuf,
+                )
+                column.add_attribute(
+                    pixbuf,
+                    "pixbuf",
+                    app.image_store.FIELDS[field_name]["id"],
+                )
+                treeview_images.append_column(column)
+            else:
+                raise TypeError(
+                    "Unsupported field type '%s'" % str(field_type)
+                )
 
     def _prepare_format_combobox(self):
         output_format_combobox = self._builder.get_object(
