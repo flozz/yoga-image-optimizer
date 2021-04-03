@@ -72,8 +72,8 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("images_treeview").set_sensitive(True)
         elif state == app.STATE_OPTIMIZE:
             self._builder.get_object("add_image_button").set_sensitive(False)
-            self._builder.get_object("remove_image_button").set_sensitive(False)  # noqa: E501
-            self._builder.get_object("clear_images_button").set_sensitive(False)  # noqa: E501
+            self._builder.get_object("remove_image_button").set_sensitive(False)
+            self._builder.get_object("clear_images_button").set_sensitive(False)
             self._builder.get_object("optimize_button").hide()
             self._builder.get_object("stop_optimization_button").show()
             self._builder.get_object("images_treeview").set_sensitive(False)

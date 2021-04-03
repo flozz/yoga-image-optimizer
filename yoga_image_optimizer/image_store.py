@@ -10,21 +10,21 @@ class ImageStore(object):
 
     # fmt: off
     FIELDS = {
-        "input_file":            {"id":  0, "label": "",              "type": str, "default": ""},  # noqa: E501
-        "output_file":           {"id":  1, "label": "",              "type": str, "default": ""},  # noqa: E501
-        "input_file_display":    {"id":  2, "label": "Input Image",   "type": str, "default": ""},  # noqa: E501
-        "output_file_display":   {"id":  3, "label": "Output Image",  "type": str, "default": ""},  # noqa: E501
-        "input_size":            {"id":  4, "label": "",              "type": int, "default": 0},  # noqa: E501
-        "output_size":           {"id":  5, "label": "",              "type": int, "default": 0},  # noqa: E501
-        "input_size_display":    {"id":  6, "label": "Input Size",    "type": str, "default": ""},  # noqa: E501
-        "output_size_display":   {"id":  7, "label": "Output Size",   "type": str, "default": ""},  # noqa: E501
-        "input_format":          {"id":  8, "label": "Input Format",  "type": str, "default": ""},  # noqa: E501
-        "output_format":         {"id":  9, "label": "",              "type": str, "default": ""},  # noqa: E501
-        "output_format_display": {"id": 10, "label": "Output Format", "type": str, "default": ""},  # noqa: E501
-        "preview":               {"id": 11, "label": "",              "type": GdkPixbuf.Pixbuf, "default": None},  # noqa: E501
-        "separator":             {"id": 12, "label": "",              "type": str, "default": "➡️"},  # noqa: E501
-        "status":                {"id": 13, "label": "",              "type": int, "default": 0},  # noqa: E501
-        "status_display":        {"id": 14, "label": "Status",        "type": str, "default": ""},  # noqa: E501
+        "input_file":            {"id":  0, "label": "",              "type": str,              "default": ""},
+        "output_file":           {"id":  1, "label": "",              "type": str,              "default": ""},
+        "input_file_display":    {"id":  2, "label": "Input Image",   "type": str,              "default": ""},
+        "output_file_display":   {"id":  3, "label": "Output Image",  "type": str,              "default": ""},
+        "input_size":            {"id":  4, "label": "",              "type": int,              "default": 0},
+        "output_size":           {"id":  5, "label": "",              "type": int,              "default": 0},
+        "input_size_display":    {"id":  6, "label": "Input Size",    "type": str,              "default": ""},
+        "output_size_display":   {"id":  7, "label": "Output Size",   "type": str,              "default": ""},
+        "input_format":          {"id":  8, "label": "Input Format",  "type": str,              "default": ""},
+        "output_format":         {"id":  9, "label": "",              "type": str,              "default": ""},
+        "output_format_display": {"id": 10, "label": "Output Format", "type": str,              "default": ""},
+        "preview":               {"id": 11, "label": "",              "type": GdkPixbuf.Pixbuf, "default": None},
+        "separator":             {"id": 12, "label": "",              "type": str,              "default": "➡️"},
+        "status":                {"id": 13, "label": "",              "type": int,              "default": 0},
+        "status_display":        {"id": 14, "label": "Status",        "type": str,              "default": ""},
     }
     # fmt: on
 
