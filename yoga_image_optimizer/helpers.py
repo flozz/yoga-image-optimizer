@@ -1,5 +1,6 @@
-from gi.repository import Gio
 from pathlib import Path
+
+from gi.repository import Gio, GdkPixbuf
 
 
 def find_data_path(path):
@@ -49,3 +50,35 @@ def gvfs_uri_to_local_path(uri):
     """
     gvfs = Gio.Vfs.get_default()
     return gvfs.get_file_for_uri(uri).get_path()
+
+
+def add_suffix_to_filename(path, suffix="opti"):
+    """Adds a suffix to the file name (just before the file extension).
+
+    :param str path: The input path.
+    :param str suffix: The suffix to add (optional, default: ``"opti"``).
+
+    :returns: The output path.
+    :rtype: str
+
+    >>> add_suffix_to_filename("hello.jpg")
+    'hello.opti.jpg'
+    >>> add_suffix_to_filename("/tmp/filename.ext")
+    '/tmp/filename.opti.ext'
+    >>> add_suffix_to_filename("hello.jpg", suffix="foo")
+    'hello.foo.jpg'
+    """
+    input_path = Path(path)
+    output_path = input_path.with_suffix(".%s%s" % (suffix, input_path.suffix))
+    return output_path.as_posix()
+
+
+def preview_gdk_pixbuf_from_path(path, size=64):
+    """Returns a Gdk Pixbuf containing the preview the image at the given path.
+
+    :param str path: The path of the image.
+    :param int size: The size of the preview (optional, default: ``64``).
+
+    :rtype: GdkPixbuf.Pixbuff
+    """
+    return GdkPixbuf.Pixbuf.new_from_file_at_size(path, size, size)

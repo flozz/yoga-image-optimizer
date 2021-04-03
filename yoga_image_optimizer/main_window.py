@@ -3,10 +3,13 @@ from pathlib import Path
 from . import APPLICATION_NAME
 from . import helpers
 
-import gi
+from gi.repository import Gtk, Gdk, GdkPixbuf
 
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk  # noqa: E402
+
+OUTPUT_FORMATS = [
+    "JPEG",
+    "PNG",
+]
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -34,6 +37,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.add(content)
 
         self._prepare_treeview()
+        self._prepare_format_combobox()
 
         open_image_dialog = self._builder.get_object("open_image_dialog")
         open_image_dialog.add_buttons(
@@ -83,81 +87,55 @@ class MainWindow(Gtk.ApplicationWindow):
     def _prepare_treeview(self):
         app = self.get_application()
 
+        DISPLAYED_FIELDS = [
+            "status_display",
+            "preview",
+            "input_file_display",
+            "input_size_display",
+            "separator",
+            "output_file_display",
+            "output_format_display",
+            "output_size_display",
+        ]
+
         treeview_images = self._builder.get_object("images_treeview")
         treeview_images.set_model(app.image_store.gtk_list_store)
 
-        # Status
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["status_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["status_display"]["id"],
-            ),
+        for field_name in DISPLAYED_FIELDS:
+            field_type = app.image_store.FIELDS[field_name]["type"]
+
+            if field_type is str:
+                treeview_images.append_column(
+                    Gtk.TreeViewColumn(
+                        app.image_store.FIELDS[field_name]["label"],
+                        Gtk.CellRendererText(),
+                        text=app.image_store.FIELDS[field_name]["id"],
+                    ),
+                )
+            elif field_type is GdkPixbuf.Pixbuf:
+                pixbuf = Gtk.CellRendererPixbuf()
+                column = Gtk.TreeViewColumn(
+                    app.image_store.FIELDS[field_name]["label"],
+                    pixbuf,
+                )
+                column.add_attribute(
+                    pixbuf,
+                    "pixbuf",
+                    app.image_store.FIELDS[field_name]["id"],
+                )
+                treeview_images.append_column(column)
+            else:
+                raise TypeError(
+                    "Unsupported field type '%s'" % str(field_type)
+                )
+
+    def _prepare_format_combobox(self):
+        output_format_combobox = self._builder.get_object(
+            "output_format_combobox"
         )
 
-        # Preview
-        renderer_prevew = Gtk.CellRendererPixbuf()
-        column_preview = Gtk.TreeViewColumn(None, renderer_prevew)
-        column_preview.add_attribute(
-            renderer_prevew,
-            "pixbuf",
-            app.image_store.FIELDS["preview"]["id"],
-        )
-        treeview_images.append_column(column_preview)
-
-        # Input Image
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["input_file_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["input_file_display"]["id"],
-            ),
-        )
-
-        # Input Size
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["input_size_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["input_size_display"]["id"],
-            ),
-        )
-
-        # ->
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["separator"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["separator"]["id"],
-            ),
-        )
-
-        # Output Image
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["output_file_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_file_display"]["id"],
-            ),
-        )
-
-        # Output Format
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["output_format_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_format_display"]["id"],
-            ),
-        )
-
-        # Output Size
-        treeview_images.append_column(
-            Gtk.TreeViewColumn(
-                app.image_store.FIELDS["output_size_display"]["label"],
-                Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_size_display"]["id"],
-            ),
-        )
+        for output_format in OUTPUT_FORMATS:
+            output_format_combobox.append_text(output_format)
 
     def _on_add_image_button_clicked(self, widget):
         open_image_dialog = self._builder.get_object("open_image_dialog")
@@ -208,11 +186,6 @@ class MainWindow(Gtk.ApplicationWindow):
             app.add_image(path)
 
     def _on_image_treeview_selection_changed(self, selection):
-        _COMBOBOX_FORMATS = {
-            "JPEG": 0,
-            "PNG": 1,
-        }
-
         app = self.get_application()
         _, iter_ = selection.get_selected()
         output_image_options = self._builder.get_object("output_image_options")
@@ -228,7 +201,7 @@ class MainWindow(Gtk.ApplicationWindow):
             output_image_options.show()
 
         output_format_combobox.set_active(
-            _COMBOBOX_FORMATS[app.image_store.get(iter_)["output_format"]]
+            OUTPUT_FORMATS.index(app.image_store.get(iter_)["output_format"])
         )
 
         output_file = app.image_store.get(iter_)["output_file"]
@@ -248,11 +221,6 @@ class MainWindow(Gtk.ApplicationWindow):
         )
 
     def _on_output_format_combobox_changed(self, combobox):
-        _COMBOBOX_FORMATS = {
-            0: "JPEG",
-            1: "PNG",
-        }
-
         app = self.get_application()
         treeview_images = self._builder.get_object("images_treeview")
         selection = treeview_images.get_selection()
@@ -262,8 +230,7 @@ class MainWindow(Gtk.ApplicationWindow):
             "output_format_combobox"
         )
 
-        output_format_index = output_format_combobox.get_active()
-        output_format = _COMBOBOX_FORMATS[output_format_index]
+        output_format = OUTPUT_FORMATS[output_format_combobox.get_active()]
 
         app.image_store.update(
             iter_,

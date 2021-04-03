@@ -3,15 +3,12 @@ import concurrent.futures
 from pathlib import Path
 
 import yoga.image
+from gi.repository import Gtk, GLib, Gio
 
 from . import APPLICATION_ID
+from . import helpers
 from .main_window import MainWindow
 from .image_store import ImageStore
-
-import gi
-
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Gio, GdkPixbuf  # noqa: E402
 
 
 _IMAGE_FORMATS = {
@@ -71,25 +68,20 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def add_image(self, path):
         input_path = Path(path).resolve()
-        output_path = input_path.with_suffix(".opti%s" % input_path.suffix)
-        preview = GdkPixbuf.Pixbuf.new_from_file_at_size(
-            input_path.as_posix(), 64, 64
-        )
         input_size = input_path.stat().st_size
-
         ext = input_path.suffix.lower()
 
-        data = {
-            "input_file": input_path.as_posix(),
-            "output_file": output_path.as_posix(),
-            "input_size": input_size,
-            "output_size": 0,
-            "input_format": _IMAGE_FORMATS[ext],
-            "output_format": _IMAGE_FORMATS[ext],
-            "preview": preview,
-        }
-
-        self.image_store.append(**data)
+        self.image_store.append(
+            input_file=input_path.as_posix(),
+            output_file=helpers.add_suffix_to_filename(input_path.as_posix()),
+            input_size=input_size,
+            output_size=0,
+            input_format=_IMAGE_FORMATS[ext],
+            output_format=_IMAGE_FORMATS[ext],
+            preview=helpers.preview_gdk_pixbuf_from_path(
+                input_path.as_posix()
+            ),
+        )
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
