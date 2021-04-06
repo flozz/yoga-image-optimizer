@@ -102,15 +102,16 @@ or run the tests::
 
     nox --session test
 
-You can also fix automatically coding style errors with::
-
-    nox -s black_fix
-
 To run the tests only for a specific Python version, you can use following commands (the corresponding Python interpreter must be installed on your machine)::
 
     nox --session test-3.7
     nox --session test-3.8
     nox --session test-3.9
+
+You can also fix automatically coding style errors with::
+
+    nox -s black_fix
+
 
 
 .. |Github| image:: https://img.shields.io/github/stars/flozz/yoga-image-optimizer?label=Github&logo=github
