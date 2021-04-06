@@ -83,6 +83,16 @@ class YogaImageOptimizerApplication(Gtk.Application):
             ),
         )
 
+    def remove_selected_image(self):
+        treeview_images = self._main_window.get_images_treeview()
+        selection = treeview_images.get_selection()
+
+        if selection.count_selected_rows() == 0:
+            return
+
+        _, iter_ = selection.get_selected()
+        self.image_store.remove(iter_)
+
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
 

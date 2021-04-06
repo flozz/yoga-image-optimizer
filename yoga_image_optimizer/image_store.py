@@ -127,19 +127,26 @@ class ImageStore(object):
         for i in range(self.length):
             yield self.get(i)
 
-    def remove(self, index):
-        """Removes a row from the store.
+    def remove(self, iter_):
+        """Removes a row at given gtk.TreeIter from the store.
 
-        :param int,gtk.TreeIter index: The index of the row.
+        :param gtk.TreeIter index: The iter of the row.
+        """
+        self.gtk_list_store.remove(iter_)
+
+    def remove_at_index(self, index):
+        """Removes a row at given index from the store.
+
+        :param int index: The index of the row.
 
         >>> image_store = ImageStore()
         >>> image_store.append()
         >>> image_store.length
         1
-        >>> image_store.remove(0)
+        >>> image_store.remove_at_index(0)
         >>> image_store.length
         0
-        >>> image_store.remove(0)
+        >>> image_store.remove_at_index(0)
         Traceback (most recent call last):
             ...
         IndexError: ...
@@ -148,7 +155,7 @@ class ImageStore(object):
             iter_ = self.gtk_list_store.get_iter(index)
         except ValueError as error:
             raise IndexError(error)
-        self.gtk_list_store.remove(iter_)
+        self.remove(iter_)
 
     def update(self, index, **kwargs):
         """Updates a row.

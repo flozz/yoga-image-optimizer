@@ -63,6 +63,9 @@ class MainWindow(Gtk.ApplicationWindow):
         )
         self.connect("drag-data-received", self._on_drag_data_received)
 
+    def get_images_treeview(self):
+        return self._builder.get_object("images_treeview")
+
     def switch_state(self, state):
         app = self.get_application()
 
@@ -144,14 +147,8 @@ class MainWindow(Gtk.ApplicationWindow):
         open_image_dialog.show_all()
 
     def _on_remove_image_button_clicked(self, widget):
-        treeview_images = self._builder.get_object("images_treeview")
-        selection = treeview_images.get_selection()
-
-        if selection.count_selected_rows() == 0:
-            return
-
-        store, iter_ = selection.get_selected()
-        store.remove(iter_)
+        app = self.get_application()
+        app.remove_selected_image()
 
     def _on_clear_images_button_clicked(self, widget):
         app = self.get_application()
