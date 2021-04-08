@@ -40,9 +40,31 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def do_startup(self):
         Gtk.Application.do_startup(self)
 
-        action_quit = Gio.SimpleAction.new("quit", None)
-        action_quit.connect("activate", self.on_quit)
-        self.add_action(action_quit)
+        # Action: app.quit
+        action = Gio.SimpleAction.new("quit", None)
+        action.connect("activate", lambda a, p: self.quit())
+        self.add_action(action)
+        self.set_accels_for_action("app.quit", ["<Ctrl>q"])
+
+        # Action: app.optimize
+        action = Gio.SimpleAction.new("optimize", None)
+        action.connect("activate", lambda a, p: self.optimize())
+        self.add_action(action)
+
+        # Action: app.stop-optimization
+        action = Gio.SimpleAction.new("stop-optimization", None)
+        action.connect("activate", lambda a, p: self.stop_optimization())
+        self.add_action(action)
+
+        # Action: app.add-image
+        action = Gio.SimpleAction.new("add-image", GLib.VariantType("s"))
+        action.connect("activate", lambda a, p: self.add_image(p.get_string()))
+        self.add_action(action)
+
+        # Action: app.clear-images
+        action = Gio.SimpleAction.new("clear-images", None)
+        action.connect("activate", lambda a, p: self.clear_images())
+        self.add_action(action)
 
     def do_activate(self):
         if not self._main_window:
@@ -61,6 +83,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
         for file_ in files:
             self.add_image(file_.get_path())
+
+    def quit(self):
+        self.stop_optimization()
+        Gtk.Application.quit(self)
 
     def switch_state(self, state):
         self.current_state = state
@@ -83,15 +109,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
             ),
         )
 
-    def remove_selected_image(self):
-        treeview_images = self._main_window.get_images_treeview()
-        selection = treeview_images.get_selection()
-
-        if selection.count_selected_rows() == 0:
-            return
-
-        _, iter_ = selection.get_selected()
-        self.image_store.remove(iter_)
+    def clear_images(self):
+        self.image_store.clear()
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
@@ -123,10 +142,6 @@ class YogaImageOptimizerApplication(Gtk.Application):
             future.cancel()
 
         self.switch_state(self.STATE_MANAGE_IMAGES)
-
-    def on_quit(self, action, param):
-        self.stop_optimization()
-        self.quit()
 
     def _update_optimization_status(self):
         if self.current_state != self.STATE_OPTIMIZE:

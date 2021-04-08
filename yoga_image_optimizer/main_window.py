@@ -3,7 +3,7 @@ from pathlib import Path
 from . import APPLICATION_NAME
 from . import helpers
 
-from gi.repository import Gtk, Gdk, GdkPixbuf
+from gi.repository import Gtk, Gdk, Gio, GdkPixbuf
 
 
 OUTPUT_FORMATS = [
@@ -63,8 +63,27 @@ class MainWindow(Gtk.ApplicationWindow):
         )
         self.connect("drag-data-received", self._on_drag_data_received)
 
-    def get_images_treeview(self):
-        return self._builder.get_object("images_treeview")
+        # Action: win.remove-selected-image
+        action = Gio.SimpleAction.new("remove-selected-image", None)
+        action.connect("activate", lambda a, p: self.remove_selected_image())
+        self.add_action(action)
+        self.set_accels_for_action("win.remove-selected-image", ["Delete"])
+
+    def set_accels_for_action(self, detailed_action_name, accels):
+        win_actions = self.get_action_group("win")
+        action_name = detailed_action_name.split(".")[-1]
+
+        accel_group = Gtk.AccelGroup()
+
+        for key, mods in [Gtk.accelerator_parse(accel) for accel in accels]:
+            accel_group.connect(
+                key,
+                mods,
+                0,
+                lambda *_: win_actions.activate_action(action_name),
+            )
+
+        self.add_accel_group(accel_group)
 
     def switch_state(self, state):
         app = self.get_application()
@@ -88,6 +107,17 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("output_image_options").set_sensitive(False)
             self._builder.get_object("jpeg_options").set_sensitive(False)
         # fmt: on
+
+    def remove_selected_image(self):
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+
+        if selection.count_selected_rows() == 0:
+            return
+
+        app = self.get_application()
+        _, iter_ = selection.get_selected()
+        app.image_store.remove(iter_)
 
     def _prepare_treeview(self):
         app = self.get_application()
@@ -145,22 +175,6 @@ class MainWindow(Gtk.ApplicationWindow):
     def _on_add_image_button_clicked(self, widget):
         open_image_dialog = self._builder.get_object("open_image_dialog")
         open_image_dialog.show_all()
-
-    def _on_remove_image_button_clicked(self, widget):
-        app = self.get_application()
-        app.remove_selected_image()
-
-    def _on_clear_images_button_clicked(self, widget):
-        app = self.get_application()
-        app.image_store.clear()
-
-    def _on_optimize_button_clicked(self, widget):
-        app = self.get_application()
-        app.optimize()
-
-    def _on_stop_optimization_button_clicked(self, widget):
-        app = self.get_application()
-        app.stop_optimization()
 
     def _on_open_image_dialog_response(self, widget, response):
         widget.hide()

@@ -39,9 +39,9 @@
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="tooltip_text" translatable="yes">Remove selected image</property>
+        <property name="action_name">win.remove-selected-image</property>
         <property name="image">image-remove</property>
         <property name="always_show_image">True</property>
-        <signal name="clicked" handler="_on_remove_image_button_clicked" swapped="no"/>
       </object>
       <packing>
         <property name="position">1</property>
@@ -63,10 +63,10 @@
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="tooltip_text" translatable="yes">Remove all images</property>
+        <property name="action_name">app.clear-images</property>
         <property name="image">image-clear</property>
         <property name="relief">none</property>
         <property name="always_show_image">True</property>
-        <signal name="clicked" handler="_on_clear_images_button_clicked" swapped="no"/>
       </object>
       <packing>
         <property name="position">3</property>
@@ -79,7 +79,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
-        <signal name="clicked" handler="_on_optimize_button_clicked" swapped="no"/>
+        <property name="action_name">app.optimize</property>
       </object>
       <packing>
         <property name="pack_type">end</property>
@@ -92,8 +92,8 @@
         <property name="name">button-stop</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <property name="action_name">app.stop-optimization</property>
         <property name="use_stock">True</property>
-        <signal name="clicked" handler="_on_stop_optimization_button_clicked" swapped="no"/>
         <style>
           <class name="destructive-action"/>
         </style>
