@@ -95,7 +95,6 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("clear_images_button").set_sensitive(False)
             self._builder.get_object("optimize_button").hide()
             self._builder.get_object("stop_optimization_button").show()
-            self._builder.get_object("open_image_dialog").hide()
             self._builder.get_object("output_image_options").set_sensitive(False)
             self._builder.get_object("jpeg_options").set_sensitive(False)
         # fmt: on
