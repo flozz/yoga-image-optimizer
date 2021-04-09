@@ -131,10 +131,16 @@ class YogaImageOptimizerApplication(Gtk.Application):
         )
         file_chooser_dialog.set_select_multiple(True)
 
-        file_filter = Gtk.FileFilter()
-        file_filter.add_mime_type("image/jpeg")
-        file_filter.add_mime_type("image/png")
-        file_chooser_dialog.add_filter(file_filter)
+        image_file_filter = Gtk.FileFilter()
+        image_file_filter.set_name("Image Files")
+        image_file_filter.add_mime_type("image/jpeg")
+        image_file_filter.add_mime_type("image/png")
+        file_chooser_dialog.add_filter(image_file_filter)
+
+        any_file_filter = Gtk.FileFilter()
+        any_file_filter.set_name("All Files")
+        any_file_filter.add_pattern("*")
+        file_chooser_dialog.add_filter(any_file_filter)
 
         response = file_chooser_dialog.run()
 
