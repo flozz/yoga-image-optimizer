@@ -39,14 +39,6 @@ class MainWindow(Gtk.ApplicationWindow):
         self._prepare_treeview()
         self._prepare_format_combobox()
 
-        open_image_dialog = self._builder.get_object("open_image_dialog")
-        open_image_dialog.add_buttons(
-            Gtk.STOCK_CANCEL,
-            Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OPEN,
-            Gtk.ResponseType.OK,
-        )
-
         self.connect("destroy", self._on_main_window_destroyed)
 
         # Drag & drop files
@@ -172,20 +164,9 @@ class MainWindow(Gtk.ApplicationWindow):
         for output_format in OUTPUT_FORMATS:
             output_format_combobox.append_text(output_format)
 
-    def _on_add_image_button_clicked(self, widget):
-        open_image_dialog = self._builder.get_object("open_image_dialog")
-        open_image_dialog.show_all()
-
-    def _on_open_image_dialog_response(self, widget, response):
-        widget.hide()
-        app = self.get_application()
-        if response == Gtk.ResponseType.OK:
-            for file_ in widget.get_filenames():
-                app.add_image(file_)
-
     def _on_main_window_destroyed(self, widget):
         app = self.get_application()
-        app.stop_optimization()
+        app.quit()
 
     def _on_drag_data_received(
         self, widget, drag_context, x, y, data, info, time

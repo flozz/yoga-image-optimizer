@@ -28,9 +28,9 @@
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="tooltip_text" translatable="yes">Add an image</property>
+        <property name="action_name">app.open-file</property>
         <property name="image">image-add</property>
         <property name="always_show_image">True</property>
-        <signal name="clicked" handler="_on_add_image_button_clicked" swapped="no"/>
       </object>
     </child>
     <child>
@@ -102,50 +102,6 @@
         <property name="pack_type">end</property>
         <property name="position">5</property>
       </packing>
-    </child>
-  </object>
-  <object class="GtkFileFilter" id="image_filefilter">
-    <mime-types>
-      <mime-type>image/jpeg</mime-type>
-      <mime-type>image/png</mime-type>
-    </mime-types>
-  </object>
-  <object class="GtkFileChooserDialog" id="open_image_dialog">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Open Images</property>
-    <property name="modal">True</property>
-    <property name="window_position">center</property>
-    <property name="type_hint">dialog</property>
-    <property name="create_folders">False</property>
-    <property name="filter">image_filefilter</property>
-    <property name="select_multiple">True</property>
-    <signal name="response" handler="_on_open_image_dialog_response" swapped="no"/>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
     </child>
   </object>
   <object class="GtkAdjustment" id="jpeg_quality_adjustment">

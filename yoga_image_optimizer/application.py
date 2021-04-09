@@ -66,6 +66,12 @@ class YogaImageOptimizerApplication(Gtk.Application):
         action.connect("activate", lambda a, p: self.clear_images())
         self.add_action(action)
 
+        # Action: app.open-file
+        action = Gio.SimpleAction.new("open-file", None)
+        action.connect("activate", lambda a, p: self.open_file())
+        self.add_action(action)
+        self.set_accels_for_action("app.open-file", ["<Ctrl>o"])
+
     def do_activate(self):
         if not self._main_window:
             self._main_window = MainWindow(self)
@@ -111,6 +117,32 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def clear_images(self):
         self.image_store.clear()
+
+    def open_file(self):
+        file_chooser_dialog = Gtk.FileChooserDialog(
+            title="Open Images...",
+            parent=self._main_window,
+        )
+        file_chooser_dialog.add_buttons(
+            Gtk.STOCK_CANCEL,
+            Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OPEN,
+            Gtk.ResponseType.OK,
+        )
+        file_chooser_dialog.set_select_multiple(True)
+
+        file_filter = Gtk.FileFilter()
+        file_filter.add_mime_type("image/jpeg")
+        file_filter.add_mime_type("image/png")
+        file_chooser_dialog.add_filter(file_filter)
+
+        response = file_chooser_dialog.run()
+
+        if response == Gtk.ResponseType.OK:
+            for filename in file_chooser_dialog.get_filenames():
+                self.add_image(filename)
+
+        file_chooser_dialog.destroy()
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
