@@ -8,6 +8,7 @@ from gi.repository import Gtk, GLib, Gio
 from . import APPLICATION_ID
 from . import helpers
 from .main_window import MainWindow
+from .about_dialog import AboutDialog
 from .image_store import ImageStore
 
 
@@ -39,6 +40,11 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
+
+        # Action: app.about
+        action = Gio.SimpleAction.new("about", None)
+        action.connect("activate", lambda a, p: self.about())
+        self.add_action(action)
 
         # Action: app.quit
         action = Gio.SimpleAction.new("quit", None)
@@ -89,6 +95,11 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
         for file_ in files:
             self.add_image(file_.get_path())
+
+    def about(self):
+        about_dialog = AboutDialog(parent=self._main_window)
+        about_dialog.run()
+        about_dialog.destroy()
 
     def quit(self):
         self.stop_optimization()

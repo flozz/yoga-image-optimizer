@@ -2,6 +2,11 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkImage" id="image-about">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">help-about-symbolic</property>
+  </object>
   <object class="GtkImage" id="image-add">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -69,6 +74,21 @@
         <property name="always_show_image">True</property>
       </object>
       <packing>
+        <property name="position">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="about_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="tooltip_text" translatable="yes">About</property>
+        <property name="action_name">app.about</property>
+        <property name="image">image-about</property>
+        <property name="always_show_image">True</property>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
         <property name="position">3</property>
       </packing>
     </child>
