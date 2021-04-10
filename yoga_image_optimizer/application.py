@@ -50,7 +50,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
         action = Gio.SimpleAction.new("quit", None)
         action.connect("activate", lambda a, p: self.quit())
         self.add_action(action)
-        self.set_accels_for_action("app.quit", ["<Ctrl>q"])
+        self.set_accels_for_action("app.quit", ["<Ctrl>Q", "<Ctrl>W"])
 
         # Action: app.optimize
         action = Gio.SimpleAction.new("optimize", None)
@@ -76,7 +76,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
         action = Gio.SimpleAction.new("open-file", None)
         action.connect("activate", lambda a, p: self.open_file())
         self.add_action(action)
-        self.set_accels_for_action("app.open-file", ["<Ctrl>o"])
+        self.set_accels_for_action("app.open-file", ["<Ctrl>O"])
 
     def do_activate(self):
         if not self._main_window:
