@@ -2,11 +2,6 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkImage" id="image-about">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">help-about-symbolic</property>
-  </object>
   <object class="GtkImage" id="image-add">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -21,108 +16,6 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">list-remove-symbolic</property>
-  </object>
-  <object class="GtkHeaderBar" id="main_window_header">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">YOGA Image Optimizer</property>
-    <property name="show_close_button">True</property>
-    <child>
-      <object class="GtkButton" id="add_image_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="tooltip_text" translatable="yes">Add an image</property>
-        <property name="action_name">app.open-file</property>
-        <property name="image">image-add</property>
-        <property name="always_show_image">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="remove_image_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="tooltip_text" translatable="yes">Remove selected image</property>
-        <property name="action_name">win.remove-selected-image</property>
-        <property name="image">image-remove</property>
-        <property name="always_show_image">True</property>
-      </object>
-      <packing>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkSeparator">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-      </object>
-      <packing>
-        <property name="position">2</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="clear_images_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="tooltip_text" translatable="yes">Remove all images</property>
-        <property name="action_name">app.clear-images</property>
-        <property name="image">image-clear</property>
-        <property name="relief">none</property>
-        <property name="always_show_image">True</property>
-      </object>
-      <packing>
-        <property name="position">3</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="about_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="tooltip_text" translatable="yes">About</property>
-        <property name="action_name">app.about</property>
-        <property name="image">image-about</property>
-        <property name="always_show_image">True</property>
-      </object>
-      <packing>
-        <property name="pack_type">end</property>
-        <property name="position">3</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="optimize_button">
-        <property name="label" translatable="yes">Optimize</property>
-        <property name="name">button-optimize</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="action_name">app.optimize</property>
-      </object>
-      <packing>
-        <property name="pack_type">end</property>
-        <property name="position">4</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="stop_optimization_button">
-        <property name="label">gtk-stop</property>
-        <property name="name">button-stop</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="action_name">app.stop-optimization</property>
-        <property name="use_stock">True</property>
-        <style>
-          <class name="destructive-action"/>
-        </style>
-      </object>
-      <packing>
-        <property name="pack_type">end</property>
-        <property name="position">5</property>
-      </packing>
-    </child>
   </object>
   <object class="GtkAdjustment" id="jpeg_quality_adjustment">
     <property name="upper">100</property>
@@ -375,6 +268,157 @@
         <property name="expand">False</property>
         <property name="fill">True</property>
         <property name="position">1</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkPopover" id="menu_popover">
+    <property name="width_request">200</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_left">6</property>
+        <property name="margin_right">6</property>
+        <property name="margin_top">6</property>
+        <property name="margin_bottom">6</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkModelButton">
+            <property name="name">about_modelbutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="action_name">app.about</property>
+            <property name="text" translatable="yes">About</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="name">quit_modelbutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="action_name">app.quit</property>
+            <property name="text" translatable="yes">Quit</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkHeaderBar" id="main_window_header">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">YOGA Image Optimizer</property>
+    <property name="show_close_button">True</property>
+    <child>
+      <object class="GtkButton" id="add_image_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="tooltip_text" translatable="yes">Add an image</property>
+        <property name="action_name">app.open-file</property>
+        <property name="image">image-add</property>
+        <property name="always_show_image">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="remove_image_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="tooltip_text" translatable="yes">Remove selected image</property>
+        <property name="action_name">win.remove-selected-image</property>
+        <property name="image">image-remove</property>
+        <property name="always_show_image">True</property>
+      </object>
+      <packing>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+      </object>
+      <packing>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="clear_images_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="tooltip_text" translatable="yes">Remove all images</property>
+        <property name="action_name">app.clear-images</property>
+        <property name="image">image-clear</property>
+        <property name="relief">none</property>
+        <property name="always_show_image">True</property>
+      </object>
+      <packing>
+        <property name="position">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkMenuButton" id="menu_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="focus_on_click">False</property>
+        <property name="receives_default">True</property>
+        <property name="popover">menu_popover</property>
+        <child>
+          <object class="GtkImage" id="image-menu">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">open-menu-symbolic</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="optimize_button">
+        <property name="label" translatable="yes">Optimize</property>
+        <property name="name">button-optimize</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="action_name">app.optimize</property>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+        <property name="position">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="stop_optimization_button">
+        <property name="label">gtk-stop</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="action_name">app.stop-optimization</property>
+        <property name="use_stock">True</property>
+        <style>
+          <class name="destructive-action"/>
+        </style>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+        <property name="position">6</property>
       </packing>
     </child>
   </object>
