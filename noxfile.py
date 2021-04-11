@@ -12,7 +12,7 @@ PYTHON_FILES = [
 def lint(session):
     session.install("flake8", "black")
     session.run("flake8", *PYTHON_FILES)
-    session.run("black", "--check", *PYTHON_FILES)
+    session.run("black", "--check", "--diff", "--color", *PYTHON_FILES)
 
 
 @nox.session(reuse_venv=True)
