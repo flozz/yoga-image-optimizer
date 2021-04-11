@@ -253,15 +253,10 @@ class ImageStore(object):
             output_size_display = ""
 
             if output_size > 0:
-                size_delta = (
-                    100
-                    - min(input_size, output_size)
-                    / max(input_size, output_size)
-                    * 100
-                )
+                size_delta = -(100 - output_size / input_size * 100)
                 output_size_display = "%s (%s%.1f %%)" % (
                     helpers.human_readable_file_size(output_size),
-                    "-" if output_size <= output_size else "+",
+                    "+" if output_size > input_size else "",
                     size_delta,
                 )
 
