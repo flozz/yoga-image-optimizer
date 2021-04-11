@@ -2,14 +2,10 @@ from pathlib import Path
 
 from . import APPLICATION_NAME
 from . import helpers
+from .image_formats import get_supported_output_format_ids
+from .image_formats import get_supported_output_format_names
 
 from gi.repository import Gtk, Gdk, Gio, GdkPixbuf
-
-
-OUTPUT_FORMATS = [
-    "JPEG",
-    "PNG",
-]
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -160,7 +156,7 @@ class MainWindow(Gtk.ApplicationWindow):
             "output_format_combobox"
         )
 
-        for output_format in OUTPUT_FORMATS:
+        for output_format in get_supported_output_format_names():
             output_format_combobox.append_text(output_format)
 
     def _on_main_window_destroyed(self, widget):
@@ -199,7 +195,9 @@ class MainWindow(Gtk.ApplicationWindow):
         output_format_combobox = self._builder.get_object(
             "output_format_combobox"
         )
-        output_format_combobox.set_active(OUTPUT_FORMATS.index(output_format))
+        output_format_combobox.set_active(
+            get_supported_output_format_ids().index(output_format)
+        )
 
         output_file = app.image_store.get(iter_)["output_file"]
         output_file_entry = self._builder.get_object("output_file_entry")
@@ -208,7 +206,7 @@ class MainWindow(Gtk.ApplicationWindow):
         output_image_options.show()
 
         # [JPEG] Update and show jpeg options
-        if output_format == "JPEG":
+        if output_format == "jpeg":
             jpeg_quality_adjustment = self._builder.get_object(
                 "jpeg_quality_adjustment"
             )
@@ -241,7 +239,9 @@ class MainWindow(Gtk.ApplicationWindow):
             "output_format_combobox"
         )
 
-        output_format = OUTPUT_FORMATS[output_format_combobox.get_active()]
+        output_format = get_supported_output_format_ids()[
+            output_format_combobox.get_active()
+        ]
         app.image_store.update(iter_, output_format=output_format)
 
         self._on_image_treeview_selection_changed(selection)

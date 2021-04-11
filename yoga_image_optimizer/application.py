@@ -7,16 +7,11 @@ from gi.repository import Gtk, GLib, Gio
 
 from . import APPLICATION_ID
 from . import helpers
+from .image_formats import find_file_format
+from .image_formats import get_supported_input_format_mimetypes
 from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .image_store import ImageStore
-
-
-_IMAGE_FORMATS = {
-    ".jpg": "JPEG",
-    ".jpeg": "JPEG",
-    ".png": "PNG",
-}
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -112,15 +107,19 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def add_image(self, path):
         input_path = Path(path).resolve()
         input_size = input_path.stat().st_size
-        ext = input_path.suffix.lower()
+        input_format = find_file_format(input_path.as_posix())
+
+        if input_format is None:
+            print("W: File ignored (unsupported format): %s" % path)
+            return
 
         self.image_store.append(
             input_file=input_path.as_posix(),
             output_file=helpers.add_suffix_to_filename(input_path.as_posix()),
             input_size=input_size,
             output_size=0,
-            input_format=_IMAGE_FORMATS[ext],
-            output_format=_IMAGE_FORMATS[ext],
+            input_format=input_format,
+            output_format=input_format,
             preview=helpers.preview_gdk_pixbuf_from_path(
                 input_path.as_posix()
             ),
@@ -144,8 +143,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
         image_file_filter = Gtk.FileFilter()
         image_file_filter.set_name("Image Files")
-        image_file_filter.add_mime_type("image/jpeg")
-        image_file_filter.add_mime_type("image/png")
+        for mimetype in get_supported_input_format_mimetypes():
+            image_file_filter.add_mime_type(mimetype)
         file_chooser_dialog.add_filter(image_file_filter)
 
         any_file_filter = Gtk.FileFilter()

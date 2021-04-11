@@ -4,6 +4,7 @@ from pathlib import Path
 from gi.repository import Gtk, GdkPixbuf
 
 from . import helpers
+from .image_formats import IMAGES_FORMATS
 
 
 class ImageStore(object):
@@ -195,19 +196,23 @@ class ImageStore(object):
             )
 
         if "output_format" in kwargs or "jpeg_quality" in kwargs:
-            _FORMATS = {
-                "JPEG": ".jpg",
-                "PNG": ".png",
+            _FORMATS_EXTS = {
+                fid: fmt["exts"][0] for fid, fmt in IMAGES_FORMATS.items()
             }
 
             output_format = self.get(index)["output_format"]
 
-            if output_format == "JPEG":
-                text = "JPEG (%i %%)" % self.get(index)["jpeg_quality"]
+            if output_format == "jpeg":
+                text = "%s (%i %%)" % (
+                    IMAGES_FORMATS["jpeg"]["display_name"],
+                    self.get(index)["jpeg_quality"],
+                )
                 self._update_field(index, "output_format_display", text)
             else:
                 self._update_field(
-                    index, "output_format_display", output_format
+                    index,
+                    "output_format_display",
+                    IMAGES_FORMATS[output_format]["display_name"],
                 )
 
             output_file = Path(self.get(index)["output_file"])
@@ -215,7 +220,9 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "output_file",
-                output_file.with_suffix(_FORMATS[output_format]).as_posix(),
+                output_file.with_suffix(
+                    _FORMATS_EXTS[output_format]
+                ).as_posix(),
             )
 
         if "output_file" in kwargs or "output_format" in kwargs:
