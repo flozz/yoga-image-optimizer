@@ -7,6 +7,7 @@ from gi.repository import Gtk, GLib, Gio
 
 from . import APPLICATION_ID
 from . import helpers
+from .image_formats import IMAGES_FORMATS
 from .image_formats import find_file_format
 from .image_formats import get_supported_input_format_mimetypes
 from .main_window import MainWindow
@@ -113,13 +114,19 @@ class YogaImageOptimizerApplication(Gtk.Application):
             print("W: File ignored (unsupported format): %s" % path)
             return
 
+        output_format = input_format
+
+        # Default to JPEG if the input format is not supported as output format
+        if not IMAGES_FORMATS[input_format]["output"]:
+            output_format = "jpeg"
+
         self.image_store.append(
             input_file=input_path.as_posix(),
             output_file=helpers.add_suffix_to_filename(input_path.as_posix()),
             input_size=input_size,
             output_size=0,
             input_format=input_format,
-            output_format=input_format,
+            output_format=output_format,
             preview=helpers.preview_gdk_pixbuf_from_path(
                 input_path.as_posix()
             ),

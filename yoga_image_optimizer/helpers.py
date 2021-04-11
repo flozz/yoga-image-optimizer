@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from gi.repository import Gio, GdkPixbuf
+from PIL import Image
+from gi.repository import GLib, Gio, GdkPixbuf
 
 
 def find_data_path(path):
@@ -81,4 +82,24 @@ def preview_gdk_pixbuf_from_path(path, size=64):
 
     :rtype: GdkPixbuf.Pixbuff
     """
-    return GdkPixbuf.Pixbuf.new_from_file_at_size(path, size, size)
+    image = Image.open(path)
+    image.thumbnail([size, size], Image.LANCZOS)
+
+    image_rgba = Image.new("RGBA", image.size)
+    image_rgba.paste(image)
+
+    # fmt: off
+    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
+        GLib.Bytes.new(image_rgba.tobytes()),  # data
+        GdkPixbuf.Colorspace.RGB,              # colorspace
+        True,                                  # has alpha
+        8,                                     # bits_per_sample
+        *image_rgba.size,                      # width, height
+        image_rgba.size[0] * 4,                # rowstride
+    )
+    # fmt: on
+
+    image.close()
+    image_rgba.close()
+
+    return pixbuf

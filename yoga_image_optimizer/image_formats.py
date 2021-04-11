@@ -18,6 +18,7 @@ import pathlib
 
 
 IMAGES_FORMATS = {
+    # ==== Formats supported as output ====
     "jpeg": {
         "display_name": "JPEG",
         "exts": [".jpg", ".jpeg"],
@@ -34,6 +35,111 @@ IMAGES_FORMATS = {
         "output": True,
         "check_function": "_check_extention",
     },
+    # ==== Formats only supported as input ====
+    "bmp": {
+        "display_name": "Windows Bitmap",
+        "exts": [".bmp", ".dib"],
+        "mimetype": "image/bmp",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "eps": {
+        "display_name": "EPS",
+        "exts": [".eps"],
+        "mimetype": "image/x-eps",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "gif": {
+        "display_name": "GIF",
+        "exts": [".gif"],
+        "mimetype": "image/gif",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "icns": {
+        "display_name": "MacOS Icon (ICNS)",
+        "exts": [".icns"],
+        "mimetype": "image/x-icns",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "ico": {
+        "display_name": "Windows Icon (ICO)",
+        "exts": [".ico"],
+        "mimetype": "image/vnd.microsoft.icon",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "tga": {
+        "display_name": "Truevision TGA",
+        "exts": [".tga"],
+        "mimetype": "image/x-tga",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "tiff": {
+        "display_name": "TIFF",
+        "exts": [".tiff", ".tif"],
+        "mimetype": "image/tiff",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "webp": {
+        "display_name": "WEBP",
+        "exts": [".webp"],
+        "mimetype": "image/webp",
+        "input": True,
+        "output": False,
+        "check_function": "_check_extention",
+    },
+    "webpl": {
+        "display_name": "WEBP (lossless)",
+        "exts": [".webp"],
+        "mimetype": "image/webp",
+        "input": True,
+        "output": False,
+        "check_function": "_check_nop",
+    },
+    # ==== TODO ====
+    # BLP
+    # CUR
+    # DCX
+    # DDS
+    # FLI, FLC
+    # FPX
+    # FTEX
+    # GBR
+    # GD
+    # IM
+    # IMT
+    # IPTC/NAA
+    # JPEG 2000
+    # MCIDAS
+    # MIC
+    # MPO
+    # MSP
+    # PBM
+    # PCD
+    # PCX
+    # PGM
+    # PIXAR
+    # PNM
+    # PPM
+    # PSD
+    # SGI
+    # SPIDER
+    # WAL
+    # WMF
+    # XBM
+    # XPM
 }
 
 
@@ -59,6 +165,21 @@ def _check_extention(format_id, filename):
     """
     exts = IMAGES_FORMATS[format_id]["exts"]
     return pathlib.Path(filename).suffix.lower() in exts
+
+
+def _check_nop(format_id, filename):
+    """Format checker that always returns False (used to disable a format).
+
+    :param str format_id: The internal format identifier to check.
+    :param str filename: The path of the file to check.
+
+    :rtype: bool
+    :return: Always returns ``False``.
+
+    > _check_nop("foo", "bar")
+    False
+    """
+    return False
 
 
 def find_file_format(filename):
