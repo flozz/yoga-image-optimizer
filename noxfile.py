@@ -1,3 +1,5 @@
+import pathlib
+
 import nox
 
 
@@ -28,3 +30,19 @@ def test(session):
     session.install("pytest")
     session.install("-e", ".")
     session.run("pytest", "--doctest-modules", "yoga_image_optimizer")
+
+
+@nox.session
+def locale_extract(session):
+    session.run(
+        "xgettext",
+        "--from-code=UTF-8",
+        "-o",
+        "yoga_image_optimizer/data/locales/messages.pot",
+        "yoga_image_optimizer/data/ui/main-window.glade",
+        *[
+            p.as_posix()
+            for p in pathlib.Path("yoga_image_optimizer/").glob("**/*.py")
+        ],
+        external=True,
+    )
