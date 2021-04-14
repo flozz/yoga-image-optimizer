@@ -1,8 +1,13 @@
-from . import APPLICATION_NAME
+import gettext
+
+from . import APPLICATION_NAME, APPLICATION_ID
 from . import VERSION
 from . import helpers
 
 from gi.repository import Gtk, GdkPixbuf
+
+
+gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
 
 
 class AboutDialog(Gtk.AboutDialog):
@@ -11,7 +16,9 @@ class AboutDialog(Gtk.AboutDialog):
             self,
             parent=parent,
             program_name=APPLICATION_NAME,
-            comments="A graphical interface to optimizes JPEG and PNG images (based on YOGA)",
+            comments=_(
+                "A graphical interface to optimizes JPEG and PNG images (based on YOGA)"
+            ),
             version=VERSION,
             copyright="Copyright (c) 2021 Fabien LOISON",
             website_label="github.com/flozz/yoga-image-optimizer",

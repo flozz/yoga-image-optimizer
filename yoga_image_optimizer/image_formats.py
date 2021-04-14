@@ -15,6 +15,13 @@ Supported image formats.
 """
 
 import pathlib
+import gettext
+
+from . import APPLICATION_ID
+from . import helpers
+
+
+gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
 
 
 IMAGES_FORMATS = {
@@ -37,7 +44,7 @@ IMAGES_FORMATS = {
     },
     # ==== Formats only supported as input ====
     "bmp": {
-        "display_name": "Windows Bitmap",
+        "display_name": _("Windows Bitmap"),
         "exts": [".bmp", ".dib"],
         "mimetype": "image/bmp",
         "input": True,
@@ -61,7 +68,7 @@ IMAGES_FORMATS = {
         "check_function": "_check_extention",
     },
     "icns": {
-        "display_name": "MacOS Icon (ICNS)",
+        "display_name": _("MacOS Icon (ICNS)"),
         "exts": [".icns"],
         "mimetype": "image/x-icns",
         "input": True,
@@ -69,7 +76,7 @@ IMAGES_FORMATS = {
         "check_function": "_check_extention",
     },
     "ico": {
-        "display_name": "Windows Icon (ICO)",
+        "display_name": _("Windows Icon (ICO)"),
         "exts": [".ico"],
         "mimetype": "image/vnd.microsoft.icon",
         "input": True,
@@ -101,7 +108,7 @@ IMAGES_FORMATS = {
         "check_function": "_check_extention",
     },
     "webpl": {
-        "display_name": "WEBP (lossless)",
+        "display_name": _("WEBP (lossless)"),
         "exts": [".webp"],
         "mimetype": "image/webp",
         "input": True,

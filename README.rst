@@ -112,6 +112,20 @@ You can also fix automatically coding style errors with::
 
     nox -s black_fix
 
+Extract, Update or Build Translations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You will first have to install `nox <https://nox.thea.codes/>`_::
+
+    pip3 install nox
+
+To extract messages and update locales run::
+
+    nox --session locales_update
+
+To compile locales, run::
+
+    nox --session locales_compile
 
 
 .. |Github| image:: https://img.shields.io/github/stars/flozz/yoga-image-optimizer?label=Github&logo=github

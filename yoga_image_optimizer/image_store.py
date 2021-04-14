@@ -1,32 +1,37 @@
 import os
 from pathlib import Path
+import gettext
 
 from gi.repository import Gtk, GdkPixbuf
 
+from . import APPLICATION_ID
 from . import helpers
 from .image_formats import IMAGES_FORMATS
+
+
+gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
 
 
 class ImageStore(object):
 
     # fmt: off
     FIELDS = {
-        "input_file":            {"id":  0, "label": "",              "type": str,              "default": ""},
-        "output_file":           {"id":  1, "label": "",              "type": str,              "default": ""},
-        "input_file_display":    {"id":  2, "label": "Input Image",   "type": str,              "default": ""},
-        "output_file_display":   {"id":  3, "label": "Output Image",  "type": str,              "default": ""},
-        "input_size":            {"id":  4, "label": "",              "type": int,              "default": 0},
-        "output_size":           {"id":  5, "label": "",              "type": int,              "default": 0},
-        "input_size_display":    {"id":  6, "label": "Input Size",    "type": str,              "default": ""},
-        "output_size_display":   {"id":  7, "label": "Output Size",   "type": str,              "default": ""},
-        "input_format":          {"id":  8, "label": "Input Format",  "type": str,              "default": ""},
-        "output_format":         {"id":  9, "label": "",              "type": str,              "default": ""},
-        "output_format_display": {"id": 10, "label": "Output Format", "type": str,              "default": ""},
-        "preview":               {"id": 11, "label": "",              "type": GdkPixbuf.Pixbuf, "default": None},
-        "separator":             {"id": 12, "label": "",              "type": str,              "default": "➡️"},
-        "status":                {"id": 13, "label": "",              "type": int,              "default": 0},
-        "status_display":        {"id": 14, "label": "Status",        "type": str,              "default": ""},
-        "jpeg_quality":          {"id": 15, "label": "",              "type": int,              "default": 90},
+        "input_file":            {"id":  0, "label": "",                 "type": str,              "default": ""},
+        "output_file":           {"id":  1, "label": "",                 "type": str,              "default": ""},
+        "input_file_display":    {"id":  2, "label": _("Input Image"),   "type": str,              "default": ""},
+        "output_file_display":   {"id":  3, "label": _("Output Image"),  "type": str,              "default": ""},
+        "input_size":            {"id":  4, "label": "",                 "type": int,              "default": 0},
+        "output_size":           {"id":  5, "label": "",                 "type": int,              "default": 0},
+        "input_size_display":    {"id":  6, "label": _("Input Size"),    "type": str,              "default": ""},
+        "output_size_display":   {"id":  7, "label": _("Output Size"),   "type": str,              "default": ""},
+        "input_format":          {"id":  8, "label": _("Input Format"),  "type": str,              "default": ""},
+        "output_format":         {"id":  9, "label": "",                 "type": str,              "default": ""},
+        "output_format_display": {"id": 10, "label": _("Output Format"), "type": str,              "default": ""},
+        "preview":               {"id": 11, "label": "",                 "type": GdkPixbuf.Pixbuf, "default": None},
+        "separator":             {"id": 12, "label": "",                 "type": str,              "default": "➡️"},
+        "status":                {"id": 13, "label": "",                 "type": int,              "default": 0},
+        "status_display":        {"id": 14, "label": _("Status"),        "type": str,              "default": ""},
+        "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 90},
     }
     # fmt: on
 

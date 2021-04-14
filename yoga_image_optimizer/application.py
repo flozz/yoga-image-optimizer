@@ -1,6 +1,8 @@
 import os
 import concurrent.futures
 from pathlib import Path
+import gettext
+import locale
 
 import yoga.image
 from gi.repository import Gtk, GLib, Gio
@@ -13,6 +15,10 @@ from .image_formats import get_supported_input_format_mimetypes
 from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .image_store import ImageStore
+
+
+locale.bindtextdomain(APPLICATION_ID, helpers.find_data_path("locales"))
+gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -137,7 +143,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def open_file(self):
         file_chooser_dialog = Gtk.FileChooserDialog(
-            title="Open Images...",
+            title=_("Open Images..."),
             parent=self._main_window,
         )
         file_chooser_dialog.add_buttons(
@@ -149,13 +155,13 @@ class YogaImageOptimizerApplication(Gtk.Application):
         file_chooser_dialog.set_select_multiple(True)
 
         image_file_filter = Gtk.FileFilter()
-        image_file_filter.set_name("Image Files")
+        image_file_filter.set_name(_("Image Files"))
         for mimetype in get_supported_input_format_mimetypes():
             image_file_filter.add_mime_type(mimetype)
         file_chooser_dialog.add_filter(image_file_filter)
 
         any_file_filter = Gtk.FileFilter()
-        any_file_filter.set_name("All Files")
+        any_file_filter.set_name(_("All Files"))
         any_file_filter.add_pattern("*")
         file_chooser_dialog.add_filter(any_file_filter)
 

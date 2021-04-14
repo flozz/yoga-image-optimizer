@@ -1,4 +1,7 @@
 from pathlib import Path
+import gettext
+
+from . import APPLICATION_ID
 
 from PIL import Image
 from gi.repository import GLib, Gio, GdkPixbuf
@@ -32,8 +35,12 @@ def human_readable_file_size(size):
     '1.50 kiB'
     """
     if size < 1024:
-        return "%i Bytes" % size
-    for u, d in [("kiB", 1024 ** 1), ("MiB", 1024 ** 2), ("GiB", 1024 ** 3)]:
+        return "%i %s" % (size, _("Bytes"))
+    for u, d in [
+        (_("kiB"), 1024 ** 1),
+        (_("MiB"), 1024 ** 2),
+        (_("GiB"), 1024 ** 3),
+    ]:
         if size / d < 1024:
             return "%.2f %s" % (size / d, u)
     return "∞"
@@ -103,3 +110,6 @@ def preview_gdk_pixbuf_from_path(path, size=64):
     image_rgba.close()
 
     return pixbuf
+
+
+gettext.install(APPLICATION_ID, localedir=find_data_path("locales"))
