@@ -29,16 +29,22 @@ def black_fix(session):
 def test(session):
     session.install("pytest")
     session.install("-e", ".")
-    session.run("pytest", "--doctest-modules", "yoga_image_optimizer")
+    session.run(
+        "pytest",
+        "--doctest-modules",
+        "yoga_image_optimizer",
+        env={"LANG": "C"},  # Force using the default strings
+    )
 
 
 @nox.session
-def locale_extract(session):
+def locales_update(session):
+    # Extract messages in .pot
     session.run(
         "xgettext",
         "--from-code=UTF-8",
         "-o",
-        "yoga_image_optimizer/data/locales/messages.pot",
+        "locales/messages.pot",
         "yoga_image_optimizer/data/ui/main-window.glade",
         *[
             p.as_posix()
@@ -46,3 +52,34 @@ def locale_extract(session):
         ],
         external=True,
     )
+    # Updates locales
+    for po_file in pathlib.Path("locales").glob("*.po"):
+        session.run(
+            "msgmerge",
+            "--update",
+            "--no-fuzzy-matching",
+            po_file.as_posix(),
+            "locales/messages.pot",
+            external=True,
+        )
+
+
+@nox.session
+def locales_compile(session):
+    LOCAL_DIR = pathlib.Path("yoga_image_optimizer/data/locales")
+    for po_file in pathlib.Path("locales").glob("*.po"):
+        output_file = (
+            LOCAL_DIR
+            / po_file.name[: -len(po_file.suffix)]
+            / "LC_MESSAGES"
+            / "org.flozz.yoga-image-optimizer.mo"
+        )
+        print(output_file.as_posix())
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        session.run(
+            "msgfmt",
+            po_file.as_posix(),
+            "-o",
+            output_file.as_posix(),
+            external=True,
+        )

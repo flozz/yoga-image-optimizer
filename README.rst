@@ -16,8 +16,6 @@ Limitations
 
 As this is an early development version:
 
-* Only JPEG and PNG are supported as input file. This will be improved in the future to allow opening any image format supported by `Pillow <https://pillow.readthedocs.io/en/stable/>`_.
-
 * PNG Optimization is very, very, **VERY** slow due to unbalanced ZoppfliPNG optimization options set by YOGA, this will be improved in the future.
 
 
@@ -112,6 +110,24 @@ You can also fix automatically coding style errors with::
 
     nox -s black_fix
 
+Extract, Update or Build Translations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You will first have to install `nox <https://nox.thea.codes/>`_::
+
+    pip3 install nox
+
+To extract messages and update locales run::
+
+    nox --session locales_update
+
+To compile locales, run::
+
+    nox --session locales_compile
+
+**NOTE:** you will need to have ``xgettext``, ``msgmerge`` and ``msgfmt`` executable installed on your system to run the above commands. On Debian / Ubuntu, they can be installed with the following command::
+
+    sudo apt install gettext
 
 
 .. |Github| image:: https://img.shields.io/github/stars/flozz/yoga-image-optimizer?label=Github&logo=github

@@ -1,7 +1,8 @@
 from pathlib import Path
 
-from . import APPLICATION_NAME
+from . import APPLICATION_NAME, APPLICATION_ID
 from . import helpers
+from . import data_helpers
 from .image_formats import get_supported_output_format_ids
 from .image_formats import get_supported_output_format_names
 
@@ -21,8 +22,9 @@ class MainWindow(Gtk.ApplicationWindow):
         )
 
         self._builder = Gtk.Builder()
+        self._builder.set_translation_domain(APPLICATION_ID)
         self._builder.add_from_file(
-            helpers.find_data_path("ui/main-window.glade")
+            data_helpers.find_data_path("ui/main-window.glade")
         )
         self._builder.connect_signals(self)
 

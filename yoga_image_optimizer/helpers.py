@@ -1,13 +1,11 @@
 from pathlib import Path
 
 from PIL import Image
-from gi.repository import GLib, Gio, GdkPixbuf
+from gi.repository import GLib
+from gi.repository import Gio
+from gi.repository import GdkPixbuf
 
-
-def find_data_path(path):
-    path_file = Path(__file__)
-    root = path_file.parent.resolve()
-    return root.joinpath("data", path).as_posix()
+from .translation import gettext as _
 
 
 def human_readable_file_size(size):
@@ -32,8 +30,12 @@ def human_readable_file_size(size):
     '1.50 kiB'
     """
     if size < 1024:
-        return "%i Bytes" % size
-    for u, d in [("kiB", 1024 ** 1), ("MiB", 1024 ** 2), ("GiB", 1024 ** 3)]:
+        return "%i %s" % (size, _("Bytes"))
+    for u, d in [
+        (_("kiB"), 1024 ** 1),
+        (_("MiB"), 1024 ** 2),
+        (_("GiB"), 1024 ** 3),
+    ]:
         if size / d < 1024:
             return "%.2f %s" % (size / d, u)
     return "∞"
