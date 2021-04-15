@@ -1,15 +1,12 @@
 import os
 from pathlib import Path
-import gettext
 
-from gi.repository import Gtk, GdkPixbuf
+from gi.repository import Gtk
+from gi.repository import GdkPixbuf
 
-from . import APPLICATION_ID
 from . import helpers
 from .image_formats import IMAGES_FORMATS
-
-
-gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
+from .translation import gettext as _
 
 
 class ImageStore(object):

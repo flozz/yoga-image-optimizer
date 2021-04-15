@@ -1,11 +1,11 @@
 import os
 import concurrent.futures
 from pathlib import Path
-import gettext
-import locale
 
 import yoga.image
-from gi.repository import Gtk, GLib, Gio
+from gi.repository import Gtk
+from gi.repository import GLib
+from gi.repository import Gio
 
 from . import APPLICATION_ID
 from . import helpers
@@ -15,10 +15,7 @@ from .image_formats import get_supported_input_format_mimetypes
 from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .image_store import ImageStore
-
-
-locale.bindtextdomain(APPLICATION_ID, helpers.find_data_path("locales"))
-gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
+from .translation import gettext as _
 
 
 class YogaImageOptimizerApplication(Gtk.Application):

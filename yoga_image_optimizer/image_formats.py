@@ -15,13 +15,7 @@ Supported image formats.
 """
 
 import pathlib
-import gettext
-
-from . import APPLICATION_ID
-from . import helpers
-
-
-gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
+from .translation import gettext as _
 
 
 IMAGES_FORMATS = {

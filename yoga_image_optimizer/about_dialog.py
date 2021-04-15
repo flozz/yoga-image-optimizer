@@ -1,13 +1,10 @@
-import gettext
+from gi.repository import Gtk
+from gi.repository import GdkPixbuf
 
-from . import APPLICATION_NAME, APPLICATION_ID
+from . import APPLICATION_NAME
 from . import VERSION
 from . import helpers
-
-from gi.repository import Gtk, GdkPixbuf
-
-
-gettext.install(APPLICATION_ID, localedir=helpers.find_data_path("locales"))
+from .translation import gettext as _
 
 
 class AboutDialog(Gtk.AboutDialog):
