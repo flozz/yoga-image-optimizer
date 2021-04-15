@@ -29,7 +29,12 @@ def black_fix(session):
 def test(session):
     session.install("pytest")
     session.install("-e", ".")
-    session.run("pytest", "--doctest-modules", "yoga_image_optimizer")
+    session.run(
+        "pytest",
+        "--doctest-modules",
+        "yoga_image_optimizer",
+        env={"LANG": "C"},  # Force using the default strings
+    )
 
 
 @nox.session
