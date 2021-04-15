@@ -271,9 +271,9 @@ class ImageStore(object):
         if "status" in kwargs:
             _STATUS = {
                 0: "",
-                1: "⏸️ Pending",
-                2: "🔄️ In progress",
-                3: "✅️ Done",
+                1: "⏸️ %s" % _("Pending"),
+                2: "🔄️ %s" % _("In progress"),
+                3: "✅️ %s" % _("Done"),
             }
             self._update_field(
                 index,

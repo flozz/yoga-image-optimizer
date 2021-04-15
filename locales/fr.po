@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-13 13:43+0200\n"
-"PO-Revision-Date: 2021-04-13 13:37+0200\n"
+"POT-Creation-Date: 2021-04-15 13:58+0200\n"
+"PO-Revision-Date: 2021-04-15 13:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgid "Output file"
 msgstr "Fichier de sortie"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:144
-#: yoga_image_optimizer/image_store.py:22
+#: yoga_image_optimizer/image_store.py:19
 msgid "Output Image"
 msgstr "Image de sortie"
 
@@ -57,75 +57,87 @@ msgstr "Supprimer toutes les images"
 msgid "Optimize"
 msgstr "Optimiser"
 
-#: yoga_image_optimizer/image_formats.py:47
+#: yoga_image_optimizer/image_formats.py:41
 msgid "Windows Bitmap"
 msgstr "Bitmap Windows"
 
-#: yoga_image_optimizer/image_formats.py:71
+#: yoga_image_optimizer/image_formats.py:65
 msgid "MacOS Icon (ICNS)"
 msgstr "Icône MacOS (ICNS)"
 
-#: yoga_image_optimizer/image_formats.py:79
+#: yoga_image_optimizer/image_formats.py:73
 msgid "Windows Icon (ICO)"
 msgstr "Icône Windows (ICO)"
 
-#: yoga_image_optimizer/image_formats.py:111
+#: yoga_image_optimizer/image_formats.py:105
 msgid "WEBP (lossless)"
 msgstr "WEBP (sans perte)"
 
-#: yoga_image_optimizer/helpers.py:38
+#: yoga_image_optimizer/helpers.py:33
 msgid "Bytes"
 msgstr "octets"
 
-#: yoga_image_optimizer/helpers.py:39
+#: yoga_image_optimizer/helpers.py:35
 msgid "kiB"
 msgstr "kio"
 
-#: yoga_image_optimizer/helpers.py:39
+#: yoga_image_optimizer/helpers.py:36
 msgid "MiB"
 msgstr "Mio"
 
-#: yoga_image_optimizer/helpers.py:39
+#: yoga_image_optimizer/helpers.py:37
 msgid "GiB"
 msgstr "Gio"
 
-#: yoga_image_optimizer/application.py:146
+#: yoga_image_optimizer/application.py:143
 msgid "Open Images..."
 msgstr "Ouvrir des images..."
 
-#: yoga_image_optimizer/application.py:158
+#: yoga_image_optimizer/application.py:155
 msgid "Image Files"
 msgstr "Fichier images"
 
-#: yoga_image_optimizer/application.py:164
+#: yoga_image_optimizer/application.py:161
 msgid "All Files"
 msgstr "Tous les fichiers"
 
-#: yoga_image_optimizer/image_store.py:21
+#: yoga_image_optimizer/image_store.py:18
 msgid "Input Image"
 msgstr "Image d'entrée"
 
-#: yoga_image_optimizer/image_store.py:25
+#: yoga_image_optimizer/image_store.py:22
 msgid "Input Size"
 msgstr "Taille d'entrée"
 
-#: yoga_image_optimizer/image_store.py:26
+#: yoga_image_optimizer/image_store.py:23
 msgid "Output Size"
 msgstr "Taille de sortie"
 
-#: yoga_image_optimizer/image_store.py:27
+#: yoga_image_optimizer/image_store.py:24
 msgid "Input Format"
 msgstr "Format d'entrée"
 
-#: yoga_image_optimizer/image_store.py:29
+#: yoga_image_optimizer/image_store.py:26
 msgid "Output Format"
 msgstr "Format de sortie"
 
-#: yoga_image_optimizer/image_store.py:33
+#: yoga_image_optimizer/image_store.py:30
 msgid "Status"
 msgstr "État"
 
-#: yoga_image_optimizer/about_dialog.py:19
+#: yoga_image_optimizer/image_store.py:274
+msgid "Pending"
+msgstr "En attente"
+
+#: yoga_image_optimizer/image_store.py:275
+msgid "In progress"
+msgstr "En cours"
+
+#: yoga_image_optimizer/image_store.py:276
+msgid "Done"
+msgstr "Fait"
+
+#: yoga_image_optimizer/about_dialog.py:17
 msgid "A graphical interface to optimizes JPEG and PNG images (based on YOGA)"
 msgstr ""
 "Une interface graphique pour optimiser les images JPEG et les PNG  (basé sur "
