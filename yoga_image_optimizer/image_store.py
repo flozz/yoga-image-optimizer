@@ -7,6 +7,7 @@ from gi.repository import GdkPixbuf
 from . import helpers
 from .image_formats import IMAGES_FORMATS
 from .translation import gettext as _
+from .translation import format_string
 
 
 class ImageStore(object):
@@ -256,10 +257,10 @@ class ImageStore(object):
 
             if output_size > 0:
                 size_delta = -(100 - output_size / input_size * 100)
-                output_size_display = "%s (%s%.1f %%)" % (
+                output_size_display = "%s (%s%s %%)" % (
                     helpers.human_readable_file_size(output_size),
                     "+" if output_size > input_size else "",
-                    size_delta,
+                    format_string("%.1f", size_delta),
                 )
 
             self._update_field(

@@ -6,6 +6,7 @@ from gi.repository import Gio
 from gi.repository import GdkPixbuf
 
 from .translation import gettext as _
+from .translation import format_string
 
 
 def human_readable_file_size(size):
@@ -37,7 +38,7 @@ def human_readable_file_size(size):
         (_("GiB"), 1024 ** 3),
     ]:
         if size / d < 1024:
-            return "%.2f %s" % (size / d, u)
+            return "%s %s" % (format_string("%.2f", size / d), u)
     return "∞"
 
 
