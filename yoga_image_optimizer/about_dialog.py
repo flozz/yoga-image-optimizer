@@ -3,7 +3,7 @@ from gi.repository import GdkPixbuf
 
 from . import APPLICATION_NAME
 from . import VERSION
-from . import helpers
+from . import data_helpers
 from .translation import gettext as _
 
 
@@ -24,6 +24,6 @@ class AboutDialog(Gtk.AboutDialog):
         )
 
         logo = GdkPixbuf.Pixbuf.new_from_file(
-            helpers.find_data_path("images/logo.svg")
+            data_helpers.find_data_path("images/logo.svg")
         )
         self.set_logo(logo)
