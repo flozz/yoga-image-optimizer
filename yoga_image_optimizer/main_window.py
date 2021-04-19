@@ -169,11 +169,18 @@ class MainWindow(Gtk.ApplicationWindow):
         self, widget, drag_context, x, y, data, info, time
     ):
         app = self.get_application()
+
+        def _add_path(paths):
+            for path in paths:
+                if path.is_dir():
+                    _add_path(p for p in path.glob("**/*") if p.is_file())
+                elif path.is_file():
+                    app.add_image(path)
+                    Gtk.main_iteration_do(True)
+
         for uri in data.get_uris():
             path = Path(helpers.gvfs_uri_to_local_path(uri))
-            if not path.is_file():
-                continue
-            app.add_image(path)
+            _add_path([path])
 
     def _on_image_treeview_selection_changed(self, selection):
         app = self.get_application()
