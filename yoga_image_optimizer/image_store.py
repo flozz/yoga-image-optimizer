@@ -30,6 +30,7 @@ class ImageStore(object):
         "status":                {"id": 13, "label": "",                 "type": int,              "default": 0},
         "status_display":        {"id": 14, "label": _("Status"),        "type": str,              "default": ""},
         "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 90},
+        "webp_quality":          {"id": 16, "label": "",                 "type": int,              "default": 90},
     }
     # fmt: on
 
@@ -198,7 +199,11 @@ class ImageStore(object):
                 path.name,
             )
 
-        if "output_format" in kwargs or "jpeg_quality" in kwargs:
+        if (
+            "output_format" in kwargs
+            or "jpeg_quality" in kwargs
+            or "webp_quality" in kwargs
+        ):
             _FORMATS_EXTS = {
                 fid: fmt["exts"][0] for fid, fmt in IMAGES_FORMATS.items()
             }
@@ -209,6 +214,12 @@ class ImageStore(object):
                 text = "%s (%i %%)" % (
                     IMAGES_FORMATS["jpeg"]["display_name"],
                     self.get(index)["jpeg_quality"],
+                )
+                self._update_field(index, "output_format_display", text)
+            elif output_format == "webp":
+                text = "%s (%i %%)" % (
+                    IMAGES_FORMATS["webp"]["display_name"],
+                    self.get(index)["webp_quality"],
                 )
                 self._update_field(index, "output_format_display", text)
             else:

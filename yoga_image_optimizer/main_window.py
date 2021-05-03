@@ -87,6 +87,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("stop_optimization_button").hide()
             self._builder.get_object("output_image_options").set_sensitive(True)
             self._builder.get_object("jpeg_options").set_sensitive(True)
+            self._builder.get_object("webp_options").set_sensitive(True)
         elif state == app.STATE_OPTIMIZE:
             self._builder.get_object("add_image_button").set_sensitive(False)
             self._builder.get_object("remove_image_button").set_sensitive(False)
@@ -95,6 +96,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("stop_optimization_button").show()
             self._builder.get_object("output_image_options").set_sensitive(False)
             self._builder.get_object("jpeg_options").set_sensitive(False)
+            self._builder.get_object("webp_options").set_sensitive(False)
         # fmt: on
 
     def remove_selected_image(self):
@@ -186,10 +188,12 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
         output_image_options = self._builder.get_object("output_image_options")
         jpeg_options = self._builder.get_object("jpeg_options")
+        webp_options = self._builder.get_object("webp_options")
 
         # Reset output options visibilité (hide everything)
         output_image_options.hide()
         jpeg_options.hide()
+        webp_options.hide()
 
         # Get selected image
         _, iter_ = selection.get_selected()
@@ -223,6 +227,15 @@ class MainWindow(Gtk.ApplicationWindow):
                 app.image_store.get(iter_)["jpeg_quality"]
             )
             jpeg_options.show()
+        # [WebP] Update and show webp options
+        elif output_format == "webp":
+            webp_quality_adjustment = self._builder.get_object(
+                "webp_quality_adjustment"
+            )
+            webp_quality_adjustment.set_value(
+                app.image_store.get(iter_)["webp_quality"]
+            )
+            webp_options.show()
 
     def _on_output_file_entry_changed(self, entry):
         app = self.get_application()
@@ -263,3 +276,12 @@ class MainWindow(Gtk.ApplicationWindow):
         _, iter_ = selection.get_selected()
 
         app.image_store.update(iter_, jpeg_quality=adjustement.get_value())
+
+    def _on_webp_quality_adjustement_value_changed(self, adjustement):
+        app = self.get_application()
+
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+        _, iter_ = selection.get_selected()
+
+        app.image_store.update(iter_, webp_quality=adjustement.get_value())
