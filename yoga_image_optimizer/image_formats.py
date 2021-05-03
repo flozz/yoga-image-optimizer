@@ -36,6 +36,22 @@ IMAGES_FORMATS = {
         "output": True,
         "check_function": "_check_extention",
     },
+    "webp": {
+        "display_name": "WebP",
+        "exts": [".webp"],
+        "mimetype": "image/webp",
+        "input": True,
+        "output": True,
+        "check_function": "_check_extention",
+    },
+    "webpl": {
+        "display_name": _("WebP (lossless)"),
+        "exts": [".webp"],
+        "mimetype": "image/webp",
+        "input": True,
+        "output": True,
+        "check_function": "_check_nop",
+    },
     # ==== Formats only supported as input ====
     "bmp": {
         "display_name": _("Windows Bitmap"),
@@ -92,22 +108,6 @@ IMAGES_FORMATS = {
         "input": True,
         "output": False,
         "check_function": "_check_extention",
-    },
-    "webp": {
-        "display_name": "WEBP",
-        "exts": [".webp"],
-        "mimetype": "image/webp",
-        "input": True,
-        "output": False,
-        "check_function": "_check_extention",
-    },
-    "webpl": {
-        "display_name": _("WEBP (lossless)"),
-        "exts": [".webp"],
-        "mimetype": "image/webp",
-        "input": True,
-        "output": False,
-        "check_function": "_check_nop",
     },
     # ==== TODO ====
     # BLP

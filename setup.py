@@ -22,7 +22,7 @@ setup(
     author="Fabien LOISON",
     packages=find_packages(),
     install_requires=[
-        "yoga>=0.11.0",
+        "yoga>=1.0.0",
         "pycairo",
         "PyGObject>=3.26",
     ],
