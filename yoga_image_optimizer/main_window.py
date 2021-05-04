@@ -100,15 +100,18 @@ class MainWindow(Gtk.ApplicationWindow):
         # fmt: on
 
     def remove_selected_image(self):
+        iter_ = self.get_selected_image_iter()
+        if iter_:
+            app = self.get_application()
+            app.image_store.remove(iter_)
+
+    def get_selected_image_iter(self):
         treeview_images = self._builder.get_object("images_treeview")
         selection = treeview_images.get_selection()
-
         if selection.count_selected_rows() == 0:
-            return
-
-        app = self.get_application()
+            return None
         _, iter_ = selection.get_selected()
-        app.image_store.remove(iter_)
+        return iter_
 
     def _prepare_treeview(self):
         app = self.get_application()
@@ -198,7 +201,7 @@ class MainWindow(Gtk.ApplicationWindow):
         png_options.hide()
 
         # Get selected image
-        _, iter_ = selection.get_selected()
+        iter_ = self.get_selected_image_iter()
 
         # No image selected, stop here
         if not iter_:
@@ -250,12 +253,8 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_output_file_entry_changed(self, entry):
         app = self.get_application()
-        treeview_images = self._builder.get_object("images_treeview")
-        selection = treeview_images.get_selection()
-        _, iter_ = selection.get_selected()
-
+        iter_ = self.get_selected_image_iter()
         output_file = Path(entry.get_text())
-
         app.image_store.update(
             iter_,
             output_file=output_file.resolve().as_posix(),
@@ -277,33 +276,23 @@ class MainWindow(Gtk.ApplicationWindow):
         ]
         app.image_store.update(iter_, output_format=output_format)
 
-        self._on_image_treeview_selection_changed(selection)
+        self._on_image_treeview_selection_changed(
+            selection
+        )  # FIXME to refacto
 
     def _on_jpeg_quality_adjustement_value_changed(self, adjustement):
         app = self.get_application()
-
-        treeview_images = self._builder.get_object("images_treeview")
-        selection = treeview_images.get_selection()
-        _, iter_ = selection.get_selected()
-
+        iter_ = self.get_selected_image_iter()
         app.image_store.update(iter_, jpeg_quality=adjustement.get_value())
 
     def _on_webp_quality_adjustement_value_changed(self, adjustement):
         app = self.get_application()
-
-        treeview_images = self._builder.get_object("images_treeview")
-        selection = treeview_images.get_selection()
-        _, iter_ = selection.get_selected()
-
+        iter_ = self.get_selected_image_iter()
         app.image_store.update(iter_, webp_quality=adjustement.get_value())
 
     def _on_png_slow_optimization_checkbutton_toggled(self, checkbutton):
         app = self.get_application()
-
-        treeview_images = self._builder.get_object("images_treeview")
-        selection = treeview_images.get_selection()
-        _, iter_ = selection.get_selected()
-
+        iter_ = self.get_selected_image_iter()
         app.image_store.update(
             iter_, png_slow_optimization=checkbutton.get_active()
         )
