@@ -99,6 +99,70 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("webp_options").set_sensitive(False)
         # fmt: on
 
+    def update_interface(self):
+        app = self.get_application()
+        output_image_options = self._builder.get_object("output_image_options")
+        jpeg_options = self._builder.get_object("jpeg_options")
+        webp_options = self._builder.get_object("webp_options")
+        png_options = self._builder.get_object("png_options")
+
+        # Reset output options visibilité (hide everything)
+        output_image_options.hide()
+        jpeg_options.hide()
+        webp_options.hide()
+        png_options.hide()
+
+        # Get selected image
+        iter_ = self.get_selected_image_iter()
+
+        # No image selected, stop here
+        if not iter_:
+            return
+
+        output_format = app.image_store.get(iter_)["output_format"]
+
+        # Update and show output image options
+        output_format_combobox = self._builder.get_object(
+            "output_format_combobox"
+        )
+        output_format_combobox.set_active(
+            get_supported_output_format_ids().index(output_format)
+        )
+
+        output_file = app.image_store.get(iter_)["output_file"]
+        output_file_entry = self._builder.get_object("output_file_entry")
+        output_file_entry.set_text(output_file)
+
+        output_image_options.show()
+
+        # [JPEG] Update and show jpeg options
+        if output_format == "jpeg":
+            jpeg_quality_adjustment = self._builder.get_object(
+                "jpeg_quality_adjustment"
+            )
+            jpeg_quality_adjustment.set_value(
+                app.image_store.get(iter_)["jpeg_quality"]
+            )
+            jpeg_options.show()
+        # [WebP] Update and show webp options
+        elif output_format == "webp":
+            webp_quality_adjustment = self._builder.get_object(
+                "webp_quality_adjustment"
+            )
+            webp_quality_adjustment.set_value(
+                app.image_store.get(iter_)["webp_quality"]
+            )
+            webp_options.show()
+        # [PNG] Update and show png options
+        elif output_format == "png":
+            png_slow_optimization_checkbutton = self._builder.get_object(
+                "png_slow_optimization_checkbutton"
+            )
+            png_slow_optimization_checkbutton.set_active(
+                app.image_store.get(iter_)["png_slow_optimization"]
+            )
+            png_options.show()
+
     def remove_selected_image(self):
         iter_ = self.get_selected_image_iter()
         if iter_:
@@ -188,68 +252,7 @@ class MainWindow(Gtk.ApplicationWindow):
             _add_path([path])
 
     def _on_image_treeview_selection_changed(self, selection):
-        app = self.get_application()
-        output_image_options = self._builder.get_object("output_image_options")
-        jpeg_options = self._builder.get_object("jpeg_options")
-        webp_options = self._builder.get_object("webp_options")
-        png_options = self._builder.get_object("png_options")
-
-        # Reset output options visibilité (hide everything)
-        output_image_options.hide()
-        jpeg_options.hide()
-        webp_options.hide()
-        png_options.hide()
-
-        # Get selected image
-        iter_ = self.get_selected_image_iter()
-
-        # No image selected, stop here
-        if not iter_:
-            return
-
-        output_format = app.image_store.get(iter_)["output_format"]
-
-        # Update and show output image options
-        output_format_combobox = self._builder.get_object(
-            "output_format_combobox"
-        )
-        output_format_combobox.set_active(
-            get_supported_output_format_ids().index(output_format)
-        )
-
-        output_file = app.image_store.get(iter_)["output_file"]
-        output_file_entry = self._builder.get_object("output_file_entry")
-        output_file_entry.set_text(output_file)
-
-        output_image_options.show()
-
-        # [JPEG] Update and show jpeg options
-        if output_format == "jpeg":
-            jpeg_quality_adjustment = self._builder.get_object(
-                "jpeg_quality_adjustment"
-            )
-            jpeg_quality_adjustment.set_value(
-                app.image_store.get(iter_)["jpeg_quality"]
-            )
-            jpeg_options.show()
-        # [WebP] Update and show webp options
-        elif output_format == "webp":
-            webp_quality_adjustment = self._builder.get_object(
-                "webp_quality_adjustment"
-            )
-            webp_quality_adjustment.set_value(
-                app.image_store.get(iter_)["webp_quality"]
-            )
-            webp_options.show()
-        # [PNG] Update and show png options
-        elif output_format == "png":
-            png_slow_optimization_checkbutton = self._builder.get_object(
-                "png_slow_optimization_checkbutton"
-            )
-            png_slow_optimization_checkbutton.set_active(
-                app.image_store.get(iter_)["png_slow_optimization"]
-            )
-            png_options.show()
+        self.update_interface()
 
     def _on_output_file_entry_changed(self, entry):
         app = self.get_application()
@@ -262,11 +265,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_output_format_combobox_changed(self, combobox):
         app = self.get_application()
-
-        treeview_images = self._builder.get_object("images_treeview")
-        selection = treeview_images.get_selection()
-        _, iter_ = selection.get_selected()
-
+        iter_ = self.get_selected_image_iter()
         output_format_combobox = self._builder.get_object(
             "output_format_combobox"
         )
@@ -274,11 +273,9 @@ class MainWindow(Gtk.ApplicationWindow):
         output_format = get_supported_output_format_ids()[
             output_format_combobox.get_active()
         ]
-        app.image_store.update(iter_, output_format=output_format)
 
-        self._on_image_treeview_selection_changed(
-            selection
-        )  # FIXME to refacto
+        app.image_store.update(iter_, output_format=output_format)
+        self.update_interface()
 
     def _on_jpeg_quality_adjustement_value_changed(self, adjustement):
         app = self.get_application()
