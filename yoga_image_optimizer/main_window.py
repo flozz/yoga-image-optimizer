@@ -189,11 +189,13 @@ class MainWindow(Gtk.ApplicationWindow):
         output_image_options = self._builder.get_object("output_image_options")
         jpeg_options = self._builder.get_object("jpeg_options")
         webp_options = self._builder.get_object("webp_options")
+        png_options = self._builder.get_object("png_options")
 
         # Reset output options visibilité (hide everything)
         output_image_options.hide()
         jpeg_options.hide()
         webp_options.hide()
+        png_options.hide()
 
         # Get selected image
         _, iter_ = selection.get_selected()
@@ -236,6 +238,15 @@ class MainWindow(Gtk.ApplicationWindow):
                 app.image_store.get(iter_)["webp_quality"]
             )
             webp_options.show()
+        # [PNG] Update and show png options
+        elif output_format == "png":
+            png_slow_optimization_checkbutton = self._builder.get_object(
+                "png_slow_optimization_checkbutton"
+            )
+            png_slow_optimization_checkbutton.set_active(
+                app.image_store.get(iter_)["png_slow_optimization"]
+            )
+            png_options.show()
 
     def _on_output_file_entry_changed(self, entry):
         app = self.get_application()
@@ -285,3 +296,14 @@ class MainWindow(Gtk.ApplicationWindow):
         _, iter_ = selection.get_selected()
 
         app.image_store.update(iter_, webp_quality=adjustement.get_value())
+
+    def _on_png_slow_optimization_checkbutton_toggled(self, checkbutton):
+        app = self.get_application()
+
+        treeview_images = self._builder.get_object("images_treeview")
+        selection = treeview_images.get_selection()
+        _, iter_ = selection.get_selected()
+
+        app.image_store.update(
+            iter_, png_slow_optimization=checkbutton.get_active()
+        )

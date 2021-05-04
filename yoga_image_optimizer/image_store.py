@@ -31,6 +31,7 @@ class ImageStore(object):
         "status_display":        {"id": 14, "label": _("Status"),        "type": str,              "default": ""},
         "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 90},
         "webp_quality":          {"id": 16, "label": "",                 "type": int,              "default": 90},
+        "png_slow_optimization": {"id": 17, "label": "",                 "type": bool,             "default": False},
     }
     # fmt: on
 
@@ -203,6 +204,7 @@ class ImageStore(object):
             "output_format" in kwargs
             or "jpeg_quality" in kwargs
             or "webp_quality" in kwargs
+            or "png_slow_optimization" in kwargs
         ):
             _FORMATS_EXTS = {
                 fid: fmt["exts"][0] for fid, fmt in IMAGES_FORMATS.items()
@@ -220,6 +222,14 @@ class ImageStore(object):
                 text = "%s (%i %%)" % (
                     IMAGES_FORMATS["webp"]["display_name"],
                     self.get(index)["webp_quality"],
+                )
+                self._update_field(index, "output_format_display", text)
+            elif output_format == "png":
+                text = "%s%s" % (
+                    IMAGES_FORMATS["png"]["display_name"],
+                    (" (%s)" % "slow")
+                    if self.get(index)["png_slow_optimization"]
+                    else "",
                 )
                 self._update_field(index, "output_format_display", text)
             else:
