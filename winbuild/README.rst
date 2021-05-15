@@ -25,6 +25,12 @@ dependencies:
 
 * Visual Studio 16 (2019)
 
+* Inno Setup
+
+  * Install it at default location (``C:\Program Files (x86)\Inno Setup 6\\``)
+    or change its path in ``build-installer.bat``
+  * Download: https://jrsoftware.org/isinfo.php
+
 
 Building YOGA Image Optimizer for Windows
 -----------------------------------------
@@ -37,3 +43,12 @@ contains the ``setup.py`` file).
    cmd.exe,
 3. Clean GTK build (441 Mo -> 85 Mo) running ``winbuild\clean-gtk.sh`` using
    Git Bash or MSYS2,
+
+
+Building distribable files
+--------------------------
+
+* Windows installer: run ``winbuild\build-installer.bat``
+* Zip: run ``winbuild\build-zip.bat``
+
+Results goes to the ``dist``  folder.
