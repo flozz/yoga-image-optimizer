@@ -7,6 +7,7 @@ PYTHON_FILES = [
     "yoga_image_optimizer",
     "setup.py",
     "noxfile.py",
+    "winbuild/yoga-image-optimizer.py",
 ]
 
 

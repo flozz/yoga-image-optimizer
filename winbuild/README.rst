@@ -33,3 +33,5 @@ All commands must be run from the project's root directory (the one that
 contains the ``setup.py`` file).
 
 1. Build GTK by running ``winbuild\build-gtk.bat`` using cmd.exe,
+2. Build YOGA Image Optimizer running ``winbuild\build-yoga.bat`` using
+   cmd.exe,
