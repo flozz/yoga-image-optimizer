@@ -37,7 +37,6 @@ python -m nuitka ^
     --include-package=PIL ^
     --include-package-data=yoga_image_optimizer ^
     --windows-disable-console ^
-    --windows-force-stderr-spec=yoga-image-optimizer.err.txt ^
     --standalone ^
     winbuild\yoga-image-optimizer.py
 
