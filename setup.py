@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 
 long_description = ""
 if os.path.isfile("README.rst"):
-    long_description = open("README.rst", "r").read()
+    long_description = open("README.rst", "r", encoding="UTF-8").read()
 
 
 setup(
@@ -18,7 +18,7 @@ setup(
     url="https://github.com/wanadev/yoga",
     license="BSD-3-Clause",
     long_description=long_description,
-    keywords="image jpeg png optimizer converter guetzli zopfli gui gtk",  # noqa
+    keywords="image jpeg png optimizer converter guetzli zopfli gui gtk",
     author="Fabien LOISON",
     packages=find_packages(),
     install_requires=[
