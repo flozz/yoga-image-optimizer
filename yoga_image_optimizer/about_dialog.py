@@ -24,6 +24,6 @@ class AboutDialog(Gtk.AboutDialog):
         )
 
         logo = GdkPixbuf.Pixbuf.new_from_file(
-            data_helpers.find_data_path("images/logo.svg")
+            data_helpers.find_data_path("images/icon_256.png")
         )
         self.set_logo(logo)

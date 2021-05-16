@@ -15,7 +15,9 @@ class MainWindow(Gtk.ApplicationWindow):
             self,
             application=app,
             title=APPLICATION_NAME,
-            # icon_name="TODO",
+            icon=GdkPixbuf.Pixbuf.new_from_file(
+                data_helpers.find_data_path("images/icon_64.png")
+            ),
             default_width=800,
             default_height=500,
             resizable=True,

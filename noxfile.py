@@ -84,3 +84,39 @@ def locales_compile(session):
             output_file.as_posix(),
             external=True,
         )
+
+
+# Requires inkscape and icoutils
+@nox.session(reuse_venv=True)
+def gen_icons(session):
+    session.install("yoga")
+    icons = []
+    for size in [32, 64, 128, 256]:
+        output_icon = "./yoga_image_optimizer/data/images/icon_%i.png" % size
+        session.run(
+            "inkscape",
+            "--export-area-page",
+            "--export-filename=%s" % output_icon,
+            "--export-width=%i" % size,
+            "--export-height=%i" % size,
+            "./yoga_image_optimizer/data/images/icon.svg",
+            external=True,
+        )
+        session.run(
+            "python",
+            "-m",
+            "yoga",
+            "image",
+            "--png-slow-optimization",
+            output_icon,
+            output_icon,
+            external=True,
+        )
+        icons.append(output_icon)
+    session.run(
+        "icotool",
+        "--create",
+        "--output=winbuild/icon.ico",
+        *icons,
+        external=True,
+    )
