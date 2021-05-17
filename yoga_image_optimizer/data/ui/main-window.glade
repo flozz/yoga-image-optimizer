@@ -198,7 +198,6 @@
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="headers-clickable">False</property>
-            <property name="enable-grid-lines">both</property>
             <child internal-child="selection">
               <object class="GtkTreeSelection">
                 <signal name="changed" handler="_on_image_treeview_selection_changed" swapped="no"/>
