@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-15 13:58+0200\n"
+"POT-Creation-Date: 2021-05-17 13:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,80 +17,97 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:93
-msgid "Output format"
-msgstr ""
-
-#: yoga_image_optimizer/data/ui/main-window.glade:105
-msgid "Output file"
-msgstr ""
-
-#: yoga_image_optimizer/data/ui/main-window.glade:144
-#: yoga_image_optimizer/image_store.py:19
-msgid "Output Image"
-msgstr ""
-
-#: yoga_image_optimizer/data/ui/main-window.glade:188
-msgid "Quality"
-msgstr ""
-
-#: yoga_image_optimizer/data/ui/main-window.glade:246
-msgid "JPEG Options"
-msgstr ""
-
-#: yoga_image_optimizer/data/ui/main-window.glade:288
+#: yoga_image_optimizer/data/ui/main-window.glade:46
 msgid "About"
 msgstr ""
 
-#: yoga_image_optimizer/data/ui/main-window.glade:303
+#: yoga_image_optimizer/data/ui/main-window.glade:61
 msgid "Quit"
 msgstr ""
 
-#: yoga_image_optimizer/data/ui/main-window.glade:324
+#: yoga_image_optimizer/data/ui/main-window.glade:82
 msgid "Add an image..."
 msgstr ""
 
-#: yoga_image_optimizer/data/ui/main-window.glade:335
+#: yoga_image_optimizer/data/ui/main-window.glade:93
 msgid "Remove selected image"
 msgstr ""
 
-#: yoga_image_optimizer/data/ui/main-window.glade:359
+#: yoga_image_optimizer/data/ui/main-window.glade:117
 msgid "Remove all images"
 msgstr ""
 
-#: yoga_image_optimizer/data/ui/main-window.glade:391
+#: yoga_image_optimizer/data/ui/main-window.glade:149
 msgid "Optimize"
 msgstr ""
 
-#: yoga_image_optimizer/image_formats.py:41
+#: yoga_image_optimizer/data/ui/main-window.glade:163
+msgid "Stop"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:250
+msgid "Output format"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:262
+msgid "Output file"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:301
+#: yoga_image_optimizer/image_store.py:20
+msgid "Output Image"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:351
+#: yoga_image_optimizer/data/ui/main-window.glade:454
+msgid "Quality"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:409
+msgid "JPEG Options"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:512
+msgid "WebP Options"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:555
+msgid "Slow PNG optimization"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:575
+msgid "PNG Options"
+msgstr ""
+
+#: yoga_image_optimizer/image_formats.py:48
+msgid "WebP (lossless)"
+msgstr ""
+
+#: yoga_image_optimizer/image_formats.py:57
 msgid "Windows Bitmap"
 msgstr ""
 
-#: yoga_image_optimizer/image_formats.py:65
+#: yoga_image_optimizer/image_formats.py:81
 msgid "MacOS Icon (ICNS)"
 msgstr ""
 
-#: yoga_image_optimizer/image_formats.py:73
+#: yoga_image_optimizer/image_formats.py:89
 msgid "Windows Icon (ICO)"
 msgstr ""
 
-#: yoga_image_optimizer/image_formats.py:105
-msgid "WEBP (lossless)"
-msgstr ""
-
-#: yoga_image_optimizer/helpers.py:33
+#: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
 msgstr ""
 
-#: yoga_image_optimizer/helpers.py:35
+#: yoga_image_optimizer/helpers.py:36
 msgid "kiB"
 msgstr ""
 
-#: yoga_image_optimizer/helpers.py:36
+#: yoga_image_optimizer/helpers.py:37
 msgid "MiB"
 msgstr ""
 
-#: yoga_image_optimizer/helpers.py:37
+#: yoga_image_optimizer/helpers.py:38
 msgid "GiB"
 msgstr ""
 
@@ -106,39 +123,39 @@ msgstr ""
 msgid "All Files"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:18
+#: yoga_image_optimizer/image_store.py:19
 msgid "Input Image"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:22
+#: yoga_image_optimizer/image_store.py:23
 msgid "Input Size"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:23
+#: yoga_image_optimizer/image_store.py:24
 msgid "Output Size"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:24
+#: yoga_image_optimizer/image_store.py:25
 msgid "Input Format"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:26
+#: yoga_image_optimizer/image_store.py:27
 msgid "Output Format"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:30
+#: yoga_image_optimizer/image_store.py:31
 msgid "Status"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:274
+#: yoga_image_optimizer/image_store.py:296
 msgid "Pending"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:275
+#: yoga_image_optimizer/image_store.py:297
 msgid "In progress"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:276
+#: yoga_image_optimizer/image_store.py:298
 msgid "Done"
 msgstr ""
 

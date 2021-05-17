@@ -160,11 +160,10 @@
     </child>
     <child>
       <object class="GtkButton" id="stop_optimization_button">
-        <property name="label">gtk-stop</property>
+        <property name="label" translatable="yes">Stop</property>
         <property name="can-focus">True</property>
         <property name="receives-default">True</property>
         <property name="action-name">app.stop-optimization</property>
-        <property name="use-stock">True</property>
         <style>
           <class name="destructive-action"/>
         </style>
