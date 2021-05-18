@@ -1,10 +1,23 @@
-__env__
-*.egg-info
-__pycache__
+# Python
+/dist/
+/build/
+/*.egg-info/
+__pycache__/
+*.pyc
+
+# Nutika
+/*.build/
+/*.dist/
+
+# Temporary files / backup / cache
 *~
 *#
-*.pyc
-/images/
+.nox
+
+# Generated
 *.mo
-/dist/
+
+# Misc
+__env__
+/images/
 /misc/
