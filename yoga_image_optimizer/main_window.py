@@ -1,12 +1,14 @@
+import os
 from pathlib import Path
+
+from gi.repository import Gtk, Gdk, Gio, GdkPixbuf
 
 from . import APPLICATION_NAME, APPLICATION_ID
 from . import helpers
 from . import data_helpers
 from .image_formats import get_supported_output_format_ids
 from .image_formats import get_supported_output_format_names
-
-from gi.repository import Gtk, Gdk, Gio, GdkPixbuf
+from .translation import gtk_builder_translation_hack
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -60,6 +62,10 @@ class MainWindow(Gtk.ApplicationWindow):
         action.connect("activate", lambda a, p: self.remove_selected_image())
         self.add_action(action)
         self.set_accels_for_action("win.remove-selected-image", ["Delete"])
+
+        # HACK: Translate the UI on Windows
+        if os.name == "nt":
+            gtk_builder_translation_hack(self._builder)
 
     def set_accels_for_action(self, detailed_action_name, accels):
         win_actions = self.get_action_group("win")
