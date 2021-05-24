@@ -210,6 +210,15 @@ def get_supported_input_format_mimetypes():
     return [fmt["mimetype"] for fmt in IMAGES_FORMATS.values() if fmt["input"]]
 
 
+def get_supported_input_format_exts():
+    return set(
+        ext
+        for fmt in IMAGES_FORMATS.values()
+        if fmt["input"]
+        for ext in fmt["exts"]
+    )
+
+
 def get_supported_output_format_ids():
     return [fid for fid, fmt in IMAGES_FORMATS.items() if fmt["output"]]
 

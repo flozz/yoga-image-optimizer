@@ -11,11 +11,10 @@ from . import APPLICATION_ID
 from . import helpers
 from .image_formats import IMAGES_FORMATS
 from .image_formats import find_file_format
-from .image_formats import get_supported_input_format_mimetypes
 from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .image_store import ImageStore
-from .translation import gettext as _
+from .file_chooser import open_file_chooser
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -139,36 +138,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self.image_store.clear()
 
     def open_file(self):
-        file_chooser_dialog = Gtk.FileChooserDialog(
-            title=_("Open Images..."),
-            parent=self._main_window,
-        )
-        file_chooser_dialog.add_buttons(
-            Gtk.STOCK_CANCEL,
-            Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OPEN,
-            Gtk.ResponseType.OK,
-        )
-        file_chooser_dialog.set_select_multiple(True)
-
-        image_file_filter = Gtk.FileFilter()
-        image_file_filter.set_name(_("Image Files"))
-        for mimetype in get_supported_input_format_mimetypes():
-            image_file_filter.add_mime_type(mimetype)
-        file_chooser_dialog.add_filter(image_file_filter)
-
-        any_file_filter = Gtk.FileFilter()
-        any_file_filter.set_name(_("All Files"))
-        any_file_filter.add_pattern("*")
-        file_chooser_dialog.add_filter(any_file_filter)
-
-        response = file_chooser_dialog.run()
-
-        if response == Gtk.ResponseType.OK:
-            for filename in file_chooser_dialog.get_filenames():
-                self.add_image(filename)
-
-        file_chooser_dialog.destroy()
+        filenames = open_file_chooser(parent=self._main_window)
+        for filename in filenames:
+            self.add_image(filename)
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
