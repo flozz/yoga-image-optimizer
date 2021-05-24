@@ -14,8 +14,44 @@ rm -rf yoga-image-optimizer.dist/gtk/share/gir-1.0  # This is compiled in lib/gi
 rm -rf yoga-image-optimizer.dist/gtk/share/{aclocal,gobject-introspection-1.0,installed-tests,pkgconfig}
 rm -rf yoga-image-optimizer.dist/gtk/libexec
 
-# Remove parts of the Adwaita theme we do not use such as cursors
-rm -rf yoga-image-optimizer.dist/gtk/share/icons/Adwaita/cursors
-
 # Remove all useless .exe
-rm -f yoga-image-optimizer.dist/gtk/bin/*.exe
+cd yoga-image-optimizer.dist/bin
+mkdir bak
+mv gdbus.exe bak/
+mv gspawn-win64-helper.exe bak/
+rm *.exe
+mv bak/*.exe .
+rmdir bak
+cd -
+
+# Adwaita icon theme: keep only what we use
+cd yoga-image-optimizer.dist/gtk/share/icons/
+mkdir -p Adwaita.keep/scalable/actions
+mkdir -p Adwaita.keep/scalable/ui
+for icon in actions/list-add-symbolic \
+            actions/list-remove-symbolic \
+            actions/value-increase-symbolic \
+            actions/value-decrease-symbolic \
+            actions/edit-delete-symbolic \
+            actions/open-menu-symbolic \
+            ui/window-close-symbolic \
+            ui/window-maximize-symbolic \
+            ui/window-minimize-symbolic
+do
+    mv Adwaita/scalable/$icon.svg Adwaita.keep/scalable/$icon.svg
+done
+cp Adwaita/index.theme Adwaita.keep/index.theme
+rm -rf Adwaita
+mv Adwaita.keep Adwaita
+cd -
+
+# Keep only supported locales
+cd yoga-image-optimizer.dist/gtk/share/
+mkdir -p locale.keep
+for l10n in fr en
+do
+    mv locale/$l10n locale.keep/$l0n
+done
+rm -r locale
+mv locale.keep locale
+cd -
