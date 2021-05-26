@@ -41,7 +41,9 @@ contains the ``setup.py`` file).
 1. Build GTK by running ``winbuild\build-gtk.bat`` using cmd.exe,
 2. Build YOGA Image Optimizer running ``winbuild\build-yoga.bat`` using
    cmd.exe,
-3. Clean GTK build (441 Mo -> 85 Mo) running ``winbuild\clean-gtk.sh`` using
+3. Add the Windows 10 GTK theme running ``winbuild\add-gtk-theme.bat`` using
+   cmd.exe (optional),
+4. Clean GTK build (441 Mo -> 40 Mo) running ``winbuild/clean-gtk.sh`` using
    Git Bash or MSYS2,
 
 

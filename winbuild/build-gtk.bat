@@ -30,3 +30,6 @@ python build.py build ^
     --vs-ver 16 ^
     --enable-gi ^
     gtk3 adwaita-icon-theme
+
+::
+CD %ROOTDIR%
