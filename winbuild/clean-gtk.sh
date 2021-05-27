@@ -15,7 +15,7 @@ rm -rf yoga-image-optimizer.dist/gtk/share/{aclocal,gobject-introspection-1.0,in
 rm -rf yoga-image-optimizer.dist/gtk/libexec
 
 # Remove all useless .exe
-cd yoga-image-optimizer.dist/bin
+cd yoga-image-optimizer.dist/gtk/bin
 mkdir bak
 mv gdbus.exe bak/
 mv gspawn-win64-helper.exe bak/
