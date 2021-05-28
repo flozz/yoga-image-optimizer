@@ -36,7 +36,10 @@ for icon in actions/list-add-symbolic \
             actions/open-menu-symbolic \
             ui/window-close-symbolic \
             ui/window-maximize-symbolic \
-            ui/window-minimize-symbolic
+            ui/window-minimize-symbolic \
+            ui/window-restore-symbolic \
+            ui/pan-down-symbolic
+            ui/pan-down-symbolic
 do
     mv Adwaita/scalable/$icon.svg Adwaita.keep/scalable/$icon.svg
 done
