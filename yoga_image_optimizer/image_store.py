@@ -244,9 +244,7 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "output_file",
-                output_file.with_suffix(
-                    _FORMATS_EXTS[output_format]
-                ).as_posix(),
+                str(output_file.with_suffix(_FORMATS_EXTS[output_format])),
             )
 
         if "output_file" in kwargs or "output_format" in kwargs:

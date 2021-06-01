@@ -74,7 +74,7 @@ def add_suffix_to_filename(path, suffix="opti"):
     """
     input_path = Path(path)
     output_path = input_path.with_suffix(".%s%s" % (suffix, input_path.suffix))
-    return output_path.as_posix()
+    return str(output_path)
 
 
 def preview_gdk_pixbuf_from_path(path, size=64):

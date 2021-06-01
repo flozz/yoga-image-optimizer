@@ -270,7 +270,7 @@ class MainWindow(Gtk.ApplicationWindow):
         output_file = Path(entry.get_text())
         app.image_store.update(
             iter_,
-            output_file=output_file.resolve().as_posix(),
+            output_file=str(output_file.resolve()),
         )
 
     def _on_output_format_combobox_changed(self, combobox):

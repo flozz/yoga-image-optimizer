@@ -110,7 +110,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def add_image(self, path):
         input_path = Path(path).resolve()
         input_size = input_path.stat().st_size
-        input_format = find_file_format(input_path.as_posix())
+        input_format = find_file_format(input_path)
 
         if input_format is None:
             print("W: File ignored (unsupported format): %s" % path)
@@ -123,15 +123,13 @@ class YogaImageOptimizerApplication(Gtk.Application):
             output_format = "jpeg"
 
         self.image_store.append(
-            input_file=input_path.as_posix(),
-            output_file=helpers.add_suffix_to_filename(input_path.as_posix()),
+            input_file=str(input_path),
+            output_file=helpers.add_suffix_to_filename(str(input_path)),
             input_size=input_size,
             output_size=0,
             input_format=input_format,
             output_format=output_format,
-            preview=helpers.preview_gdk_pixbuf_from_path(
-                input_path.as_posix()
-            ),
+            preview=helpers.preview_gdk_pixbuf_from_path(str(input_path)),
         )
 
     def clear_images(self):
