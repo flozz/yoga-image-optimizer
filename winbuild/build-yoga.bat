@@ -41,8 +41,9 @@ python -m nuitka ^
     --standalone ^
     winbuild\yoga-image-optimizer.py
 
-:: Add license,...
+:: Add license, readme,...
 copy COPYING yoga-image-optimizer.dist\COPYING.txt
+copy winbuild\windows-readme.dist.txt yoga-image-optimizer.dist\README.txt
 
 :: Copy GTK build
 xcopy /E /Y C:\gtk-build\gtk\x64\release yoga-image-optimizer.dist\gtk\
