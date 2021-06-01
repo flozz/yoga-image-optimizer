@@ -59,7 +59,9 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # Action: win.remove-selected-image
         action = Gio.SimpleAction.new("remove-selected-image", None)
-        action.connect("activate", lambda a, p: self.remove_selected_image())
+        action.connect(
+            "activate", self._on_remove_selected_image_action_activated
+        )
         self.add_action(action)
         self.set_accels_for_action("win.remove-selected-image", ["Delete"])
 
@@ -301,3 +303,8 @@ class MainWindow(Gtk.ApplicationWindow):
         app.image_store.update(
             iter_, png_slow_optimization=checkbutton.get_active()
         )
+
+    def _on_remove_selected_image_action_activated(self, action, param):
+        treeview_images = self._builder.get_object("images_treeview")
+        if treeview_images.has_focus():
+            self.remove_selected_image()
