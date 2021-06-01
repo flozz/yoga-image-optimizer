@@ -1,11 +1,9 @@
 YOGA Image Optimizer
 ====================
 
-|Github| |Discord| |Github Actions| |License|
+|Github| |Discord| |Github Actions| |Black| |License|
 
-**YOGA Image Optimizer** is a graphical user interface for `YOGA Image <https://github.com/wanadev/yoga>`_ that **optimizes JPEGs and PNGs**.
-
-**THIS PROJECT IS WORK IN PROGRESS**, there is no public release available yet. 😊️
+**YOGA Image Optimizer** is a graphical user interface for `YOGA Image <https://github.com/wanadev/yoga>`_ that **converts and optimizes JPEGs, PNGs and WebP images**.
 
 .. figure:: ./screenshot.png
    :alt: YOGA Image Optimizer screenshot
@@ -31,18 +29,23 @@ Requirements
 Install
 -------
 
+Linux (PyPI)
+~~~~~~~~~~~~
+
 First, you will need to install some dependencies on your system. On Debian and Ubuntu this can be achieved with the following command::
 
     sudo apt install git build-essential python3 python3-dev python3-pip libgirepository1.0-dev libcairo2-dev pkg-config gir1.2-gtk-3.0
 
-Then clone this repository::
+Then install YOGA Image Optimizer using pip::
 
-    git clone https://github.com/flozz/yoga-image-optimizer.git
-    cd yoga-image-optimizer
+    sudo pip3 install yoga-image-optimizer
 
-And install YOGA Image Optimizer::
+Windows
+~~~~~~~
 
-    sudo pip3 install .
+Download either the portable .zip version or the Windows installer from the release page:
+
+* https://github.com/flozz/yoga-image-optimizer/releases
 
 
 Usage
@@ -130,6 +133,16 @@ To compile locales, run::
     sudo apt install gettext
 
 
+Changelog
+---------
+
+* **v0.99.0 (beta):**
+
+  * Initial release
+  * Linux and Windows support
+  * Optimizes PNG, JPEG and WebP image formats
+
+
 .. |Github| image:: https://img.shields.io/github/stars/flozz/yoga-image-optimizer?label=Github&logo=github
    :target: https://github.com/flozz/yoga-image-optimizer
 
@@ -138,6 +151,9 @@ To compile locales, run::
 
 .. |Github Actions| image:: https://github.com/flozz/yoga-image-optimizer/actions/workflows/python-ci.yml/badge.svg
    :target: https://github.com/flozz/yoga-image-optimizer/actions
+
+.. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://black.readthedocs.io/en/stable/
 
 .. |License| image:: https://img.shields.io/github/license/flozz/yoga-image-optimizer
    :target: https://github.com/flozz/yoga-image-optimizer/blob/master/COPYING
