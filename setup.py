@@ -14,7 +14,7 @@ if os.path.isfile("README.rst"):
 setup(
     name="yoga_image_optimizer",
     version="0.0.0",
-    description="A graphical interface to optimizes JPEG and PNG images",
+    description="A graphical interface to convert and optimize JPEG, PNG and WebP images (based on YOGA)",
     url="https://github.com/wanadev/yoga",
     license="BSD-3-Clause",
     long_description=long_description,

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 13:52+0200\n"
+"POT-Creation-Date: 2021-06-01 19:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,6 +95,21 @@ msgstr ""
 msgid "Windows Icon (ICO)"
 msgstr ""
 
+#: yoga_image_optimizer/file_chooser.py:12
+#: yoga_image_optimizer/file_chooser.py:39
+msgid "Open Images..."
+msgstr ""
+
+#: yoga_image_optimizer/file_chooser.py:24
+#: yoga_image_optimizer/file_chooser.py:45
+msgid "Image Files"
+msgstr ""
+
+#: yoga_image_optimizer/file_chooser.py:30
+#: yoga_image_optimizer/file_chooser.py:51
+msgid "All Files"
+msgstr ""
+
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
 msgstr ""
@@ -109,18 +124,6 @@ msgstr ""
 
 #: yoga_image_optimizer/helpers.py:38
 msgid "GiB"
-msgstr ""
-
-#: yoga_image_optimizer/application.py:143
-msgid "Open Images..."
-msgstr ""
-
-#: yoga_image_optimizer/application.py:155
-msgid "Image Files"
-msgstr ""
-
-#: yoga_image_optimizer/application.py:161
-msgid "All Files"
 msgstr ""
 
 #: yoga_image_optimizer/image_store.py:19
@@ -147,18 +150,20 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:296
+#: yoga_image_optimizer/image_store.py:294
 msgid "Pending"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:297
+#: yoga_image_optimizer/image_store.py:295
 msgid "In progress"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:298
+#: yoga_image_optimizer/image_store.py:296
 msgid "Done"
 msgstr ""
 
 #: yoga_image_optimizer/about_dialog.py:17
-msgid "A graphical interface to optimizes JPEG and PNG images (based on YOGA)"
+msgid ""
+"A graphical interface to convert and optimize JPEG, PNG and WebP images "
+"(based on YOGA)"
 msgstr ""

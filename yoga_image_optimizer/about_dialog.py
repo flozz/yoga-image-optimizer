@@ -14,7 +14,8 @@ class AboutDialog(Gtk.AboutDialog):
             parent=parent,
             program_name=APPLICATION_NAME,
             comments=_(
-                "A graphical interface to optimizes JPEG and PNG images (based on YOGA)"
+                "A graphical interface to convert and optimize "
+                "JPEG, PNG and WebP images (based on YOGA)"
             ),
             version=VERSION,
             copyright="Copyright (c) 2021 Fabien LOISON",

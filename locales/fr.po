@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 13:52+0200\n"
-"PO-Revision-Date: 2021-05-17 13:54+0200\n"
+"POT-Creation-Date: 2021-06-01 19:57+0200\n"
+"PO-Revision-Date: 2021-06-01 19:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -90,6 +90,21 @@ msgstr "Icône MacOS (ICNS)"
 msgid "Windows Icon (ICO)"
 msgstr "Icône Windows (ICO)"
 
+#: yoga_image_optimizer/file_chooser.py:12
+#: yoga_image_optimizer/file_chooser.py:39
+msgid "Open Images..."
+msgstr "Ouvrir des images..."
+
+#: yoga_image_optimizer/file_chooser.py:24
+#: yoga_image_optimizer/file_chooser.py:45
+msgid "Image Files"
+msgstr "Fichier images"
+
+#: yoga_image_optimizer/file_chooser.py:30
+#: yoga_image_optimizer/file_chooser.py:51
+msgid "All Files"
+msgstr "Tous les fichiers"
+
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
 msgstr "octets"
@@ -105,18 +120,6 @@ msgstr "Mio"
 #: yoga_image_optimizer/helpers.py:38
 msgid "GiB"
 msgstr "Gio"
-
-#: yoga_image_optimizer/application.py:143
-msgid "Open Images..."
-msgstr "Ouvrir des images..."
-
-#: yoga_image_optimizer/application.py:155
-msgid "Image Files"
-msgstr "Fichier images"
-
-#: yoga_image_optimizer/application.py:161
-msgid "All Files"
-msgstr "Tous les fichiers"
 
 #: yoga_image_optimizer/image_store.py:19
 msgid "Input Image"
@@ -142,23 +145,31 @@ msgstr "Format de sortie"
 msgid "Status"
 msgstr "État"
 
-#: yoga_image_optimizer/image_store.py:296
+#: yoga_image_optimizer/image_store.py:294
 msgid "Pending"
 msgstr "En attente"
 
-#: yoga_image_optimizer/image_store.py:297
+#: yoga_image_optimizer/image_store.py:295
 msgid "In progress"
 msgstr "En cours"
 
-#: yoga_image_optimizer/image_store.py:298
+#: yoga_image_optimizer/image_store.py:296
 msgid "Done"
 msgstr "Fait"
 
 #: yoga_image_optimizer/about_dialog.py:17
-msgid "A graphical interface to optimizes JPEG and PNG images (based on YOGA)"
+msgid ""
+"A graphical interface to convert and optimize JPEG, PNG and WebP images "
+"(based on YOGA)"
 msgstr ""
-"Une interface graphique pour optimiser les images JPEG et les PNG  (basé sur "
-"YOGA)"
+"Une interface graphique pour convertir et optimiser les images JPEG, PNG et "
+"WebP (basé sur YOGA)"
+
+#~ msgid ""
+#~ "A graphical interface to optimizes JPEG and PNG images (based on YOGA)"
+#~ msgstr ""
+#~ "Une interface graphique pour optimiser les images JPEG et les PNG  (basé "
+#~ "sur YOGA)"
 
 #~ msgid "WEBP (lossless)"
 #~ msgstr "WEBP (sans perte)"
