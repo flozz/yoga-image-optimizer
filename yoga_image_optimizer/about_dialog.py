@@ -28,3 +28,11 @@ class AboutDialog(Gtk.AboutDialog):
             data_helpers.find_data_path("images/icon_256.png")
         )
         self.set_logo(logo)
+
+        self.set_artists(
+            [
+                "Katia ROBINSON (Wanadev)",
+            ]
+        )
+
+        self.set_translator_credits(_("translator-credits"))
