@@ -136,6 +136,11 @@ To compile locales, run::
 Changelog
 ---------
 
+* **v0.99.1 (beta):**
+
+  * Fix site URL in setup.py
+  * Fix version number
+
 * **v0.99.0 (beta):**
 
   * Initial release
