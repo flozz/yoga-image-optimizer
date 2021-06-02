@@ -136,6 +136,11 @@ To compile locales, run::
 Changelog
 ---------
 
+* **v0.99.2 (beta):**
+
+  * Fix package data not installed while installing with pip (#3)
+  * NOTE: no new release for Windows as nothing changed
+
 * **v0.99.1 (beta):**
 
   * Fix site URL in setup.py

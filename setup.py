@@ -13,7 +13,7 @@ if os.path.isfile("README.rst"):
 
 setup(
     name="yoga_image_optimizer",
-    version="0.99.1",
+    version="0.99.2",
     description="A graphical interface to convert and optimize JPEG, PNG and WebP images (based on YOGA)",
     url="https://github.com/flozz/yoga-image-optimizer",
     license="BSD-3-Clause",
@@ -21,6 +21,7 @@ setup(
     keywords="image jpeg png optimizer converter guetzli zopfli gui gtk",
     author="Fabien LOISON",
     packages=find_packages(),
+    include_package_data=True,
     install_requires=[
         "yoga>=1.0.0",
         "pycairo",
