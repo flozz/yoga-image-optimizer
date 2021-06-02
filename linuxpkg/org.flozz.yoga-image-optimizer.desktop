@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=YOGA Image Optimizer
+Comment=Convert and optimize images
+TryExec=yoga-image-optimizer
+Exec=yoga-image-optimizer %F
+Icon=org.flozz.yoga-image-optimizer
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=GTK;Graphics;2DGraphics;RasterGraphics;
+MimeType=image/jpeg;image/png;image/webp;image/webp;image/bmp;image/x-eps;image/gif;image/x-icns;image/vnd.microsoft.icon;image/x-tga;image/tiff
+Keywords=Picture;Image;Optimize;
