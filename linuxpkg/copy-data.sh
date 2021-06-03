@@ -33,5 +33,3 @@ cp -v ../yoga_image_optimizer/data/images/icon.svg \
 mkdir -pv $PREFIX/share/man/man1/
 cp -v ./yoga-image-optimizer.1 $PREFIX/share/man/man1/yoga-image-optimizer.1
 sed -i "s/{VERSION}/$(python ../setup.py --version)/g" $PREFIX/share/man/man1/yoga-image-optimizer.1
-sed -i "s/{DESCRIPTION}/$(python ../setup.py --description)/g" $PREFIX/share/man/man1/yoga-image-optimizer.1
-sed -i "s;{WEBSITE};$(python ../setup.py --url);g" $PREFIX/share/man/man1/yoga-image-optimizer.1

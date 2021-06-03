@@ -1,29 +1,85 @@
-.TH yoga-image-optimizer 1 "" "version {VERSION}" "YOGA IMAGE OPTIMIZER"
+.TH YOGA-IMAGE-OPTIMIZER 1 2021-06-03 "YOGA Image Optimizer {VERSION}" "General Commands Manual"
+
 
 .SH NAME
-YOGA Image Optimizer - Convert and optimize images
+
+yoga-image-optimizer \- convert and optimize JPEGs, PNGs and WebP images
+
 
 .SH SYNOPSIS
+
 .B yoga-image-optimizer
-.I [IMAGE_FILE_1 [IMAGE_FILE_2 [...]]]
+.RI [ -h ]
+.RI [ -v ]
+.RI [ image ...]
+
 
 .SH DESCRIPTION
-{DESCRIPTION}
+
+YOGA Image Optimizer is a graphical user interface for YOGA Image that converts
+and optimizes the size of JPEGs, PNGs and WebP image files.
+
+.TP
+.B JPEG
+JPEGs are optimized using the \fIGuetzli\fR library. During the optimization,
+all file metadata will be removed.
+
+.TP
+.B PNG
+PNGs are optimized using the \fIZopfliPNG\fR library. During the optimization,
+the color space can be converted from RGBA to RGB or indexed color to reduce
+the size of the output file. All metadata will be removed from output file.
+
+.TP
+.B WebP
+Both lossy and lossless WebPs are processed using the \fIlibwebp\fR library, so
+there will be probably no gain to process already encoded WebPs. All metadata
+will be removed from the output file.
+
+
+.SH OPTIONS
+
+.TP
+\fB-h\fR, \fB--help\fR
+show the help message and exit
+
+.TP
+\fB-v\fR, \fB--version\fR
+show program's version number and exit
 
 .SH WEB SITE
-{WEBSITE}
 
-.SH AUTHOR
-Fabien Loison <https://flozz.fr/>
+https://github.com/flozz/yoga-image-optimizer
+
 
 .SH REPORTING BUGS
+
 Report bugs to <https://github.com/flozz/yoga-image-optimizer/issues>.
 
+
 .SH COPYRIGHT
-Copyright  ©  2021 Fabien Loison
+
+Copyright © 2021 Fabien Loison
 
 YOGA Image Optimizer is free software under GNU GPL v3+ licence
 <http://gnu.org/licenses/gpl.html>, you are free to modify and redistribute it
 under the terms of the license.
 
 
+.SH SEE ALSO
+
+.TP
+.I YOGA documentation
+https://wanadev.github.io/yoga/
+
+.TP
+.I Guetzli JPEG encoder
+https://ai.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html
+
+.TP
+.I ZopfliPNG PNG encoder
+https://github.com/google/zopfli/blob/master/README.zopflipng
+
+.TP
+.I WebP format
+https://developers.google.com/speed/webp/

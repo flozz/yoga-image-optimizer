@@ -3,18 +3,10 @@ YOGA Image Optimizer
 
 |Github| |Discord| |Github Actions| |Black| |License|
 
-**YOGA Image Optimizer** is a graphical user interface for `YOGA Image <https://github.com/wanadev/yoga>`_ that **converts and optimizes JPEGs, PNGs and WebP images**.
+**YOGA Image Optimizer** is a graphical user interface for `YOGA Image <https://github.com/wanadev/yoga>`_ that **converts and optimizes** the size of **JPEGs, PNGs and WebP** image files.
 
 .. figure:: ./screenshot.png
    :alt: YOGA Image Optimizer screenshot
-
-
-Limitations
------------
-
-As this is an early development version:
-
-* PNG Optimization is very, very, **VERY** slow due to unbalanced ZoppfliPNG optimization options set by YOGA, this will be improved in the future.
 
 
 Requirements
