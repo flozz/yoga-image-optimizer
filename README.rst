@@ -128,6 +128,10 @@ To compile locales, run::
 Changelog
 ---------
 
+* **[NEXT]**:
+
+  * Fix ``[-]`` button do not remove selected image
+
 * **v0.99.2 (beta):**
 
   * Fix package data not installed while installing with pip (#3)

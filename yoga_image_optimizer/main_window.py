@@ -63,15 +63,23 @@ class MainWindow(Gtk.ApplicationWindow):
             "activate", self._on_remove_selected_image_action_activated
         )
         self.add_action(action)
-        self.set_accels_for_action("win.remove-selected-image", ["Delete"])
+
+        images_treeview = self._builder.get_object("images_treeview")
+        self.set_accels_for_action_while_widget_focused(
+            "win.remove-selected-image",
+            ["Delete"],
+            images_treeview,
+        )
 
         # HACK: Translate the UI on Windows
         if os.name == "nt":
             gtk_builder_translation_hack(self._builder)
 
-    def set_accels_for_action(self, detailed_action_name, accels):
-        win_actions = self.get_action_group("win")
-        action_name = detailed_action_name.split(".")[-1]
+    def set_accels_for_action_while_widget_focused(
+        self, detailed_action_name, accels, widget
+    ):
+        action_group_name, action_name = detailed_action_name.split(".")
+        action_group = self.get_action_group(action_group_name)
 
         accel_group = Gtk.AccelGroup()
 
@@ -80,7 +88,9 @@ class MainWindow(Gtk.ApplicationWindow):
                 key,
                 mods,
                 0,
-                lambda *_: win_actions.activate_action(action_name),
+                # Activate the action only if the widget is focused
+                lambda *_: widget.has_focus()
+                and action_group.activate_action(action_name),
             )
 
         self.add_accel_group(accel_group)
@@ -305,6 +315,4 @@ class MainWindow(Gtk.ApplicationWindow):
         )
 
     def _on_remove_selected_image_action_activated(self, action, param):
-        treeview_images = self._builder.get_object("images_treeview")
-        if treeview_images.has_focus():
-            self.remove_selected_image()
+        self.remove_selected_image()
