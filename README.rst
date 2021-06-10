@@ -131,6 +131,7 @@ Changelog
 * **[NEXT]**:
 
   * Fix ``[-]`` button do not remove selected image
+  * Update site URL
 
 * **v0.99.2 (beta):**
 

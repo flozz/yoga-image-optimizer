@@ -19,8 +19,8 @@ class AboutDialog(Gtk.AboutDialog):
             ),
             version=VERSION,
             copyright="Copyright (c) 2021 Fabien LOISON",
-            website_label="github.com/flozz/yoga-image-optimizer",
-            website="https://github.com/flozz/yoga-image-optimizer",
+            website_label="yoga.flozz.org",
+            website="https://yoga.flozz.org/",
             license_type=Gtk.License.GPL_3_0,
         )
 
