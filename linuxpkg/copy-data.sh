@@ -29,7 +29,12 @@ mkdir -pv $PREFIX/share/icons/hicolor/scalable/apps/
 cp -v ../yoga_image_optimizer/data/images/icon.svg \
       $PREFIX/share/icons/hicolor/scalable/apps/org.flozz.yoga-image-optimizer.svg
 
+# Update icon cache for real installation
+if [ $PREFIX == "/usr" ] ; then
+    update-icon-caches /usr/share/icons/*
+fi
+
 # Copy man page
 mkdir -pv $PREFIX/share/man/man1/
 cp -v ./yoga-image-optimizer.1 $PREFIX/share/man/man1/yoga-image-optimizer.1
-sed -i "s/{VERSION}/$(python ../setup.py --version)/g" $PREFIX/share/man/man1/yoga-image-optimizer.1
+sed -i "s/{VERSION}/$(python3 ../setup.py --version)/g" $PREFIX/share/man/man1/yoga-image-optimizer.1
