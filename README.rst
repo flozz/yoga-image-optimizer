@@ -160,6 +160,10 @@ Changelog
 
 * **[NEXT]**:
 
+  * Nothing yet
+
+* **v1.0.0:**
+
   * Fix ``[-]`` button do not remove selected image
   * Update site URL
 
