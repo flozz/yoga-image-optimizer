@@ -21,6 +21,26 @@ Requirements
 Install
 -------
 
+Linux (source)
+~~~~~~~~~~~~~~
+
+First, you will need to install some dependencies on your system. On Debian and Ubuntu this can be achieved with the following command::
+
+    sudo apt install git build-essential python3 python3-dev python3-pip libgirepository1.0-dev libcairo2-dev pkg-config gir1.2-gtk-3.0
+
+Then clone this repository and navigate to it::
+
+    git clone https://github.com/flozz/yoga-image-optimizer.git
+    cd yoga-image-optimizer
+
+Then install YOGA Image Optimizer using pip::
+
+    sudo pip3 install .
+
+Finally, you can install desktop file, icons and manual using the following command::
+
+    sudo ./linuxpkg/copy-data.sh /usr
+
 Linux (PyPI)
 ~~~~~~~~~~~~
 
