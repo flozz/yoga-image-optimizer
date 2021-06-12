@@ -27,7 +27,7 @@ Packaging
 
 Here we will see how to package YOGA Image Optimizer for Linux.
 
-To simplify commands, I will ues a ``$ROOT`` varaible that contain the path
+To simplify commands, I will use a ``$ROOT`` varaible that contain the path
 where the file will be installed. For a real installation this variable should
 contain ``/``, for packaging it may be something like
 ``/tmp/my-packaging-build``.
@@ -35,12 +35,32 @@ contain ``/``, for packaging it may be something like
 All commands are run from the project root directory (the one that contains the
 ``setup.py`` file.
 
+
+Build Dependencies
+~~~~~~~~~~~~~~~~~~
+
 Packaging will require some build dependencies:
 
-* python3
-* setuptools (search for ``python3-setuptools`` package)
+* Python 3
+* setuptools (search for a ``python3-setuptools`` package)
 * nox (search for a ``python3-nox`` package)
 * gettext
+
+Except Python 3, the other dependencies are no more needed once the package is
+built.
+
+
+Release Tarball
+~~~~~~~~~~~~~~~
+
+You can get the release tarball on the `release page
+<https://github.com/flozz/yoga-image-optimizer/releases>`_. For example:
+
+* https://github.com/flozz/yoga-image-optimizer/archive/refs/tags/v1.0.0.tar.gz
+
+
+Building the package
+~~~~~~~~~~~~~~~~~~~~
 
 The first step is to build the locales::
 
