@@ -21,6 +21,13 @@ Requirements
 Install
 -------
 
+ArchLinux
+~~~~~~~~~
+
+The package is available on AUR (``yoga-image-optimizer``):
+
+* https://aur.archlinux.org/packages/yoga-image-optimizer/
+
 Linux (source)
 ~~~~~~~~~~~~~~
 
