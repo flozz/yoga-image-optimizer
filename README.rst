@@ -59,6 +59,8 @@ Then install YOGA Image Optimizer using pip::
 
     sudo pip3 install yoga-image-optimizer
 
+**NOTE:** Installing from PyPI will not install ``.desktop`` file and man page. You will not be able to run the software from your graphical app menu (GNOME Shell,...).
+
 Windows
 ~~~~~~~
 
@@ -106,6 +108,22 @@ Pull Requests
 Please consider `filing a bug <https://github.com/flozz/yoga-image-optimizer/issues>`_ before starting to work on a new feature. This will allow us to discuss the best way to do it. This is of course not necessary if you just want to fix some typo or small errors in the code.
 
 Please note that your code must pass tests and follow the coding style defined by the `pep8 <https://pep8.org/>`_. `Flake8 <https://flake8.pycqa.org/en/latest/>`_ and `Black <https://black.readthedocs.io/en/stable/>`_ are used on this project to enforce coding style.
+
+Translating YOGA Image Optimizer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the software is not available in you language, you help translating it. To translate YOGA Image Optimizer, you can use the Launchpad translation web interface here:
+
+* https://translations.launchpad.net/yoga-image-optimizer/
+
+Of course, you can also submit your translations using a Github a Pull Request. In that case, do not forget to add you name as a translation of the ``translator-credits`` key (one name per line, e-mail is optional)::
+
+    #: yoga_image_optimizer/about_dialog.py:38
+    msgid "translator-credits"
+    msgstr ""
+    "John DOE\n"
+    "Other TRANSLATOR <foobar@example.org>\n"
+
 
 Running The Tests
 ~~~~~~~~~~~~~~~~~
