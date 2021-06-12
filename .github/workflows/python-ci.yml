@@ -20,7 +20,7 @@ jobs:
       - name: Install OS Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
+          sudo apt-get install -y libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 gettext
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
@@ -39,3 +39,8 @@ jobs:
       - name: Test with pytest
         run: |
           python3 -m nox --session test-${{ matrix.python-version }}
+
+      - name: Check locales
+        run: |
+          python3 -m nox --session locales_update
+          python3 -m nox --session locales_compile
