@@ -162,6 +162,11 @@ Changelog
 
   * Nothing yet
 
+* **v1.0.1:**
+
+  * Fix PyPI packages
+  * NOTE: no new release for Windows as nothing changed
+
 * **v1.0.0:**
 
   * Fix ``[-]`` button do not remove selected image
