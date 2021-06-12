@@ -158,9 +158,9 @@ Wanna support this project?
 Changelog
 ---------
 
-* **[NEXT]**:
+* **[NEXT]** (changes on ``master`` but not released yet):
 
-  * Nothing yet
+  * Turkish translation
 
 * **v1.0.1:**
 

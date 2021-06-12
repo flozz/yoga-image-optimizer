@@ -168,12 +168,3 @@ msgstr ""
 #: yoga_image_optimizer/about_dialog.py:38
 msgid "translator-credits"
 msgstr "Cihan Alkan"
-
-#~ msgid ""
-#~ "A graphical interface to optimizes JPEG and PNG images (based on YOGA)"
-#~ msgstr ""
-#~ "Une interface graphique pour optimiser les images JPEG et les PNG  (basé "
-#~ "sur YOGA)"
-
-#~ msgid "WEBP (lossless)"
-#~ msgstr "WEBP (sans perte)"
