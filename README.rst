@@ -28,6 +28,13 @@ The package is available on AUR (``yoga-image-optimizer``):
 
 * https://aur.archlinux.org/packages/yoga-image-optimizer/
 
+Flatpak (Linux)
+~~~~~~~~~~~~~~~
+
+A Flatpak package is available on Flathub. This is currently the simplest way to install YOGA Image Optimizer on all major Linux distributions:
+
+* https://flathub.org/apps/details/org.flozz.yoga-image-optimizer
+
 Linux (source)
 ~~~~~~~~~~~~~~
 
