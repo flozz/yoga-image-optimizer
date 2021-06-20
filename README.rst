@@ -193,6 +193,7 @@ Changelog
 * **[NEXT]** (changes on ``master`` but not released yet):
 
   * Turkish translation
+  * Italian translation
 
 * **v1.0.1:**
 
