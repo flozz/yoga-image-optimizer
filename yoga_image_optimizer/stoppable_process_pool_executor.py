@@ -1,7 +1,7 @@
 from concurrent.futures import ProcessPoolExecutor
 
 
-class StopableProcessPoolExecutor(ProcessPoolExecutor):
+class StoppableProcessPoolExecutor(ProcessPoolExecutor):
     """A concurrent.futures.ProcessPoolExecutor that kills running processes on
     shutdown.
     """

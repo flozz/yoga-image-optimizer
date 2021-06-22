@@ -14,7 +14,7 @@ from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .image_store import ImageStore
 from .file_chooser import open_file_chooser
-from .stopable_process_pool_executor import StopableProcessPoolExecutor
+from .stoppable_process_pool_executor import StoppableProcessPoolExecutor
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -143,7 +143,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
 
-        self._executor = StopableProcessPoolExecutor(max_workers=2)
+        self._executor = StoppableProcessPoolExecutor(max_workers=2)
         self._futures = []
 
         for row in self.image_store.get_all():
