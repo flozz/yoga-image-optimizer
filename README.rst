@@ -194,6 +194,8 @@ Changelog
 
   * Turkish translation
   * Italian translation
+  * The "Stop" button now stops the running optimizations and not only the
+    pending ones
 
 * **v1.0.1:**
 
