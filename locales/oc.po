@@ -19,7 +19,7 @@ msgstr ""
 
 #: yoga_image_optimizer/data/ui/main-window.glade:46
 msgid "About"
-msgstr "A prepaus de"
+msgstr "A prepaus"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:61
 msgid "Quit"
