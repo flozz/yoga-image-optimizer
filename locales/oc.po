@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-12 13:41+0200\n"
+"PO-Revision-Date: 2021-06-22 22:46+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: Quentin PAGÈS\n"
+"Language: oc\n"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:46
+msgid "About"
+msgstr "A prepaus de"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:61
+msgid "Quit"
+msgstr "Quitar"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:82
+msgid "Add an image..."
+msgstr "Apondre un imatge..."
+
+#: yoga_image_optimizer/data/ui/main-window.glade:93
+msgid "Remove selected image"
+msgstr "Suprimir totes los imatges seleccionats"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:117
+msgid "Remove all images"
+msgstr "Suprimir totes los imatges"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:149
+msgid "Optimize"
+msgstr "Optimizar"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:163
+msgid "Stop"
+msgstr "Arrestar"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:250
+msgid "Output format"
+msgstr "Format de sortida"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:262
+msgid "Output file"
+msgstr "Fichièr de sortida"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:301
+#: yoga_image_optimizer/image_store.py:20
+msgid "Output Image"
+msgstr "Imatge en sortida"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:351
+#: yoga_image_optimizer/data/ui/main-window.glade:454
+msgid "Quality"
+msgstr "Qualitat"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:409
+msgid "JPEG Options"
+msgstr "Opcions JPEG"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:512
+msgid "WebP Options"
+msgstr "Opcion WebP"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:555
+msgid "Slow PNG optimization"
+msgstr "Optimizacion PNG lenta"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:575
+msgid "PNG Options"
+msgstr "Opcions PNG"
+
+#: yoga_image_optimizer/image_formats.py:48
+msgid "WebP (lossless)"
+msgstr "WebP (pèrda de qualitat)"
+
+#: yoga_image_optimizer/image_formats.py:57
+msgid "Windows Bitmap"
+msgstr "Windows Bitmap"
+
+#: yoga_image_optimizer/image_formats.py:81
+msgid "MacOS Icon (ICNS)"
+msgstr "Icòna MacOS (ICNS)"
+
+#: yoga_image_optimizer/image_formats.py:89
+msgid "Windows Icon (ICO)"
+msgstr "Icòna Windows (ICO)"
+
+#: yoga_image_optimizer/file_chooser.py:12
+#: yoga_image_optimizer/file_chooser.py:39
+msgid "Open Images..."
+msgstr "Dobrir d'imatges..."
+
+#: yoga_image_optimizer/file_chooser.py:24
+#: yoga_image_optimizer/file_chooser.py:45
+msgid "Image Files"
+msgstr "Fichièrs imatge"
+
+#: yoga_image_optimizer/file_chooser.py:30
+#: yoga_image_optimizer/file_chooser.py:51
+msgid "All Files"
+msgstr "Totes los fichièrs"
+
+#: yoga_image_optimizer/helpers.py:34
+msgid "Bytes"
+msgstr "Octets"
+
+#: yoga_image_optimizer/helpers.py:36
+msgid "kiB"
+msgstr "ko"
+
+#: yoga_image_optimizer/helpers.py:37
+msgid "MiB"
+msgstr "Mo"
+
+#: yoga_image_optimizer/helpers.py:38
+msgid "GiB"
+msgstr "Go"
+
+#: yoga_image_optimizer/image_store.py:19
+msgid "Input Image"
+msgstr "Imatge d’entrada"
+
+#: yoga_image_optimizer/image_store.py:23
+msgid "Input Size"
+msgstr "Talha en entrada"
+
+#: yoga_image_optimizer/image_store.py:24
+msgid "Output Size"
+msgstr "Talha en sortida"
+
+#: yoga_image_optimizer/image_store.py:25
+msgid "Input Format"
+msgstr "Format d’entrada"
+
+#: yoga_image_optimizer/image_store.py:27
+msgid "Output Format"
+msgstr "Format de sortida"
+
+#: yoga_image_optimizer/image_store.py:31
+msgid "Status"
+msgstr "Estatut"
+
+#: yoga_image_optimizer/image_store.py:294
+msgid "Pending"
+msgstr "En espèra"
+
+#: yoga_image_optimizer/image_store.py:295
+msgid "In progress"
+msgstr "En cors"
+
+#: yoga_image_optimizer/image_store.py:296
+msgid "Done"
+msgstr "Acabat"
+
+#: yoga_image_optimizer/about_dialog.py:17
+msgid ""
+"A graphical interface to convert and optimize JPEG, PNG and WebP images "
+"(based on YOGA)"
+msgstr ""
+"Interfàcia grafica per convertir e optimizar los imatges JPEG, PNG e "
+"WebP (Basat sus YOGA)"
+
+#: yoga_image_optimizer/about_dialog.py:38
+msgid "translator-credits"
+msgstr "Quentin PAGÈS"
