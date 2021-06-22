@@ -1,5 +1,4 @@
 import os
-import concurrent.futures
 from pathlib import Path
 
 import yoga.image
@@ -15,6 +14,7 @@ from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .image_store import ImageStore
 from .file_chooser import open_file_chooser
+from .stopable_process_pool_executor import StopableProcessPoolExecutor
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -143,7 +143,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
 
-        self._executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+        self._executor = StopableProcessPoolExecutor(max_workers=2)
         self._futures = []
 
         for row in self.image_store.get_all():
@@ -168,9 +168,6 @@ class YogaImageOptimizerApplication(Gtk.Application):
             return
 
         self._executor.shutdown(wait=False)
-        for future in self._futures:
-            future.cancel()
-
         self.switch_state(self.STATE_MANAGE_IMAGES)
 
     def _update_optimization_status(self):
