@@ -31,7 +31,7 @@ msgstr "Apondre un imatge..."
 
 #: yoga_image_optimizer/data/ui/main-window.glade:93
 msgid "Remove selected image"
-msgstr "Suprimir totes los imatges seleccionats"
+msgstr "Suprimir l’imatges seleccionat"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:117
 msgid "Remove all images"
@@ -69,7 +69,7 @@ msgstr "Opcions JPEG"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:512
 msgid "WebP Options"
-msgstr "Opcion WebP"
+msgstr "Opcions WebP"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:555
 msgid "Slow PNG optimization"
@@ -81,7 +81,7 @@ msgstr "Opcions PNG"
 
 #: yoga_image_optimizer/image_formats.py:48
 msgid "WebP (lossless)"
-msgstr "WebP (pèrda de qualitat)"
+msgstr "WebP (sens pèrda de qualitat)"
 
 #: yoga_image_optimizer/image_formats.py:57
 msgid "Windows Bitmap"
