@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.flozz.yoga-image-optimizer</id>
+  <name>YOGA Image Optimizer</name>
+  <project_license>GPL-3.0-or-later</project_license>
+  <summary>A graphical tool to convert and optimize JPEG, PNG and WebP images</summary>
+
+  <url type="homepage">https://yoga.flozz.org/</url>
+  <url type="bugtracker">https://github.com/flozz/yoga-image-optimizer/issues</url>
+  <url type="contact">https://contact.flozz.fr/</url>
+  <url type="donation">https://github.com/flozz/yoga-image-optimizer#supporting-this-project</url>
+
+  <categories>
+    <category>Utility</category>
+    <category>Graphics</category>
+  </categories>
+
+  <description>
+    <p>
+        YOGA Image Optimizer is a graphical user interface for YOGA Image that
+        converts and optimizes the size of JPEGs, PNGs and WebP image files.
+    </p>
+    <p>
+        You will be able to save about 30 % of space on JPEGs and 20 % on PNGs.
+        Optimizing a WebP image will save you only few percents... but
+        converting a JPEG to a lossy WebP can reduce image size to a half and
+        converting a PNG to a lossy WebP can save you 35 % on average.
+    </p>
+    <p>
+        Please note that image optimization is slow and may require a lot of RAM
+        (for example, the JPEG encoder needs 300 MB of RAM per Mpix).
+    </p>
+  </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main window while optimizing images</caption>
+      <image>https://yoga.flozz.org/images/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="1.0.0" date="2021-06-11"/>
+  </releases>
+
+  <launchable type="desktop-id">org.flozz.yoga-image-optimizer.desktop</launchable>
+  <provides>
+    <binary>yoga-image-optimizer</binary>
+    <binary>yoga</binary>
+  </provides>
+  <metadata_license>CC0-1.0</metadata_license>
+  <content_rating type="oars-1.1" />
+</component>

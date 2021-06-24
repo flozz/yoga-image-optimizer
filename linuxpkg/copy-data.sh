@@ -38,3 +38,7 @@ fi
 mkdir -pv $PREFIX/share/man/man1/
 cp -v ./yoga-image-optimizer.1 $PREFIX/share/man/man1/yoga-image-optimizer.1
 sed -i "s/{VERSION}/$(python3 ../setup.py --version)/g" $PREFIX/share/man/man1/yoga-image-optimizer.1
+
+# Copy the Appstream file
+mkdir -pv $PREFIX/share/metainfo/
+cp -v ./org.flozz.yoga-image-optimizer.metainfo.xml $PREFIX/share/metainfo/org.flozz.yoga-image-optimizer.metainfo.xml
