@@ -184,6 +184,10 @@ class MainWindow(Gtk.ApplicationWindow):
             png_options.show()
 
     def remove_selected_image(self):
+        app = self.get_application()
+        if not app.current_state == app.STATE_MANAGE_IMAGES:
+            return
+
         iter_ = self.get_selected_image_iter()
         if iter_:
             app = self.get_application()
