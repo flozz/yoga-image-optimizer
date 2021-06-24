@@ -192,11 +192,17 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * Turkish translation
-  * Italian translation
-  * Occitan translation
+  * New translations:
+
+    * Turkish
+    * Italian
+    * Occitan
+
   * The "Stop" button now stops the running optimizations and not only the
     pending ones
+  * Display a "Canceled" status on non-optimized image while the "Stop" button
+    is clicked
+  * Do not allow to remove images with the ``<Del>`` key while optimizing
 
 * **v1.0.1:**
 
