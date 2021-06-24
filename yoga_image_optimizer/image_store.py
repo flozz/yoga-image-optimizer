@@ -39,6 +39,7 @@ class ImageStore(object):
     STATUS_PENDING = 1
     STATUS_IN_PROGRESS = 2
     STATUS_DONE = 3
+    STATUS_CANCELED = 4
 
     gtk_list_store = None
 
@@ -294,6 +295,7 @@ class ImageStore(object):
                 1: "⏸️ %s" % _("Pending"),
                 2: "🔄️ %s" % _("In progress"),
                 3: "✅️ %s" % _("Done"),
+                4: "⏹️ %s" % _("Canceled"),
             }
             self._update_field(
                 index,

@@ -170,6 +170,16 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._executor.shutdown(wait=False)
         self.switch_state(self.STATE_MANAGE_IMAGES)
 
+        for i in range(self.image_store.length):
+            image = self.image_store.get(i)
+            if image["status"] in [
+                self.image_store.STATUS_PENDING,
+                self.image_store.STATUS_IN_PROGRESS,
+            ]:
+                self.image_store.update(
+                    i, status=self.image_store.STATUS_CANCELED
+                )
+
     def _update_optimization_status(self):
         if self.current_state != self.STATE_OPTIMIZE:
             return

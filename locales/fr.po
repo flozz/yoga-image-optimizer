@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-01 20:47+0200\n"
+"POT-Creation-Date: 2021-06-24 12:56+0200\n"
 "PO-Revision-Date: 2021-06-01 20:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -145,17 +145,21 @@ msgstr "Format de sortie"
 msgid "Status"
 msgstr "État"
 
-#: yoga_image_optimizer/image_store.py:294
+#: yoga_image_optimizer/image_store.py:295
 msgid "Pending"
 msgstr "En attente"
 
-#: yoga_image_optimizer/image_store.py:295
+#: yoga_image_optimizer/image_store.py:296
 msgid "In progress"
 msgstr "En cours"
 
-#: yoga_image_optimizer/image_store.py:296
+#: yoga_image_optimizer/image_store.py:297
 msgid "Done"
 msgstr "Fait"
+
+#: yoga_image_optimizer/image_store.py:298
+msgid "Canceled"
+msgstr "Annulé"
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
