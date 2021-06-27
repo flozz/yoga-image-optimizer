@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from PIL import Image
@@ -6,7 +5,6 @@ from gi.repository import GLib
 from gi.repository import Gio
 from gi.repository import GdkPixbuf
 
-from . import APPLICATION_ID
 from .translation import gettext as _
 from .translation import format_string
 
@@ -108,53 +106,3 @@ def preview_gdk_pixbuf_from_path(path, size=64):
     image_rgba.close()
 
     return pixbuf
-
-
-def get_unix_xdg_config_home():
-    """Returns the path to the user's config directory (XDG_CONFIG_HOME) on
-    Unix platforms.
-
-    :rtype: pathlib.Path
-    """
-    if "XDG_CONFIG_HOME" in os.environ and os.environ["XDG_CONFIG_HOME"]:
-        config_dir = Path(os.environ["XDG_CONFIG_HOME"])
-    else:
-        config_dir = Path("~/.config")
-    return config_dir.expanduser().resolve().absolute()
-
-
-def get_win_user_data_dir():
-    """Returns the user's data path on Windows platform.
-
-    :rtype: pathlib.Path
-    """
-    if "APPDATA" in os.environ and os.environ["APPDATA"]:
-        user_data_dir = Path(os.environ["APPDATA"])
-    else:
-        import ctypes
-
-        CSIDL_APPDATA = 26
-        MAX_PATH = 2048
-
-        buff = ctypes.create_unicode_buffer(MAX_PATH)
-        ctypes.windll.shell32.SHGetFolderPathW(
-            None, CSIDL_APPDATA, None, 0, buff
-        )
-
-        buff2 = ctypes.create_unicode_buffer(MAX_PATH)
-        ctypes.windll.kernel32.GetShortPathNameW(buff.value, buff2, MAX_PATH)
-
-        user_data_dir = Path(buff2.value)
-
-    return user_data_dir.expanduser().resolve().absolute()
-
-
-def get_config_file_path():
-    """Returns the path to the application's config file.
-
-    :rtype: pathlib.Path
-    """
-    if os.name == "posix":
-        return get_unix_xdg_config_home() / APPLICATION_ID / "config.ini"
-    elif os.name == "nt":
-        return get_win_user_data_dir() / APPLICATION_ID / "config.ini"

@@ -8,6 +8,7 @@ from gi.repository import Gio
 
 from . import APPLICATION_ID
 from . import helpers
+from . import config
 from .image_formats import IMAGES_FORMATS
 from .image_formats import find_file_format
 from .main_window import MainWindow
@@ -31,6 +32,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
         self.current_state = None
         self.image_store = ImageStore()
+        self.config = config.get_config()
 
         self._main_window = None
         self._executor = None
@@ -143,7 +145,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
 
-        self._executor = StoppableProcessPoolExecutor(max_workers=2)
+        self._executor = StoppableProcessPoolExecutor(
+            max_workers=self.config.getint("optimization", "threads")
+        )
         self._futures = []
 
         for row in self.image_store.get_all():
