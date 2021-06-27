@@ -13,6 +13,7 @@ from .image_formats import IMAGES_FORMATS
 from .image_formats import find_file_format
 from .main_window import MainWindow
 from .about_dialog import AboutDialog
+from .settings_window import SettingsWindow
 from .image_store import ImageStore
 from .file_chooser import open_file_chooser
 from .stoppable_process_pool_executor import StoppableProcessPoolExecutor
@@ -44,6 +45,11 @@ class YogaImageOptimizerApplication(Gtk.Application):
         # Action: app.about
         action = Gio.SimpleAction.new("about", None)
         action.connect("activate", lambda a, p: self.about())
+        self.add_action(action)
+
+        # Action: app.settings
+        action = Gio.SimpleAction.new("settings", None)
+        action.connect("activate", lambda a, p: self.settings())
         self.add_action(action)
 
         # Action: app.quit
@@ -100,6 +106,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
         about_dialog = AboutDialog(parent=self._main_window)
         about_dialog.run()
         about_dialog.destroy()
+
+    def settings(self):
+        settings_window = SettingsWindow(self.config)
+        settings_window.show_all()
 
     def quit(self):
         self.stop_optimization()
