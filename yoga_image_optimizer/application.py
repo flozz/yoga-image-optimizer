@@ -9,6 +9,7 @@ from gi.repository import Gio
 from . import APPLICATION_ID
 from . import helpers
 from . import config
+from . import gtk_themes_helpers
 from .image_formats import IMAGES_FORMATS
 from .image_formats import find_file_format
 from .main_window import MainWindow
@@ -84,6 +85,17 @@ class YogaImageOptimizerApplication(Gtk.Application):
         action.connect("activate", lambda a, p: self.open_file())
         self.add_action(action)
         self.set_accels_for_action("app.open-file", ["<Ctrl>O"])
+
+        # Apply GTK theme
+        if self.config.get("interface", "gtk-theme-name") != "default":
+            gtk_themes_helpers.set_gtk_theme_name(
+                self.config.get("interface", "gtk-theme-name")
+            )
+        gtk_themes_helpers.set_gtk_application_prefer_dark_theme(
+            self.config.getboolean(
+                "interface", "gtk-application-prefer-dark-theme"
+            )
+        )
 
     def do_activate(self):
         if not self._main_window:

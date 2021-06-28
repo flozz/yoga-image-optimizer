@@ -10,6 +10,10 @@ DEFAULT = {
     "optimization": {
         "threads": 2,
     },
+    "interface": {
+        "gtk-theme-name": "default",
+        "gtk-application-prefer-dark-theme": False,
+    },
 }
 
 
