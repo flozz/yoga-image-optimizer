@@ -4,6 +4,7 @@ from gi.repository import Gtk, GdkPixbuf
 
 from . import APPLICATION_NAME, APPLICATION_ID
 from . import data_helpers
+from . import gtk_themes_helpers
 from .translation import gtk_builder_translation_hack
 from .translation import gettext as _
 from .config import save_config
@@ -49,10 +50,25 @@ class SettingsWindow(Gtk.Window):
             self._config.getint("optimization", "threads")
         )
 
+        prefer_dark_theme_switch = self._builder.get_object(
+            "prefer_dark_theme_switch"
+        )
+        prefer_dark_theme_switch.set_state(
+            self._config.getboolean(
+                "interface", "gtk-application-prefer-dark-theme"
+            )
+        )
+
     def _on_threads_adjustment_value_changed(self, adjustment):
         self._config.set(
             "optimization", "threads", str(int(adjustment.get_value()))
         )
+
+    def _on_prefer_dark_theme_switch_state_setted(self, widget, state):
+        self._config.set(
+            "interface", "gtk-application-prefer-dark-theme", str(state)
+        )
+        gtk_themes_helpers.set_gtk_application_prefer_dark_theme(state)
 
     def _on_settings_windows_destroyed(self, widget):
         save_config(self._config)
