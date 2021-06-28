@@ -36,6 +36,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self.config = config.get_config()
 
         self._main_window = None
+        self._settings_window = None
         self._executor = None
         self._futures = []
 
@@ -108,8 +109,16 @@ class YogaImageOptimizerApplication(Gtk.Application):
         about_dialog.destroy()
 
     def settings(self):
-        settings_window = SettingsWindow(self.config)
-        settings_window.show_all()
+        def _on_settings_window_destroyed(*args):
+            self._settings_window = None
+
+        if not self._settings_window:
+            self._settings_window = SettingsWindow(self.config)
+            self._settings_window.connect(
+                "destroy", _on_settings_window_destroyed
+            )
+            self._settings_window.show_all()
+        self._settings_window.present()
 
     def quit(self):
         self.stop_optimization()
