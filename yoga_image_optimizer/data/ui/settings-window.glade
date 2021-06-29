@@ -140,24 +140,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="left-attach">1</property>
-                    <property name="top-attach">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkSwitch" id="prefer_dark_theme_switch">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
+                    <property name="halign">start</property>
+                    <property name="valign">center</property>
                     <signal name="state-set" handler="_on_prefer_dark_theme_switch_state_setted" swapped="no"/>
                   </object>
                   <packing>
                     <property name="left-attach">1</property>
                     <property name="top-attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="theme_combobox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <signal name="changed" handler="_on_theme_combobox_changed" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left-attach">1</property>
+                    <property name="top-attach">0</property>
                   </packing>
                 </child>
               </object>
