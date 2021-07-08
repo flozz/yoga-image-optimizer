@@ -198,6 +198,11 @@ Changelog
     * Italian
     * Occitan
 
+  * Settings were added:
+
+    * Theme selection / dark theme preference
+    * Number of threads used to optimize images
+
   * The "Stop" button now stops the running optimizations and not only the
     pending ones
   * Display a "Canceled" status on non-optimized image while the "Stop" button
