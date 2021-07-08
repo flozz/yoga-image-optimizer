@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-24 12:56+0200\n"
-"PO-Revision-Date: 2021-06-01 20:50+0200\n"
+"POT-Creation-Date: 2021-07-08 12:54+0200\n"
+"PO-Revision-Date: 2021-07-08 12:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -13,66 +13,104 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:46
+#: yoga_image_optimizer/settings_window.py:17
+msgid "Settings"
+msgstr "Préférences"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:61
 msgid "About"
 msgstr "À propos"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:61
+#: yoga_image_optimizer/data/ui/main-window.glade:76
 msgid "Quit"
 msgstr "Quitter"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:82
+#: yoga_image_optimizer/data/ui/main-window.glade:97
 msgid "Add an image..."
 msgstr "Ajouter une image..."
 
-#: yoga_image_optimizer/data/ui/main-window.glade:93
+#: yoga_image_optimizer/data/ui/main-window.glade:108
 msgid "Remove selected image"
 msgstr "Supprimer l'image sélectionnée"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:117
+#: yoga_image_optimizer/data/ui/main-window.glade:132
 msgid "Remove all images"
 msgstr "Supprimer toutes les images"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:149
+#: yoga_image_optimizer/data/ui/main-window.glade:164
 msgid "Optimize"
 msgstr "Optimiser"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:163
+#: yoga_image_optimizer/data/ui/main-window.glade:178
 msgid "Stop"
 msgstr "Arrêter"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:250
+#: yoga_image_optimizer/data/ui/main-window.glade:265
 msgid "Output format"
 msgstr "Format de sortie"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:262
+#: yoga_image_optimizer/data/ui/main-window.glade:277
 msgid "Output file"
 msgstr "Fichier de sortie"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:301
+#: yoga_image_optimizer/data/ui/main-window.glade:316
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Image de sortie"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:351
-#: yoga_image_optimizer/data/ui/main-window.glade:454
+#: yoga_image_optimizer/data/ui/main-window.glade:366
+#: yoga_image_optimizer/data/ui/main-window.glade:469
 msgid "Quality"
 msgstr "Qualité"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:409
+#: yoga_image_optimizer/data/ui/main-window.glade:424
 msgid "JPEG Options"
 msgstr "Options JPEG"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:512
+#: yoga_image_optimizer/data/ui/main-window.glade:527
 msgid "WebP Options"
 msgstr "Options WebP"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:555
+#: yoga_image_optimizer/data/ui/main-window.glade:570
 msgid "Slow PNG optimization"
 msgstr "Optimisation PNG lente"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:575
+#: yoga_image_optimizer/data/ui/main-window.glade:590
 msgid "PNG Options"
 msgstr "Options PNG"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:45
+msgid "Number of threads"
+msgstr "Nombre de threads"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:56
+msgid ""
+"The number of threads determines the number of images that will be optimized "
+"at the same time. This value should not be higher than your CPU count."
+msgstr ""
+"Le nombre de threads détermine le nombre d'images qui seront optimisées en "
+"parallèle. Cette valeur ne devrait pas être supérieure au nombre de CPU "
+"disponibles."
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:87
+msgid "Optimization"
+msgstr "Optimisation"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:123
+msgid "Prefer dark theme"
+msgstr "Utiliser le thème foncé"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:135
+msgid "Theme"
+msgstr "Thème"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:174
+msgid "Interface"
+msgstr "Interface"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:194
+msgid "Close"
+msgstr "Fermer"
 
 #: yoga_image_optimizer/image_formats.py:48
 msgid "WebP (lossless)"

@@ -41,16 +41,21 @@ def test(session):
 @nox.session
 def locales_update(session):
     # Extract messages in .pot
+    python_files = [
+        p.as_posix()
+        for p in pathlib.Path("yoga_image_optimizer/").glob("**/*.py")
+    ]
+    ui_files = [
+        p.as_posix()
+        for p in pathlib.Path("yoga_image_optimizer/data/ui").glob("*.glade")
+    ]
     session.run(
         "xgettext",
         "--from-code=UTF-8",
         "-o",
         "locales/messages.pot",
-        "yoga_image_optimizer/data/ui/main-window.glade",
-        *[
-            p.as_posix()
-            for p in pathlib.Path("yoga_image_optimizer/").glob("**/*.py")
-        ],
+        *ui_files,
+        *python_files,
         external=True,
     )
     # Updates locales

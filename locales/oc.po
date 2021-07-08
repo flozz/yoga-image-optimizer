@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-24 12:56+0200\n"
+"POT-Creation-Date: 2021-07-08 12:54+0200\n"
 "PO-Revision-Date: 2021-06-22 22:46+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
@@ -18,66 +18,101 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:46
+#: yoga_image_optimizer/settings_window.py:17
+msgid "Settings"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:61
 msgid "About"
 msgstr "A prepaus"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:61
+#: yoga_image_optimizer/data/ui/main-window.glade:76
 msgid "Quit"
 msgstr "Quitar"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:82
+#: yoga_image_optimizer/data/ui/main-window.glade:97
 msgid "Add an image..."
 msgstr "Apondre un imatge..."
 
-#: yoga_image_optimizer/data/ui/main-window.glade:93
+#: yoga_image_optimizer/data/ui/main-window.glade:108
 msgid "Remove selected image"
 msgstr "Suprimir l’imatges seleccionat"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:117
+#: yoga_image_optimizer/data/ui/main-window.glade:132
 msgid "Remove all images"
 msgstr "Suprimir totes los imatges"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:149
+#: yoga_image_optimizer/data/ui/main-window.glade:164
 msgid "Optimize"
 msgstr "Optimizar"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:163
+#: yoga_image_optimizer/data/ui/main-window.glade:178
 msgid "Stop"
 msgstr "Arrestar"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:250
+#: yoga_image_optimizer/data/ui/main-window.glade:265
 msgid "Output format"
 msgstr "Format de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:262
+#: yoga_image_optimizer/data/ui/main-window.glade:277
 msgid "Output file"
 msgstr "Fichièr de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:301
+#: yoga_image_optimizer/data/ui/main-window.glade:316
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Imatge en sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:351
-#: yoga_image_optimizer/data/ui/main-window.glade:454
+#: yoga_image_optimizer/data/ui/main-window.glade:366
+#: yoga_image_optimizer/data/ui/main-window.glade:469
 msgid "Quality"
 msgstr "Qualitat"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:409
+#: yoga_image_optimizer/data/ui/main-window.glade:424
 msgid "JPEG Options"
 msgstr "Opcions JPEG"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:512
+#: yoga_image_optimizer/data/ui/main-window.glade:527
 msgid "WebP Options"
 msgstr "Opcions WebP"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:555
+#: yoga_image_optimizer/data/ui/main-window.glade:570
 msgid "Slow PNG optimization"
 msgstr "Optimizacion PNG lenta"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:575
+#: yoga_image_optimizer/data/ui/main-window.glade:590
 msgid "PNG Options"
 msgstr "Opcions PNG"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:45
+msgid "Number of threads"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:56
+msgid ""
+"The number of threads determines the number of images that will be optimized "
+"at the same time. This value should not be higher than your CPU count."
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:87
+msgid "Optimization"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:123
+msgid "Prefer dark theme"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:135
+msgid "Theme"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:174
+msgid "Interface"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:194
+msgid "Close"
+msgstr ""
 
 #: yoga_image_optimizer/image_formats.py:48
 msgid "WebP (lossless)"
