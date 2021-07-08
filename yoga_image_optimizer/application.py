@@ -8,10 +8,13 @@ from gi.repository import Gio
 
 from . import APPLICATION_ID
 from . import helpers
+from . import config
+from . import gtk_themes_helpers
 from .image_formats import IMAGES_FORMATS
 from .image_formats import find_file_format
 from .main_window import MainWindow
 from .about_dialog import AboutDialog
+from .settings_window import SettingsWindow
 from .image_store import ImageStore
 from .file_chooser import open_file_chooser
 from .stoppable_process_pool_executor import StoppableProcessPoolExecutor
@@ -31,8 +34,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
         self.current_state = None
         self.image_store = ImageStore()
+        self.config = config.get_config()
 
         self._main_window = None
+        self._settings_window = None
         self._executor = None
         self._futures = []
 
@@ -42,6 +47,11 @@ class YogaImageOptimizerApplication(Gtk.Application):
         # Action: app.about
         action = Gio.SimpleAction.new("about", None)
         action.connect("activate", lambda a, p: self.about())
+        self.add_action(action)
+
+        # Action: app.settings
+        action = Gio.SimpleAction.new("settings", None)
+        action.connect("activate", lambda a, p: self.settings())
         self.add_action(action)
 
         # Action: app.quit
@@ -76,6 +86,17 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self.add_action(action)
         self.set_accels_for_action("app.open-file", ["<Ctrl>O"])
 
+        # Apply GTK theme
+        if self.config.get("interface", "gtk-theme-name") != "default":
+            gtk_themes_helpers.set_gtk_theme_name(
+                self.config.get("interface", "gtk-theme-name")
+            )
+        gtk_themes_helpers.set_gtk_application_prefer_dark_theme(
+            self.config.getboolean(
+                "interface", "gtk-application-prefer-dark-theme"
+            )
+        )
+
     def do_activate(self):
         if not self._main_window:
             self._main_window = MainWindow(self)
@@ -98,6 +119,18 @@ class YogaImageOptimizerApplication(Gtk.Application):
         about_dialog = AboutDialog(parent=self._main_window)
         about_dialog.run()
         about_dialog.destroy()
+
+    def settings(self):
+        def _on_settings_window_destroyed(*args):
+            self._settings_window = None
+
+        if not self._settings_window:
+            self._settings_window = SettingsWindow(self.config)
+            self._settings_window.connect(
+                "destroy", _on_settings_window_destroyed
+            )
+            self._settings_window.show_all()
+        self._settings_window.present()
 
     def quit(self):
         self.stop_optimization()
@@ -143,7 +176,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)
 
-        self._executor = StoppableProcessPoolExecutor(max_workers=2)
+        self._executor = StoppableProcessPoolExecutor(
+            max_workers=self.config.getint("optimization", "threads")
+        )
         self._futures = []
 
         for row in self.image_store.get_all():
