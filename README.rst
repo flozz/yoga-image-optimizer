@@ -208,6 +208,8 @@ Changelog
   * Display a "Canceled" status on non-optimized image while the "Stop" button
     is clicked
   * Do not allow to remove images with the ``<Del>`` key while optimizing
+  * Multiple files can now be selected and their parameters can be edited all
+    at once
 
 * **v1.0.1:**
 
