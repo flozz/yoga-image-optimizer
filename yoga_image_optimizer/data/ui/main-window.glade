@@ -106,7 +106,7 @@
         <property name="can-focus">True</property>
         <property name="receives-default">True</property>
         <property name="tooltip-text" translatable="yes">Remove selected image</property>
-        <property name="action-name">win.remove-selected-image</property>
+        <property name="action-name">win.remove-selected-images</property>
         <property name="image">image-remove</property>
         <property name="always-show-image">True</property>
       </object>
@@ -212,6 +212,8 @@
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="headers-clickable">False</property>
+            <property name="enable-search">False</property>
+            <property name="rubber-banding">True</property>
             <child internal-child="selection">
               <object class="GtkTreeSelection">
                 <signal name="changed" handler="_on_image_treeview_selection_changed" swapped="no"/>

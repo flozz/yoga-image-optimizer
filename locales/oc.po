@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-08 12:54+0200\n"
+"POT-Creation-Date: 2021-07-09 13:21+0200\n"
 "PO-Revision-Date: 2021-06-22 22:46+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
@@ -50,37 +50,37 @@ msgstr "Optimizar"
 msgid "Stop"
 msgstr "Arrestar"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:265
+#: yoga_image_optimizer/data/ui/main-window.glade:267
 msgid "Output format"
 msgstr "Format de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:277
+#: yoga_image_optimizer/data/ui/main-window.glade:279
 msgid "Output file"
 msgstr "Fichièr de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:316
+#: yoga_image_optimizer/data/ui/main-window.glade:318
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Imatge en sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:366
-#: yoga_image_optimizer/data/ui/main-window.glade:469
+#: yoga_image_optimizer/data/ui/main-window.glade:368
+#: yoga_image_optimizer/data/ui/main-window.glade:471
 msgid "Quality"
 msgstr "Qualitat"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:424
+#: yoga_image_optimizer/data/ui/main-window.glade:426
 msgid "JPEG Options"
 msgstr "Opcions JPEG"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:527
+#: yoga_image_optimizer/data/ui/main-window.glade:529
 msgid "WebP Options"
 msgstr "Opcions WebP"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:570
+#: yoga_image_optimizer/data/ui/main-window.glade:572
 msgid "Slow PNG optimization"
 msgstr "Optimizacion PNG lenta"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:590
+#: yoga_image_optimizer/data/ui/main-window.glade:592
 msgid "PNG Options"
 msgstr "Opcions PNG"
 
@@ -144,6 +144,10 @@ msgstr "Fichièrs imatge"
 #: yoga_image_optimizer/file_chooser.py:51
 msgid "All Files"
 msgstr "Totes los fichièrs"
+
+#: yoga_image_optimizer/main_window.py:181
+msgid "— Multiple files selected —"
+msgstr ""
 
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
