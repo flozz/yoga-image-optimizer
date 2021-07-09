@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-08 12:54+0200\n"
+"POT-Creation-Date: 2021-07-09 13:21+0200\n"
 "PO-Revision-Date: 2021-06-20 10:40+0200\n"
 "Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language-Team: ITALIAN <LL@li.org>\n"
@@ -49,37 +49,37 @@ msgstr "Ottimizza"
 msgid "Stop"
 msgstr "Ferma"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:265
+#: yoga_image_optimizer/data/ui/main-window.glade:267
 msgid "Output format"
 msgstr "Formato di output"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:277
+#: yoga_image_optimizer/data/ui/main-window.glade:279
 msgid "Output file"
 msgstr "File di output"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:316
+#: yoga_image_optimizer/data/ui/main-window.glade:318
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Immagine Output"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:366
-#: yoga_image_optimizer/data/ui/main-window.glade:469
+#: yoga_image_optimizer/data/ui/main-window.glade:368
+#: yoga_image_optimizer/data/ui/main-window.glade:471
 msgid "Quality"
 msgstr "Qualità"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:424
+#: yoga_image_optimizer/data/ui/main-window.glade:426
 msgid "JPEG Options"
 msgstr "Opzioni JPEG"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:527
+#: yoga_image_optimizer/data/ui/main-window.glade:529
 msgid "WebP Options"
 msgstr "Opzioni WebP"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:570
+#: yoga_image_optimizer/data/ui/main-window.glade:572
 msgid "Slow PNG optimization"
 msgstr "Ottimizzazione PNG lenta"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:590
+#: yoga_image_optimizer/data/ui/main-window.glade:592
 msgid "PNG Options"
 msgstr "Opzioni PNG"
 
@@ -143,6 +143,10 @@ msgstr "File Immagine"
 #: yoga_image_optimizer/file_chooser.py:51
 msgid "All Files"
 msgstr "Tutti i File"
+
+#: yoga_image_optimizer/main_window.py:181
+msgid "— Multiple files selected —"
+msgstr ""
 
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
