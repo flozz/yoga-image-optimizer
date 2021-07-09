@@ -9,6 +9,7 @@ from . import data_helpers
 from .image_formats import get_supported_output_format_ids
 from .image_formats import get_supported_output_format_names
 from .translation import gtk_builder_translation_hack
+from .translation import gettext as _
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -24,6 +25,8 @@ class MainWindow(Gtk.ApplicationWindow):
             default_height=500,
             resizable=True,
         )
+
+        self._updating_interface = False
 
         self._builder = Gtk.Builder()
         self._builder.set_translation_domain(APPLICATION_ID)
@@ -58,15 +61,15 @@ class MainWindow(Gtk.ApplicationWindow):
         self.connect("drag-data-received", self._on_drag_data_received)
 
         # Action: win.remove-selected-image
-        action = Gio.SimpleAction.new("remove-selected-image", None)
+        action = Gio.SimpleAction.new("remove-selected-images", None)
         action.connect(
-            "activate", self._on_remove_selected_image_action_activated
+            "activate", self._on_remove_selected_images_action_activated
         )
         self.add_action(action)
 
         images_treeview = self._builder.get_object("images_treeview")
         self.set_accels_for_action_while_widget_focused(
-            "win.remove-selected-image",
+            "win.remove-selected-images",
             ["Delete"],
             images_treeview,
         )
@@ -120,38 +123,63 @@ class MainWindow(Gtk.ApplicationWindow):
         # fmt: on
 
     def update_interface(self):
+        self._updating_interface = True
+
         app = self.get_application()
         output_image_options = self._builder.get_object("output_image_options")
         jpeg_options = self._builder.get_object("jpeg_options")
         webp_options = self._builder.get_object("webp_options")
         png_options = self._builder.get_object("png_options")
 
-        # Reset output options visibilité (hide everything)
+        def _have_all_same_values(iters, property_):
+            value = app.image_store.get(iters[0])[property_]
+            for iter_ in iters:
+                if app.image_store.get(iter_)[property_] != value:
+                    return False
+            return True
+
+        def _avg(iters, property_):
+            return sum(
+                [app.image_store.get(iter_)[property_] for iter_ in iters]
+            ) // len(iters)
+
+        # Reset output options visibility (hide everything)
         output_image_options.hide()
         jpeg_options.hide()
         webp_options.hide()
         png_options.hide()
 
-        # Get selected image
-        iter_ = self.get_selected_image_iter()
+        # Get selected images
+        iters = self.get_selected_image_iters()
 
         # No image selected, stop here
-        if not iter_:
+        if len(iters) == 0:
             return
 
-        output_format = app.image_store.get(iter_)["output_format"]
+        if _have_all_same_values(iters, "output_format"):
+            output_format = app.image_store.get(iters[0])["output_format"]
+        else:
+            output_format = None
 
-        # Update and show output image options
+        # [Output image] Update and show output image options
         output_format_combobox = self._builder.get_object(
             "output_format_combobox"
         )
-        output_format_combobox.set_active(
-            get_supported_output_format_ids().index(output_format)
-        )
+        if output_format is not None:
+            output_format_combobox.set_active(
+                get_supported_output_format_ids().index(output_format)
+            )
+        else:
+            output_format_combobox.set_active(-1)
 
-        output_file = app.image_store.get(iter_)["output_file"]
         output_file_entry = self._builder.get_object("output_file_entry")
-        output_file_entry.set_text(output_file)
+        if len(iters) == 1:
+            output_file = app.image_store.get(iters[0])["output_file"]
+            output_file_entry.set_text(output_file)
+            output_file_entry.set_sensitive(True)
+        else:
+            output_file_entry.set_text(_("— Multiple files selected —"))
+            output_file_entry.set_sensitive(False)
 
         output_image_options.show()
 
@@ -160,46 +188,49 @@ class MainWindow(Gtk.ApplicationWindow):
             jpeg_quality_adjustment = self._builder.get_object(
                 "jpeg_quality_adjustment"
             )
-            jpeg_quality_adjustment.set_value(
-                app.image_store.get(iter_)["jpeg_quality"]
-            )
+            jpeg_quality_adjustment.set_value(_avg(iters, "jpeg_quality"))
             jpeg_options.show()
         # [WebP] Update and show webp options
         elif output_format == "webp":
             webp_quality_adjustment = self._builder.get_object(
                 "webp_quality_adjustment"
             )
-            webp_quality_adjustment.set_value(
-                app.image_store.get(iter_)["webp_quality"]
-            )
+            webp_quality_adjustment.set_value(_avg(iters, "webp_quality"))
             webp_options.show()
         # [PNG] Update and show png options
         elif output_format == "png":
             png_slow_optimization_checkbutton = self._builder.get_object(
                 "png_slow_optimization_checkbutton"
             )
-            png_slow_optimization_checkbutton.set_active(
-                app.image_store.get(iter_)["png_slow_optimization"]
-            )
+            if _have_all_same_values(iters, "png_slow_optimization"):
+                png_slow_optimization_checkbutton.set_active(
+                    app.image_store.get(iters[0])["png_slow_optimization"]
+                )
+                png_slow_optimization_checkbutton.set_inconsistent(False)
+            else:
+                png_slow_optimization_checkbutton.set_active(False)
+                png_slow_optimization_checkbutton.set_inconsistent(True)
             png_options.show()
 
-    def remove_selected_image(self):
+        self._updating_interface = False
+
+    def remove_selected_images(self):
         app = self.get_application()
         if not app.current_state == app.STATE_MANAGE_IMAGES:
             return
 
-        iter_ = self.get_selected_image_iter()
-        if iter_:
+        iters = self.get_selected_image_iters()
+        for iter_ in iters:
             app = self.get_application()
             app.image_store.remove(iter_)
 
-    def get_selected_image_iter(self):
+    def get_selected_image_iters(self):
         treeview_images = self._builder.get_object("images_treeview")
         selection = treeview_images.get_selection()
-        if selection.count_selected_rows() == 0:
-            return None
-        _, iter_ = selection.get_selected()
-        return iter_
+        model = treeview_images.get_model()
+
+        _, tree_paths = selection.get_selected_rows()
+        return [model.get_iter(tree_path) for tree_path in tree_paths]
 
     def _prepare_treeview(self):
         app = self.get_application()
@@ -246,6 +277,10 @@ class MainWindow(Gtk.ApplicationWindow):
                     "Unsupported field type '%s'" % str(field_type)
                 )
 
+        # Enable multi-selection
+        selection = treeview_images.get_selection()
+        selection.set_mode(Gtk.SelectionMode.MULTIPLE)
+
     def _prepare_format_combobox(self):
         output_format_combobox = self._builder.get_object(
             "output_format_combobox"
@@ -279,44 +314,77 @@ class MainWindow(Gtk.ApplicationWindow):
         self.update_interface()
 
     def _on_output_file_entry_changed(self, entry):
+        if self._updating_interface:
+            return
+
         app = self.get_application()
-        iter_ = self.get_selected_image_iter()
+        iters = self.get_selected_image_iters()
+
+        if len(iters) != 1:
+            return
+
         output_file = Path(entry.get_text())
         app.image_store.update(
-            iter_,
+            iters[0],
             output_file=str(output_file.resolve()),
         )
 
     def _on_output_format_combobox_changed(self, combobox):
+        if self._updating_interface:
+            return
+
         app = self.get_application()
-        iter_ = self.get_selected_image_iter()
         output_format_combobox = self._builder.get_object(
             "output_format_combobox"
         )
+
+        # No format selected
+        if output_format_combobox.get_active() == -1:
+            return
 
         output_format = get_supported_output_format_ids()[
             output_format_combobox.get_active()
         ]
 
-        app.image_store.update(iter_, output_format=output_format)
+        iters = self.get_selected_image_iters()
+        for iter_ in iters:
+            app.image_store.update(iter_, output_format=output_format)
+
         self.update_interface()
 
     def _on_jpeg_quality_adjustement_value_changed(self, adjustement):
+        if self._updating_interface:
+            return
+
         app = self.get_application()
-        iter_ = self.get_selected_image_iter()
-        app.image_store.update(iter_, jpeg_quality=adjustement.get_value())
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(iter_, jpeg_quality=adjustement.get_value())
 
     def _on_webp_quality_adjustement_value_changed(self, adjustement):
+        if self._updating_interface:
+            return
+
         app = self.get_application()
-        iter_ = self.get_selected_image_iter()
-        app.image_store.update(iter_, webp_quality=adjustement.get_value())
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(iter_, webp_quality=adjustement.get_value())
 
     def _on_png_slow_optimization_checkbutton_toggled(self, checkbutton):
-        app = self.get_application()
-        iter_ = self.get_selected_image_iter()
-        app.image_store.update(
-            iter_, png_slow_optimization=checkbutton.get_active()
-        )
+        if self._updating_interface:
+            return
 
-    def _on_remove_selected_image_action_activated(self, action, param):
-        self.remove_selected_image()
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(
+                iter_, png_slow_optimization=checkbutton.get_active()
+            )
+
+        self.update_interface()
+
+    def _on_remove_selected_images_action_activated(self, action, param):
+        self.remove_selected_images()
