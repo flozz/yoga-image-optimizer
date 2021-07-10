@@ -20,7 +20,7 @@ msgstr ""
 #: yoga_image_optimizer/data/ui/main-window.glade:46
 #: yoga_image_optimizer/settings_window.py:17
 msgid "Settings"
-msgstr ""
+msgstr "Preferéncias"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:61
 msgid "About"
@@ -86,33 +86,35 @@ msgstr "Opcions PNG"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:45
 msgid "Number of threads"
-msgstr ""
+msgstr "Nombre de fils d’execucion"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:56
 msgid ""
 "The number of threads determines the number of images that will be optimized "
 "at the same time. This value should not be higher than your CPU count."
 msgstr ""
+"Lo nombre de fils d’execucion determina lo nombdre d’imatge que serà optimizat "
+"al meteis temps. Aquesta valor deu pas èsser superiora al compte de vòstre CPU."
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:87
 msgid "Optimization"
-msgstr ""
+msgstr "Optimizacion"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:123
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "Preferir lo tèma escur"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:135
 msgid "Theme"
-msgstr ""
+msgstr "Tèma"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:174
 msgid "Interface"
-msgstr ""
+msgstr "Interfàcia"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:194
 msgid "Close"
-msgstr ""
+msgstr "Tampar"
 
 #: yoga_image_optimizer/image_formats.py:48
 msgid "WebP (lossless)"
@@ -147,7 +149,7 @@ msgstr "Totes los fichièrs"
 
 #: yoga_image_optimizer/main_window.py:181
 msgid "— Multiple files selected —"
-msgstr ""
+msgstr "— Mantun fichièr seleccionat —"
 
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
@@ -203,7 +205,7 @@ msgstr "Acabat"
 
 #: yoga_image_optimizer/image_store.py:298
 msgid "Canceled"
-msgstr ""
+msgstr "Annulat"
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
