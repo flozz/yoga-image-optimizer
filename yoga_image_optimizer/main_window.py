@@ -360,7 +360,9 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
 
         for iter_ in iters:
-            app.image_store.update(iter_, jpeg_quality=adjustement.get_value())
+            app.image_store.update(
+                iter_, jpeg_quality=round(adjustement.get_value())
+            )
 
     def _on_webp_quality_adjustement_value_changed(self, adjustement):
         if self._updating_interface:
@@ -370,7 +372,9 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
 
         for iter_ in iters:
-            app.image_store.update(iter_, webp_quality=adjustement.get_value())
+            app.image_store.update(
+                iter_, webp_quality=round(adjustement.get_value())
+            )
 
     def _on_png_slow_optimization_checkbutton_toggled(self, checkbutton):
         if self._updating_interface:
