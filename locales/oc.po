@@ -93,7 +93,7 @@ msgid ""
 "The number of threads determines the number of images that will be optimized "
 "at the same time. This value should not be higher than your CPU count."
 msgstr ""
-"Lo nombre de fils d’execucion determina lo nombdre d’imatge que serà optimizat "
+"Lo nombre de fils d’execucion determina lo nombre d’imatge que serà optimizat "
 "al meteis temps. Aquesta valor deu pas èsser superiora al compte de vòstre CPU."
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:87
