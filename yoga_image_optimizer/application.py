@@ -198,6 +198,12 @@ class YogaImageOptimizerApplication(Gtk.Application):
                         "jpeg_quality": row["jpeg_quality"] / 100,
                         "webp_quality": row["webp_quality"] / 100,
                         "png_slow_optimization": row["png_slow_optimization"],
+                        "resize": [
+                            row["resize_width"],
+                            row["resize_height"],
+                        ]
+                        if row["resize_enabled"]
+                        else "orig",
                     },
                 )
             )
