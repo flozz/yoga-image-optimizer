@@ -32,6 +32,9 @@ class ImageStore(object):
         "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 90},
         "webp_quality":          {"id": 16, "label": "",                 "type": int,              "default": 90},
         "png_slow_optimization": {"id": 17, "label": "",                 "type": bool,             "default": False},
+        "resize_enable":         {"id": 18, "label": "",                 "type": bool,             "default": False},
+        "resize_width":          {"id": 19, "label": "",                 "type": int,              "default": 1},
+        "resize_height":         {"id": 20, "label": "",                 "type": int,              "default": 1},
     }
     # fmt: on
 

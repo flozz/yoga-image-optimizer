@@ -155,6 +155,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
         if not IMAGES_FORMATS[input_format]["output"]:
             output_format = "jpeg"
 
+        image = helpers.open_image_from_path(str(input_path))
+
         self.image_store.append(
             input_file=str(input_path),
             output_file=helpers.add_suffix_to_filename(str(input_path)),
@@ -162,8 +164,12 @@ class YogaImageOptimizerApplication(Gtk.Application):
             output_size=0,
             input_format=input_format,
             output_format=output_format,
-            preview=helpers.preview_gdk_pixbuf_from_path(str(input_path)),
+            preview=helpers.preview_gdk_pixbuf_from_image(image),
+            resize_width=image.width,
+            resize_height=image.height,
         )
+
+        image.close()
 
     def clear_images(self):
         self.image_store.clear()
