@@ -210,6 +210,7 @@ Changelog
   * Do not allow to remove images with the ``<Del>`` key while optimizing
   * Multiple files can now be selected and their parameters can be edited all
     at once
+  * Allow to resize images (downscale only, preserve ratio)
 
 * **v1.0.1:**
 
