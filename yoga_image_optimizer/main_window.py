@@ -21,8 +21,8 @@ class MainWindow(Gtk.ApplicationWindow):
             icon=GdkPixbuf.Pixbuf.new_from_file(
                 data_helpers.find_data_path("images/icon_64.png")
             ),
-            default_width=800,
-            default_height=500,
+            default_width=1000,
+            default_height=600,
             resizable=True,
         )
 
