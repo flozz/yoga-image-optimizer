@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-09 13:21+0200\n"
+"POT-Creation-Date: 2021-07-14 15:04+0200\n"
 "PO-Revision-Date: 2021-06-12 12:59+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,37 +45,45 @@ msgstr "Optimize et"
 msgid "Stop"
 msgstr "Durdur"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:267
+#: yoga_image_optimizer/data/ui/main-window.glade:282
 msgid "Output format"
 msgstr "Çıkış formatı"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:279
+#: yoga_image_optimizer/data/ui/main-window.glade:303
+msgid "Maximum size"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:375
+msgid "Reset values with the original image dimensions"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:403
 msgid "Output file"
 msgstr "Çıkış dosyası"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:318
+#: yoga_image_optimizer/data/ui/main-window.glade:430
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Çıkış resmi"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:368
-#: yoga_image_optimizer/data/ui/main-window.glade:471
+#: yoga_image_optimizer/data/ui/main-window.glade:480
+#: yoga_image_optimizer/data/ui/main-window.glade:583
 msgid "Quality"
 msgstr "Kalite"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:426
+#: yoga_image_optimizer/data/ui/main-window.glade:538
 msgid "JPEG Options"
 msgstr "JPEG Seçenekleri"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:529
+#: yoga_image_optimizer/data/ui/main-window.glade:641
 msgid "WebP Options"
 msgstr "WebP Seçenekleri"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:572
+#: yoga_image_optimizer/data/ui/main-window.glade:684
 msgid "Slow PNG optimization"
 msgstr "Yavaş PNG optimizasyonu"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:592
+#: yoga_image_optimizer/data/ui/main-window.glade:704
 msgid "PNG Options"
 msgstr "PNG Seçenekleri"
 
@@ -140,7 +148,7 @@ msgstr "Resim Dosyaları"
 msgid "All Files"
 msgstr "Tüm Dosyalar"
 
-#: yoga_image_optimizer/main_window.py:181
+#: yoga_image_optimizer/main_window.py:235
 msgid "— Multiple files selected —"
 msgstr ""
 
@@ -184,19 +192,19 @@ msgstr "Çıkış Formatı"
 msgid "Status"
 msgstr "Durum"
 
-#: yoga_image_optimizer/image_store.py:295
+#: yoga_image_optimizer/image_store.py:327
 msgid "Pending"
 msgstr "Bekliyor"
 
-#: yoga_image_optimizer/image_store.py:296
+#: yoga_image_optimizer/image_store.py:328
 msgid "In progress"
 msgstr "Devam etmekte"
 
-#: yoga_image_optimizer/image_store.py:297
+#: yoga_image_optimizer/image_store.py:329
 msgid "Done"
 msgstr "Bitti"
 
-#: yoga_image_optimizer/image_store.py:298
+#: yoga_image_optimizer/image_store.py:330
 msgid "Canceled"
 msgstr ""
 

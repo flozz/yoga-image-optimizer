@@ -32,6 +32,11 @@ class ImageStore(object):
         "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 90},
         "webp_quality":          {"id": 16, "label": "",                 "type": int,              "default": 90},
         "png_slow_optimization": {"id": 17, "label": "",                 "type": bool,             "default": False},
+        "image_width":           {"id": 18, "label": "",                 "type": int,              "default": 0},
+        "image_height":          {"id": 19, "label": "",                 "type": int,              "default": 0},
+        "resize_enabled":        {"id": 20, "label": "",                 "type": bool,             "default": False},
+        "resize_width":          {"id": 21, "label": "",                 "type": int,              "default": 1},
+        "resize_height":         {"id": 22, "label": "",                 "type": int,              "default": 1},
     }
     # fmt: on
 
@@ -248,16 +253,43 @@ class ImageStore(object):
                 str(output_file.with_suffix(_FORMATS_EXTS[output_format])),
             )
 
-        if "output_file" in kwargs or "output_format" in kwargs:
+        if "image_width" in kwargs:
+            self._update_field(index, "resize_width", kwargs["image_width"])
+
+        if "image_height" in kwargs:
+            self._update_field(index, "resize_height", kwargs["image_height"])
+
+        if (
+            "output_file" in kwargs
+            or "output_format" in kwargs
+            or "resize_enabled" in kwargs
+            or "resize_width" in kwargs
+            or "resize_height" in kwargs
+        ):
             output_file = Path(self.get(index)["output_file"])
             input_file = Path(self.get(index)["input_file"])
+            relative_path = os.path.relpath(
+                output_file, start=input_file.parent
+            )
+
+            resize = ""
+            if self.get(index)["resize_enabled"]:
+                ratio = min(
+                    self.get(index)["resize_width"]
+                    / self.get(index)["image_width"],
+                    self.get(index)["resize_height"]
+                    / self.get(index)["image_height"],
+                )
+                if ratio < 1.0:
+                    resize = " (↓ %i×%i px)" % (
+                        self.get(index)["image_width"] * ratio,
+                        self.get(index)["image_height"] * ratio,
+                    )
+
             self._update_field(
                 index,
                 "output_file_display",
-                os.path.relpath(
-                    output_file,
-                    start=input_file.parent,
-                ),
+                relative_path + resize,
             )
 
         if "input_size" in kwargs:

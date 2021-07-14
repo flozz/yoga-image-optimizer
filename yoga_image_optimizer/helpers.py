@@ -77,19 +77,31 @@ def add_suffix_to_filename(path, suffix="opti"):
     return str(output_path)
 
 
-def preview_gdk_pixbuf_from_path(path, size=64):
-    """Returns a Gdk Pixbuf containing the preview the image at the given path.
+def open_image_from_path(path):
+    """Open a PIL image from the given path.
+
+    TODO: Handle JPEG rotation
 
     :param str path: The path of the image.
+
+    :rtype: PIL.Image.Image
+    """
+    return Image.open(path)
+
+
+def preview_gdk_pixbuf_from_image(image, size=64):
+    """Returns a Gdk Pixbuf containing the preview the image at the given path.
+
+    :param PIL.Image.Image image: the image.
     :param int size: The size of the preview (optional, default: ``64``).
 
     :rtype: GdkPixbuf.Pixbuff
     """
-    image = Image.open(path)
-    image.thumbnail([size, size], Image.LANCZOS)
+    thumb = image.copy()
+    thumb.thumbnail([size, size], Image.LANCZOS)
 
-    image_rgba = Image.new("RGBA", image.size)
-    image_rgba.paste(image)
+    image_rgba = Image.new("RGBA", thumb.size)
+    image_rgba.paste(thumb)
 
     # fmt: off
     pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
@@ -102,7 +114,7 @@ def preview_gdk_pixbuf_from_path(path, size=64):
     )
     # fmt: on
 
-    image.close()
+    thumb.close()
     image_rgba.close()
 
     return pixbuf

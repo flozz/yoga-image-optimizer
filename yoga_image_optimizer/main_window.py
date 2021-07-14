@@ -21,8 +21,8 @@ class MainWindow(Gtk.ApplicationWindow):
             icon=GdkPixbuf.Pixbuf.new_from_file(
                 data_helpers.find_data_path("images/icon_64.png")
             ),
-            default_width=800,
-            default_height=500,
+            default_width=1000,
+            default_height=600,
             resizable=True,
         )
 
@@ -172,6 +172,60 @@ class MainWindow(Gtk.ApplicationWindow):
         else:
             output_format_combobox.set_active(-1)
 
+        resize_checkbutton = self._builder.get_object("resize_checkbutton")
+        if _have_all_same_values(iters, "resize_enabled"):
+            resize_checkbutton.set_active(
+                app.image_store.get(iters[0])["resize_enabled"]
+            )
+            resize_checkbutton.set_inconsistent(False)
+        else:
+            resize_checkbutton.set_active(False)
+            resize_checkbutton.set_inconsistent(True)
+
+        resize_width_adjustment = self._builder.get_object(
+            "resize_width_adjustment"
+        )
+        resize_width_adjustment.set_value(
+            max(
+                [app.image_store.get(iter_)["resize_width"] for iter_ in iters]
+            )
+        )
+
+        resize_width_spinbutton = self._builder.get_object(
+            "resize_width_spinbutton"
+        )
+        resize_width_spinbutton.set_sensitive(resize_checkbutton.get_active())
+
+        resize_height_adjustment = self._builder.get_object(
+            "resize_height_adjustment"
+        )
+        resize_height_adjustment.set_value(
+            max(
+                [
+                    app.image_store.get(iter_)["resize_height"]
+                    for iter_ in iters
+                ]
+            )
+        )
+
+        resize_height_spinbutton = self._builder.get_object(
+            "resize_height_spinbutton"
+        )
+        resize_height_spinbutton.set_sensitive(resize_checkbutton.get_active())
+
+        resize_reset_button = self._builder.get_object("resize_reset_button")
+        if len(iters) > 1:
+            resize_reset_button.set_visible(True)
+        elif (
+            app.image_store.get(iters[0])["resize_width"]
+            != app.image_store.get(iters[0])["image_width"]
+            or app.image_store.get(iters[0])["resize_height"]
+            != app.image_store.get(iters[0])["image_height"]
+        ):
+            resize_reset_button.set_visible(True)
+        else:
+            resize_reset_button.set_visible(False)
+
         output_file_entry = self._builder.get_object("output_file_entry")
         if len(iters) == 1:
             output_file = app.image_store.get(iters[0])["output_file"]
@@ -313,22 +367,6 @@ class MainWindow(Gtk.ApplicationWindow):
     def _on_image_treeview_selection_changed(self, selection):
         self.update_interface()
 
-    def _on_output_file_entry_changed(self, entry):
-        if self._updating_interface:
-            return
-
-        app = self.get_application()
-        iters = self.get_selected_image_iters()
-
-        if len(iters) != 1:
-            return
-
-        output_file = Path(entry.get_text())
-        app.image_store.update(
-            iters[0],
-            output_file=str(output_file.resolve()),
-        )
-
     def _on_output_format_combobox_changed(self, combobox):
         if self._updating_interface:
             return
@@ -352,7 +390,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self.update_interface()
 
-    def _on_jpeg_quality_adjustement_value_changed(self, adjustement):
+    def _on_resize_checkbutton_toggled(self, checkbutton):
         if self._updating_interface:
             return
 
@@ -361,10 +399,12 @@ class MainWindow(Gtk.ApplicationWindow):
 
         for iter_ in iters:
             app.image_store.update(
-                iter_, jpeg_quality=round(adjustement.get_value())
+                iter_, resize_enabled=checkbutton.get_active()
             )
 
-    def _on_webp_quality_adjustement_value_changed(self, adjustement):
+        self.update_interface()
+
+    def _on_resize_width_adjustment_value_changed(self, adjustment):
         if self._updating_interface:
             return
 
@@ -373,7 +413,79 @@ class MainWindow(Gtk.ApplicationWindow):
 
         for iter_ in iters:
             app.image_store.update(
-                iter_, webp_quality=round(adjustement.get_value())
+                iter_, resize_width=round(adjustment.get_value())
+            )
+
+        self.update_interface()
+
+    def _on_resize_height_adjustment_value_changed(self, adjustment):
+        if self._updating_interface:
+            return
+
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(
+                iter_, resize_height=round(adjustment.get_value())
+            )
+
+        self.update_interface()
+
+    def _on_resize_reset_button_clicked(self, widget):
+        if self._updating_interface:
+            return
+
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(
+                iter_,
+                resize_width=app.image_store.get(iter_)["image_width"],
+                resize_height=app.image_store.get(iter_)["image_height"],
+            )
+
+        self.update_interface()
+
+    def _on_output_file_entry_changed(self, entry):
+        if self._updating_interface:
+            return
+
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+
+        if len(iters) != 1:
+            return
+
+        output_file = Path(entry.get_text())
+        app.image_store.update(
+            iters[0],
+            output_file=str(output_file.resolve()),
+        )
+
+    def _on_jpeg_quality_adjustement_value_changed(self, adjustment):
+        if self._updating_interface:
+            return
+
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(
+                iter_, jpeg_quality=round(adjustment.get_value())
+            )
+
+    def _on_webp_quality_adjustement_value_changed(self, adjustment):
+        if self._updating_interface:
+            return
+
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(
+                iter_, webp_quality=round(adjustment.get_value())
             )
 
     def _on_png_slow_optimization_checkbutton_toggled(self, checkbutton):

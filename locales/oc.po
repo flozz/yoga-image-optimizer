@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-09 13:21+0200\n"
+"POT-Creation-Date: 2021-07-14 15:04+0200\n"
 "PO-Revision-Date: 2021-06-22 22:46+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
@@ -50,37 +50,45 @@ msgstr "Optimizar"
 msgid "Stop"
 msgstr "Arrestar"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:267
+#: yoga_image_optimizer/data/ui/main-window.glade:282
 msgid "Output format"
 msgstr "Format de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:279
+#: yoga_image_optimizer/data/ui/main-window.glade:303
+msgid "Maximum size"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:375
+msgid "Reset values with the original image dimensions"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:403
 msgid "Output file"
 msgstr "Fichièr de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:318
+#: yoga_image_optimizer/data/ui/main-window.glade:430
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Imatge en sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:368
-#: yoga_image_optimizer/data/ui/main-window.glade:471
+#: yoga_image_optimizer/data/ui/main-window.glade:480
+#: yoga_image_optimizer/data/ui/main-window.glade:583
 msgid "Quality"
 msgstr "Qualitat"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:426
+#: yoga_image_optimizer/data/ui/main-window.glade:538
 msgid "JPEG Options"
 msgstr "Opcions JPEG"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:529
+#: yoga_image_optimizer/data/ui/main-window.glade:641
 msgid "WebP Options"
 msgstr "Opcions WebP"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:572
+#: yoga_image_optimizer/data/ui/main-window.glade:684
 msgid "Slow PNG optimization"
 msgstr "Optimizacion PNG lenta"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:592
+#: yoga_image_optimizer/data/ui/main-window.glade:704
 msgid "PNG Options"
 msgstr "Opcions PNG"
 
@@ -93,8 +101,9 @@ msgid ""
 "The number of threads determines the number of images that will be optimized "
 "at the same time. This value should not be higher than your CPU count."
 msgstr ""
-"Lo nombre de fils d’execucion determina lo nombre d’imatge que serà optimizat "
-"al meteis temps. Aquesta valor deu pas èsser superiora al compte de vòstre CPU."
+"Lo nombre de fils d’execucion determina lo nombre d’imatge que serà "
+"optimizat al meteis temps. Aquesta valor deu pas èsser superiora al compte "
+"de vòstre CPU."
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:87
 msgid "Optimization"
@@ -147,7 +156,7 @@ msgstr "Fichièrs imatge"
 msgid "All Files"
 msgstr "Totes los fichièrs"
 
-#: yoga_image_optimizer/main_window.py:181
+#: yoga_image_optimizer/main_window.py:235
 msgid "— Multiple files selected —"
 msgstr "— Mantun fichièr seleccionat —"
 
@@ -191,19 +200,19 @@ msgstr "Format de sortida"
 msgid "Status"
 msgstr "Estatut"
 
-#: yoga_image_optimizer/image_store.py:295
+#: yoga_image_optimizer/image_store.py:327
 msgid "Pending"
 msgstr "En espèra"
 
-#: yoga_image_optimizer/image_store.py:296
+#: yoga_image_optimizer/image_store.py:328
 msgid "In progress"
 msgstr "En cors"
 
-#: yoga_image_optimizer/image_store.py:297
+#: yoga_image_optimizer/image_store.py:329
 msgid "Done"
 msgstr "Acabat"
 
-#: yoga_image_optimizer/image_store.py:298
+#: yoga_image_optimizer/image_store.py:330
 msgid "Canceled"
 msgstr "Annulat"
 
