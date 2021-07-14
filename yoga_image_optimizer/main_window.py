@@ -213,6 +213,19 @@ class MainWindow(Gtk.ApplicationWindow):
         )
         resize_height_spinbutton.set_sensitive(resize_checkbutton.get_active())
 
+        resize_reset_button = self._builder.get_object("resize_reset_button")
+        if len(iters) > 1:
+            resize_reset_button.set_visible(True)
+        elif (
+            app.image_store.get(iters[0])["resize_width"]
+            != app.image_store.get(iters[0])["image_width"]
+            or app.image_store.get(iters[0])["resize_height"]
+            != app.image_store.get(iters[0])["image_height"]
+        ):
+            resize_reset_button.set_visible(True)
+        else:
+            resize_reset_button.set_visible(False)
+
         output_file_entry = self._builder.get_object("output_file_entry")
         if len(iters) == 1:
             output_file = app.image_store.get(iters[0])["output_file"]
@@ -403,6 +416,8 @@ class MainWindow(Gtk.ApplicationWindow):
                 iter_, resize_width=round(adjustment.get_value())
             )
 
+        self.update_interface()
+
     def _on_resize_height_adjustment_value_changed(self, adjustment):
         if self._updating_interface:
             return
@@ -414,6 +429,24 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.update(
                 iter_, resize_height=round(adjustment.get_value())
             )
+
+        self.update_interface()
+
+    def _on_resize_reset_button_clicked(self, widget):
+        if self._updating_interface:
+            return
+
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(
+                iter_,
+                resize_width=app.image_store.get(iter_)["image_width"],
+                resize_height=app.image_store.get(iter_)["image_height"],
+            )
+
+        self.update_interface()
 
     def _on_output_file_entry_changed(self, entry):
         if self._updating_interface:
