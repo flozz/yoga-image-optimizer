@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-09 13:21+0200\n"
+"POT-Creation-Date: 2021-07-14 15:04+0200\n"
 "PO-Revision-Date: 2021-06-20 10:40+0200\n"
 "Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language-Team: ITALIAN <LL@li.org>\n"
@@ -49,37 +49,45 @@ msgstr "Ottimizza"
 msgid "Stop"
 msgstr "Ferma"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:267
+#: yoga_image_optimizer/data/ui/main-window.glade:282
 msgid "Output format"
 msgstr "Formato di output"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:279
+#: yoga_image_optimizer/data/ui/main-window.glade:303
+msgid "Maximum size"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:375
+msgid "Reset values with the original image dimensions"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:403
 msgid "Output file"
 msgstr "File di output"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:318
+#: yoga_image_optimizer/data/ui/main-window.glade:430
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Immagine Output"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:368
-#: yoga_image_optimizer/data/ui/main-window.glade:471
+#: yoga_image_optimizer/data/ui/main-window.glade:480
+#: yoga_image_optimizer/data/ui/main-window.glade:583
 msgid "Quality"
 msgstr "Qualità"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:426
+#: yoga_image_optimizer/data/ui/main-window.glade:538
 msgid "JPEG Options"
 msgstr "Opzioni JPEG"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:529
+#: yoga_image_optimizer/data/ui/main-window.glade:641
 msgid "WebP Options"
 msgstr "Opzioni WebP"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:572
+#: yoga_image_optimizer/data/ui/main-window.glade:684
 msgid "Slow PNG optimization"
 msgstr "Ottimizzazione PNG lenta"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:592
+#: yoga_image_optimizer/data/ui/main-window.glade:704
 msgid "PNG Options"
 msgstr "Opzioni PNG"
 
@@ -144,7 +152,7 @@ msgstr "File Immagine"
 msgid "All Files"
 msgstr "Tutti i File"
 
-#: yoga_image_optimizer/main_window.py:181
+#: yoga_image_optimizer/main_window.py:235
 msgid "— Multiple files selected —"
 msgstr ""
 
@@ -188,19 +196,19 @@ msgstr "Formato di uscita"
 msgid "Status"
 msgstr "Sato"
 
-#: yoga_image_optimizer/image_store.py:295
+#: yoga_image_optimizer/image_store.py:327
 msgid "Pending"
 msgstr "Sospeso"
 
-#: yoga_image_optimizer/image_store.py:296
+#: yoga_image_optimizer/image_store.py:328
 msgid "In progress"
 msgstr "In corso"
 
-#: yoga_image_optimizer/image_store.py:297
+#: yoga_image_optimizer/image_store.py:329
 msgid "Done"
 msgstr "Fatto"
 
-#: yoga_image_optimizer/image_store.py:298
+#: yoga_image_optimizer/image_store.py:330
 msgid "Canceled"
 msgstr "Annullato"
 
