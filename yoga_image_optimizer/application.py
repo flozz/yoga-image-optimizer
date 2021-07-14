@@ -165,8 +165,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
             input_format=input_format,
             output_format=output_format,
             preview=helpers.preview_gdk_pixbuf_from_image(image),
-            resize_width=image.width,
-            resize_height=image.height,
+            image_width=image.width,
+            image_height=image.height,
         )
 
         image.close()
