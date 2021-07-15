@@ -28,18 +28,21 @@ cd -
 cd yoga-image-optimizer.dist/gtk/share/icons/
 mkdir -p Adwaita.keep/scalable/actions
 mkdir -p Adwaita.keep/scalable/ui
+mkdir -p Adwaita.keep/scalable/status
 for icon in actions/list-add-symbolic \
             actions/list-remove-symbolic \
             actions/value-increase-symbolic \
             actions/value-decrease-symbolic \
             actions/edit-delete-symbolic \
             actions/open-menu-symbolic \
+            actions/edit-undo-symbolic \
             ui/window-close-symbolic \
             ui/window-maximize-symbolic \
             ui/window-minimize-symbolic \
             ui/window-restore-symbolic \
             ui/pan-up-symbolic \
-            ui/pan-down-symbolic
+            ui/pan-down-symbolic \
+            status/dialog-question-symbolic
 do
     mv Adwaita/scalable/$icon.svg Adwaita.keep/scalable/$icon.svg
 done
@@ -51,7 +54,7 @@ cd -
 # Keep only supported locales
 cd yoga-image-optimizer.dist/gtk/share/
 mkdir -p locale.keep
-for l10n in fr en tr
+for l10n in fr en it oc tr
 do
     mv locale/$l10n locale.keep/$l0n
 done

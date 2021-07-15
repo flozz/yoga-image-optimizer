@@ -54,7 +54,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="tooltip-text" translatable="yes">The number of threads determines the number of images that will be optimized at the same time. This value should not be higher than your CPU count.</property>
-                    <property name="icon-name">help</property>
+                    <property name="icon-name">dialog-question-symbolic</property>
                   </object>
                   <packing>
                     <property name="left-attach">2</property>
