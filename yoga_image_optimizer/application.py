@@ -212,7 +212,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 )
             )
 
-        self._update_optimization_status()
+        self._update_optimization_status(first_update=True)
 
     def stop_optimization(self):
         if self.current_state != self.STATE_OPTIMIZE:
@@ -231,11 +231,11 @@ class YogaImageOptimizerApplication(Gtk.Application):
                     i, status=self.image_store.STATUS_CANCELED
                 )
 
-    def _update_optimization_status(self):
+    def _update_optimization_status(self, first_update=False):
         if self.current_state != self.STATE_OPTIMIZE:
             return
 
-        is_running = False
+        is_running = first_update
 
         for i in range(len(self._futures)):
             future = self._futures[i]
