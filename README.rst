@@ -211,6 +211,7 @@ Changelog
   * Multiple files can now be selected and their parameters can be edited all
     at once
   * Allow to resize images (downscale only, preserve ratio)
+  * Do not optimize again images that have already been optimized
 
 * **v1.0.1:**
 
