@@ -188,6 +188,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._futures = []
 
         for row in self.image_store.get_all():
+            if row["status"] == ImageStore.STATUS_DONE:
+                # Skip already optimized images
+                self._futures.append(None)
+                continue
             self._futures.append(
                 self._executor.submit(
                     yoga.image.optimize,
@@ -235,6 +239,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
         for i in range(len(self._futures)):
             future = self._futures[i]
+
+            if future is None:
+                continue
 
             if future.running():
                 self.image_store.update(
