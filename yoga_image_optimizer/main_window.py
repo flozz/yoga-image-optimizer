@@ -387,6 +387,7 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
         for iter_ in iters:
             app.image_store.update(iter_, output_format=output_format)
+            app.image_store.reset_status(iter_)
 
         self.update_interface()
 
@@ -401,6 +402,7 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.update(
                 iter_, resize_enabled=checkbutton.get_active()
             )
+            app.image_store.reset_status(iter_)
 
         self.update_interface()
 
@@ -415,6 +417,7 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.update(
                 iter_, resize_width=round(adjustment.get_value())
             )
+            app.image_store.reset_status(iter_)
 
         self.update_interface()
 
@@ -429,6 +432,7 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.update(
                 iter_, resize_height=round(adjustment.get_value())
             )
+            app.image_store.reset_status(iter_)
 
         self.update_interface()
 
@@ -445,6 +449,7 @@ class MainWindow(Gtk.ApplicationWindow):
                 resize_width=app.image_store.get(iter_)["image_width"],
                 resize_height=app.image_store.get(iter_)["image_height"],
             )
+            app.image_store.reset_status(iter_)
 
         self.update_interface()
 
@@ -463,6 +468,7 @@ class MainWindow(Gtk.ApplicationWindow):
             iters[0],
             output_file=str(output_file.resolve()),
         )
+        app.image_store.reset_status(iters[0])
 
     def _on_jpeg_quality_adjustement_value_changed(self, adjustment):
         if self._updating_interface:
@@ -475,6 +481,7 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.update(
                 iter_, jpeg_quality=round(adjustment.get_value())
             )
+            app.image_store.reset_status(iter_)
 
     def _on_webp_quality_adjustement_value_changed(self, adjustment):
         if self._updating_interface:
@@ -487,6 +494,7 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.update(
                 iter_, webp_quality=round(adjustment.get_value())
             )
+            app.image_store.reset_status(iter_)
 
     def _on_png_slow_optimization_checkbutton_toggled(self, checkbutton):
         if self._updating_interface:
@@ -499,6 +507,7 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.update(
                 iter_, png_slow_optimization=checkbutton.get_active()
             )
+            app.image_store.reset_status(iter_)
 
         self.update_interface()
 

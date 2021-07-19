@@ -335,6 +335,37 @@ class ImageStore(object):
                 _STATUS[self.get(index)["status"]],
             )
 
+    def reset_status(self, index):
+        """Reset the status of the image at given index.
+
+        :param int,gtk.TreeIter index: The index of the row.
+
+        >>> image_store = ImageStore()
+        >>> image_store.append(
+        ...     status=ImageStore.STATUS_DONE,
+        ...     input_size=1024,
+        ...     output_size=1024,
+        ... )
+        >>> image_store.get(0)["status"]
+        3
+        >>> image_store.get(0)["output_size"]
+        1024
+        >>> image_store.get(0)["output_size_display"]
+        '1...'
+        >>> image_store.reset_status(0)
+        >>> image_store.get(0)["status"]
+        0
+        >>> image_store.get(0)["output_size"]
+        0
+        >>> image_store.get(0)["output_size_display"]
+        ''
+        """
+        self.update(
+            index,
+            status=ImageStore.STATUS_NONE,
+            output_size=0,
+        )
+
     def _update_field(self, index, field_name, value):
         row = self.gtk_list_store[index]
         row[self.FIELDS[field_name]["id"]] = value
