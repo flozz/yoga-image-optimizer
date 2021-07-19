@@ -127,6 +127,8 @@ def list_gtk_themes():
             if (
                 not (theme_dir / "gtk-3.0" / "gtk.css").exists()
                 and not (theme_dir / "gtk-3.0" / "gtk-dark.css").exists()
+                and not (theme_dir / "gtk-3.20" / "gtk.css").exists()
+                and not (theme_dir / "gtk-3.20" / "gtk-dark.css").exists()
             ):
                 continue
             fs_themes.append(theme_dir.as_posix().split("/")[-1])
