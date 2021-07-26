@@ -192,6 +192,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 # Skip already optimized images
                 self._futures.append(None)
                 continue
+            if not Path(row["output_file"]).parent.is_dir():
+                Path(row["output_file"]).parent.mkdir(parents=True)
             self._futures.append(
                 self._executor.submit(
                     yoga.image.optimize,
