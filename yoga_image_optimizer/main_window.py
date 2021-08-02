@@ -469,6 +469,7 @@ class MainWindow(Gtk.ApplicationWindow):
         app.image_store.update(
             iters[0],
             output_file=str(output_file.resolve()),
+            use_output_pattern=False,
         )
         app.image_store.reset_status(iters[0])
 

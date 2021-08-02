@@ -37,6 +37,8 @@ class ImageStore(object):
         "resize_enabled":        {"id": 20, "label": "",                 "type": bool,             "default": False},
         "resize_width":          {"id": 21, "label": "",                 "type": int,              "default": 1},
         "resize_height":         {"id": 22, "label": "",                 "type": int,              "default": 1},
+        "output_pattern":        {"id": 23, "label": "",                 "type": str,              "default": ""},
+        "use_output_pattern":    {"id": 24, "label": "",                 "type": bool,             "default": True},
     }
     # fmt: on
 
@@ -191,6 +193,10 @@ class ImageStore(object):
             ...
         IndexError: ...
         """
+        _FORMATS_EXTS = {
+            fid: fmt["exts"][0] for fid, fmt in IMAGES_FORMATS.items()
+        }
+
         for key in kwargs:
             if key not in self.FIELDS:
                 raise KeyError("Invalid field '%s'" % key)
@@ -212,10 +218,6 @@ class ImageStore(object):
             or "webp_quality" in kwargs
             or "png_slow_optimization" in kwargs
         ):
-            _FORMATS_EXTS = {
-                fid: fmt["exts"][0] for fid, fmt in IMAGES_FORMATS.items()
-            }
-
             output_format = self.get(index)["output_format"]
 
             if output_format == "jpeg":
@@ -245,12 +247,33 @@ class ImageStore(object):
                     IMAGES_FORMATS[output_format]["display_name"],
                 )
 
-            output_file = Path(self.get(index)["output_file"])
-
+        if (
+            "input_file" in kwargs
+            or "output_file" in kwargs
+            or "output_format" in kwargs
+            or "output_pattern" in kwargs
+            or "use_output_pattern" in kwargs
+        ):
+            output_pattern = self.get(index)["output_pattern"]
+            output_format = self.get(index)["output_format"]
+            output_ext = _FORMATS_EXTS[output_format]
+            input_file = Path(self.get(index)["input_file"])
+            filename_without_ext = str(input_file.name)[
+                : -len(input_file.suffix)
+            ]
+            if self.get(index)["use_output_pattern"]:
+                # fmt: off
+                output_file = input_file.parent / output_pattern \
+                    .replace("{FILENAME}", filename_without_ext) \
+                    .replace("{EXT}", output_ext[1:])
+                # fmt: on
+            else:
+                # Simply swap extension on custom paths
+                output_file = Path(self.get(index)["output_file"]).with_suffix(
+                    output_ext
+                )
             self._update_field(
-                index,
-                "output_file",
-                str(output_file.with_suffix(_FORMATS_EXTS[output_format])),
+                index, "output_file", str(output_file.resolve())
             )
 
         if "image_width" in kwargs:
@@ -265,6 +288,8 @@ class ImageStore(object):
             or "resize_enabled" in kwargs
             or "resize_width" in kwargs
             or "resize_height" in kwargs
+            or "output_pattern" in kwargs
+            or "use_output_pattern" in kwargs
         ):
             output_file = Path(self.get(index)["output_file"])
             input_file = Path(self.get(index)["input_file"])

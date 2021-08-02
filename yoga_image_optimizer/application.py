@@ -155,11 +155,20 @@ class YogaImageOptimizerApplication(Gtk.Application):
         if not IMAGES_FORMATS[input_format]["output"]:
             output_format = "jpeg"
 
+        active_pattern = self.config.get("output", "active-pattern")
+        if active_pattern in config.DEFAULT_OUTPUT_PATTERNS:
+            output_pattern = config.DEFAULT_OUTPUT_PATTERNS[active_pattern]
+        elif active_pattern == config.OUTPUT_PATTERN_CUSTOM:
+            output_pattern = self.config.get("output", "custom-pattern")
+        else:
+            output_pattern = config.DEFAULT_OUTPUT_PATTERNS[
+                config.OUTPUT_PATTERN_NEXT_TO_FILE
+            ]
+
         image = helpers.open_image_from_path(str(input_path))
 
         self.image_store.append(
             input_file=str(input_path),
-            output_file=helpers.add_suffix_to_filename(str(input_path)),
             input_size=input_size,
             output_size=0,
             input_format=input_format,
@@ -167,6 +176,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
             preview=helpers.preview_gdk_pixbuf_from_image(image),
             image_width=image.width,
             image_height=image.height,
+            use_output_pattern=True,
+            output_pattern=output_pattern,
         )
 
         image.close()
