@@ -23,7 +23,7 @@ class ImageStore(object):
         "input_size_display":    {"id":  6, "label": _("Input Size"),    "type": str,              "default": ""},
         "output_size_display":   {"id":  7, "label": _("Output Size"),   "type": str,              "default": ""},
         "input_format":          {"id":  8, "label": _("Input Format"),  "type": str,              "default": ""},
-        "output_format":         {"id":  9, "label": "",                 "type": str,              "default": ""},
+        "output_format":         {"id":  9, "label": "",                 "type": str,              "default": "jpeg"},
         "output_format_display": {"id": 10, "label": _("Output Format"), "type": str,              "default": ""},
         "preview":               {"id": 11, "label": "",                 "type": GdkPixbuf.Pixbuf, "default": None},
         "separator":             {"id": 12, "label": "",                 "type": str,              "default": "➡️"},
@@ -178,12 +178,16 @@ class ImageStore(object):
         :param **kwargs: The columns key/value of the row.
 
         >>> image_store = ImageStore()
-        >>> image_store.append(output_file="aaa.png")
+        >>> image_store.append(
+        ...     output_format="png",
+        ...     output_file="aaa.png",
+        ...     use_output_pattern=False,
+        ... )
         >>> image_store.get(0)["output_file"]
-        'aaa.png'
+        '...aaa.png'
         >>> image_store.update(0, output_file="bbb.png")
         >>> image_store.get(0)["output_file"]
-        'bbb.png'
+        '...bbb.png'
         >>> image_store.update(0, foo="bar")
         Traceback (most recent call last):
             ...
