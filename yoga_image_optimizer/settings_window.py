@@ -18,7 +18,7 @@ class SettingsWindow(Gtk.Window):
             icon=GdkPixbuf.Pixbuf.new_from_file(
                 data_helpers.find_data_path("images/icon_64.png")
             ),
-            resizable=False,
+            default_width=450,
         )
 
         self._config = config
@@ -74,6 +74,33 @@ class SettingsWindow(Gtk.Window):
             )
         )
 
+        # Output file / Output files location
+        output_pattern_radiobuttons = {
+            "next-to-file": self._builder.get_object(
+                "output_pattern_next_to_file_radiobutton"
+            ),
+            "subfolder": self._builder.get_object(
+                "output_pattern_subfolder_radiobutton"
+            ),
+            "custom": self._builder.get_object(
+                "output_pattern_custom_radiobutton"
+            ),
+        }
+        output_pattern_radiobuttons[
+            self._config.get("output", "active-pattern")
+        ].set_active(True)
+
+        output_pattern_custom_entry = self._builder.get_object(
+            "output_pattern_custom_entry"
+        )
+        output_pattern_custom_entry.set_text(
+            self._config.get("output", "custom-pattern")
+        )
+
+        output_pattern_custom_entry.set_sensitive(
+            self._config.get("output", "active-pattern") == "custom"
+        )
+
     def _prepare_theme_combobox(self):
         theme_combobox = self._builder.get_object("theme_combobox")
 
@@ -95,6 +122,36 @@ class SettingsWindow(Gtk.Window):
             "interface", "gtk-application-prefer-dark-theme", str(state)
         )
         gtk_themes_helpers.set_gtk_application_prefer_dark_theme(state)
+
+    def _on_output_pattern_next_to_file_radiobutton_toggled(self, widget):
+        if not widget.get_active():
+            return
+        self._config.set("output", "active-pattern", "next-to-file")
+        output_pattern_custom_entry = self._builder.get_object(
+            "output_pattern_custom_entry"
+        )
+        output_pattern_custom_entry.set_sensitive(False)
+
+    def _on_output_pattern_subfolder_radiobutton_toggled(self, widget):
+        if not widget.get_active():
+            return
+        self._config.set("output", "active-pattern", "subfolder")
+        output_pattern_custom_entry = self._builder.get_object(
+            "output_pattern_custom_entry"
+        )
+        output_pattern_custom_entry.set_sensitive(False)
+
+    def _on_output_pattern_custom_radiobutton_toggled(self, widget):
+        if not widget.get_active():
+            return
+        self._config.set("output", "active-pattern", "custom")
+        output_pattern_custom_entry = self._builder.get_object(
+            "output_pattern_custom_entry"
+        )
+        output_pattern_custom_entry.set_sensitive(True)
+
+    def _on_output_pattern_custom_entry_changed(self, widget):
+        self._config.set("output", "custom-pattern", widget.get_text())
 
     def _on_settings_windows_destroyed(self, widget):
         save_config(self._config)
