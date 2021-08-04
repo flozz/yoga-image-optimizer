@@ -19,6 +19,8 @@ class CustomPatternDialog(object):
         self._entry = self._builder.get_object("custom_pattern_entry")
         self._entry.set_text(initial_pattern)
 
+        self._dialog.set_transient_for(parent_window)
+
     def run(self):
         self._dialog.run()
         return self._custom_pattern

@@ -125,7 +125,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
             self._settings_window = None
 
         if not self._settings_window:
-            self._settings_window = SettingsWindow(self.config)
+            self._settings_window = SettingsWindow(
+                self.config, parent_window=self._main_window
+            )
             self._settings_window.connect(
                 "destroy", _on_settings_window_destroyed
             )

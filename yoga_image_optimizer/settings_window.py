@@ -11,7 +11,7 @@ from .config import save_config
 
 
 class SettingsWindow(Gtk.Window):
-    def __init__(self, config):
+    def __init__(self, config, parent_window=None):
         Gtk.Window.__init__(
             self,
             title="%s - %s" % (_("Settings"), APPLICATION_NAME),
@@ -19,7 +19,10 @@ class SettingsWindow(Gtk.Window):
                 data_helpers.find_data_path("images/icon_64.png")
             ),
             default_width=450,
+            modal=True,
         )
+        self.set_transient_for(parent_window)
+        self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
 
         self._config = config
 
