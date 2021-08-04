@@ -270,7 +270,7 @@
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="tooltip-markup" translatable="yes">In the pattern, you can use the following variables:
+                    <property name="tooltip-markup" translatable="yes" comments="DO NOT translate &quot;{FILENAME}&quot; and &quot;{EXT}&quot;">In the pattern, you can use the following variables:
 ・ &lt;b&gt;{FILENAME}&lt;/b&gt; - the name of the input file without the extension
 ・ &lt;b&gt;{EXT}&lt;/b&gt; - the extension of the output file (depending of the selected output format)</property>
                     <property name="icon-name">dialog-question-symbolic</property>

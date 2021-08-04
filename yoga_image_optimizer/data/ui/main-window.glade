@@ -230,9 +230,11 @@
         </child>
         <child>
           <object class="GtkModelButton" id="output_pattern_custom_modelbutton">
+            <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="text" translatable="yes">Custom pattern...</property>
+            <signal name="clicked" handler="_on_output_pattern_custom_modelbutton_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>

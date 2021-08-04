@@ -11,6 +11,7 @@ from .image_formats import get_supported_output_format_ids
 from .image_formats import get_supported_output_format_names
 from .translation import gtk_builder_translation_hack
 from .translation import gettext as _
+from .custom_pattern_dialog import CustomPatternDialog
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -486,6 +487,12 @@ class MainWindow(Gtk.ApplicationWindow):
             )
             app.image_store.reset_status(iter_)
 
+        if len(iters) == 1:
+            output_file_entry = self._builder.get_object("output_file_entry")
+            output_file_entry.set_text(
+                app.image_store.get(iters[0])["output_file"]
+            )
+
     def _on_output_pattern_subfolder_modelbutton_clicked(self, widget):
         app = self.get_application()
         iters = self.get_selected_image_iters()
@@ -497,6 +504,40 @@ class MainWindow(Gtk.ApplicationWindow):
                 use_output_pattern=True,
             )
             app.image_store.reset_status(iter_)
+
+        if len(iters) == 1:
+            output_file_entry = self._builder.get_object("output_file_entry")
+            output_file_entry.set_text(
+                app.image_store.get(iters[0])["output_file"]
+            )
+
+    def _on_output_pattern_custom_modelbutton_clicked(self, widget):
+        app = self.get_application()
+
+        custom_pattern_dialog = CustomPatternDialog(
+            initial_pattern=app.config.get("output", "custom-pattern"),
+            parent_window=self,
+        )
+        custom_pattern = custom_pattern_dialog.run()
+
+        if not custom_pattern:
+            return
+
+        iters = self.get_selected_image_iters()
+
+        for iter_ in iters:
+            app.image_store.update(
+                iter_,
+                output_pattern=custom_pattern,
+                use_output_pattern=True,
+            )
+            app.image_store.reset_status(iter_)
+
+        if len(iters) == 1:
+            output_file_entry = self._builder.get_object("output_file_entry")
+            output_file_entry.set_text(
+                app.image_store.get(iters[0])["output_file"]
+            )
 
     def _on_jpeg_quality_adjustement_value_changed(self, adjustment):
         if self._updating_interface:
