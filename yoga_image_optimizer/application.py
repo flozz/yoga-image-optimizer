@@ -16,7 +16,7 @@ from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .settings_window import SettingsWindow
 from .image_store import ImageStore
-from .file_chooser import open_file_chooser
+from .file_chooser import open_file_chooser_open_file
 from .stoppable_process_pool_executor import StoppableProcessPoolExecutor
 
 
@@ -188,7 +188,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self.image_store.clear()
 
     def open_file(self):
-        filenames = open_file_chooser(parent=self._main_window)
+        filenames = open_file_chooser_open_file(parent=self._main_window)
         for filename in filenames:
             self.add_image(filename)
 

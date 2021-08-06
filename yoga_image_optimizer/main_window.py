@@ -12,6 +12,7 @@ from .image_formats import get_supported_output_format_names
 from .translation import gtk_builder_translation_hack
 from .translation import gettext as _
 from .custom_pattern_dialog import CustomPatternDialog
+from .file_chooser import open_file_chooser_save_file
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -240,6 +241,11 @@ class MainWindow(Gtk.ApplicationWindow):
             output_file_entry.set_sensitive(False)
 
         output_image_options.show()
+
+        output_path_browse_modelbutton = self._builder.get_object(
+            "output_path_browse_modelbutton"
+        )
+        output_path_browse_modelbutton.set_sensitive(len(iters) == 1)
 
         # [JPEG] Update and show jpeg options
         if output_format == "jpeg":
@@ -537,6 +543,26 @@ class MainWindow(Gtk.ApplicationWindow):
             output_file_entry = self._builder.get_object("output_file_entry")
             output_file_entry.set_text(
                 app.image_store.get(iters[0])["output_file"]
+            )
+
+    def _on_output_path_browse_modelbutton_clicked(self, widget):
+        app = self.get_application()
+        iter_ = self.get_selected_image_iters()[0]
+
+        filename = open_file_chooser_save_file(
+            filename=app.image_store.get(iter_)["output_file"],
+            parent=self,
+        )
+
+        if filename:
+            app.image_store.update(
+                iter_,
+                output_file=filename,
+                use_output_pattern=False,
+            )
+            output_file_entry = self._builder.get_object("output_file_entry")
+            output_file_entry.set_text(
+                app.image_store.get(iter_)["output_file"]
             )
 
     def _on_jpeg_quality_adjustement_value_changed(self, adjustment):
