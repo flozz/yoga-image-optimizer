@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from PIL import Image
 from gi.repository import GLib
 from gi.repository import Gio
@@ -54,27 +52,6 @@ def gvfs_uri_to_local_path(uri):
     """
     gvfs = Gio.Vfs.get_default()
     return gvfs.get_file_for_uri(uri).get_path()
-
-
-def add_suffix_to_filename(path, suffix="opti"):
-    """Adds a suffix to the file name (just before the file extension).
-
-    :param str path: The input path.
-    :param str suffix: The suffix to add (optional, default: ``"opti"``).
-
-    :returns: The output path.
-    :rtype: str
-
-    >>> add_suffix_to_filename("hello.jpg")
-    'hello.opti.jpg'
-    >>> add_suffix_to_filename("/tmp/filename.ext")
-    '/tmp/filename.opti.ext'
-    >>> add_suffix_to_filename("hello.jpg", suffix="foo")
-    'hello.foo.jpg'
-    """
-    input_path = Path(path)
-    output_path = input_path.with_suffix(".%s%s" % (suffix, input_path.suffix))
-    return str(output_path)
 
 
 def open_image_from_path(path):

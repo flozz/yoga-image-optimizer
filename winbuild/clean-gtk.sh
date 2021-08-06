@@ -36,6 +36,7 @@ for icon in actions/list-add-symbolic \
             actions/edit-delete-symbolic \
             actions/open-menu-symbolic \
             actions/edit-undo-symbolic \
+            actions/view-more-symbolic \
             ui/window-close-symbolic \
             ui/window-maximize-symbolic \
             ui/window-minimize-symbolic \

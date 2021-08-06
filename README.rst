@@ -202,6 +202,7 @@ Changelog
 
     * Theme selection / dark theme preference
     * Number of threads used to optimize images
+    * Setting the default output locations / name or pattern of output files
 
   * The "Stop" button now stops the running optimizations and not only the
     pending ones
@@ -212,6 +213,9 @@ Changelog
     at once
   * Allow to resize images (downscale only, preserve ratio)
   * Do not optimize again images that have already been optimized
+  * Allow to "mass update" the output file locations and names (next to the
+    input files, in a subfolder or using a custom pattern)
+  * Allow browsing for the output file location using a file chooser dialog
 
 * **v1.0.1:**
 

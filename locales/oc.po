@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-14 15:04+0200\n"
+"POT-Creation-Date: 2021-08-06 14:25+0200\n"
 "PO-Revision-Date: 2021-06-22 22:46+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
@@ -50,47 +50,93 @@ msgstr "Optimizar"
 msgid "Stop"
 msgstr "Arrestar"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:282
+#. Do not translate the '.opti.png' part of the example file name, it is not localized
+#: yoga_image_optimizer/data/ui/main-window.glade:208
+#: yoga_image_optimizer/data/ui/settings-window.glade:208
+msgid "Next to the input file (→ image.opti.png)"
+msgstr ""
+
+#. Do not translate the 'optimized/' part of the example file path, it is not localized
+#: yoga_image_optimizer/data/ui/main-window.glade:222
+#: yoga_image_optimizer/data/ui/settings-window.glade:224
+msgid "In a subfolder (→ optimized/image.png)"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:236
+msgid "Custom pattern..."
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:250
+msgid "Browse..."
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:352
 msgid "Output format"
 msgstr "Format de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:303
+#: yoga_image_optimizer/data/ui/main-window.glade:373
 msgid "Maximum size"
 msgstr ""
 
-#: yoga_image_optimizer/data/ui/main-window.glade:375
+#: yoga_image_optimizer/data/ui/main-window.glade:445
 msgid "Reset values with the original image dimensions"
 msgstr ""
 
-#: yoga_image_optimizer/data/ui/main-window.glade:403
+#: yoga_image_optimizer/data/ui/main-window.glade:473
 msgid "Output file"
 msgstr "Fichièr de sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:430
+#: yoga_image_optimizer/data/ui/main-window.glade:534
 #: yoga_image_optimizer/image_store.py:20
 msgid "Output Image"
 msgstr "Imatge en sortida"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:480
-#: yoga_image_optimizer/data/ui/main-window.glade:583
+#: yoga_image_optimizer/data/ui/main-window.glade:584
+#: yoga_image_optimizer/data/ui/main-window.glade:687
 msgid "Quality"
 msgstr "Qualitat"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:538
+#: yoga_image_optimizer/data/ui/main-window.glade:642
 msgid "JPEG Options"
 msgstr "Opcions JPEG"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:641
+#: yoga_image_optimizer/data/ui/main-window.glade:745
 msgid "WebP Options"
 msgstr "Opcions WebP"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:684
+#: yoga_image_optimizer/data/ui/main-window.glade:788
 msgid "Slow PNG optimization"
 msgstr "Optimizacion PNG lenta"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:704
+#: yoga_image_optimizer/data/ui/main-window.glade:808
 msgid "PNG Options"
 msgstr "Opcions PNG"
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
+msgid "Custom Pattern"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:29
+msgid "Cancel"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:43
+msgid "Apply"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:74
+msgid "Custom pattern"
+msgstr ""
+
+#. DO NOT translate "{FILENAME}" and "{EXT}"
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:98
+#: yoga_image_optimizer/data/ui/settings-window.glade:273
+msgid ""
+"In the pattern, you can use the following variables:\n"
+"・ <b>{FILENAME}</b> - the name of the input file without the extension\n"
+"・ <b>{EXT}</b> - the extension of the output file (depending of the "
+"selected output format)"
+msgstr ""
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:45
 msgid "Number of threads"
@@ -121,7 +167,15 @@ msgstr "Tèma"
 msgid "Interface"
 msgstr "Interfàcia"
 
-#: yoga_image_optimizer/data/ui/settings-window.glade:194
+#: yoga_image_optimizer/data/ui/settings-window.glade:241
+msgid "Custom pattern:"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:300
+msgid "Default output files location"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:320
 msgid "Close"
 msgstr "Tampar"
 
@@ -141,38 +195,41 @@ msgstr "Icòna MacOS (ICNS)"
 msgid "Windows Icon (ICO)"
 msgstr "Icòna Windows (ICO)"
 
-#: yoga_image_optimizer/file_chooser.py:12
-#: yoga_image_optimizer/file_chooser.py:39
-msgid "Open Images..."
-msgstr "Dobrir d'imatges..."
-
-#: yoga_image_optimizer/file_chooser.py:24
-#: yoga_image_optimizer/file_chooser.py:45
+#: yoga_image_optimizer/file_chooser.py:13
 msgid "Image Files"
 msgstr "Fichièrs imatge"
 
-#: yoga_image_optimizer/file_chooser.py:30
-#: yoga_image_optimizer/file_chooser.py:51
+#: yoga_image_optimizer/file_chooser.py:22
 msgid "All Files"
 msgstr "Totes los fichièrs"
 
-#: yoga_image_optimizer/main_window.py:235
+#: yoga_image_optimizer/file_chooser.py:30
+#: yoga_image_optimizer/file_chooser.py:72
+msgid "Open Images..."
+msgstr "Dobrir d'imatges..."
+
+#: yoga_image_optimizer/file_chooser.py:49
+#: yoga_image_optimizer/file_chooser.py:84
+msgid "Save Image As..."
+msgstr ""
+
+#: yoga_image_optimizer/main_window.py:240
 msgid "— Multiple files selected —"
 msgstr "— Mantun fichièr seleccionat —"
 
-#: yoga_image_optimizer/helpers.py:34
+#: yoga_image_optimizer/helpers.py:32
 msgid "Bytes"
 msgstr "Octets"
 
-#: yoga_image_optimizer/helpers.py:36
+#: yoga_image_optimizer/helpers.py:34
 msgid "kiB"
 msgstr "ko"
 
-#: yoga_image_optimizer/helpers.py:37
+#: yoga_image_optimizer/helpers.py:35
 msgid "MiB"
 msgstr "Mo"
 
-#: yoga_image_optimizer/helpers.py:38
+#: yoga_image_optimizer/helpers.py:36
 msgid "GiB"
 msgstr "Go"
 
@@ -200,19 +257,19 @@ msgstr "Format de sortida"
 msgid "Status"
 msgstr "Estatut"
 
-#: yoga_image_optimizer/image_store.py:327
+#: yoga_image_optimizer/image_store.py:356
 msgid "Pending"
 msgstr "En espèra"
 
-#: yoga_image_optimizer/image_store.py:328
+#: yoga_image_optimizer/image_store.py:357
 msgid "In progress"
 msgstr "En cors"
 
-#: yoga_image_optimizer/image_store.py:329
+#: yoga_image_optimizer/image_store.py:358
 msgid "Done"
 msgstr "Acabat"
 
-#: yoga_image_optimizer/image_store.py:330
+#: yoga_image_optimizer/image_store.py:359
 msgid "Canceled"
 msgstr "Annulat"
 

@@ -6,6 +6,14 @@ from configparser import ConfigParser
 from . import APPLICATION_ID
 
 
+OUTPUT_PATTERN_NEXT_TO_FILE = "next-to-file"
+OUTPUT_PATTERN_SUBFOLDER = "subfolder"
+OUTPUT_PATTERN_CUSTOM = "custom"
+DEFAULT_OUTPUT_PATTERNS = {
+    "next-to-file": "{FILENAME}.opti.{EXT}",
+    "subfolder": "optimized/{FILENAME}.{EXT}",
+}
+
 DEFAULT = {
     "optimization": {
         "threads": 2,
@@ -13,6 +21,10 @@ DEFAULT = {
     "interface": {
         "gtk-theme-name": "default",
         "gtk-application-prefer-dark-theme": False,
+    },
+    "output": {
+        "active-pattern": OUTPUT_PATTERN_NEXT_TO_FILE,
+        "custom-pattern": "optimized/{EXT}/example_{FILENAME}.{EXT}",
     },
 }
 
