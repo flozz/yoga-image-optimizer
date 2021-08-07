@@ -74,11 +74,9 @@ def preview_gdk_pixbuf_from_image(image, size=64):
 
     :rtype: GdkPixbuf.Pixbuff
     """
-    thumb = image.copy()
-    thumb.thumbnail([size, size], Image.LANCZOS)
-
-    image_rgba = Image.new("RGBA", thumb.size)
-    image_rgba.paste(thumb)
+    image_rgba = Image.new("RGBA", image.size)
+    image_rgba.paste(image)
+    image_rgba.thumbnail([size, size], Image.LANCZOS)
 
     # fmt: off
     pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
@@ -91,7 +89,6 @@ def preview_gdk_pixbuf_from_image(image, size=64):
     )
     # fmt: on
 
-    thumb.close()
     image_rgba.close()
 
     return pixbuf
