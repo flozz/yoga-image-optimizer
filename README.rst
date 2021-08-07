@@ -119,11 +119,9 @@ Please note that your code must pass tests and follow the coding style defined b
 Translating YOGA Image Optimizer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the software is not available in your language, you can help translating it. To translate YOGA Image Optimizer, you can use the Launchpad translation web interface here:
+If the software is not available in your language, you can help translating it.
 
-* https://translations.launchpad.net/yoga-image-optimizer/
-
-Of course, you can also submit your translations using a Pull Request on Github. In that case, do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, e-mail is optional)::
+To translate YOGA Image Optimizer, you can submit your translations using a Pull Request on Github. Do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, e-mail is optional)::
 
     #: yoga_image_optimizer/about_dialog.py:38
     msgid "translator-credits"
