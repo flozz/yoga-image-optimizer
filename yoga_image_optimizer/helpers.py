@@ -74,9 +74,29 @@ def preview_gdk_pixbuf_from_image(image, size=64):
 
     :rtype: GdkPixbuf.Pixbuff
     """
+    EXIF_TAG_ORIENTATION = 274
+    ORIENTATION_OPERATIONS = {
+        1: [],
+        2: [Image.FLIP_LEFT_RIGHT],
+        3: [Image.ROTATE_180],
+        4: [Image.FLIP_TOP_BOTTOM],
+        5: [Image.FLIP_LEFT_RIGHT, Image.ROTATE_90],
+        6: [Image.ROTATE_270],
+        7: [Image.FLIP_LEFT_RIGHT, Image.ROTATE_270],
+        8: [Image.ROTATE_90],
+    }
+
     image_rgba = Image.new("RGBA", image.size)
     image_rgba.paste(image)
     image_rgba.thumbnail([size, size], Image.LANCZOS)
+
+    # Handle JPEG orientation
+    if image.format == "JPEG":
+        exif = image.getexif()
+        if EXIF_TAG_ORIENTATION in exif:
+            orientation = exif[EXIF_TAG_ORIENTATION]
+            for operation in ORIENTATION_OPERATIONS[orientation]:
+                image_rgba = image_rgba.transpose(operation)
 
     # fmt: off
     pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
