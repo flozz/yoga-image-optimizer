@@ -214,6 +214,7 @@ Changelog
   * Allow to "mass update" the output file locations and names (next to the
     input files, in a subfolder or using a custom pattern)
   * Allow browsing for the output file location using a file chooser dialog
+  * Fix image previews: no more ugly thumbnails with indexed images
 
 * **v1.0.1:**
 
