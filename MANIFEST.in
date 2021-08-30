@@ -1,6 +1,6 @@
 include README.rst
 include COPYING
-include yoga_image_optimizer/data/ui/main-window.glade
+recursive-include yoga_image_optimizer/data/ui/ *.glade
 recursive-include yoga_image_optimizer/data/locales/ *.mo
 recursive-include yoga_image_optimizer/data/images/ *.svg
 recursive-include yoga_image_optimizer/data/images/ *.png
