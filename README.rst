@@ -13,9 +13,9 @@ Requirements
 ------------
 
 * Python >= 3.7,
-* YOGA >= 0.11.0,
+* YOGA >= 1.1.0,
 * PyCairo,
-* PyGObject >= 3. 36,
+* PyGObject >= 3.36,
 
 
 Install
@@ -215,6 +215,12 @@ Changelog
     input files, in a subfolder or using a custom pattern)
   * Allow browsing for the output file location using a file chooser dialog
   * Fix image previews: no more ugly thumbnails with indexed images
+
+  * **NOTE for packagers:**
+
+    * YOGA >= 1.1.0 is now required
+    * YOGA v1.1.0 requires a new dependency: `mozjpeg-lossless-optimization
+      <https://github.com/wanadev/mozjpeg-lossless-optimization>`_
 
 * **v1.0.1:**
 

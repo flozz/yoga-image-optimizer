@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "yoga>=1.0.0",
+        "yoga>=1.1.0",
         "pycairo",
         "PyGObject>=3.26",
     ],
