@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-06 14:25+0200\n"
-"PO-Revision-Date: 2021-06-22 22:46+0200\n"
+"PO-Revision-Date: 2021-08-27 10:56+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
 "Language: oc\n"
@@ -54,21 +54,21 @@ msgstr "Arrestar"
 #: yoga_image_optimizer/data/ui/main-window.glade:208
 #: yoga_image_optimizer/data/ui/settings-window.glade:208
 msgid "Next to the input file (→ image.opti.png)"
-msgstr ""
+msgstr "A costat del fichièr de sortida (→ image.opti.png)"
 
 #. Do not translate the 'optimized/' part of the example file path, it is not localized
 #: yoga_image_optimizer/data/ui/main-window.glade:222
 #: yoga_image_optimizer/data/ui/settings-window.glade:224
 msgid "In a subfolder (→ optimized/image.png)"
-msgstr ""
+msgstr "Al jos-dossièr (→ optimized/image.png)"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:236
 msgid "Custom pattern..."
-msgstr ""
+msgstr "Motiu personalizat..."
 
 #: yoga_image_optimizer/data/ui/main-window.glade:250
 msgid "Browse..."
-msgstr ""
+msgstr "Percórrer..."
 
 #: yoga_image_optimizer/data/ui/main-window.glade:352
 msgid "Output format"
@@ -76,11 +76,11 @@ msgstr "Format de sortida"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:373
 msgid "Maximum size"
-msgstr ""
+msgstr "Talha maximum"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:445
 msgid "Reset values with the original image dimensions"
-msgstr ""
+msgstr "Remetre las valors a las dimensions de l’imatge d’origina"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:473
 msgid "Output file"
@@ -114,19 +114,19 @@ msgstr "Opcions PNG"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
 msgid "Custom Pattern"
-msgstr ""
+msgstr "Motiu personalizat"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:29
 msgid "Cancel"
-msgstr ""
+msgstr "Anullar"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:43
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:74
 msgid "Custom pattern"
-msgstr ""
+msgstr "Motiu personalizat"
 
 #. DO NOT translate "{FILENAME}" and "{EXT}"
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:98
@@ -137,6 +137,10 @@ msgid ""
 "・ <b>{EXT}</b> - the extension of the output file (depending of the "
 "selected output format)"
 msgstr ""
+"Al motiu, podètz utilizar las variables seguentas :\n"
+"・ <b>{FILENAME}</b> - lo nom del fichièr de sortida sens l’extension\n"
+"・ <b>{EXT}</b> - l’extension del fichièr de sortida (depend del format de "
+"sortida seleccionat)"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:45
 msgid "Number of threads"
@@ -169,11 +173,11 @@ msgstr "Interfàcia"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:241
 msgid "Custom pattern:"
-msgstr ""
+msgstr "Motiu personalizat :"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:300
 msgid "Default output files location"
-msgstr ""
+msgstr "Destinacion dels fichièrs per defaut"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:320
 msgid "Close"
@@ -211,7 +215,7 @@ msgstr "Dobrir d'imatges..."
 #: yoga_image_optimizer/file_chooser.py:49
 #: yoga_image_optimizer/file_chooser.py:84
 msgid "Save Image As..."
-msgstr ""
+msgstr "Enregistrar l’imatge jos..."
 
 #: yoga_image_optimizer/main_window.py:240
 msgid "— Multiple files selected —"
