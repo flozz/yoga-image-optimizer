@@ -1,0 +1,34 @@
+name: "Windows Standalone Build"
+
+on:
+  push:
+    tags: "v[0-9]+.[0-9]+.[0-9]+"
+    branches: winbuild2
+
+jobs:
+
+  build:
+
+    name: "Build Windows standalone version"
+    runs-on: windows-latest
+
+    steps:
+
+      - name: "Checkout the repository"
+        uses: actions/checkout@v2
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: "Install MSYS2"
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MSYS
+          update: true
+          install: git mingw-w64-x86_64-toolchain
+
+      - name: "Build GTK"
+        run: |
+          winbuild\build-gtk.bat
