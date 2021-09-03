@@ -30,5 +30,41 @@ jobs:
           install: git mingw-w64-x86_64-toolchain
 
       - name: "Build GTK"
+        shell: cmd
         run: |
           winbuild\build-gtk.bat
+
+      - name: "Build YOGA Image Optimizer"
+        shell: cmd
+        run: |
+          winbuild\build-yoga.bat
+
+      - name: "Add Windows 10 GTK Theme"
+        shell: cmd
+        run: |
+          winbuild\add-gtk-theme.bat
+
+      - name: "Clean the GTK build"
+        shell: bash
+        run: |
+          winbuild/clean-gtk.sh
+
+      - name: "Build the Windows Installer distribution (InnoSetup)"
+        shell: cmd
+        run: |
+          winbuild\build-installer.bat
+
+      - name: "Build the Windows Zip distribution"
+        shell: cmd
+        run: |
+          winbuild\build-zip.bat
+
+      - name: "Upload the Windows Installer artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          path: dist/*.exe
+
+      - name: "Upload the Windows Zip artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          path: dist/*.zip
