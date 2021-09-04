@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: gtk-build
-          path: gtk-build\gtk\x64\release\
+          path: C:\gtk-build\gtk\x64\release\
 
       # Build YOGA Image Optimizer
 
