@@ -1,4 +1,4 @@
-SET GVSBUILD_REV=9b10978a8c5aa539f4280feeaa69bc5cc8bf9fbf
+SET GVSBUILD_REV=ed2136815a33e33e3ff15e05576416aca704cefc
 SET ROOTDIR=%CD%
 
 :: Get or update gvsbuild
