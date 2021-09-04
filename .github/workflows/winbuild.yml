@@ -29,10 +29,20 @@ jobs:
           update: true
           install: git mingw-w64-x86_64-toolchain
 
+      # Build GTK
+
       - name: "Build GTK"
         shell: cmd
         run: |
           winbuild\build-gtk.bat
+
+      - name: "Upload GTK build artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          name: gtk-build
+          path: gtk-build\gtk\x64\release\
+
+      # Build YOGA Image Optimizer
 
       - name: "Build YOGA Image Optimizer"
         shell: cmd
@@ -49,22 +59,27 @@ jobs:
         run: |
           winbuild/clean-gtk.sh
 
-      - name: "Build the Windows Installer distribution (InnoSetup)"
-        shell: cmd
-        run: |
-          winbuild\build-installer.bat
+      # Zip distribution
 
       - name: "Build the Windows Zip distribution"
         shell: cmd
         run: |
           winbuild\build-zip.bat
 
+      - name: "Upload the Windows Zip artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          path: dist/*.zip
+
+      # Windows installer
+
+      - name: "Build the Windows Installer distribution (InnoSetup)"
+        shell: cmd
+        run: |
+          winbuild\build-installer.bat
+
       - name: "Upload the Windows Installer artifact"
         uses: actions/upload-artifact@v2
         with:
           path: dist/*.exe
 
-      - name: "Upload the Windows Zip artifact"
-        uses: actions/upload-artifact@v2
-        with:
-          path: dist/*.zip
