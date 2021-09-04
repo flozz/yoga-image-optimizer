@@ -17,7 +17,7 @@ IF NOT EXIST build\gvsbuild (
 :: Install the Python version that will be used to build...
 python build.py build ^
     -p x64 ^
-    --vs-ver 16 ^
+    --vs-ver 19 ^
     python
 
 :: ... and patch it to allow our build to work
