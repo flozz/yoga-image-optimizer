@@ -1,7 +1,10 @@
+import os
+
 from gi.repository import Gtk
 
 from . import APPLICATION_ID
 from . import data_helpers
+from .translation import gtk_builder_translation_hack
 
 
 class CustomPatternDialog(object):
@@ -20,6 +23,10 @@ class CustomPatternDialog(object):
         self._entry.set_text(initial_pattern)
 
         self._dialog.set_transient_for(parent_window)
+
+        # HACK: Translate the UI on Windows
+        if os.name == "nt":
+            gtk_builder_translation_hack(self._builder)
 
     def run(self):
         self._dialog.run()
