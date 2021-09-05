@@ -47,8 +47,8 @@ contains the ``setup.py`` file).
    Git Bash or MSYS2,
 
 
-Building distribable files
---------------------------
+Building distribuable files
+---------------------------
 
 * Windows installer: run ``winbuild\build-installer.bat``
 * Zip: run ``winbuild\build-zip.bat``
