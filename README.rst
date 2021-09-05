@@ -216,6 +216,8 @@ Changelog
   * Allow browsing for the output file location using a file chooser dialog
   * Fix image previews: no more ugly thumbnails with indexed images
   * Image previews now honor the JPEG orientation EXIF tag
+  * Use the Adwaita theme by default on Windows as the Windows10 GTK theme
+    looks buggy
 
   * **NOTE for packagers:**
 
