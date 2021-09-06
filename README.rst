@@ -190,11 +190,17 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * New translations:
+  * Nothing yet
 
-    * Turkish
-    * Italian
-    * Occitan
+* **v1.1.0:**
+
+  * `YOGA <https://github.com/wanadev/yoga>`_ updated to v1.1.0:
+
+    * Honor the JPEG orientation EXIF tag
+    * JPEG optimization improved: up to 7.3 % of additional size reduction
+      since previous version.
+    * YOGA can no more output a PNG larger than the input one when performing
+      a PNG to PNG optimization
 
   * Settings were added:
 
@@ -202,22 +208,37 @@ Changelog
     * Number of threads used to optimize images
     * Setting the default output locations / name or pattern of output files
 
-  * The "Stop" button now stops the running optimizations and not only the
-    pending ones
-  * Display a "Canceled" status on non-optimized image while the "Stop" button
-    is clicked
-  * Do not allow to remove images with the ``<Del>`` key while optimizing
-  * Multiple files can now be selected and their parameters can be edited all
-    at once
+  * "Optimize" and "Stop" buttons behaviour improved:
+
+    * The "Stop" button now stops the running optimizations and not only the
+      pending ones
+    * Display a "Canceled" status on non-optimized image while the "Stop"
+      button is clicked
+    * Do not optimize again images that have already been optimized
+
   * Allow to resize images (downscale only, preserve ratio)
-  * Do not optimize again images that have already been optimized
-  * Allow to "mass update" the output file locations and names (next to the
-    input files, in a subfolder or using a custom pattern)
-  * Allow browsing for the output file location using a file chooser dialog
-  * Fix image previews: no more ugly thumbnails with indexed images
-  * Image previews now honor the JPEG orientation EXIF tag
-  * Use the Adwaita theme by default on Windows as the Windows10 GTK theme
-    looks buggy
+
+  * Multiselection: Multiple files can now be selected and their parameters can
+    be edited all at once
+
+  * Bug fix / improvements:
+
+    * Do not allow to remove images with the ``<Del>`` key while an
+      optimization is in progress
+    * Fix image previews: no more ugly thumbnails with indexed images
+    * Image previews now honor the JPEG orientation EXIF tag
+
+  * Windows specific changes:
+
+    * Use the Adwaita theme by default on Windows as the Windows10 GTK theme
+      looks buggy
+
+  * Translations udpated:
+
+    * French
+    * Italian (partial)
+    * Occitan
+    * Turkish (partial)
 
   * **NOTE for packagers:**
 
