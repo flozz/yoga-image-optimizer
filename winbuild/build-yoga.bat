@@ -36,6 +36,7 @@ python -m nuitka ^
     --assume-yes-for-downloads ^
     --include-package=PIL ^
     --include-package-data=yoga_image_optimizer ^
+    --plugin-enable=multiprocessing ^
     --windows-disable-console ^
     --windows-icon-from-ico=winbuild\icon.ico ^
     --standalone ^
