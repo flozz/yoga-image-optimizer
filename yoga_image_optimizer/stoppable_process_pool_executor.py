@@ -22,16 +22,21 @@ class StoppableProcessPoolExecutor(ProcessPoolExecutor):
     https://bugs.python.org/issue37276
     """
 
+    def __init__(self, *args, **kwargs):
+        self._state_manager = multiprocessing.Manager()
+        ProcessPoolExecutor.__init__(self, *args, **kwargs)
+
     def shutdown(self, *args, **kwargs):
         processes = self._processes
         ProcessPoolExecutor.shutdown(self, *args, **kwargs)
         for pid, process in processes.items():
             process.kill()
+        self._state_manager.shutdown()
 
     shutdown.__doc__ = ProcessPoolExecutor.shutdown.__doc__
 
     def submit(self, fn, *args, **kwargs):
-        is_running = multiprocessing.Manager().Value(bool, False)
+        is_running = self._state_manager.Value(bool, False)
         future = ProcessPoolExecutor.submit(
             self,
             functools.partial(_callable_wrapper, is_running, fn),
