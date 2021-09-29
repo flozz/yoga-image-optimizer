@@ -190,6 +190,10 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
+  * Nothing yet
+
+* **v1.1.1:**
+
   * Fix the abnormal amount of processes created (and not cleaned) when
     starting an optimization (#13)
 
