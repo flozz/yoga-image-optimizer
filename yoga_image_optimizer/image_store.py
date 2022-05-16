@@ -174,7 +174,7 @@ class ImageStore(object):
     def update(self, index, **kwargs):
         """Updates a row.
 
-        :param int,gtk.TreeIter index: The index of the row.
+        :param int,Gtk.TreeIter index: The index of the row.
         :param **kwargs: The columns key/value of the row.
 
         >>> image_store = ImageStore()
@@ -367,7 +367,7 @@ class ImageStore(object):
     def reset_status(self, index):
         """Reset the status of the image at given index.
 
-        :param int,gtk.TreeIter index: The index of the row.
+        :param int,Gtk.TreeIter index: The index of the row.
 
         >>> image_store = ImageStore()
         >>> image_store.append(
