@@ -31,9 +31,9 @@ def human_readable_file_size(size):
     if size < 1024:
         return "%i %s" % (size, _("Bytes"))
     for u, d in [
-        (_("kiB"), 1024 ** 1),
-        (_("MiB"), 1024 ** 2),
-        (_("GiB"), 1024 ** 3),
+        (_("kiB"), 1024**1),
+        (_("MiB"), 1024**2),
+        (_("GiB"), 1024**3),
     ]:
         if size / d < 1024:
             return "%s %s" % (format_string("%.2f", size / d), u)
