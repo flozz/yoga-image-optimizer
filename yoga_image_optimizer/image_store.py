@@ -74,6 +74,7 @@ class ImageStore(object):
         ...     input_file="/tmp/foobar.png",
         ...     output_file="/tmp/foobar.opti.png",
         ... )
+        <Gtk.TreeIter object ...>
         >>> image_store.length
         1
         >>> image_store.append(foo="bar")
@@ -100,6 +101,7 @@ class ImageStore(object):
 
         >>> image_store = ImageStore()
         >>> image_store.append()
+        <Gtk.TreeIter object ...>
         >>> image_store.length
         1
         >>> image_store.clear()
@@ -118,6 +120,7 @@ class ImageStore(object):
 
         >>> image_store = ImageStore()
         >>> image_store.append()
+        <Gtk.TreeIter object ...>
         >>> image_store.get(0)
         {...}
         >>> image_store.get(1)
@@ -159,6 +162,7 @@ class ImageStore(object):
 
         >>> image_store = ImageStore()
         >>> image_store.append()
+        <Gtk.TreeIter object ...>
         >>> image_store.length
         1
         >>> image_store.remove_at_index(0)
@@ -187,6 +191,7 @@ class ImageStore(object):
         ...     output_file="aaa.png",
         ...     use_output_pattern=False,
         ... )
+        <Gtk.TreeIter object ...>
         >>> image_store.get(0)["output_file"]
         '...aaa.png'
         >>> image_store.update(0, output_file="bbb.png")
@@ -379,6 +384,7 @@ class ImageStore(object):
         ...     input_size=1024,
         ...     output_size=1024,
         ... )
+        <Gtk.TreeIter object ...>
         >>> image_store.get(0)["status"]
         3
         >>> image_store.get(0)["output_size"]
