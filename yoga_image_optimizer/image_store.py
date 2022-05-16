@@ -64,6 +64,9 @@ class ImageStore(object):
 
         :param **kwargs: The columns key/value of the row.
 
+        :rtype: gtk.TreeIter
+        :return: the iter of the inserted value.
+
         >>> image_store = ImageStore()
         >>> image_store.length
         0
@@ -90,6 +93,7 @@ class ImageStore(object):
 
         iter_ = self.gtk_list_store.append(row)
         self.update(iter_, **kwargs)
+        return iter_
 
     def clear(self):
         """Clears the store.
