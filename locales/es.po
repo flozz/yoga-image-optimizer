@@ -61,7 +61,7 @@ msgstr "Junto al archivo de entrada (→ image.opti.png)"
 #: yoga_image_optimizer/data/ui/main-window.glade:222
 #: yoga_image_optimizer/data/ui/settings-window.glade:224
 msgid "In a subfolder (→ optimized/image.png)"
-msgstr "En una subcarpeta (→optimized/image.png)"
+msgstr "En una subcarpeta (→ optimized/image.png)"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:236
 msgid "Custom pattern..."
