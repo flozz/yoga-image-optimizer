@@ -1,0 +1,282 @@
+# RUSSIAN TRANSLATION FOR YOGA-IMAGE-OPTIMIZER.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# SEMEN KUZNETSOV <info@cat-design.ru>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-10 14:25+0200\n"
+"PO-Revision-Date: 2022-07-10 10:40+0200\n"
+"Last-Translator: Semen Kuznetsov <info@cat-design.ru>\n"
+"Language-Team: CatDesign <info@cat-design.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:46
+#: yoga_image_optimizer/settings_window.py:17
+msgid "Settings"
+msgstr "Настройки"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:61
+msgid "About"
+msgstr "О программе"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:76
+msgid "Quit"
+msgstr "Закрыть"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:97
+msgid "Add an image..."
+msgstr "Добавить изображение..."
+
+#: yoga_image_optimizer/data/ui/main-window.glade:108
+msgid "Remove selected image"
+msgstr "Убрать выбранные изображения"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:132
+msgid "Remove all images"
+msgstr "Очистить список изображений"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:164
+msgid "Optimize"
+msgstr "Оптимизировать"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:178
+msgid "Stop"
+msgstr "Остановить"
+
+#. Do not translate the '.opti.png' part of the example file name, it is not localized
+#: yoga_image_optimizer/data/ui/main-window.glade:208
+#: yoga_image_optimizer/data/ui/settings-window.glade:208
+msgid "Next to the input file (→ image.opti.png)"
+msgstr "Рядом с входным файлом (→ image.opti.png)"
+
+#. Do not translate the 'optimized/' part of the example file path, it is not localized
+#: yoga_image_optimizer/data/ui/main-window.glade:222
+#: yoga_image_optimizer/data/ui/settings-window.glade:224
+msgid "In a subfolder (→ optimized/image.png)"
+msgstr "В подкаталоге (→ optimized/image.png)"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:236
+msgid "Custom pattern..."
+msgstr "Свой паттерн..."
+
+#: yoga_image_optimizer/data/ui/main-window.glade:250
+msgid "Browse..."
+msgstr "Обзор..."
+
+#: yoga_image_optimizer/data/ui/main-window.glade:352
+msgid "Output format"
+msgstr "Выходной формат"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:373
+msgid "Maximum size"
+msgstr "Разрешение"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:445
+msgid "Reset values with the original image dimensions"
+msgstr "Сбросить значения до исходных параметров изображения"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:473
+msgid "Output file"
+msgstr "Выходной файл"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:534
+#: yoga_image_optimizer/image_store.py:20
+msgid "Output Image"
+msgstr "Выходное изображение"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:584
+#: yoga_image_optimizer/data/ui/main-window.glade:687
+msgid "Quality"
+msgstr "Качество"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:642
+msgid "JPEG Options"
+msgstr "Настройки JPEG"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:745
+msgid "WebP Options"
+msgstr "Настройки WebP"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:788
+msgid "Slow PNG optimization"
+msgstr "Оптимизировать PNG"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:808
+msgid "PNG Options"
+msgstr "Настройки PNG"
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
+msgid "Custom Pattern"
+msgstr "Свой паттерн"
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:29
+msgid "Cancel"
+msgstr "Отмена"
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:43
+msgid "Apply"
+msgstr "Применить"
+
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:74
+msgid "Custom pattern"
+msgstr "Свой паттерн"
+
+#. DO NOT translate "{FILENAME}" and "{EXT}"
+#: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:98
+#: yoga_image_optimizer/data/ui/settings-window.glade:273
+msgid ""
+"In the pattern, you can use the following variables:\n"
+"・ <b>{FILENAME}</b> - the name of the input file without the extension\n"
+"・ <b>{EXT}</b> - the extension of the output file (depending of the "
+"selected output format)"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:45
+msgid "Number of threads"
+msgstr "Количество потоков"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:56
+msgid ""
+"The number of threads determines the number of images that will be optimized "
+"at the same time. This value should not be higher than your CPU count."
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:87
+msgid "Optimization"
+msgstr "Оптимизация"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:123
+msgid "Использовать темную тему"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:135
+msgid "Theme"
+msgstr "Тема"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:174
+msgid "Interface"
+msgstr "Интерфейс"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:241
+msgid "Custom pattern:"
+msgstr "Свой паттерн:"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:300
+msgid "Default output files location"
+msgstr "Расположение выходных файлов"
+
+#: yoga_image_optimizer/data/ui/settings-window.glade:320
+msgid "Close"
+msgstr "Закрыть"
+
+#: yoga_image_optimizer/image_formats.py:48
+msgid "WebP (lossless)"
+msgstr "WebP (без потерь)"
+
+#: yoga_image_optimizer/image_formats.py:57
+msgid "Windows Bitmap"
+msgstr "Windows Bitmap"
+
+#: yoga_image_optimizer/image_formats.py:81
+msgid "MacOS Icon (ICNS)"
+msgstr "Иконка MacOS (ICNS)"
+
+#: yoga_image_optimizer/image_formats.py:89
+msgid "Windows Icon (ICO)"
+msgstr "Иконка Windows (ICO)"
+
+#: yoga_image_optimizer/file_chooser.py:13
+msgid "Image Files"
+msgstr "Файлы изображений"
+
+#: yoga_image_optimizer/file_chooser.py:22
+msgid "All Files"
+msgstr "Все файлы"
+
+#: yoga_image_optimizer/file_chooser.py:30
+#: yoga_image_optimizer/file_chooser.py:72
+msgid "Open Images..."
+msgstr "Открыть изображения..."
+
+#: yoga_image_optimizer/file_chooser.py:49
+#: yoga_image_optimizer/file_chooser.py:84
+msgid "Save Image As..."
+msgstr "Сохранить изображение как..."
+
+#: yoga_image_optimizer/main_window.py:240
+msgid "— Multiple files selected —"
+msgstr ""
+
+#: yoga_image_optimizer/helpers.py:32
+msgid "Bytes"
+msgstr "Byte"
+
+#: yoga_image_optimizer/helpers.py:34
+msgid "kiB"
+msgstr "kB"
+
+#: yoga_image_optimizer/helpers.py:35
+msgid "MiB"
+msgstr "MB"
+
+#: yoga_image_optimizer/helpers.py:36
+msgid "GiB"
+msgstr "GB"
+
+#: yoga_image_optimizer/image_store.py:19
+msgid "Input Image"
+msgstr "Входное изображение"
+
+#: yoga_image_optimizer/image_store.py:23
+msgid "Input Size"
+msgstr "Входной размер"
+
+#: yoga_image_optimizer/image_store.py:24
+msgid "Output Size"
+msgstr "Выходной размер"
+
+#: yoga_image_optimizer/image_store.py:25
+msgid "Input Format"
+msgstr "Входной формат"
+
+#: yoga_image_optimizer/image_store.py:27
+msgid "Output Format"
+msgstr "Выходной формат"
+
+#: yoga_image_optimizer/image_store.py:31
+msgid "Status"
+msgstr "Статус"
+
+#: yoga_image_optimizer/image_store.py:356
+msgid "Pending"
+msgstr "Ожидает"
+
+#: yoga_image_optimizer/image_store.py:357
+msgid "In progress"
+msgstr "В процессе"
+
+#: yoga_image_optimizer/image_store.py:358
+msgid "Done"
+msgstr "Выполнено"
+
+#: yoga_image_optimizer/image_store.py:359
+msgid "Canceled"
+msgstr "Отменено"
+
+#: yoga_image_optimizer/about_dialog.py:17
+msgid ""
+"A graphical interface to convert and optimize JPEG, PNG and WebP images "
+"(based on YOGA)"
+msgstr ""
+"Un'interfaccia grafica per convertire e ottimizzare immagini JPEG, PNG e "
+"WebP (basato su YOGA)"
+
+#: yoga_image_optimizer/about_dialog.py:38
+msgid "translator-credits"
+msgstr "Semen Kuznetsov"
