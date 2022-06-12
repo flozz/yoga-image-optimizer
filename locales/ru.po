@@ -152,8 +152,8 @@ msgid "Optimization"
 msgstr "Оптимизация"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:123
-msgid "Использовать темную тему"
-msgstr ""
+msgid "Prefer dark theme"
+msgstr "Использовать темную тему"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:135
 msgid "Theme"
@@ -274,8 +274,8 @@ msgid ""
 "A graphical interface to convert and optimize JPEG, PNG and WebP images "
 "(based on YOGA)"
 msgstr ""
-"Un'interfaccia grafica per convertire e ottimizzare immagini JPEG, PNG e "
-"WebP (basato su YOGA)"
+"Графический интерфейс для преобразования и оптимизации изображений формата JPEG, PNG и"
+"WebP (основано на YOGA)"
 
 #: yoga_image_optimizer/about_dialog.py:38
 msgid "translator-credits"
