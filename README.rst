@@ -190,7 +190,8 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * Nothing yet
+  * Add Spanish translation
+  * Add Russian translation
 
 * **v1.1.1:**
 
