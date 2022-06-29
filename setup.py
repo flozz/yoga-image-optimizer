@@ -16,7 +16,7 @@ setup(
     version="1.1.1",
     description="A graphical interface to convert and optimize JPEG, PNG and WebP images (based on YOGA)",
     url="https://github.com/flozz/yoga-image-optimizer",
-    license="BSD-3-Clause",
+    license="GPLv3",
     long_description=long_description,
     keywords="image jpeg png optimizer converter guetzli zopfli gui gtk",
     author="Fabien LOISON",
