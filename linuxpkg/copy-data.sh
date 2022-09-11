@@ -12,7 +12,7 @@ fi
 
 PREFIX=$(realpath $1)
 
-# Go to the scrip directory
+# Go to the script directory
 cd "${0%/*}" 1> /dev/null 2> /dev/null
 
 # Copy desktop file
