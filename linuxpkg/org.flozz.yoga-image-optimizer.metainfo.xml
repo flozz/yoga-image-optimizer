@@ -4,6 +4,7 @@
   <name>YOGA Image Optimizer</name>
   <project_license>GPL-3.0-or-later</project_license>
   <summary>A graphical tool to convert and optimize JPEG, PNG and WebP images</summary>
+  <developer_name>Fabien LOISON</developer_name>
 
   <url type="homepage">https://yoga.flozz.org/</url>
   <url type="bugtracker">https://github.com/flozz/yoga-image-optimizer/issues</url>
@@ -17,18 +18,18 @@
 
   <description>
     <p>
-        YOGA Image Optimizer is a graphical user interface for YOGA Image that
-        converts and optimizes the size of JPEGs, PNGs and WebP image files.
+      YOGA Image Optimizer is a graphical user interface for YOGA Image that
+      converts and optimizes the size of JPEGs, PNGs and WebP image files.
     </p>
     <p>
-        You will be able to save about 30 % of space on JPEGs and 20 % on PNGs.
-        Optimizing a WebP image will save you only few percents... but
-        converting a JPEG to a lossy WebP can reduce image size to a half and
-        converting a PNG to a lossy WebP can save you 35 % on average.
+      You will be able to save about 30 % of space on JPEGs and 20 % on PNGs.
+      Optimizing a WebP image will save you only few percents... but
+      converting a JPEG to a lossy WebP can reduce image size to a half and
+      converting a PNG to a lossy WebP can save you 35 % on average.
     </p>
     <p>
-        Please note that image optimization is slow and may require a lot of RAM
-        (for example, the JPEG encoder needs 300 MB of RAM per Mpix).
+      Please note that image optimization is slow and may require a lot of RAM
+      (for example, the JPEG encoder needs 300 MB of RAM per Mpix).
     </p>
   </description>
 
@@ -40,6 +41,19 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.2" date="2022-09-12">
+      <description>
+        <p>New translations:</p>
+        <ul>
+          <li>Spanish</li>
+          <li>Russian</li>
+        </ul>
+        <p>Updated translation:</p>
+        <ul>
+          <li>Turkish</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.1" date="2021-09-29"/>
     <release version="1.1.0" date="2021-09-06"/>
     <release version="1.0.0" date="2021-06-11"/>

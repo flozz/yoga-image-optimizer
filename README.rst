@@ -190,11 +190,18 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * Translations added / udpated:
+  * Nothing yet
 
-    * Spanish (added)
-    * Russian (added)
-    * Turkish (updated)
+* **v1.1.2:**
+
+  * New translations:
+
+    * Spanish
+    * Russian
+
+  * Updated translation:
+
+    * Turkish
 
 * **v1.1.1:**
 
