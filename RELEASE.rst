@@ -4,6 +4,14 @@ Things to do while releasing a new version
 This file is a memo for the maintainer.
 
 
+0. Checks
+---------
+
+* Check the locales list is up to date in ``winbuild/clean-gtk.sh``
+* Check Copyright years in the About dialog
+* Check screenshot links in ``linuxpkg/org.flozz.yoga-image-optimizer.metainfo.xml``
+
+
 1. Release
 ----------
 
