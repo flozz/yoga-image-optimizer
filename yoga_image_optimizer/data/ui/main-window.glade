@@ -90,39 +90,46 @@
     <property name="title">YOGA Image Optimizer</property>
     <property name="show-close-button">True</property>
     <child>
-      <object class="GtkButton" id="add_image_button">
-        <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="receives-default">True</property>
-        <property name="tooltip-text" translatable="yes">Add an image...</property>
-        <property name="action-name">app.open-file</property>
-        <property name="image">image-add</property>
-        <property name="always-show-image">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="remove_image_button">
-        <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="receives-default">True</property>
-        <property name="tooltip-text" translatable="yes">Remove selected image</property>
-        <property name="action-name">win.remove-selected-images</property>
-        <property name="image">image-remove</property>
-        <property name="always-show-image">True</property>
-      </object>
-      <packing>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkSeparator">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkButton" id="add_image_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Add an image...</property>
+            <property name="action-name">app.open-file</property>
+            <property name="image">image-add</property>
+            <property name="always-show-image">True</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="remove_image_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Remove selected image</property>
+            <property name="action-name">win.remove-selected-images</property>
+            <property name="image">image-remove</property>
+            <property name="always-show-image">True</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <style>
+          <class name="linked"/>
+          <class name="horizontal"/>
+        </style>
       </object>
-      <packing>
-        <property name="position">2</property>
-      </packing>
     </child>
     <child>
       <object class="GtkButton" id="clear_images_button">
@@ -136,7 +143,7 @@
         <property name="always-show-image">True</property>
       </object>
       <packing>
-        <property name="position">3</property>
+        <property name="position">1</property>
       </packing>
     </child>
     <child>
