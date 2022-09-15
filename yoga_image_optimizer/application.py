@@ -10,6 +10,7 @@ from . import APPLICATION_ID
 from . import helpers
 from . import config
 from . import gtk_themes_helpers
+from .data_helpers import find_data_path
 from .image_formats import IMAGES_FORMATS
 from .image_formats import find_file_format
 from .main_window import MainWindow
@@ -43,6 +44,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
+
+        helpers.load_gtk_custom_css(
+            find_data_path("style/yoga-image-optimizer.css")
+        )
 
         # Action: app.about
         action = Gio.SimpleAction.new("about", None)

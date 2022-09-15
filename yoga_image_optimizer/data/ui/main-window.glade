@@ -312,6 +312,9 @@
             </child>
           </object>
         </child>
+        <style>
+          <class name="yoga-image-optimizer-scrolledwindow"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>

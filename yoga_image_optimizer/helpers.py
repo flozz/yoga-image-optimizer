@@ -1,6 +1,8 @@
 from PIL import Image
 from gi.repository import GLib
 from gi.repository import Gio
+from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 
 from .translation import gettext as _
@@ -112,3 +114,19 @@ def preview_gdk_pixbuf_from_image(image, size=64):
     image_rgba.close()
 
     return pixbuf
+
+
+def load_gtk_custom_css(path):
+    """Load custom GTK CSS from path.
+
+    :param str path: Path to the CSS file.
+    """
+    css_provider = Gtk.CssProvider()
+    css_provider.load_from_path(path)
+    screen = Gdk.Screen.get_default()
+    style_context = Gtk.StyleContext()
+    style_context.add_provider_for_screen(
+        screen,
+        css_provider,
+        Gtk.STYLE_PROVIDER_PRIORITY_USER,
+    )

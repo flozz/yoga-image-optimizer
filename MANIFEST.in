@@ -4,3 +4,4 @@ recursive-include yoga_image_optimizer/data/ui/ *.glade
 recursive-include yoga_image_optimizer/data/locales/ *.mo
 recursive-include yoga_image_optimizer/data/images/ *.svg
 recursive-include yoga_image_optimizer/data/images/ *.png
+recursive-include yoga_image_optimizer/data/style/ *.css
