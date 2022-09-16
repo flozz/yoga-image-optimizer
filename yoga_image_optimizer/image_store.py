@@ -29,7 +29,7 @@ class ImageStore(object):
         "separator":             {"id": 12, "label": "",                 "type": str,              "default": "➡️"},
         "status":                {"id": 13, "label": "",                 "type": int,              "default": 0},
         "status_display":        {"id": 14, "label": _("Status"),        "type": str,              "default": ""},
-        "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 90},
+        "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 94},
         "webp_quality":          {"id": 16, "label": "",                 "type": int,              "default": 90},
         "png_slow_optimization": {"id": 17, "label": "",                 "type": bool,             "default": False},
         "image_width":           {"id": 18, "label": "",                 "type": int,              "default": 0},
