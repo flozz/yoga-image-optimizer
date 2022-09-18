@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from gi.repository import Gtk, Gdk, Gio, GdkPixbuf
+from gi.repository import Gtk, Gdk, Gio, GdkPixbuf, Pango
 
 from . import APPLICATION_NAME, APPLICATION_ID
 from . import helpers
@@ -24,7 +24,7 @@ class MainWindow(Gtk.ApplicationWindow):
             icon=GdkPixbuf.Pixbuf.new_from_file(
                 data_helpers.find_data_path("images/icon_64.png")
             ),
-            default_width=600,
+            default_width=700,
             default_height=600,
             resizable=True,
         )
@@ -315,10 +315,17 @@ class MainWindow(Gtk.ApplicationWindow):
         # Input file / Output file
         column = Gtk.TreeViewColumn(_("Input Image / Output Image"))
         column.set_expand(True)
+        column.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
+        column.set_resizable(True)
+        column.set_min_width(100)
         column.get_area().set_orientation(Gtk.Orientation.VERTICAL)
         treeview_images.append_column(column)
 
-        input_image_renderer = Gtk.CellRendererText(weight=700, yalign=1.0)
+        input_image_renderer = Gtk.CellRendererText(
+            weight=700,
+            yalign=1.0,
+            ellipsize=Pango.EllipsizeMode.MIDDLE,
+        )
         column.pack_start(input_image_renderer, True)
         column.add_attribute(
             input_image_renderer,
@@ -330,6 +337,7 @@ class MainWindow(Gtk.ApplicationWindow):
             weight=400,
             scale=0.75,
             yalign=0.0,
+            ellipsize=Pango.EllipsizeMode.MIDDLE,
         )
         column.pack_start(output_image_renderer, True)
         column.add_attribute(
