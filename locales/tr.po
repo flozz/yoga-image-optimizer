@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: org.flozz.yoga-image-optimizer main\n"
-"Report-Msgid-Bugs-To: https://github.com/flozz/yoga-image-optimizer/issues\n"
-"POT-Creation-Date: 2021-08-06 14:25+0200\n"
-"PO-Revision-Date: 2022-09-11 16:55+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-18 16:30+0200\n"
+"PO-Revision-Date: 2022-09-18 16:36+0200\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -18,104 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:46
-#: yoga_image_optimizer/settings_window.py:17
-msgid "Settings"
-msgstr "Ayarlar"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:61
-msgid "About"
-msgstr "Hakkında"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:76
-msgid "Quit"
-msgstr "Çık"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:97
-msgid "Add an image..."
-msgstr "Resim ekle..."
-
-#: yoga_image_optimizer/data/ui/main-window.glade:108
-msgid "Remove selected image"
-msgstr "Seçilen resmi kaldır"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:132
-msgid "Remove all images"
-msgstr "Tüm resimleri kaldır"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:164
-msgid "Optimize"
-msgstr "Eniyile"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:178
-msgid "Stop"
-msgstr "Durdur"
-
-# .opti.png kısmını çevirmeyin!
-#. Do not translate the '.opti.png' part of the example file name, it is not localized
-#: yoga_image_optimizer/data/ui/main-window.glade:208
-#: yoga_image_optimizer/data/ui/settings-window.glade:208
-msgid "Next to the input file (→ image.opti.png)"
-msgstr "Girdi dosyasının yanında (→ resim.opti.png)"
-
-# Optimized kısmını çevirmeyin!
-#. Do not translate the 'optimized/' part of the example file path, it is not localized
-#: yoga_image_optimizer/data/ui/main-window.glade:222
-#: yoga_image_optimizer/data/ui/settings-window.glade:224
-msgid "In a subfolder (→ optimized/image.png)"
-msgstr "Alt klasörde (→ optimized/resim.opti.png)"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:236
-msgid "Custom pattern..."
-msgstr "Özel desen..."
-
-#: yoga_image_optimizer/data/ui/main-window.glade:250
-msgid "Browse..."
-msgstr "Gözat..."
-
-#: yoga_image_optimizer/data/ui/main-window.glade:352
-msgid "Output format"
-msgstr "Çıktı biçimi"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:373
-msgid "Maximum size"
-msgstr "Azami boyut"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:445
-msgid "Reset values with the original image dimensions"
-msgstr "Değerleri özgün resim boyutlarıyla sıfırla"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:473
-msgid "Output file"
-msgstr "Çıktı dosyası"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:534
-#: yoga_image_optimizer/image_store.py:20
-msgid "Output Image"
-msgstr "Çıktı Resmi"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:584
-#: yoga_image_optimizer/data/ui/main-window.glade:687
-msgid "Quality"
-msgstr "Nitelik"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:642
-msgid "JPEG Options"
-msgstr "JPEG Seçenekleri"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:745
-msgid "WebP Options"
-msgstr "WebP Seçenekleri"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:788
-msgid "Slow PNG optimization"
-msgstr "Yavaş PNG eniyilemesi"
-
-#: yoga_image_optimizer/data/ui/main-window.glade:808
-msgid "PNG Options"
-msgstr "PNG Seçenekleri"
+"X-Generator: Poedit 3.0.1\n"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
 msgid "Custom Pattern"
@@ -175,6 +78,20 @@ msgstr "Tema"
 msgid "Interface"
 msgstr "Arayüz"
 
+# .opti.png kısmını çevirmeyin!
+#. Do not translate the '.opti.png' part of the example file name, it is not localized
+#: yoga_image_optimizer/data/ui/settings-window.glade:208
+#: yoga_image_optimizer/data/ui/main-window.glade:215
+msgid "Next to the input file (→ image.opti.png)"
+msgstr "Girdi dosyasının yanında (→ resim.opti.png)"
+
+# Optimized kısmını çevirmeyin!
+#. Do not translate the 'optimized/' part of the example file path, it is not localized
+#: yoga_image_optimizer/data/ui/settings-window.glade:224
+#: yoga_image_optimizer/data/ui/main-window.glade:229
+msgid "In a subfolder (→ optimized/image.png)"
+msgstr "Alt klasörde (→ optimized/resim.opti.png)"
+
 #: yoga_image_optimizer/data/ui/settings-window.glade:241
 msgid "Custom pattern:"
 msgstr "Özel desen:"
@@ -186,6 +103,86 @@ msgstr "Öntanımlı çıktı dosyaları konumu"
 #: yoga_image_optimizer/data/ui/settings-window.glade:320
 msgid "Close"
 msgstr "Kapat"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:46
+#: yoga_image_optimizer/settings_window.py:17
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:61
+msgid "About"
+msgstr "Hakkında"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:76
+msgid "Quit"
+msgstr "Çık"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:101
+msgid "Add an image..."
+msgstr "Resim ekle..."
+
+#: yoga_image_optimizer/data/ui/main-window.glade:117
+msgid "Remove selected image"
+msgstr "Seçilen resmi kaldır"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:139
+msgid "Remove all images"
+msgstr "Tüm resimleri kaldır"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:171
+msgid "Optimize"
+msgstr "Eniyile"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:185
+msgid "Stop"
+msgstr "Durdur"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:243
+msgid "Custom pattern..."
+msgstr "Özel desen..."
+
+#: yoga_image_optimizer/data/ui/main-window.glade:257
+msgid "Browse..."
+msgstr "Gözat..."
+
+#: yoga_image_optimizer/data/ui/main-window.glade:344
+msgid "Output format"
+msgstr "Çıktı biçimi"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:383
+#: yoga_image_optimizer/data/ui/main-window.glade:437
+msgid "Quality"
+msgstr "Nitelik"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:489
+msgid "Slow PNG optimization"
+msgstr "Yavaş PNG eniyilemesi"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:527
+msgid "Output file"
+msgstr "Çıktı dosyası"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:582
+msgid "Maximum size"
+msgstr "Azami boyut"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:654
+msgid "Reset values with the original image dimensions"
+msgstr "Değerleri özgün resim boyutlarıyla sıfırla"
+
+#: yoga_image_optimizer/about_dialog.py:17
+msgid ""
+"A graphical interface to convert and optimize JPEG, PNG and WebP images "
+"(based on YOGA)"
+msgstr ""
+"JPEG, PNG ve WebP görüntülerini dönüştürmek ve eniyilemek için bir grafik "
+"arayüz (YOGA tabanlı)"
+
+#: yoga_image_optimizer/about_dialog.py:38
+msgid "translator-credits"
+msgstr ""
+"Cihan Alkan\n"
+"Sabri Ünal <libreajans@gmail.com>"
 
 #: yoga_image_optimizer/image_formats.py:48
 msgid "WebP (lossless)"
@@ -221,76 +218,71 @@ msgstr "Resimleri Aç..."
 msgid "Save Image As..."
 msgstr "Resmi Farklı Kaydet..."
 
+#: yoga_image_optimizer/helpers.py:34
+msgid "Bytes"
+msgstr "Bayt"
+
+#: yoga_image_optimizer/helpers.py:36
+msgid "kiB"
+msgstr "kiB"
+
+#: yoga_image_optimizer/helpers.py:37
+msgid "MiB"
+msgstr "MiB"
+
+#: yoga_image_optimizer/helpers.py:38
+msgid "GiB"
+msgstr "GiB"
+
 #: yoga_image_optimizer/main_window.py:240
 msgid "— Multiple files selected —"
 msgstr "— birden fazla dosya seçildi —"
 
-#: yoga_image_optimizer/helpers.py:32
-msgid "Bytes"
-msgstr "Bayt"
+#: yoga_image_optimizer/main_window.py:316
+msgid "Input Image / Output Image"
+msgstr "Girdi Resmi / Çıktı Resmi"
 
-#: yoga_image_optimizer/helpers.py:34
-msgid "kiB"
-msgstr "kiB"
-
-#: yoga_image_optimizer/helpers.py:35
-msgid "MiB"
-msgstr "MiB"
-
-#: yoga_image_optimizer/helpers.py:36
-msgid "GiB"
-msgstr "GiB"
-
-#: yoga_image_optimizer/image_store.py:19
-msgid "Input Image"
-msgstr "Girdi Resmi"
-
-#: yoga_image_optimizer/image_store.py:23
-msgid "Input Size"
-msgstr "Girdi Boyutu"
-
-#: yoga_image_optimizer/image_store.py:24
-msgid "Output Size"
-msgstr "Çıktı Boyutu"
-
-#: yoga_image_optimizer/image_store.py:25
-msgid "Input Format"
-msgstr "Girdi Biçimi"
-
-#: yoga_image_optimizer/image_store.py:27
+#: yoga_image_optimizer/main_window.py:352
 msgid "Output Format"
 msgstr "Çıktı Biçimi"
 
-#: yoga_image_optimizer/image_store.py:31
-msgid "Status"
-msgstr "Durum"
+#: yoga_image_optimizer/main_window.py:361
+msgid "Input Size"
+msgstr "Girdi Boyutu"
 
-#: yoga_image_optimizer/image_store.py:356
-msgid "Pending"
-msgstr "Bekliyor"
+#: yoga_image_optimizer/main_window.py:368
+msgid "Output Size"
+msgstr "Çıktı Boyutu"
 
-#: yoga_image_optimizer/image_store.py:357
-msgid "In progress"
-msgstr "İşlemde"
+#~ msgid "Output Image"
+#~ msgstr "Çıktı Resmi"
 
-#: yoga_image_optimizer/image_store.py:358
-msgid "Done"
-msgstr "Bitti"
+#~ msgid "JPEG Options"
+#~ msgstr "JPEG Seçenekleri"
 
-#: yoga_image_optimizer/image_store.py:359
-msgid "Canceled"
-msgstr "İptal edildi"
+#~ msgid "WebP Options"
+#~ msgstr "WebP Seçenekleri"
 
-#: yoga_image_optimizer/about_dialog.py:17
-msgid ""
-"A graphical interface to convert and optimize JPEG, PNG and WebP images "
-"(based on YOGA)"
-msgstr ""
-"JPEG, PNG ve WebP görüntülerini dönüştürmek ve eniyilemek için bir grafik "
-"arayüz (YOGA tabanlı)"
+#~ msgid "PNG Options"
+#~ msgstr "PNG Seçenekleri"
 
-#: yoga_image_optimizer/about_dialog.py:38
-msgid "translator-credits"
-msgstr ""
-"Cihan Alkan\n"
-"Sabri Ünal <libreajans@gmail.com>"
+#~ msgid "Input Image"
+#~ msgstr "Girdi Resmi"
+
+#~ msgid "Input Format"
+#~ msgstr "Girdi Biçimi"
+
+#~ msgid "Status"
+#~ msgstr "Durum"
+
+#~ msgid "Pending"
+#~ msgstr "Bekliyor"
+
+#~ msgid "In progress"
+#~ msgstr "İşlemde"
+
+#~ msgid "Done"
+#~ msgstr "Bitti"
+
+#~ msgid "Canceled"
+#~ msgstr "İptal edildi"

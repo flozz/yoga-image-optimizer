@@ -190,7 +190,7 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * Nothing yet
+  * More compact interface
 
 * **v1.1.2:**
 
