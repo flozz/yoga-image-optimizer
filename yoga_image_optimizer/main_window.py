@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from gi.repository import Gtk, Gdk, Gio, GdkPixbuf
+from gi.repository import Gtk, Gdk, Gio, GdkPixbuf, Pango
 
 from . import APPLICATION_NAME, APPLICATION_ID
 from . import helpers
@@ -24,7 +24,7 @@ class MainWindow(Gtk.ApplicationWindow):
             icon=GdkPixbuf.Pixbuf.new_from_file(
                 data_helpers.find_data_path("images/icon_64.png")
             ),
-            default_width=1000,
+            default_width=700,
             default_height=600,
             resizable=True,
         )
@@ -299,47 +299,90 @@ class MainWindow(Gtk.ApplicationWindow):
     def _prepare_treeview(self):
         app = self.get_application()
 
-        DISPLAYED_FIELDS = [
-            "status_display",
-            "preview",
-            "input_file_display",
-            "input_size_display",
-            "separator",
-            "output_file_display",
-            "output_format_display",
-            "output_size_display",
-        ]
-
         treeview_images = self._builder.get_object("images_treeview")
         treeview_images.set_model(app.image_store.gtk_list_store)
 
-        for field_name in DISPLAYED_FIELDS:
-            field_type = app.image_store.FIELDS[field_name]["type"]
+        # Preview
+        pixbuf = Gtk.CellRendererPixbuf()
+        column = Gtk.TreeViewColumn("", pixbuf)
+        column.add_attribute(
+            pixbuf,
+            "pixbuf",
+            app.image_store.FIELDS["preview"]["id"],
+        )
+        treeview_images.append_column(column)
 
-            if field_type is str:
-                treeview_images.append_column(
-                    Gtk.TreeViewColumn(
-                        app.image_store.FIELDS[field_name]["label"],
-                        Gtk.CellRendererText(),
-                        text=app.image_store.FIELDS[field_name]["id"],
-                    ),
-                )
-            elif field_type is GdkPixbuf.Pixbuf:
-                pixbuf = Gtk.CellRendererPixbuf()
-                column = Gtk.TreeViewColumn(
-                    app.image_store.FIELDS[field_name]["label"],
-                    pixbuf,
-                )
-                column.add_attribute(
-                    pixbuf,
-                    "pixbuf",
-                    app.image_store.FIELDS[field_name]["id"],
-                )
-                treeview_images.append_column(column)
-            else:
-                raise TypeError(
-                    "Unsupported field type '%s'" % str(field_type)
-                )
+        # Input file / Output file
+        column = Gtk.TreeViewColumn(_("Input Image / Output Image"))
+        column.set_expand(True)
+        column.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
+        column.set_resizable(True)
+        column.set_min_width(100)
+        column.get_area().set_orientation(Gtk.Orientation.VERTICAL)
+        treeview_images.append_column(column)
+
+        input_image_renderer = Gtk.CellRendererText(
+            weight=700,
+            yalign=1.0,
+            ellipsize=Pango.EllipsizeMode.MIDDLE,
+        )
+        column.pack_start(input_image_renderer, True)
+        column.add_attribute(
+            input_image_renderer,
+            "text",
+            app.image_store.FIELDS["input_file_display"]["id"],
+        )
+
+        output_image_renderer = Gtk.CellRendererText(
+            weight=400,
+            scale=0.75,
+            yalign=0.0,
+            ellipsize=Pango.EllipsizeMode.MIDDLE,
+        )
+        column.pack_start(output_image_renderer, True)
+        column.add_attribute(
+            output_image_renderer,
+            "text",
+            app.image_store.FIELDS["output_file_display"]["id"],
+        )
+
+        # Output Format
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
+                _("Output Format"),
+                Gtk.CellRendererText(),
+                text=app.image_store.FIELDS["output_format_display"]["id"],
+            ),
+        )
+
+        # Input Size
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
+                _("Input Size"),
+                Gtk.CellRendererText(),
+                text=app.image_store.FIELDS["input_size_display"]["id"],
+            ),
+        )
+
+        # Output Size / Status
+        column = Gtk.TreeViewColumn(_("Output Size"))
+        treeview_images.append_column(column)
+
+        status_renderer = Gtk.CellRendererText()
+        column.pack_start(status_renderer, False)
+        column.add_attribute(
+            status_renderer,
+            "text",
+            app.image_store.FIELDS["status_display"]["id"],
+        )
+
+        output_size_renderer = Gtk.CellRendererText()
+        column.pack_start(output_size_renderer, False)
+        column.add_attribute(
+            output_size_renderer,
+            "text",
+            app.image_store.FIELDS["output_size_display"]["id"],
+        )
 
         # Enable multi-selection
         selection = treeview_images.get_selection()
