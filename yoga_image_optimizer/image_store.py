@@ -6,7 +6,6 @@ from gi.repository import GdkPixbuf
 
 from . import helpers
 from .image_formats import IMAGES_FORMATS
-from .translation import gettext as _
 from .translation import format_string
 
 
@@ -14,31 +13,30 @@ class ImageStore(object):
 
     # fmt: off
     FIELDS = {
-        "input_file":            {"id":  0, "label": "",                 "type": str,              "default": ""},
-        "output_file":           {"id":  1, "label": "",                 "type": str,              "default": ""},
-        "input_file_display":    {"id":  2, "label": _("Input Image"),   "type": str,              "default": ""},
-        "output_file_display":   {"id":  3, "label": _("Output Image"),  "type": str,              "default": ""},
-        "input_size":            {"id":  4, "label": "",                 "type": int,              "default": 0},
-        "output_size":           {"id":  5, "label": "",                 "type": int,              "default": 0},
-        "input_size_display":    {"id":  6, "label": _("Input Size"),    "type": str,              "default": ""},
-        "output_size_display":   {"id":  7, "label": _("Output Size"),   "type": str,              "default": ""},
-        "input_format":          {"id":  8, "label": _("Input Format"),  "type": str,              "default": ""},
-        "output_format":         {"id":  9, "label": "",                 "type": str,              "default": "jpeg"},
-        "output_format_display": {"id": 10, "label": _("Output Format"), "type": str,              "default": ""},
-        "preview":               {"id": 11, "label": "",                 "type": GdkPixbuf.Pixbuf, "default": None},
-        "separator":             {"id": 12, "label": "",                 "type": str,              "default": "➡️"},
-        "status":                {"id": 13, "label": "",                 "type": int,              "default": 0},
-        "status_display":        {"id": 14, "label": _("Status"),        "type": str,              "default": ""},
-        "jpeg_quality":          {"id": 15, "label": "",                 "type": int,              "default": 94},
-        "webp_quality":          {"id": 16, "label": "",                 "type": int,              "default": 90},
-        "png_slow_optimization": {"id": 17, "label": "",                 "type": bool,             "default": False},
-        "image_width":           {"id": 18, "label": "",                 "type": int,              "default": 0},
-        "image_height":          {"id": 19, "label": "",                 "type": int,              "default": 0},
-        "resize_enabled":        {"id": 20, "label": "",                 "type": bool,             "default": False},
-        "resize_width":          {"id": 21, "label": "",                 "type": int,              "default": 1},
-        "resize_height":         {"id": 22, "label": "",                 "type": int,              "default": 1},
-        "output_pattern":        {"id": 23, "label": "",                 "type": str,              "default": ""},
-        "use_output_pattern":    {"id": 24, "label": "",                 "type": bool,             "default": True},
+        "input_file":            {"id":  0, "type": str,              "default": ""},
+        "output_file":           {"id":  1, "type": str,              "default": ""},
+        "input_file_display":    {"id":  2, "type": str,              "default": ""},
+        "output_file_display":   {"id":  3, "type": str,              "default": ""},
+        "input_size":            {"id":  4, "type": int,              "default": 0},
+        "output_size":           {"id":  5, "type": int,              "default": 0},
+        "input_size_display":    {"id":  6, "type": str,              "default": ""},
+        "output_size_display":   {"id":  7, "type": str,              "default": ""},
+        "input_format":          {"id":  8, "type": str,              "default": ""},
+        "output_format":         {"id":  9, "type": str,              "default": "jpeg"},
+        "output_format_display": {"id": 10, "type": str,              "default": ""},
+        "preview":               {"id": 11, "type": GdkPixbuf.Pixbuf, "default": None},
+        "status":                {"id": 12, "type": int,              "default": 0},
+        "status_display":        {"id": 13, "type": str,              "default": ""},
+        "jpeg_quality":          {"id": 14, "type": int,              "default": 94},
+        "webp_quality":          {"id": 15, "type": int,              "default": 90},
+        "png_slow_optimization": {"id": 16, "type": bool,             "default": False},
+        "image_width":           {"id": 17, "type": int,              "default": 0},
+        "image_height":          {"id": 18, "type": int,              "default": 0},
+        "resize_enabled":        {"id": 19, "type": bool,             "default": False},
+        "resize_width":          {"id": 20, "type": int,              "default": 1},
+        "resize_height":         {"id": 21, "type": int,              "default": 1},
+        "output_pattern":        {"id": 22, "type": str,              "default": ""},
+        "use_output_pattern":    {"id": 23, "type": bool,             "default": True},
     }
     # fmt: on
 
@@ -230,35 +228,51 @@ class ImageStore(object):
             or "jpeg_quality" in kwargs
             or "webp_quality" in kwargs
             or "png_slow_optimization" in kwargs
+            or "resize_enabled" in kwargs
+            or "resize_width" in kwargs
+            or "resize_height" in kwargs
         ):
             output_format = self.get(index)["output_format"]
 
+            format_ = IMAGES_FORMATS[output_format]["display_name"]
             if output_format == "jpeg":
-                text = "%s (%i %%)" % (
+                format_ = "%s (%i %%)" % (
                     IMAGES_FORMATS["jpeg"]["display_name"],
                     self.get(index)["jpeg_quality"],
                 )
-                self._update_field(index, "output_format_display", text)
             elif output_format == "webp":
-                text = "%s (%i %%)" % (
+                format_ = "%s (%i %%)" % (
                     IMAGES_FORMATS["webp"]["display_name"],
                     self.get(index)["webp_quality"],
                 )
-                self._update_field(index, "output_format_display", text)
             elif output_format == "png":
-                text = "%s%s" % (
+                format_ = "%s%s" % (
                     IMAGES_FORMATS["png"]["display_name"],
                     (" (%s)" % "slow")
                     if self.get(index)["png_slow_optimization"]
                     else "",
                 )
-                self._update_field(index, "output_format_display", text)
-            else:
-                self._update_field(
-                    index,
-                    "output_format_display",
-                    IMAGES_FORMATS[output_format]["display_name"],
+
+            resize = ""
+            if self.get(index)["resize_enabled"]:
+                ratio = min(
+                    self.get(index)["resize_width"]
+                    / self.get(index)["image_width"],
+                    self.get(index)["resize_height"]
+                    / self.get(index)["image_height"],
                 )
+                if ratio < 1.0:
+                    resize = "↓ %i×%i px" % (
+                        self.get(index)["image_width"] * ratio,
+                        self.get(index)["image_height"] * ratio,
+                    )
+
+            if resize:
+                text = "%s\n%s" % (format_, resize)
+            else:
+                text = format_
+
+            self._update_field(index, "output_format_display", text)
 
         if (
             "input_file" in kwargs
@@ -298,9 +312,6 @@ class ImageStore(object):
         if (
             "output_file" in kwargs
             or "output_format" in kwargs
-            or "resize_enabled" in kwargs
-            or "resize_width" in kwargs
-            or "resize_height" in kwargs
             or "output_pattern" in kwargs
             or "use_output_pattern" in kwargs
         ):
@@ -310,24 +321,10 @@ class ImageStore(object):
                 output_file, start=input_file.parent
             )
 
-            resize = ""
-            if self.get(index)["resize_enabled"]:
-                ratio = min(
-                    self.get(index)["resize_width"]
-                    / self.get(index)["image_width"],
-                    self.get(index)["resize_height"]
-                    / self.get(index)["image_height"],
-                )
-                if ratio < 1.0:
-                    resize = " (↓ %i×%i px)" % (
-                        self.get(index)["image_width"] * ratio,
-                        self.get(index)["image_height"] * ratio,
-                    )
-
             self._update_field(
                 index,
                 "output_file_display",
-                relative_path + resize,
+                "→ %s" % relative_path,
             )
 
         if "input_size" in kwargs:
@@ -347,7 +344,7 @@ class ImageStore(object):
 
             if output_size > 0:
                 size_delta = -(100 - output_size / input_size * 100)
-                output_size_display = "%s (%s%s %%)" % (
+                output_size_display = "%s\n(%s%s %%)" % (
                     helpers.human_readable_file_size(output_size),
                     "+" if output_size > input_size else "",
                     format_string("%.1f", size_delta),
@@ -362,10 +359,10 @@ class ImageStore(object):
         if "status" in kwargs:
             _STATUS = {
                 0: "",
-                1: "⏸️ %s" % _("Pending"),
-                2: "🔄️ %s" % _("In progress"),
-                3: "✅️ %s" % _("Done"),
-                4: "⏹️ %s" % _("Canceled"),
+                1: "⏸️",
+                2: "🔄️",
+                3: "✅️",
+                4: "",
             }
             self._update_field(
                 index,
