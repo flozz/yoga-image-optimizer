@@ -87,7 +87,7 @@ msgstr "Naast het invoerbestand (→ afbeelding.opti.png)"
 #: yoga_image_optimizer/data/ui/settings-window.glade:224
 #: yoga_image_optimizer/data/ui/main-window.glade:229
 msgid "In a subfolder (→ optimized/image.png)"
-msgstr "In een onderliggende map (→ geoptimaliseerd/afbeelding.png)"
+msgstr "In een onderliggende map (→ optimized/afbeelding.png)"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:241
 msgid "Custom pattern:"
