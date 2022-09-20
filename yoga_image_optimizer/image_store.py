@@ -26,17 +26,16 @@ class ImageStore(object):
         "output_format_display": {"id": 10, "type": str,              "default": ""},
         "preview":               {"id": 11, "type": GdkPixbuf.Pixbuf, "default": None},
         "status":                {"id": 12, "type": int,              "default": 0},
-        "status_display":        {"id": 13, "type": str,              "default": ""},
-        "jpeg_quality":          {"id": 14, "type": int,              "default": 94},
-        "webp_quality":          {"id": 15, "type": int,              "default": 90},
-        "png_slow_optimization": {"id": 16, "type": bool,             "default": False},
-        "image_width":           {"id": 17, "type": int,              "default": 0},
-        "image_height":          {"id": 18, "type": int,              "default": 0},
-        "resize_enabled":        {"id": 19, "type": bool,             "default": False},
-        "resize_width":          {"id": 20, "type": int,              "default": 1},
-        "resize_height":         {"id": 21, "type": int,              "default": 1},
-        "output_pattern":        {"id": 22, "type": str,              "default": ""},
-        "use_output_pattern":    {"id": 23, "type": bool,             "default": True},
+        "jpeg_quality":          {"id": 13, "type": int,              "default": 94},
+        "webp_quality":          {"id": 14, "type": int,              "default": 90},
+        "png_slow_optimization": {"id": 15, "type": bool,             "default": False},
+        "image_width":           {"id": 16, "type": int,              "default": 0},
+        "image_height":          {"id": 17, "type": int,              "default": 0},
+        "resize_enabled":        {"id": 18, "type": bool,             "default": False},
+        "resize_width":          {"id": 19, "type": int,              "default": 1},
+        "resize_height":         {"id": 20, "type": int,              "default": 1},
+        "output_pattern":        {"id": 21, "type": str,              "default": ""},
+        "use_output_pattern":    {"id": 22, "type": bool,             "default": True},
     }
     # fmt: on
 
@@ -336,7 +335,14 @@ class ImageStore(object):
                 ),
             )
 
-        if "output_size" in kwargs:
+        if "output_size" in kwargs or "status" in kwargs:
+            _STATUS = {
+                0: "",
+                1: "⏸️",
+                2: "🔄️",
+                3: "✅️",
+                4: "⏹️",
+            }
             input_size = self.get(index)["input_size"]
             output_size = self.get(index)["output_size"]
 
@@ -349,25 +355,13 @@ class ImageStore(object):
                     "+" if output_size > input_size else "",
                     format_string("%.1f", size_delta),
                 )
+            else:
+                output_size_display = _STATUS[self.get(index)["status"]]
 
             self._update_field(
                 index,
                 "output_size_display",
                 output_size_display,
-            )
-
-        if "status" in kwargs:
-            _STATUS = {
-                0: "",
-                1: "⏸️",
-                2: "🔄️",
-                3: "✅️",
-                4: "",
-            }
-            self._update_field(
-                index,
-                "status_display",
-                _STATUS[self.get(index)["status"]],
             )
 
     def reset_status(self, index):

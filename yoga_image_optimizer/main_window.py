@@ -365,23 +365,12 @@ class MainWindow(Gtk.ApplicationWindow):
         )
 
         # Output Size / Status
-        column = Gtk.TreeViewColumn(_("Output Size"))
-        treeview_images.append_column(column)
-
-        status_renderer = Gtk.CellRendererText()
-        column.pack_start(status_renderer, False)
-        column.add_attribute(
-            status_renderer,
-            "text",
-            app.image_store.FIELDS["status_display"]["id"],
-        )
-
-        output_size_renderer = Gtk.CellRendererText()
-        column.pack_start(output_size_renderer, False)
-        column.add_attribute(
-            output_size_renderer,
-            "text",
-            app.image_store.FIELDS["output_size_display"]["id"],
+        treeview_images.append_column(
+            Gtk.TreeViewColumn(
+                _("Output Size"),
+                Gtk.CellRendererText(),
+                text=app.image_store.FIELDS["output_size_display"]["id"],
+            ),
         )
 
         # Enable multi-selection
