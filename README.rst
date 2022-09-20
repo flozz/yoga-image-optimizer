@@ -119,9 +119,16 @@ Please note that your code must pass tests and follow the coding style defined b
 Translating YOGA Image Optimizer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the software is not available in your language, you can help translating it.
+If the software is not available in your language, you can help translate it.
 
-To translate YOGA Image Optimizer, you can submit your translations using a Pull Request on Github. Do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, e-mail is optional)::
+To translate YOGA Image Optimizer, you can:
+
+* submit your translations using a Pull Request on Github,
+* or translate online using POEditor:
+
+  * →  https://poeditor.com/join/project/RoQ2r9rv89
+
+submit your translations using a Pull Request on Github. Do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, e-mail is optional)::
 
     #: yoga_image_optimizer/about_dialog.py:38
     msgid "translator-credits"
@@ -191,6 +198,7 @@ Changelog
 * **[NEXT]** (changes on ``master`` but not released yet):
 
   * More compact interface
+  * Dutch translation
 
 * **v1.1.2:**
 
