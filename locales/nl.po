@@ -181,7 +181,7 @@ msgstr "Heimen Stoffels <vistausss@fastmail.com>"
 
 #: yoga_image_optimizer/image_formats.py:48
 msgid "WebP (lossless)"
-msgstr "Webp (zonder kwaliteitsverlies)"
+msgstr "WebP (zonder kwaliteitsverlies)"
 
 #: yoga_image_optimizer/image_formats.py:57
 msgid "Windows Bitmap"
