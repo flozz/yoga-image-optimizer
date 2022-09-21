@@ -263,9 +263,12 @@ class ImageStore(object):
                     / self.get(index)["image_height"],
                 )
                 if ratio < 1.0:
-                    resize = "↓ %i×%i px" % (
-                        self.get(index)["image_width"] * ratio,
-                        self.get(index)["image_height"] * ratio,
+                    resize = (
+                        '<span font_size="75%%" font_weight="400">↓ %i×%i px</span>'
+                        % (
+                            self.get(index)["image_width"] * ratio,
+                            self.get(index)["image_height"] * ratio,
+                        )
                     )
 
             if resize:

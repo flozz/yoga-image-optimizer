@@ -351,7 +351,7 @@ class MainWindow(Gtk.ApplicationWindow):
             Gtk.TreeViewColumn(
                 _("Output Format"),
                 Gtk.CellRendererText(),
-                text=app.image_store.FIELDS["output_format_display"]["id"],
+                markup=app.image_store.FIELDS["output_format_display"]["id"],
             ),
         )
 
