@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-18 16:30+0200\n"
+"POT-Creation-Date: 2022-09-21 12:53+0200\n"
 "PO-Revision-Date: 2022-09-18 16:35+0200\n"
 "Last-Translator: Semen Kuznetsov <info@cat-design.ru>\n"
 "Language-Team: CatDesign <info@cat-design.ru>\n"
@@ -237,9 +237,25 @@ msgstr "Выходной формат"
 msgid "Input Size"
 msgstr "Входной размер"
 
-#: yoga_image_optimizer/main_window.py:368
+#: yoga_image_optimizer/main_window.py:370
 msgid "Output Size"
 msgstr "Выходной размер"
+
+#: yoga_image_optimizer/image_store.py:342
+msgid "Pending"
+msgstr "Ожидает"
+
+#: yoga_image_optimizer/image_store.py:343
+msgid "In progress"
+msgstr "В процессе"
+
+#: yoga_image_optimizer/image_store.py:344
+msgid "Done"
+msgstr "Выполнено"
+
+#: yoga_image_optimizer/image_store.py:345
+msgid "Canceled"
+msgstr "Отменено"
 
 #~ msgid "Output Image"
 #~ msgstr "Выходное изображение"
@@ -261,15 +277,3 @@ msgstr "Выходной размер"
 
 #~ msgid "Status"
 #~ msgstr "Статус"
-
-#~ msgid "Pending"
-#~ msgstr "Ожидает"
-
-#~ msgid "In progress"
-#~ msgstr "В процессе"
-
-#~ msgid "Done"
-#~ msgstr "Выполнено"
-
-#~ msgid "Canceled"
-#~ msgstr "Отменено"

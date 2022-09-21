@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.flozz.yoga-image-optimizer main\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-18 16:30+0200\n"
+"POT-Creation-Date: 2022-09-21 12:53+0200\n"
 "PO-Revision-Date: 2022-09-18 16:36+0200\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
@@ -250,9 +250,25 @@ msgstr "Çıktı Biçimi"
 msgid "Input Size"
 msgstr "Girdi Boyutu"
 
-#: yoga_image_optimizer/main_window.py:368
+#: yoga_image_optimizer/main_window.py:370
 msgid "Output Size"
 msgstr "Çıktı Boyutu"
+
+#: yoga_image_optimizer/image_store.py:342
+msgid "Pending"
+msgstr "Bekliyor"
+
+#: yoga_image_optimizer/image_store.py:343
+msgid "In progress"
+msgstr "İşlemde"
+
+#: yoga_image_optimizer/image_store.py:344
+msgid "Done"
+msgstr "Bitti"
+
+#: yoga_image_optimizer/image_store.py:345
+msgid "Canceled"
+msgstr "İptal edildi"
 
 #~ msgid "Output Image"
 #~ msgstr "Çıktı Resmi"
@@ -274,15 +290,3 @@ msgstr "Çıktı Boyutu"
 
 #~ msgid "Status"
 #~ msgstr "Durum"
-
-#~ msgid "Pending"
-#~ msgstr "Bekliyor"
-
-#~ msgid "In progress"
-#~ msgstr "İşlemde"
-
-#~ msgid "Done"
-#~ msgstr "Bitti"
-
-#~ msgid "Canceled"
-#~ msgstr "İptal edildi"

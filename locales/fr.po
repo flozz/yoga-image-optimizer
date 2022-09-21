@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-18 16:30+0200\n"
+"POT-Creation-Date: 2022-09-21 12:53+0200\n"
 "PO-Revision-Date: 2022-09-18 16:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -239,9 +239,25 @@ msgstr "Format de sortie"
 msgid "Input Size"
 msgstr "Taille d'entrée"
 
-#: yoga_image_optimizer/main_window.py:368
+#: yoga_image_optimizer/main_window.py:370
 msgid "Output Size"
 msgstr "Taille de sortie"
+
+#: yoga_image_optimizer/image_store.py:342
+msgid "Pending"
+msgstr "En attente"
+
+#: yoga_image_optimizer/image_store.py:343
+msgid "In progress"
+msgstr "En cours"
+
+#: yoga_image_optimizer/image_store.py:344
+msgid "Done"
+msgstr "Fait"
+
+#: yoga_image_optimizer/image_store.py:345
+msgid "Canceled"
+msgstr "Annulé"
 
 #~ msgid "Output Image"
 #~ msgstr "Image de sortie"
@@ -263,15 +279,3 @@ msgstr "Taille de sortie"
 
 #~ msgid "Status"
 #~ msgstr "État"
-
-#~ msgid "Pending"
-#~ msgstr "En attente"
-
-#~ msgid "In progress"
-#~ msgstr "En cours"
-
-#~ msgid "Done"
-#~ msgstr "Fait"
-
-#~ msgid "Canceled"
-#~ msgstr "Annulé"

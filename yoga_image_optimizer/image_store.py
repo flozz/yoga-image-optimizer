@@ -7,6 +7,7 @@ from gi.repository import GdkPixbuf
 from . import helpers
 from .image_formats import IMAGES_FORMATS
 from .translation import format_string
+from .translation import gettext as _
 
 
 class ImageStore(object):
@@ -338,10 +339,10 @@ class ImageStore(object):
         if "output_size" in kwargs or "status" in kwargs:
             _STATUS = {
                 0: "",
-                1: "⏸️",
-                2: "🔄️",
-                3: "✅️",
-                4: "⏹️",
+                1: "⏸️ %s" % _("Pending"),
+                2: "🔄️ %s" % _("In progress"),
+                3: "✅️ %s" % _("Done"),
+                4: "⏹️ %s" % _("Canceled"),
             }
             input_size = self.get(index)["input_size"]
             output_size = self.get(index)["output_size"]
