@@ -37,6 +37,7 @@ class ImageStore(object):
         "resize_height":         {"id": 20, "type": int,              "default": 1},
         "output_pattern":        {"id": 21, "type": str,              "default": ""},
         "use_output_pattern":    {"id": 22, "type": bool,             "default": True},
+        "optimization_success":  {"id": 23, "type": str,              "default": ""},
     }
     # fmt: on
 
@@ -348,14 +349,19 @@ class ImageStore(object):
             output_size = self.get(index)["output_size"]
 
             output_size_display = ""
+            optimization_success = ""
 
             if output_size > 0:
                 size_delta = -(100 - output_size / input_size * 100)
-                output_size_display = "%s\n(%s%s %%)" % (
-                    helpers.human_readable_file_size(output_size),
-                    "+" if output_size > input_size else "",
-                    format_string("%.1f", size_delta),
+                output_size_display = (
+                    '%s\n<span font_size="75%%" font_weight="400">%s%s %%</span>'
+                    % (
+                        helpers.human_readable_file_size(output_size),
+                        "+" if output_size > input_size else "",
+                        format_string("%.1f", size_delta),
+                    )
                 )
+                optimization_success = "⚠️" if input_size < output_size else ""
             else:
                 output_size_display = _STATUS[self.get(index)["status"]]
 
@@ -363,6 +369,11 @@ class ImageStore(object):
                 index,
                 "output_size_display",
                 output_size_display,
+            )
+            self._update_field(
+                index,
+                "optimization_success",
+                optimization_success,
             )
 
     def reset_status(self, index):
