@@ -324,6 +324,7 @@ class MainWindow(Gtk.ApplicationWindow):
         renderer = Gtk.CellRendererText(
             weight=700,
             yalign=1.0,
+            ypad=0,
             ellipsize=Pango.EllipsizeMode.MIDDLE,
         )
         column.pack_start(renderer, True)
@@ -337,6 +338,7 @@ class MainWindow(Gtk.ApplicationWindow):
             weight=400,
             scale=0.75,
             yalign=0.0,
+            ypad=0,
             ellipsize=Pango.EllipsizeMode.MIDDLE,
         )
         column.pack_start(renderer, True)

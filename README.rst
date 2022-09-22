@@ -197,8 +197,8 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * More compact interface
-  * Dutch translation
+  * More compact interface (#17)
+  * Dutch translation (partial)
 
 * **v1.1.2:**
 
