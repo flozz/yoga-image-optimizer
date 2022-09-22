@@ -321,27 +321,27 @@ class MainWindow(Gtk.ApplicationWindow):
         column.get_area().set_orientation(Gtk.Orientation.VERTICAL)
         treeview_images.append_column(column)
 
-        input_image_renderer = Gtk.CellRendererText(
+        renderer = Gtk.CellRendererText(
             weight=700,
             yalign=1.0,
             ellipsize=Pango.EllipsizeMode.MIDDLE,
         )
-        column.pack_start(input_image_renderer, True)
+        column.pack_start(renderer, True)
         column.add_attribute(
-            input_image_renderer,
+            renderer,
             "text",
             app.image_store.FIELDS["input_file_display"]["id"],
         )
 
-        output_image_renderer = Gtk.CellRendererText(
+        renderer = Gtk.CellRendererText(
             weight=400,
             scale=0.75,
             yalign=0.0,
             ellipsize=Pango.EllipsizeMode.MIDDLE,
         )
-        column.pack_start(output_image_renderer, True)
+        column.pack_start(renderer, True)
         column.add_attribute(
-            output_image_renderer,
+            renderer,
             "text",
             app.image_store.FIELDS["output_file_display"]["id"],
         )
@@ -376,7 +376,9 @@ class MainWindow(Gtk.ApplicationWindow):
             app.image_store.FIELDS["output_size_display"]["id"],
         )
 
-        renderer = Gtk.CellRendererText()
+        renderer = Gtk.CellRendererText(
+            scale=1.2,
+        )
         column.pack_start(renderer, True)
         column.add_attribute(
             renderer,

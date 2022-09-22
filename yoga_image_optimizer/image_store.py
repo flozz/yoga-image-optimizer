@@ -343,10 +343,10 @@ class ImageStore(object):
         if "output_size" in kwargs or "status" in kwargs:
             _STATUS = {
                 0: "",
-                1: "⏸️ %s" % _("Pending"),
-                2: "🔄️ %s" % _("In progress"),
-                3: "✅️ %s" % _("Done"),
-                4: "⏹️ %s" % _("Canceled"),
+                1: "⏸️ <i>%s</i>" % _("Pending"),
+                2: "🔄️ <i>%s</i>" % _("In progress"),
+                3: "✅️ <i>%s</i>" % _("Done"),
+                4: "⏹️ <i>%s</i>" % _("Canceled"),
             }
             input_size = self.get(index)["input_size"]
             output_size = self.get(index)["output_size"]
@@ -364,7 +364,9 @@ class ImageStore(object):
                         format_string("%.1f", size_delta),
                     )
                 )
-                optimization_success = "⚠️" if input_size < output_size else ""
+                optimization_success = (
+                    "⚠️ " if input_size < output_size else ""
+                )
             else:
                 output_size_display = _STATUS[self.get(index)["status"]]
 
