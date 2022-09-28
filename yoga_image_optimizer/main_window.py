@@ -125,6 +125,8 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("jpeg_options").set_sensitive(False)
             self._builder.get_object("webp_options").set_sensitive(False)
             self._builder.get_object("png_options").set_sensitive(False)
+        elif state == app.STATE_SHUTDOWN:
+            self.set_sensitive(False)
         # fmt: on
 
     def update_interface(self):

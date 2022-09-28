@@ -1,10 +1,14 @@
 import os
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import CancelledError
+
 
 import yoga.image
 from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import Gio
+from PIL import UnidentifiedImageError
 
 from . import APPLICATION_ID
 from . import helpers
@@ -25,6 +29,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     STATE_MANAGE_IMAGES = "manage"
     STATE_OPTIMIZE = "optimize"
+    STATE_SHUTDOWN = "shutdown"
 
     def __init__(self):
         Gtk.Application.__init__(
@@ -40,6 +45,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._main_window = None
         self._settings_window = None
         self._executor = None
+        self._thumbnail_executor = ThreadPoolExecutor(max_workers=2)
         self._futures = []
 
     def do_startup(self):
@@ -141,6 +147,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def quit(self):
         self.stop_optimization()
+        self.switch_state(self.STATE_SHUTDOWN)
+        self._thumbnail_executor.shutdown(wait=True, cancel_futures=True)
         Gtk.Application.quit(self)
 
     def switch_state(self, state):
@@ -148,6 +156,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._main_window.switch_state(state)
 
     def add_image(self, path):
+        if self.current_state == self.STATE_SHUTDOWN:
+            return
+
         input_path = Path(path).resolve()
         input_size = input_path.stat().st_size
         input_format = find_file_format(input_path)
@@ -172,22 +183,33 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 config.OUTPUT_PATTERN_NEXT_TO_FILE
             ]
 
-        image = helpers.open_image_from_path(str(input_path))
+        image = None
 
-        self.image_store.append(
-            input_file=str(input_path),
-            input_size=input_size,
-            output_size=0,
-            input_format=input_format,
-            output_format=output_format,
-            preview=helpers.preview_gdk_pixbuf_from_image(image),
-            image_width=image.width,
-            image_height=image.height,
-            use_output_pattern=True,
-            output_pattern=output_pattern,
-        )
-
-        image.close()
+        try:
+            image = helpers.open_image_from_path(str(input_path))
+        except UnidentifiedImageError as error:
+            print("E: %s" % str(error))
+        except OSError as error:
+            print(
+                "E: An error occured when reading '%s': %s",
+                (input_path, str(error)),
+            )
+        else:
+            iter_ = self.image_store.append(
+                input_file=str(input_path),
+                input_size=input_size,
+                output_size=0,
+                input_format=input_format,
+                output_format=output_format,
+                image_width=image.width,
+                image_height=image.height,
+                use_output_pattern=True,
+                output_pattern=output_pattern,
+            )
+            self.generate_thumbnail(iter_)
+        finally:
+            if image:
+                image.close()
 
     def clear_images(self):
         self.image_store.clear()
@@ -196,6 +218,30 @@ class YogaImageOptimizerApplication(Gtk.Application):
         filenames = open_file_chooser_open_file(parent=self._main_window)
         for filename in filenames:
             self.add_image(filename)
+
+    def generate_thumbnail(self, iter_):
+        if self.current_state == self.STATE_SHUTDOWN:
+            return
+
+        input_path = self.image_store.get(iter_)["input_file"]
+
+        def _thumbnail_callback(future):
+            try:
+                pixbuf = future.result()
+            except OSError as error:
+                print(
+                    "E: An error occured when reading '%s': %s"
+                    % (input_path, str(error))
+                )
+            except CancelledError:
+                pass
+            else:
+                self.image_store.update(iter_, preview=pixbuf)
+
+        future = self._thumbnail_executor.submit(
+            helpers.preview_gdk_pixbuf_from_image, input_path
+        )
+        future.add_done_callback(_thumbnail_callback)
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)

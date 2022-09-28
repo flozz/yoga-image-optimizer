@@ -68,10 +68,10 @@ def open_image_from_path(path):
     return Image.open(path)
 
 
-def preview_gdk_pixbuf_from_image(image, size=64):
+def preview_gdk_pixbuf_from_image(image_path, size=64):
     """Returns a Gdk Pixbuf containing the preview the image at the given path.
 
-    :param PIL.Image.Image image: the image.
+    :param str image_path: the path of the image.
     :param int size: The size of the preview (optional, default: ``64``).
 
     :rtype: GdkPixbuf.Pixbuff
@@ -88,30 +88,45 @@ def preview_gdk_pixbuf_from_image(image, size=64):
         8: [Image.ROTATE_90],
     }
 
-    image_rgba = Image.new("RGBA", image.size)
-    image_rgba.paste(image)
-    image_rgba.thumbnail([size, size], Image.LANCZOS)
+    image = None
+    image_rgba = None
 
-    # Handle JPEG orientation
-    if image.format == "JPEG":
-        exif = image.getexif()
-        if EXIF_TAG_ORIENTATION in exif:
-            orientation = exif[EXIF_TAG_ORIENTATION]
-            for operation in ORIENTATION_OPERATIONS[orientation]:
-                image_rgba = image_rgba.transpose(operation)
+    try:
+        image = open_image_from_path(image_path)
+    except Exception as error:
+        print(
+            "E: An error occured when thumbnailing '%s': %s"
+            % (image_path, str(error))
+        )
+    else:
+        image_rgba = Image.new("RGBA", image.size)
+        image_rgba.paste(image)
+        image_rgba.thumbnail([size, size], Image.LANCZOS)
 
-    # fmt: off
-    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
-        GLib.Bytes.new(image_rgba.tobytes()),  # data
-        GdkPixbuf.Colorspace.RGB,              # colorspace
-        True,                                  # has alpha
-        8,                                     # bits_per_sample
-        *image_rgba.size,                      # width, height
-        image_rgba.size[0] * 4,                # rowstride
-    )
-    # fmt: on
+        # Handle JPEG orientation
+        if image.format == "JPEG":
+            exif = image.getexif()
+            if EXIF_TAG_ORIENTATION in exif:
+                orientation = exif[EXIF_TAG_ORIENTATION]
+                for operation in ORIENTATION_OPERATIONS[orientation]:
+                    image_rgba = image_rgba.transpose(operation)
 
-    image_rgba.close()
+        # fmt: off
+        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
+            GLib.Bytes.new(image_rgba.tobytes()),  # data
+            GdkPixbuf.Colorspace.RGB,              # colorspace
+            True,                                  # has alpha
+            8,                                     # bits_per_sample
+            *image_rgba.size,                      # width, height
+            image_rgba.size[0] * 4,                # rowstride
+        )
+        # fmt: on
+
+    finally:
+        if image:
+            image.close()
+        if image_rgba:
+            image_rgba.close()
 
     return pixbuf
 
