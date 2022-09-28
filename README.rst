@@ -197,6 +197,10 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
+  * Generate thumbnails asynchronously to not freeze the interface when
+    importing a lot of image (#26)
+  * Do not crash the import / optimization process when encountering broken
+    images (#27)
   * More compact interface (#17)
   * Dutch translation (partial)
 

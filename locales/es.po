@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-21 12:53+0200\n"
+"POT-Creation-Date: 2022-09-28 13:43+0200\n"
 "PO-Revision-Date: 2022-09-18 16:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -212,6 +212,26 @@ msgstr "Abrir imágenes..."
 msgid "Save Image As..."
 msgstr "Guardar imagen como..."
 
+#: yoga_image_optimizer/main_window.py:242
+msgid "— Multiple files selected —"
+msgstr "— Selección de varios archivos —"
+
+#: yoga_image_optimizer/main_window.py:318
+msgid "Input Image / Output Image"
+msgstr "Imagen de entrada / Imagen de salida"
+
+#: yoga_image_optimizer/main_window.py:356
+msgid "Output Format"
+msgstr "Formato de salida"
+
+#: yoga_image_optimizer/main_window.py:365
+msgid "Input Size"
+msgstr "Tamaño de entrada"
+
+#: yoga_image_optimizer/main_window.py:372
+msgid "Output Size"
+msgstr "Tamaño de salida"
+
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
 msgstr "Bytes"
@@ -228,41 +248,25 @@ msgstr "MiB"
 msgid "GiB"
 msgstr "GiB"
 
-#: yoga_image_optimizer/main_window.py:240
-msgid "— Multiple files selected —"
-msgstr "— Selección de varios archivos —"
-
-#: yoga_image_optimizer/main_window.py:316
-msgid "Input Image / Output Image"
-msgstr "Imagen de entrada / Imagen de salida"
-
-#: yoga_image_optimizer/main_window.py:352
-msgid "Output Format"
-msgstr "Formato de salida"
-
-#: yoga_image_optimizer/main_window.py:361
-msgid "Input Size"
-msgstr "Tamaño de entrada"
-
-#: yoga_image_optimizer/main_window.py:370
-msgid "Output Size"
-msgstr "Tamaño de salida"
-
-#: yoga_image_optimizer/image_store.py:342
+#: yoga_image_optimizer/image_store.py:357
 msgid "Pending"
 msgstr "Pendiente"
 
-#: yoga_image_optimizer/image_store.py:343
+#: yoga_image_optimizer/image_store.py:358
 msgid "In progress"
 msgstr "En proceso"
 
-#: yoga_image_optimizer/image_store.py:344
+#: yoga_image_optimizer/image_store.py:359
 msgid "Done"
 msgstr "Completado"
 
-#: yoga_image_optimizer/image_store.py:345
+#: yoga_image_optimizer/image_store.py:360
 msgid "Canceled"
 msgstr "Cancelado"
+
+#: yoga_image_optimizer/image_store.py:361
+msgid "Error"
+msgstr ""
 
 #~ msgid "Output Image"
 #~ msgstr "Imagen de salida"

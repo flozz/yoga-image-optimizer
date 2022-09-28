@@ -5,9 +5,19 @@ from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 
 from . import helpers
+from .data_helpers import find_data_path
 from .image_formats import IMAGES_FORMATS
 from .translation import format_string
 from .translation import gettext as _
+
+
+THUMBNAIL_INPROGRESS = GdkPixbuf.Pixbuf.new_from_file(
+    find_data_path("images/thumbnail_inprogress.svg")
+)
+
+THUMBNAIL_BROKEN = GdkPixbuf.Pixbuf.new_from_file(
+    find_data_path("images/thumbnail_broken.svg")
+)
 
 
 class ImageStore(object):
@@ -25,7 +35,7 @@ class ImageStore(object):
         "input_format":          {"id":  8, "type": str,              "default": ""},
         "output_format":         {"id":  9, "type": str,              "default": "jpeg"},
         "output_format_display": {"id": 10, "type": str,              "default": ""},
-        "preview":               {"id": 11, "type": GdkPixbuf.Pixbuf, "default": None},
+        "preview":               {"id": 11, "type": GdkPixbuf.Pixbuf, "default": THUMBNAIL_INPROGRESS},
         "status":                {"id": 12, "type": int,              "default": 0},
         "jpeg_quality":          {"id": 13, "type": int,              "default": 94},
         "webp_quality":          {"id": 14, "type": int,              "default": 90},
@@ -46,6 +56,7 @@ class ImageStore(object):
     STATUS_IN_PROGRESS = 2
     STATUS_DONE = 3
     STATUS_CANCELED = 4
+    STATUS_ERROR = 5
 
     gtk_list_store = None
 
@@ -347,6 +358,7 @@ class ImageStore(object):
                 2: "🔄️ <i>%s</i>" % _("In progress"),
                 3: "✅️ <i>%s</i>" % _("Done"),
                 4: "⏹️ <i>%s</i>" % _("Canceled"),
+                5: "❌️ <i>%s</i>" % _("Error"),
             }
             input_size = self.get(index)["input_size"]
             output_size = self.get(index)["output_size"]
