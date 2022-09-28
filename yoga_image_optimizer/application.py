@@ -321,7 +321,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
             elif future.done():
                 image_data = self.image_store.get(i)
 
-                if image_data["status"] != self.image_store.STATUS_IN_PROGRESS:
+                if image_data["status"] in [
+                    self.image_store.STATUS_DONE,
+                    self.image_store.STATUS_ERROR,
+                ]:
                     continue
 
                 if os.path.isfile(image_data["output_file"]):
