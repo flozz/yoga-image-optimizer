@@ -320,13 +320,34 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 is_running = True
             elif future.done():
                 image_data = self.image_store.get(i)
-                output_size = os.stat(image_data["output_file"]).st_size
 
-                self.image_store.update(
-                    i,
-                    status=self.image_store.STATUS_DONE,
-                    output_size=output_size,
-                )
+                if image_data["status"] != self.image_store.STATUS_IN_PROGRESS:
+                    continue
+
+                if os.path.isfile(image_data["output_file"]):
+                    output_size = os.stat(image_data["output_file"]).st_size
+                    self.image_store.update(
+                        i,
+                        status=self.image_store.STATUS_DONE,
+                        output_size=output_size,
+                    )
+                else:
+                    try:
+                        future.result()
+                    except Exception as error:
+                        print(
+                            "E: An error occured when optimizing '%s': %s"
+                            % (image_data["input_file"], str(error))
+                        )
+                    else:
+                        print(
+                            "E: An unknown error occured when optimizing '%s'"
+                            % image_data["input_file"]
+                        )
+                    self.image_store.update(
+                        i,
+                        status=self.image_store.STATUS_ERROR,
+                    )
             else:
                 self.image_store.update(
                     i,

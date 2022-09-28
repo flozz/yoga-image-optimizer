@@ -56,6 +56,7 @@ class ImageStore(object):
     STATUS_IN_PROGRESS = 2
     STATUS_DONE = 3
     STATUS_CANCELED = 4
+    STATUS_ERROR = 5
 
     gtk_list_store = None
 
@@ -357,6 +358,7 @@ class ImageStore(object):
                 2: "🔄️ <i>%s</i>" % _("In progress"),
                 3: "✅️ <i>%s</i>" % _("Done"),
                 4: "⏹️ <i>%s</i>" % _("Canceled"),
+                5: "❌️ <i>%s</i>" % _("Error"),
             }
             input_size = self.get(index)["input_size"]
             output_size = self.get(index)["output_size"]
