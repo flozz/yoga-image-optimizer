@@ -21,6 +21,7 @@ from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .settings_window import SettingsWindow
 from .image_store import ImageStore
+from .image_store import THUMBNAIL_BROKEN
 from .file_chooser import open_file_chooser_open_file
 from .stoppable_process_pool_executor import StoppableProcessPoolExecutor
 
@@ -230,9 +231,10 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 pixbuf = future.result()
             except OSError as error:
                 print(
-                    "E: An error occured when reading '%s': %s"
+                    "E: An error occured when generating thumbnail for '%s': %s"
                     % (input_path, str(error))
                 )
+                self.image_store.update(iter_, preview=THUMBNAIL_BROKEN)
             except CancelledError:
                 pass
             else:

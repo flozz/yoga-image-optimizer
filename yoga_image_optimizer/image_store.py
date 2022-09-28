@@ -15,6 +15,10 @@ THUMBNAIL_INPROGRESS = GdkPixbuf.Pixbuf.new_from_file(
     find_data_path("images/thumbnail_inprogress.svg")
 )
 
+THUMBNAIL_BROKEN = GdkPixbuf.Pixbuf.new_from_file(
+    find_data_path("images/thumbnail_broken.svg")
+)
+
 
 class ImageStore(object):
 
