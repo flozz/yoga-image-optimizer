@@ -5,9 +5,15 @@ from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 
 from . import helpers
+from .data_helpers import find_data_path
 from .image_formats import IMAGES_FORMATS
 from .translation import format_string
 from .translation import gettext as _
+
+
+THUMBNAIL_INPROGRESS = GdkPixbuf.Pixbuf.new_from_file(
+    find_data_path("images/thumbnail_inprogress.svg")
+)
 
 
 class ImageStore(object):
@@ -25,7 +31,7 @@ class ImageStore(object):
         "input_format":          {"id":  8, "type": str,              "default": ""},
         "output_format":         {"id":  9, "type": str,              "default": "jpeg"},
         "output_format_display": {"id": 10, "type": str,              "default": ""},
-        "preview":               {"id": 11, "type": GdkPixbuf.Pixbuf, "default": None},
+        "preview":               {"id": 11, "type": GdkPixbuf.Pixbuf, "default": THUMBNAIL_INPROGRESS},
         "status":                {"id": 12, "type": int,              "default": 0},
         "jpeg_quality":          {"id": 13, "type": int,              "default": 94},
         "webp_quality":          {"id": 14, "type": int,              "default": 90},
