@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.flozz.yoga-image-optimizer main\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-21 12:53+0200\n"
+"POT-Creation-Date: 2022-09-28 13:43+0200\n"
 "PO-Revision-Date: 2022-09-18 16:36+0200\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
@@ -218,6 +218,26 @@ msgstr "Resimleri Aç..."
 msgid "Save Image As..."
 msgstr "Resmi Farklı Kaydet..."
 
+#: yoga_image_optimizer/main_window.py:242
+msgid "— Multiple files selected —"
+msgstr "— birden fazla dosya seçildi —"
+
+#: yoga_image_optimizer/main_window.py:318
+msgid "Input Image / Output Image"
+msgstr "Girdi Resmi / Çıktı Resmi"
+
+#: yoga_image_optimizer/main_window.py:356
+msgid "Output Format"
+msgstr "Çıktı Biçimi"
+
+#: yoga_image_optimizer/main_window.py:365
+msgid "Input Size"
+msgstr "Girdi Boyutu"
+
+#: yoga_image_optimizer/main_window.py:372
+msgid "Output Size"
+msgstr "Çıktı Boyutu"
+
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
 msgstr "Bayt"
@@ -234,41 +254,25 @@ msgstr "MiB"
 msgid "GiB"
 msgstr "GiB"
 
-#: yoga_image_optimizer/main_window.py:240
-msgid "— Multiple files selected —"
-msgstr "— birden fazla dosya seçildi —"
-
-#: yoga_image_optimizer/main_window.py:316
-msgid "Input Image / Output Image"
-msgstr "Girdi Resmi / Çıktı Resmi"
-
-#: yoga_image_optimizer/main_window.py:352
-msgid "Output Format"
-msgstr "Çıktı Biçimi"
-
-#: yoga_image_optimizer/main_window.py:361
-msgid "Input Size"
-msgstr "Girdi Boyutu"
-
-#: yoga_image_optimizer/main_window.py:370
-msgid "Output Size"
-msgstr "Çıktı Boyutu"
-
-#: yoga_image_optimizer/image_store.py:342
+#: yoga_image_optimizer/image_store.py:357
 msgid "Pending"
 msgstr "Bekliyor"
 
-#: yoga_image_optimizer/image_store.py:343
+#: yoga_image_optimizer/image_store.py:358
 msgid "In progress"
 msgstr "İşlemde"
 
-#: yoga_image_optimizer/image_store.py:344
+#: yoga_image_optimizer/image_store.py:359
 msgid "Done"
 msgstr "Bitti"
 
-#: yoga_image_optimizer/image_store.py:345
+#: yoga_image_optimizer/image_store.py:360
 msgid "Canceled"
 msgstr "İptal edildi"
+
+#: yoga_image_optimizer/image_store.py:361
+msgid "Error"
+msgstr ""
 
 #~ msgid "Output Image"
 #~ msgstr "Çıktı Resmi"

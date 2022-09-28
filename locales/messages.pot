@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-21 12:53+0200\n"
+"POT-Creation-Date: 2022-09-28 13:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -203,6 +203,26 @@ msgstr ""
 msgid "Save Image As..."
 msgstr ""
 
+#: yoga_image_optimizer/main_window.py:242
+msgid "— Multiple files selected —"
+msgstr ""
+
+#: yoga_image_optimizer/main_window.py:318
+msgid "Input Image / Output Image"
+msgstr ""
+
+#: yoga_image_optimizer/main_window.py:356
+msgid "Output Format"
+msgstr ""
+
+#: yoga_image_optimizer/main_window.py:365
+msgid "Input Size"
+msgstr ""
+
+#: yoga_image_optimizer/main_window.py:372
+msgid "Output Size"
+msgstr ""
+
 #: yoga_image_optimizer/helpers.py:34
 msgid "Bytes"
 msgstr ""
@@ -219,38 +239,22 @@ msgstr ""
 msgid "GiB"
 msgstr ""
 
-#: yoga_image_optimizer/main_window.py:240
-msgid "— Multiple files selected —"
-msgstr ""
-
-#: yoga_image_optimizer/main_window.py:316
-msgid "Input Image / Output Image"
-msgstr ""
-
-#: yoga_image_optimizer/main_window.py:352
-msgid "Output Format"
-msgstr ""
-
-#: yoga_image_optimizer/main_window.py:361
-msgid "Input Size"
-msgstr ""
-
-#: yoga_image_optimizer/main_window.py:370
-msgid "Output Size"
-msgstr ""
-
-#: yoga_image_optimizer/image_store.py:342
+#: yoga_image_optimizer/image_store.py:357
 msgid "Pending"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:343
+#: yoga_image_optimizer/image_store.py:358
 msgid "In progress"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:344
+#: yoga_image_optimizer/image_store.py:359
 msgid "Done"
 msgstr ""
 
-#: yoga_image_optimizer/image_store.py:345
+#: yoga_image_optimizer/image_store.py:360
 msgid "Canceled"
+msgstr ""
+
+#: yoga_image_optimizer/image_store.py:361
+msgid "Error"
 msgstr ""
