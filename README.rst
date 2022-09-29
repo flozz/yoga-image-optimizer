@@ -197,6 +197,8 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
+  * Fix a crash when generating thumbnails for JPEGs with an invalid
+    orientation EXIF tag (#29)
   * Generate thumbnails asynchronously to not freeze the interface when
     importing a lot of image (#26)
   * Do not crash the import / optimization process when encountering broken

@@ -106,7 +106,10 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
         # Handle JPEG orientation
         if image.format == "JPEG":
             exif = image.getexif()
-            if EXIF_TAG_ORIENTATION in exif:
+            if (
+                EXIF_TAG_ORIENTATION in exif
+                and exif[EXIF_TAG_ORIENTATION] in ORIENTATION_OPERATIONS
+            ):
                 orientation = exif[EXIF_TAG_ORIENTATION]
                 for operation in ORIENTATION_OPERATIONS[orientation]:
                     image_rgba = image_rgba.transpose(operation)
