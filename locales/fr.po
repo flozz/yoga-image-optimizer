@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-28 13:43+0200\n"
-"PO-Revision-Date: 2022-09-28 13:43+0200\n"
+"POT-Creation-Date: 2022-09-29 13:56+0200\n"
+"PO-Revision-Date: 2022-09-29 13:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -136,30 +136,38 @@ msgstr "Motif personnalisé..."
 msgid "Browse..."
 msgstr "Parcourir..."
 
-#: yoga_image_optimizer/data/ui/main-window.glade:344
+#: yoga_image_optimizer/data/ui/main-window.glade:350
 msgid "Output format"
 msgstr "Format de sortie"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:383
-#: yoga_image_optimizer/data/ui/main-window.glade:437
+#: yoga_image_optimizer/data/ui/main-window.glade:389
+#: yoga_image_optimizer/data/ui/main-window.glade:443
 msgid "Quality"
 msgstr "Qualité"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:489
+#: yoga_image_optimizer/data/ui/main-window.glade:495
 msgid "Slow PNG optimization"
 msgstr "Optimisation PNG lente"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:527
+#: yoga_image_optimizer/data/ui/main-window.glade:533
 msgid "Output file"
 msgstr "Fichier de sortie"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:582
+#: yoga_image_optimizer/data/ui/main-window.glade:592
+msgid "Output"
+msgstr "Sortie"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:611
 msgid "Maximum size"
 msgstr "Dimensions maximales"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:654
+#: yoga_image_optimizer/data/ui/main-window.glade:683
 msgid "Reset values with the original image dimensions"
 msgstr "Réinitialiser les valeurs avec les dimensions de l'image originale"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:715
+msgid "Transformations"
+msgstr "Transformations"
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
@@ -207,6 +215,26 @@ msgstr "Ouvrir des images..."
 msgid "Save Image As..."
 msgstr "Enregistrer l'image sous..."
 
+#: yoga_image_optimizer/image_store.py:357
+msgid "Pending"
+msgstr "En attente"
+
+#: yoga_image_optimizer/image_store.py:358
+msgid "In progress"
+msgstr "En cours"
+
+#: yoga_image_optimizer/image_store.py:359
+msgid "Done"
+msgstr "Fait"
+
+#: yoga_image_optimizer/image_store.py:360
+msgid "Canceled"
+msgstr "Annulé"
+
+#: yoga_image_optimizer/image_store.py:361
+msgid "Error"
+msgstr "Erreur"
+
 #: yoga_image_optimizer/main_window.py:242
 msgid "— Multiple files selected —"
 msgstr "— Plusieurs fichiers sélectionnés —"
@@ -243,25 +271,8 @@ msgstr "Mio"
 msgid "GiB"
 msgstr "Gio"
 
-#: yoga_image_optimizer/image_store.py:357
-msgid "Pending"
-msgstr "En attente"
-
-#: yoga_image_optimizer/image_store.py:358
-msgid "In progress"
-msgstr "En cours"
-
-#: yoga_image_optimizer/image_store.py:359
-msgid "Done"
-msgstr "Fait"
-
-#: yoga_image_optimizer/image_store.py:360
-msgid "Canceled"
-msgstr "Annulé"
-
-#: yoga_image_optimizer/image_store.py:361
-msgid "Error"
-msgstr "Erreur"
+#~ msgid "Transform"
+#~ msgstr "Transformations"
 
 #~ msgid "Output Image"
 #~ msgstr "Image de sortie"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.flozz.yoga-image-optimizer main\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-28 13:43+0200\n"
+"POT-Creation-Date: 2022-09-29 13:56+0200\n"
 "PO-Revision-Date: 2022-09-18 16:36+0200\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
@@ -145,30 +145,38 @@ msgstr "Özel desen..."
 msgid "Browse..."
 msgstr "Gözat..."
 
-#: yoga_image_optimizer/data/ui/main-window.glade:344
+#: yoga_image_optimizer/data/ui/main-window.glade:350
 msgid "Output format"
 msgstr "Çıktı biçimi"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:383
-#: yoga_image_optimizer/data/ui/main-window.glade:437
+#: yoga_image_optimizer/data/ui/main-window.glade:389
+#: yoga_image_optimizer/data/ui/main-window.glade:443
 msgid "Quality"
 msgstr "Nitelik"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:489
+#: yoga_image_optimizer/data/ui/main-window.glade:495
 msgid "Slow PNG optimization"
 msgstr "Yavaş PNG eniyilemesi"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:527
+#: yoga_image_optimizer/data/ui/main-window.glade:533
 msgid "Output file"
 msgstr "Çıktı dosyası"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:582
+#: yoga_image_optimizer/data/ui/main-window.glade:592
+msgid "Output"
+msgstr ""
+
+#: yoga_image_optimizer/data/ui/main-window.glade:611
 msgid "Maximum size"
 msgstr "Azami boyut"
 
-#: yoga_image_optimizer/data/ui/main-window.glade:654
+#: yoga_image_optimizer/data/ui/main-window.glade:683
 msgid "Reset values with the original image dimensions"
 msgstr "Değerleri özgün resim boyutlarıyla sıfırla"
+
+#: yoga_image_optimizer/data/ui/main-window.glade:715
+msgid "Transformations"
+msgstr ""
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
@@ -218,6 +226,26 @@ msgstr "Resimleri Aç..."
 msgid "Save Image As..."
 msgstr "Resmi Farklı Kaydet..."
 
+#: yoga_image_optimizer/image_store.py:357
+msgid "Pending"
+msgstr "Bekliyor"
+
+#: yoga_image_optimizer/image_store.py:358
+msgid "In progress"
+msgstr "İşlemde"
+
+#: yoga_image_optimizer/image_store.py:359
+msgid "Done"
+msgstr "Bitti"
+
+#: yoga_image_optimizer/image_store.py:360
+msgid "Canceled"
+msgstr "İptal edildi"
+
+#: yoga_image_optimizer/image_store.py:361
+msgid "Error"
+msgstr ""
+
 #: yoga_image_optimizer/main_window.py:242
 msgid "— Multiple files selected —"
 msgstr "— birden fazla dosya seçildi —"
@@ -253,26 +281,6 @@ msgstr "MiB"
 #: yoga_image_optimizer/helpers.py:38
 msgid "GiB"
 msgstr "GiB"
-
-#: yoga_image_optimizer/image_store.py:357
-msgid "Pending"
-msgstr "Bekliyor"
-
-#: yoga_image_optimizer/image_store.py:358
-msgid "In progress"
-msgstr "İşlemde"
-
-#: yoga_image_optimizer/image_store.py:359
-msgid "Done"
-msgstr "Bitti"
-
-#: yoga_image_optimizer/image_store.py:360
-msgid "Canceled"
-msgstr "İptal edildi"
-
-#: yoga_image_optimizer/image_store.py:361
-msgid "Error"
-msgstr ""
 
 #~ msgid "Output Image"
 #~ msgstr "Çıktı Resmi"
