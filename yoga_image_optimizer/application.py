@@ -1,8 +1,5 @@
 import os
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import CancelledError
-
 
 import yoga.image
 from gi.repository import Gtk
@@ -21,9 +18,9 @@ from .main_window import MainWindow
 from .about_dialog import AboutDialog
 from .settings_window import SettingsWindow
 from .image_store import ImageStore
-from .image_store import THUMBNAIL_BROKEN
 from .file_chooser import open_file_chooser_open_file
 from .stoppable_process_pool_executor import StoppableProcessPoolExecutor
+from .thumbnailer import Thumbnailer
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
@@ -46,8 +43,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
         self._main_window = None
         self._settings_window = None
         self._executor = None
-        self._thumbnail_executor = ThreadPoolExecutor(max_workers=2)
         self._futures = []
+        self._thumbnailer = Thumbnailer()
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
@@ -148,8 +145,8 @@ class YogaImageOptimizerApplication(Gtk.Application):
 
     def quit(self):
         self.stop_optimization()
+        self._thumbnailer.cancel_all()
         self.switch_state(self.STATE_SHUTDOWN)
-        self._thumbnail_executor.shutdown(wait=True, cancel_futures=True)
         Gtk.Application.quit(self)
 
     def switch_state(self, state):
@@ -212,7 +209,12 @@ class YogaImageOptimizerApplication(Gtk.Application):
             if image:
                 image.close()
 
+    def remove_image(self, iter_):
+        self._thumbnailer.cancel(iter_)
+        self.image_store.remove(iter_)
+
     def clear_images(self):
+        self._thumbnailer.cancel_all()
         self.image_store.clear()
 
     def open_file(self):
@@ -225,25 +227,13 @@ class YogaImageOptimizerApplication(Gtk.Application):
             return
 
         input_path = self.image_store.get(iter_)["input_file"]
-
-        def _thumbnail_callback(future):
-            try:
-                pixbuf = future.result()
-            except OSError as error:
-                print(
-                    "E: An error occured when generating thumbnail for '%s': %s"
-                    % (input_path, str(error))
-                )
-                self.image_store.update(iter_, preview=THUMBNAIL_BROKEN)
-            except CancelledError:
-                pass
-            else:
-                self.image_store.update(iter_, preview=pixbuf)
-
-        future = self._thumbnail_executor.submit(
-            helpers.preview_gdk_pixbuf_from_image, input_path
+        self._thumbnailer.generate(
+            iter_,
+            input_path,
+            lambda iter_, pixbuf: self.image_store.update(
+                iter_, preview=pixbuf
+            ),
         )
-        future.add_done_callback(_thumbnail_callback)
 
     def optimize(self):
         self.switch_state(self.STATE_OPTIMIZE)

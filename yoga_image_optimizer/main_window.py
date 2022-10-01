@@ -287,8 +287,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         iters = self.get_selected_image_iters()
         for iter_ in iters:
-            app = self.get_application()
-            app.image_store.remove(iter_)
+            app.remove_image(iter_)
 
     def get_selected_image_iters(self):
         treeview_images = self._builder.get_object("images_treeview")

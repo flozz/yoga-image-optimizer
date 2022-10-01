@@ -1,9 +1,7 @@
 from PIL import Image
-from gi.repository import GLib
 from gi.repository import Gio
 from gi.repository import Gtk
 from gi.repository import Gdk
-from gi.repository import GdkPixbuf
 
 from .translation import gettext as _
 from .translation import format_string
@@ -66,72 +64,6 @@ def open_image_from_path(path):
     :rtype: PIL.Image.Image
     """
     return Image.open(path)
-
-
-def preview_gdk_pixbuf_from_image(image_path, size=64):
-    """Returns a Gdk Pixbuf containing the preview the image at the given path.
-
-    :param str image_path: the path of the image.
-    :param int size: The size of the preview (optional, default: ``64``).
-
-    :rtype: GdkPixbuf.Pixbuff
-    """
-    EXIF_TAG_ORIENTATION = 274
-    ORIENTATION_OPERATIONS = {
-        1: [],
-        2: [Image.FLIP_LEFT_RIGHT],
-        3: [Image.ROTATE_180],
-        4: [Image.FLIP_TOP_BOTTOM],
-        5: [Image.FLIP_LEFT_RIGHT, Image.ROTATE_90],
-        6: [Image.ROTATE_270],
-        7: [Image.FLIP_LEFT_RIGHT, Image.ROTATE_270],
-        8: [Image.ROTATE_90],
-    }
-
-    image = None
-    image_rgba = None
-
-    try:
-        image = open_image_from_path(image_path)
-    except Exception as error:
-        print(
-            "E: An error occured when thumbnailing '%s': %s"
-            % (image_path, str(error))
-        )
-    else:
-        image_rgba = Image.new("RGBA", image.size)
-        image_rgba.paste(image)
-        image_rgba.thumbnail([size, size], Image.LANCZOS)
-
-        # Handle JPEG orientation
-        if image.format == "JPEG":
-            exif = image.getexif()
-            if (
-                EXIF_TAG_ORIENTATION in exif
-                and exif[EXIF_TAG_ORIENTATION] in ORIENTATION_OPERATIONS
-            ):
-                orientation = exif[EXIF_TAG_ORIENTATION]
-                for operation in ORIENTATION_OPERATIONS[orientation]:
-                    image_rgba = image_rgba.transpose(operation)
-
-        # fmt: off
-        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
-            GLib.Bytes.new(image_rgba.tobytes()),  # data
-            GdkPixbuf.Colorspace.RGB,              # colorspace
-            True,                                  # has alpha
-            8,                                     # bits_per_sample
-            *image_rgba.size,                      # width, height
-            image_rgba.size[0] * 4,                # rowstride
-        )
-        # fmt: on
-
-    finally:
-        if image:
-            image.close()
-        if image_rgba:
-            image_rgba.close()
-
-    return pixbuf
 
 
 def load_gtk_custom_css(path):
