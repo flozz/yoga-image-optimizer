@@ -204,7 +204,8 @@ Changelog
   * Do not crash the import / optimization process when encountering broken
     images (#27)
   * More compact interface (#17)
-  * Dutch translation (partial)
+  * Dutch translation (incomplete) (@Vistaus, #25)
+  * German Translation (Jürgen Benvenuti)
 
 * **v1.1.2:**
 
