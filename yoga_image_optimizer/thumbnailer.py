@@ -47,7 +47,7 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
     else:
         image_rgba = Image.new("RGBA", image.size)
         image_rgba.paste(image)
-        image_rgba.thumbnail([size, size], Image.LANCZOS)
+        image_rgba.thumbnail([size, size], Image.BOX, reducing_gap=1.0)
 
         # Handle JPEG orientation
         if image.format == "JPEG":
@@ -81,7 +81,7 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
 
 
 class Thumbnailer:
-    _MAX_WORKERS = 1
+    _MAX_WORKERS = 2
 
     def __init__(self):
         # {<uuid>: {"future": future, "iter": iter_, "callback": fn(iter_, pixbuf)}}
