@@ -84,18 +84,18 @@ class Thumbnailer:
     _MAX_WORKERS = 1
 
     def __init__(self):
-        # iter_: {future: future, callback: fn(iter_, pixbuf)}
+        # {<uuid>: {"future": future, "iter": iter_, "callback": fn(iter_, pixbuf)}}
         self._pending = {}
         self._executor = ThreadPoolExecutor(max_workers=self._MAX_WORKERS)
 
-    def generate(self, iter_, image_path, callback):
+    def generate(self, uuid, iter_, image_path, callback):
         # This thumbnail has already been submitted
-        if iter_ in self._pending:
+        if uuid in self._pending:
             return
 
         def _thumbnail_callback(future):
             # The thumbnail has been canceled so we should not go further
-            if iter_ not in self._pending:
+            if uuid not in self._pending:
                 return
 
             try:
@@ -108,25 +108,25 @@ class Thumbnailer:
                 pixbuf = THUMBNAIL_BROKEN
             except CancelledError:
                 return
-            finally:
-                self._pending[iter_]["callback"](iter_, pixbuf)
-                del self._pending[iter_]
+            self._pending[uuid]["callback"](iter_, pixbuf)
+            del self._pending[uuid]
 
         future = self._executor.submit(
             preview_gdk_pixbuf_from_image, image_path
         )
         future.add_done_callback(_thumbnail_callback)
 
-        self._pending[iter_] = {
+        self._pending[uuid] = {
             "future": future,
+            "iter": iter_,
             "callback": callback,
         }
 
-    def cancel(self, iter_):
-        if iter_ not in self._pending:
+    def cancel(self, uuid):
+        if uuid not in self._pending:
             return
-        self._pending[iter_]["future"].cancel()
-        del self._pending[iter_]
+        self._pending[uuid]["future"].cancel()
+        del self._pending[uuid]
 
     def cancel_all(self):
         self._pending = {}

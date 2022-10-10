@@ -1,4 +1,5 @@
 import os
+import uuid
 from pathlib import Path
 
 from gi.repository import Gtk
@@ -44,6 +45,7 @@ class ImageStore(object):
         "output_pattern":        {"id": 21, "type": str,              "default": ""},
         "use_output_pattern":    {"id": 22, "type": bool,             "default": True},
         "optimization_success":  {"id": 23, "type": str,              "default": ""},
+        "uuid":                  {"id": 24, "type": str,              "default": ""},
     }
     # fmt: on
 
@@ -99,7 +101,7 @@ class ImageStore(object):
             row[field_info["id"]] = field_info["default"]
 
         iter_ = self.gtk_list_store.append(row)
-        self.update(iter_, **kwargs)
+        self.update(iter_, uuid=str(uuid.uuid4()), **kwargs)
         return iter_
 
     def clear(self):

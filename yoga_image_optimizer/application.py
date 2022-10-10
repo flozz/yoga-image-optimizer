@@ -210,7 +210,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 image.close()
 
     def remove_image(self, iter_):
-        self._thumbnailer.cancel(iter_)
+        self._thumbnailer.cancel(self.image_store.get(iter_)["uuid"])
         self.image_store.remove(iter_)
 
     def clear_images(self):
@@ -227,7 +227,9 @@ class YogaImageOptimizerApplication(Gtk.Application):
             return
 
         input_path = self.image_store.get(iter_)["input_file"]
+        uuid = self.image_store.get(iter_)["uuid"]
         self._thumbnailer.generate(
+            uuid,
             iter_,
             input_path,
             lambda iter_, pixbuf: self.image_store.update(
