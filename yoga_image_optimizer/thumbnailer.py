@@ -1,9 +1,12 @@
+import os
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import CancelledError
 
 from PIL import Image
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
+from gi.repository import Gio
+from gi.repository import GnomeDesktop
 
 from . import helpers
 from .data_helpers import find_data_path
@@ -80,6 +83,22 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
     return pixbuf
 
 
+def get_cached_thumbnail_path(file_path):
+    gvfs = Gio.Vfs.get_default()
+    file_uri = gvfs.get_file_for_path(file_path).get_uri()
+    thumbnail_path_normal = GnomeDesktop.desktop_thumbnail_path_for_uri(
+        file_uri, GnomeDesktop.DesktopThumbnailSize.NORMAL
+    )
+    if os.path.isfile(thumbnail_path_normal):
+        return thumbnail_path_normal
+    thumbnail_path_large = GnomeDesktop.desktop_thumbnail_path_for_uri(
+        file_uri, GnomeDesktop.DesktopThumbnailSize.LARGE
+    )
+    if os.path.isfile(thumbnail_path_large):
+        return thumbnail_path_large
+    return None
+
+
 class Thumbnailer:
     _MAX_WORKERS = 2
 
@@ -92,6 +111,10 @@ class Thumbnailer:
         # This thumbnail has already been submitted
         if uuid in self._pending:
             return
+
+        cached_thumbnail_path = get_cached_thumbnail_path(image_path)
+        if cached_thumbnail_path:
+            image_path = cached_thumbnail_path
 
         def _thumbnail_callback(future):
             # The thumbnail has been canceled so we should not go further

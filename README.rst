@@ -206,6 +206,8 @@ Changelog
   * More compact interface (#17)
   * Dutch translation (incomplete) (@Vistaus, #25)
   * German Translation (Jürgen Benvenuti)
+  * Speedup thumbnail generation using BOX sampling instead of LANCZOS
+  * Speedup thumbnail generation (at least on Linux) using already generated thumbnails from the cache instead of generating them from original images
 
 * **v1.1.2:**
 
