@@ -22,7 +22,7 @@
     <property name="value">90</property>
     <property name="step-increment">1</property>
     <property name="page-increment">5</property>
-    <signal name="value-changed" handler="_on_jpeg_quality_adjustement_value_changed" swapped="no"/>
+    <signal name="value-changed" handler="_on_jpeg_quality_adjustment_value_changed" swapped="no"/>
   </object>
   <object class="GtkPopover" id="menu_popover">
     <property name="width-request">200</property>
@@ -285,7 +285,7 @@
     <property name="value">90</property>
     <property name="step-increment">1</property>
     <property name="page-increment">5</property>
-    <signal name="value-changed" handler="_on_webp_quality_adjustement_value_changed" swapped="no"/>
+    <signal name="value-changed" handler="_on_webp_quality_adjustment_value_changed" swapped="no"/>
   </object>
   <object class="GtkBox" id="main_window_content">
     <property name="visible">True</property>

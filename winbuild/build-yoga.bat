@@ -5,7 +5,7 @@ IF NOT EXIST build\__env__ (
 )
 CALL build\__env__\Scripts\activate.bat
 
-:: Set some environment varialbes for the PyGObject compilation
+:: Set some environment variables for the PyGObject compilation
 SET INCLUDE=^
 C:\gtk-build\gtk\x64\release\include;^
 C:\gtk-build\gtk\x64\release\include\glib-2.0;^

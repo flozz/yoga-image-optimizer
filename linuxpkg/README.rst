@@ -27,7 +27,7 @@ Packaging
 
 Here we will see how to package YOGA Image Optimizer for Linux.
 
-To simplify commands, I will use a ``$ROOT`` varaible that contain the path
+To simplify commands, I will use a ``$ROOT`` variable that contain the path
 where the file will be installed. For a real installation this variable should
 contain ``/``, for packaging it may be something like
 ``/tmp/my-packaging-build``.

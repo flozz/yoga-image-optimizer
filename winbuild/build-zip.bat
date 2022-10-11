@@ -6,7 +6,7 @@ FOR /F %%i IN ('python setup.py --version') DO (
 :: Output name
 SET OUTPUT_NAME=yoga-image-optimizer_%VERSION%_win64
 
-:: Create requried folders
+:: Create required folders
 mkdir build
 mkdir dist
 

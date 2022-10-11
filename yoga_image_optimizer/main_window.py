@@ -613,7 +613,7 @@ class MainWindow(Gtk.ApplicationWindow):
                 app.image_store.get(iter_)["output_file"]
             )
 
-    def _on_jpeg_quality_adjustement_value_changed(self, adjustment):
+    def _on_jpeg_quality_adjustment_value_changed(self, adjustment):
         if self._updating_interface:
             return
 
@@ -626,7 +626,7 @@ class MainWindow(Gtk.ApplicationWindow):
             )
             app.image_store.reset_status(iter_)
 
-    def _on_webp_quality_adjustement_value_changed(self, adjustment):
+    def _on_webp_quality_adjustment_value_changed(self, adjustment):
         if self._updating_interface:
             return
 
