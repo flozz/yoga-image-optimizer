@@ -24,16 +24,25 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
 
     :rtype: GdkPixbuf.Pixbuff
     """
+
+    # Since Pillow v9.1.0, constants on the Image object are deprecated and
+    # will be removed in Pillow v10.0.0. This code ansure the compatibility
+    # with all versions.
+    # See: https://pillow.readthedocs.io/en/stable/deprecations.html#constants
+    Transpose = Image
+    if hasattr(Image, "Transpose"):
+        Transpose = Image.Transpose
+
     EXIF_TAG_ORIENTATION = 274
     ORIENTATION_OPERATIONS = {
         1: [],
-        2: [Image.FLIP_LEFT_RIGHT],
-        3: [Image.ROTATE_180],
-        4: [Image.FLIP_TOP_BOTTOM],
-        5: [Image.FLIP_LEFT_RIGHT, Image.ROTATE_90],
-        6: [Image.ROTATE_270],
-        7: [Image.FLIP_LEFT_RIGHT, Image.ROTATE_270],
-        8: [Image.ROTATE_90],
+        2: [Transpose.FLIP_LEFT_RIGHT],
+        3: [Transpose.ROTATE_180],
+        4: [Transpose.FLIP_TOP_BOTTOM],
+        5: [Transpose.FLIP_LEFT_RIGHT, Transpose.ROTATE_90],
+        6: [Transpose.ROTATE_270],
+        7: [Transpose.FLIP_LEFT_RIGHT, Transpose.ROTATE_270],
+        8: [Transpose.ROTATE_90],
     }
 
     image = None

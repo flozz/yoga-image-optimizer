@@ -207,7 +207,9 @@ Changelog
   * Dutch translation (incomplete) (@Vistaus, #25)
   * German Translation (Jürgen Benvenuti)
   * Speedup thumbnail generation using BOX sampling instead of LANCZOS
-  * Speedup thumbnail generation (at least on Linux) using already generated thumbnails from the cache instead of generating them from original images
+  * Speedup thumbnail generation (at least on Linux) using already generated
+    thumbnails from the cache instead of generating them from original images
+  * Update the code to not use deprecated constants on newer Pillow versions
 
 * **v1.1.2:**
 
