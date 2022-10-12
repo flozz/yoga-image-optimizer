@@ -16,7 +16,8 @@ THUMBNAIL_BROKEN = GdkPixbuf.Pixbuf.new_from_file(
 
 
 def preview_gdk_pixbuf_from_image(image_path, size=64):
-    """Returns a Gdk Pixbuf containing the preview the image at the given path.
+    """Generates a thumbnail for the image at the given path and returns it as
+    a Gdk Pixbuf.
 
     :param str image_path: the path of the image.
     :param int size: The size of the preview (optional, default: ``64``).
@@ -81,7 +82,30 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
     return pixbuf
 
 
+def preview_gdk_pixbuf_from_thumbnail(thumbnail_path, size=64):
+    """Loads the given thumbnail and returns it as a Gdk Pixbuf.
+
+    :param str thumbnail_path: the path of the image.
+    :param int size: The size of the preview (optional, default: ``64``).
+
+    :rtype: GdkPixbuf.Pixbuff
+    """
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+        thumbnail_path, size, size, True
+    )
+    return pixbuf
+
+
 def get_cached_thumbnail_path(file_path):
+    """Find the smallest thumbnail available in the cache for the file at the
+    given path.
+
+    :param str file_path: The original file path.
+
+    :rtype: str or None
+    :return: The path of the thumbnail if it exists in the cache, else returns
+             ``None``.
+    """
     _THULBNAIL_SIZE = ["normal", "large", "x-large", "xx-large"]
 
     for thumbnail_path in (
@@ -107,10 +131,6 @@ class Thumbnailer:
         if uuid in self._pending:
             return
 
-        cached_thumbnail_path = get_cached_thumbnail_path(image_path)
-        if cached_thumbnail_path:
-            image_path = cached_thumbnail_path
-
         def _thumbnail_callback(future):
             # The thumbnail has been canceled so we should not go further
             if uuid not in self._pending:
@@ -129,9 +149,15 @@ class Thumbnailer:
             self._pending[uuid]["callback"](iter_, pixbuf)
             del self._pending[uuid]
 
-        future = self._executor.submit(
-            preview_gdk_pixbuf_from_image, image_path
-        )
+        cached_thumbnail_path = get_cached_thumbnail_path(image_path)
+        if cached_thumbnail_path:
+            future = self._executor.submit(
+                preview_gdk_pixbuf_from_thumbnail, cached_thumbnail_path
+            )
+        else:
+            future = self._executor.submit(
+                preview_gdk_pixbuf_from_image, image_path
+            )
         future.add_done_callback(_thumbnail_callback)
 
         self._pending[uuid] = {
