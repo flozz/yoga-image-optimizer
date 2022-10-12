@@ -5,8 +5,6 @@ from concurrent.futures import CancelledError
 from PIL import Image
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
-from gi.repository import Gio
-from gi.repository import GnomeDesktop
 
 from . import helpers
 from .data_helpers import find_data_path
@@ -84,18 +82,15 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
 
 
 def get_cached_thumbnail_path(file_path):
-    gvfs = Gio.Vfs.get_default()
-    file_uri = gvfs.get_file_for_path(file_path).get_uri()
-    thumbnail_path_normal = GnomeDesktop.desktop_thumbnail_path_for_uri(
-        file_uri, GnomeDesktop.DesktopThumbnailSize.NORMAL
-    )
-    if os.path.isfile(thumbnail_path_normal):
-        return thumbnail_path_normal
-    thumbnail_path_large = GnomeDesktop.desktop_thumbnail_path_for_uri(
-        file_uri, GnomeDesktop.DesktopThumbnailSize.LARGE
-    )
-    if os.path.isfile(thumbnail_path_large):
-        return thumbnail_path_large
+    _THULBNAIL_SIZE = ["normal", "large", "x-large", "xx-large"]
+
+    for thumbnail_path in (
+        helpers.get_thumbnail_path_for_file(file_path, size)
+        for size in _THULBNAIL_SIZE
+    ):
+        if os.path.isfile(thumbnail_path):
+            return thumbnail_path
+
     return None
 
 

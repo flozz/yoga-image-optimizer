@@ -1,7 +1,11 @@
+import os
+import hashlib
+
 from PIL import Image
 from gi.repository import Gio
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import GLib
 
 from .translation import gettext as _
 from .translation import format_string
@@ -52,6 +56,48 @@ def gvfs_uri_to_local_path(uri):
     """
     gvfs = Gio.Vfs.get_default()
     return gvfs.get_file_for_uri(uri).get_path()
+
+
+def local_path_to_gvfs_uri(path):
+    """Get a GVFS URI from a local file path.
+
+    :param str path: The local file path.
+
+    >>> local_path_to_gvfs_uri("/tmp")
+    'file:///tmp'
+    >>> local_path_to_gvfs_uri("/foo bar/baz.txt")
+    'file:///foo%20bar/baz.txt'
+    """
+    gvfs = Gio.Vfs.get_default()
+    return gvfs.get_file_for_path(path).get_uri()
+
+
+def get_thumbnail_path_for_file(path, size="normal"):
+    """Get the path of the cached thumbnail for the given file and size.
+
+    :param str path: The file path.
+    :param str size: The thumbnail size ("normal", "large", "x-large"
+                     or "xx-large")
+
+    >>> get_thumbnail_path_for_file("/foo.png")
+    '/home/.../.cache/thumbnails/normal/9a813ff0dc14ccc96494338dde9f6324.png'
+    >>> get_thumbnail_path_for_file("/foo.png", size="large")
+    '/home/.../.cache/thumbnails/large/9a813ff0dc14ccc96494338dde9f6324.png'
+    >>> get_thumbnail_path_for_file("/foo.png", size="x-large")
+    '/home/.../.cache/thumbnails/x-large/9a813ff0dc14ccc96494338dde9f6324.png'
+    >>> get_thumbnail_path_for_file("/foo.png", size="xx-large")
+    '/home/.../.cache/thumbnails/xx-large/9a813ff0dc14ccc96494338dde9f6324.png'
+    >>> get_thumbnail_path_for_file("/foo.png", size="foobar")
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid size 'foobar'
+    """
+    if size not in ["normal", "large", "x-large", "xx-large"]:
+        raise ValueError("Invalid size '%s'" % str(size))
+    cache_dir = GLib.get_user_cache_dir()
+    file_uri = local_path_to_gvfs_uri(path)
+    file_uri_md5 = hashlib.md5(file_uri.encode("UTF-8")).hexdigest()
+    return os.path.join(cache_dir, "thumbnails", size, "%s.png" % file_uri_md5)
 
 
 def open_image_from_path(path):
