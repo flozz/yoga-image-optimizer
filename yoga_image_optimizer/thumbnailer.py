@@ -32,6 +32,9 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
     Transpose = Image
     if hasattr(Image, "Transpose"):
         Transpose = Image.Transpose
+    Resampling = Image
+    if hasattr(Image, "Resampling"):
+        Resampling = Image.Resampling
 
     EXIF_TAG_ORIENTATION = 274
     ORIENTATION_OPERATIONS = {
@@ -58,7 +61,7 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
     else:
         image_rgba = Image.new("RGBA", image.size)
         image_rgba.paste(image)
-        image_rgba.thumbnail([size, size], Image.BOX, reducing_gap=1.0)
+        image_rgba.thumbnail([size, size], Resampling.BOX, reducing_gap=1.0)
 
         # Handle JPEG orientation
         if image.format == "JPEG":
