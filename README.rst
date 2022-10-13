@@ -197,6 +197,8 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
+  * Allow opening input image in the default image viewer by double-clicking on
+    its row
   * Fix wrong width and height on rotated JPEGs
   * Fix a crash when generating thumbnails for JPEGs with an invalid
     orientation EXIF tag (#29)

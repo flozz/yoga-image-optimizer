@@ -16,6 +16,10 @@ import gi.overrides.Gtk  # noqa: F401, E402
 import gi.overrides.GLib  # noqa: F401, E402
 import gi.overrides.GObject  # noqa: F401, E402
 
+# From gi.overrides.Gdk (importing it do not work...)
+from gi.repository import Gdk  # noqa: E402
+
+Gdk.EventType._2BUTTON_PRESS = getattr(Gdk.EventType, "2BUTTON_PRESS")
 
 if __name__ == "__main__":
     from yoga_image_optimizer.__main__ import main

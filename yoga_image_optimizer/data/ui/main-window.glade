@@ -307,6 +307,7 @@
             <property name="enable-search">False</property>
             <property name="rubber-banding">True</property>
             <property name="enable-grid-lines">horizontal</property>
+            <signal name="button-press-event" handler="_on_images_treeview_button_pressed" swapped="no"/>
             <child internal-child="selection">
               <object class="GtkTreeSelection">
                 <signal name="changed" handler="_on_image_treeview_selection_changed" swapped="no"/>

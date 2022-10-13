@@ -1,5 +1,7 @@
 import os
 import hashlib
+import platform
+import subprocess
 
 from PIL import Image
 from gi.repository import Gio
@@ -159,3 +161,16 @@ def load_gtk_custom_css(path):
         css_provider,
         Gtk.STYLE_PROVIDER_PRIORITY_USER,
     )
+
+
+def open_file(file_path):
+    """Open the given file with the default application.
+
+    :param str file_path: The path of the file to open.
+    """
+    if platform.system() == "Linux":
+        subprocess.run(["xdg-open", file_path])
+    elif platform.system() == "Windows":
+        os.startfile(file_path)
+    else:
+        raise Exception("Opening file is not supported on this OS")
