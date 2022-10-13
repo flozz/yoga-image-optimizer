@@ -1,7 +1,12 @@
 import os
+import subprocess
 from pathlib import Path
 
-from gi.repository import Gtk, Gdk, Gio, GdkPixbuf, Pango
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import Gio
+from gi.repository import GdkPixbuf
+from gi.repository import Pango
 
 from . import APPLICATION_NAME, APPLICATION_ID
 from . import helpers
@@ -609,3 +614,11 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_remove_selected_images_action_activated(self, action, param):
         self.remove_selected_images()
+
+    def _on_images_treeview_button_pressed(self, treeview, event):
+        if event.type != Gdk.EventType._2BUTTON_PRESS:
+            return
+        app = self.get_application()
+        iters = self.get_selected_image_iters()
+        for iter_ in iters:
+            subprocess.run(["xdg-open", app.image_store.get(iter_)["input_file"]])
