@@ -198,9 +198,7 @@ def find_file_format(filename):
     >>> find_file_format("test.foo")
     """
     for format_id in IMAGES_FORMATS:
-        checker_function = globals()[
-            IMAGES_FORMATS[format_id]["check_function"]
-        ]
+        checker_function = globals()[IMAGES_FORMATS[format_id]["check_function"]]
         if checker_function(format_id, filename):
             return format_id
     return None
@@ -212,10 +210,7 @@ def get_supported_input_format_mimetypes():
 
 def get_supported_input_format_exts():
     return set(
-        ext
-        for fmt in IMAGES_FORMATS.values()
-        if fmt["input"]
-        for ext in fmt["exts"]
+        ext for fmt in IMAGES_FORMATS.values() if fmt["input"] for ext in fmt["exts"]
     )
 
 
@@ -224,6 +219,4 @@ def get_supported_output_format_ids():
 
 
 def get_supported_output_format_names():
-    return [
-        fmt["display_name"] for fmt in IMAGES_FORMATS.values() if fmt["output"]
-    ]
+    return [fmt["display_name"] for fmt in IMAGES_FORMATS.values() if fmt["output"]]

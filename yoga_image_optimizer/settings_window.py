@@ -51,9 +51,7 @@ class SettingsWindow(Gtk.Window):
     def update_interface(self):
         # Optimization / Threads
         threads_adjustment = self._builder.get_object("threads_adjustment")
-        threads_adjustment.set_value(
-            self._config.getint("optimization", "threads")
-        )
+        threads_adjustment.set_value(self._config.getint("optimization", "threads"))
 
         # Interface / Theme
         if (
@@ -68,13 +66,9 @@ class SettingsWindow(Gtk.Window):
             )
 
         # Interface / Prefer dark theme
-        prefer_dark_theme_switch = self._builder.get_object(
-            "prefer_dark_theme_switch"
-        )
+        prefer_dark_theme_switch = self._builder.get_object("prefer_dark_theme_switch")
         prefer_dark_theme_switch.set_state(
-            self._config.getboolean(
-                "interface", "gtk-application-prefer-dark-theme"
-            )
+            self._config.getboolean("interface", "gtk-application-prefer-dark-theme")
         )
 
         # Output file / Output files location
@@ -85,9 +79,7 @@ class SettingsWindow(Gtk.Window):
             "subfolder": self._builder.get_object(
                 "output_pattern_subfolder_radiobutton"
             ),
-            "custom": self._builder.get_object(
-                "output_pattern_custom_radiobutton"
-            ),
+            "custom": self._builder.get_object("output_pattern_custom_radiobutton"),
         }
         output_pattern_radiobuttons[
             self._config.get("output", "active-pattern")
@@ -111,9 +103,7 @@ class SettingsWindow(Gtk.Window):
             theme_combobox.append_text(theme)
 
     def _on_threads_adjustment_value_changed(self, adjustment):
-        self._config.set(
-            "optimization", "threads", str(int(adjustment.get_value()))
-        )
+        self._config.set("optimization", "threads", str(int(adjustment.get_value())))
 
     def _on_theme_combobox_changed(self, widget):
         gtk_theme = gtk_themes_helpers.list_gtk_themes()[widget.get_active()]
@@ -121,9 +111,7 @@ class SettingsWindow(Gtk.Window):
         gtk_themes_helpers.set_gtk_theme_name(gtk_theme)
 
     def _on_prefer_dark_theme_switch_state_setted(self, widget, state):
-        self._config.set(
-            "interface", "gtk-application-prefer-dark-theme", str(state)
-        )
+        self._config.set("interface", "gtk-application-prefer-dark-theme", str(state))
         gtk_themes_helpers.set_gtk_application_prefer_dark_theme(state)
 
     def _on_output_pattern_next_to_file_radiobutton_toggled(self, widget):

@@ -17,9 +17,7 @@ translation = gettext.translation(
 )
 
 if hasattr(locale, "bindtextdomain"):
-    locale.bindtextdomain(
-        APPLICATION_ID, data_helpers.find_data_path("locales")
-    )
+    locale.bindtextdomain(APPLICATION_ID, data_helpers.find_data_path("locales"))
 else:
     print("W: Unable to bind text domaine")
 

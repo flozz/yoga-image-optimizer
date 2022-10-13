@@ -54,9 +54,7 @@ def get_win_user_data_dir():
         MAX_PATH = 2048
 
         buff = ctypes.create_unicode_buffer(MAX_PATH)
-        ctypes.windll.shell32.SHGetFolderPathW(
-            None, CSIDL_APPDATA, None, 0, buff
-        )
+        ctypes.windll.shell32.SHGetFolderPathW(None, CSIDL_APPDATA, None, 0, buff)
 
         buff2 = ctypes.create_unicode_buffer(MAX_PATH)
         ctypes.windll.kernel32.GetShortPathNameW(buff.value, buff2, MAX_PATH)

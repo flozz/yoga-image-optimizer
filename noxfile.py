@@ -42,8 +42,7 @@ def test(session):
 def locales_update(session):
     # Extract messages in .pot
     python_files = [
-        p.as_posix()
-        for p in pathlib.Path("yoga_image_optimizer/").glob("**/*.py")
+        p.as_posix() for p in pathlib.Path("yoga_image_optimizer/").glob("**/*.py")
     ]
     ui_files = [
         p.as_posix()

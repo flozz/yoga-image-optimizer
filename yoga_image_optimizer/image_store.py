@@ -214,9 +214,7 @@ class ImageStore(object):
             ...
         IndexError: ...
         """
-        _FORMATS_EXTS = {
-            fid: fmt["exts"][0] for fid, fmt in IMAGES_FORMATS.items()
-        }
+        _FORMATS_EXTS = {fid: fmt["exts"][0] for fid, fmt in IMAGES_FORMATS.items()}
 
         for key in kwargs:
             if key not in self.FIELDS:
@@ -266,10 +264,8 @@ class ImageStore(object):
             resize = ""
             if self.get(index)["resize_enabled"]:
                 ratio = min(
-                    self.get(index)["resize_width"]
-                    / self.get(index)["image_width"],
-                    self.get(index)["resize_height"]
-                    / self.get(index)["image_height"],
+                    self.get(index)["resize_width"] / self.get(index)["image_width"],
+                    self.get(index)["resize_height"] / self.get(index)["image_height"],
                 )
                 if ratio < 1.0:
                     resize = (
@@ -298,9 +294,7 @@ class ImageStore(object):
             output_format = self.get(index)["output_format"]
             output_ext = _FORMATS_EXTS[output_format]
             input_file = Path(self.get(index)["input_file"])
-            filename_without_ext = str(input_file.name)[
-                : -len(input_file.suffix)
-            ]
+            filename_without_ext = str(input_file.name)[: -len(input_file.suffix)]
             if self.get(index)["use_output_pattern"]:
                 # fmt: off
                 output_file = input_file.parent / output_pattern \
@@ -312,9 +306,7 @@ class ImageStore(object):
                 output_file = Path(self.get(index)["output_file"]).with_suffix(
                     output_ext
                 )
-            self._update_field(
-                index, "output_file", str(output_file.resolve())
-            )
+            self._update_field(index, "output_file", str(output_file.resolve()))
 
         if "image_width" in kwargs:
             self._update_field(index, "resize_width", kwargs["image_width"])
@@ -330,9 +322,7 @@ class ImageStore(object):
         ):
             output_file = Path(self.get(index)["output_file"])
             input_file = Path(self.get(index)["input_file"])
-            relative_path = os.path.relpath(
-                output_file, start=input_file.parent
-            )
+            relative_path = os.path.relpath(output_file, start=input_file.parent)
 
             self._update_field(
                 index,
@@ -344,9 +334,7 @@ class ImageStore(object):
             self._update_field(
                 index,
                 "input_size_display",
-                helpers.human_readable_file_size(
-                    self.get(index)["input_size"]
-                ),
+                helpers.human_readable_file_size(self.get(index)["input_size"]),
             )
 
         if "output_size" in kwargs or "status" in kwargs:
@@ -374,9 +362,7 @@ class ImageStore(object):
                         format_string("%.1f", size_delta),
                     )
                 )
-                optimization_success = (
-                    "⚠️ " if input_size < output_size else ""
-                )
+                optimization_success = "⚠️ " if input_size < output_size else ""
             else:
                 output_size_display = _STATUS[self.get(index)["status"]]
 

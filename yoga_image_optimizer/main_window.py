@@ -33,9 +33,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self._builder = Gtk.Builder()
         self._builder.set_translation_domain(APPLICATION_ID)
-        self._builder.add_from_file(
-            data_helpers.find_data_path("ui/main-window.glade")
-        )
+        self._builder.add_from_file(data_helpers.find_data_path("ui/main-window.glade"))
         self._builder.connect_signals(self)
 
         header = self._builder.get_object("main_window_header")
@@ -65,9 +63,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # Action: win.remove-selected-image
         action = Gio.SimpleAction.new("remove-selected-images", None)
-        action.connect(
-            "activate", self._on_remove_selected_images_action_activated
-        )
+        action.connect("activate", self._on_remove_selected_images_action_activated)
         self.add_action(action)
 
         images_treeview = self._builder.get_object("images_treeview")
@@ -104,7 +100,6 @@ class MainWindow(Gtk.ApplicationWindow):
     def switch_state(self, state):
         app = self.get_application()
 
-        # fmt: off
         if state == app.STATE_MANAGE_IMAGES:
             self._builder.get_object("add_image_button").set_sensitive(True)
             self._builder.get_object("remove_image_button").set_sensitive(True)
@@ -127,7 +122,6 @@ class MainWindow(Gtk.ApplicationWindow):
             self._builder.get_object("png_options").set_sensitive(False)
         elif state == app.STATE_SHUTDOWN:
             self.set_sensitive(False)
-        # fmt: on
 
     def update_interface(self):
         self._updating_interface = True
@@ -169,9 +163,7 @@ class MainWindow(Gtk.ApplicationWindow):
             output_format = None
 
         # [Output image] Update and show output image options
-        output_format_combobox = self._builder.get_object(
-            "output_format_combobox"
-        )
+        output_format_combobox = self._builder.get_object("output_format_combobox")
         if output_format is not None:
             output_format_combobox.set_active(
                 get_supported_output_format_ids().index(output_format)
@@ -189,35 +181,20 @@ class MainWindow(Gtk.ApplicationWindow):
             resize_checkbutton.set_active(False)
             resize_checkbutton.set_inconsistent(True)
 
-        resize_width_adjustment = self._builder.get_object(
-            "resize_width_adjustment"
-        )
+        resize_width_adjustment = self._builder.get_object("resize_width_adjustment")
         resize_width_adjustment.set_value(
-            max(
-                [app.image_store.get(iter_)["resize_width"] for iter_ in iters]
-            )
+            max([app.image_store.get(iter_)["resize_width"] for iter_ in iters])
         )
 
-        resize_width_spinbutton = self._builder.get_object(
-            "resize_width_spinbutton"
-        )
+        resize_width_spinbutton = self._builder.get_object("resize_width_spinbutton")
         resize_width_spinbutton.set_sensitive(resize_checkbutton.get_active())
 
-        resize_height_adjustment = self._builder.get_object(
-            "resize_height_adjustment"
-        )
+        resize_height_adjustment = self._builder.get_object("resize_height_adjustment")
         resize_height_adjustment.set_value(
-            max(
-                [
-                    app.image_store.get(iter_)["resize_height"]
-                    for iter_ in iters
-                ]
-            )
+            max([app.image_store.get(iter_)["resize_height"] for iter_ in iters])
         )
 
-        resize_height_spinbutton = self._builder.get_object(
-            "resize_height_spinbutton"
-        )
+        resize_height_spinbutton = self._builder.get_object("resize_height_spinbutton")
         resize_height_spinbutton.set_sensitive(resize_checkbutton.get_active())
 
         resize_reset_button = self._builder.get_object("resize_reset_button")
@@ -394,9 +371,7 @@ class MainWindow(Gtk.ApplicationWindow):
         selection.set_mode(Gtk.SelectionMode.MULTIPLE)
 
     def _prepare_format_combobox(self):
-        output_format_combobox = self._builder.get_object(
-            "output_format_combobox"
-        )
+        output_format_combobox = self._builder.get_object("output_format_combobox")
 
         for output_format in get_supported_output_format_names():
             output_format_combobox.append_text(output_format)
@@ -405,9 +380,7 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
         app.quit()
 
-    def _on_drag_data_received(
-        self, widget, drag_context, x, y, data, info, time
-    ):
+    def _on_drag_data_received(self, widget, drag_context, x, y, data, info, time):
         app = self.get_application()
 
         def _add_path(paths):
@@ -430,9 +403,7 @@ class MainWindow(Gtk.ApplicationWindow):
             return
 
         app = self.get_application()
-        output_format_combobox = self._builder.get_object(
-            "output_format_combobox"
-        )
+        output_format_combobox = self._builder.get_object("output_format_combobox")
 
         # No format selected
         if output_format_combobox.get_active() == -1:
@@ -457,9 +428,7 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
 
         for iter_ in iters:
-            app.image_store.update(
-                iter_, resize_enabled=checkbutton.get_active()
-            )
+            app.image_store.update(iter_, resize_enabled=checkbutton.get_active())
             app.image_store.reset_status(iter_)
 
         self.update_interface()
@@ -472,9 +441,7 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
 
         for iter_ in iters:
-            app.image_store.update(
-                iter_, resize_width=round(adjustment.get_value())
-            )
+            app.image_store.update(iter_, resize_width=round(adjustment.get_value()))
             app.image_store.reset_status(iter_)
 
         self.update_interface()
@@ -487,9 +454,7 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
 
         for iter_ in iters:
-            app.image_store.update(
-                iter_, resize_height=round(adjustment.get_value())
-            )
+            app.image_store.update(iter_, resize_height=round(adjustment.get_value()))
             app.image_store.reset_status(iter_)
 
         self.update_interface()
@@ -543,9 +508,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         if len(iters) == 1:
             output_file_entry = self._builder.get_object("output_file_entry")
-            output_file_entry.set_text(
-                app.image_store.get(iters[0])["output_file"]
-            )
+            output_file_entry.set_text(app.image_store.get(iters[0])["output_file"])
 
     def _on_output_pattern_subfolder_modelbutton_clicked(self, widget):
         app = self.get_application()
@@ -561,9 +524,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         if len(iters) == 1:
             output_file_entry = self._builder.get_object("output_file_entry")
-            output_file_entry.set_text(
-                app.image_store.get(iters[0])["output_file"]
-            )
+            output_file_entry.set_text(app.image_store.get(iters[0])["output_file"])
 
     def _on_output_pattern_custom_modelbutton_clicked(self, widget):
         app = self.get_application()
@@ -589,9 +550,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         if len(iters) == 1:
             output_file_entry = self._builder.get_object("output_file_entry")
-            output_file_entry.set_text(
-                app.image_store.get(iters[0])["output_file"]
-            )
+            output_file_entry.set_text(app.image_store.get(iters[0])["output_file"])
 
     def _on_output_path_browse_modelbutton_clicked(self, widget):
         app = self.get_application()
@@ -609,9 +568,7 @@ class MainWindow(Gtk.ApplicationWindow):
                 use_output_pattern=False,
             )
             output_file_entry = self._builder.get_object("output_file_entry")
-            output_file_entry.set_text(
-                app.image_store.get(iter_)["output_file"]
-            )
+            output_file_entry.set_text(app.image_store.get(iter_)["output_file"])
 
     def _on_jpeg_quality_adjustment_value_changed(self, adjustment):
         if self._updating_interface:
@@ -621,9 +578,7 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
 
         for iter_ in iters:
-            app.image_store.update(
-                iter_, jpeg_quality=round(adjustment.get_value())
-            )
+            app.image_store.update(iter_, jpeg_quality=round(adjustment.get_value()))
             app.image_store.reset_status(iter_)
 
     def _on_webp_quality_adjustment_value_changed(self, adjustment):
@@ -634,9 +589,7 @@ class MainWindow(Gtk.ApplicationWindow):
         iters = self.get_selected_image_iters()
 
         for iter_ in iters:
-            app.image_store.update(
-                iter_, webp_quality=round(adjustment.get_value())
-            )
+            app.image_store.update(iter_, webp_quality=round(adjustment.get_value()))
             app.image_store.reset_status(iter_)
 
     def _on_png_slow_optimization_checkbutton_toggled(self, checkbutton):

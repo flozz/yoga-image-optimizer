@@ -49,9 +49,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
     def do_startup(self):
         Gtk.Application.do_startup(self)
 
-        helpers.load_gtk_custom_css(
-            find_data_path("style/yoga-image-optimizer.css")
-        )
+        helpers.load_gtk_custom_css(find_data_path("style/yoga-image-optimizer.css"))
 
         # Action: app.about
         action = Gio.SimpleAction.new("about", None)
@@ -101,9 +99,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 self.config.get("interface", "gtk-theme-name")
             )
         gtk_themes_helpers.set_gtk_application_prefer_dark_theme(
-            self.config.getboolean(
-                "interface", "gtk-application-prefer-dark-theme"
-            )
+            self.config.getboolean("interface", "gtk-application-prefer-dark-theme")
         )
 
     def do_activate(self):
@@ -137,9 +133,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
             self._settings_window = SettingsWindow(
                 self.config, parent_window=self._main_window
             )
-            self._settings_window.connect(
-                "destroy", _on_settings_window_destroyed
-            )
+            self._settings_window.connect("destroy", _on_settings_window_destroyed)
             self._settings_window.show_all()
         self._settings_window.present()
 
@@ -232,9 +226,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
             uuid,
             iter_,
             input_path,
-            lambda iter_, pixbuf: self.image_store.update(
-                iter_, preview=pixbuf
-            ),
+            lambda iter_, pixbuf: self.image_store.update(iter_, preview=pixbuf),
         )
 
     def optimize(self):
@@ -287,9 +279,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
                 self.image_store.STATUS_PENDING,
                 self.image_store.STATUS_IN_PROGRESS,
             ]:
-                self.image_store.update(
-                    i, status=self.image_store.STATUS_CANCELED
-                )
+                self.image_store.update(i, status=self.image_store.STATUS_CANCELED)
 
     def _update_optimization_status(self):
         if self.current_state != self.STATE_OPTIMIZE:

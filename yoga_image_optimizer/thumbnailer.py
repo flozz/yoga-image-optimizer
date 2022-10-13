@@ -55,8 +55,7 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
         image = helpers.open_image_from_path(image_path)
     except Exception as error:
         print(
-            "E: An error occurred when thumbnailing '%s': %s"
-            % (image_path, str(error))
+            "E: An error occurred when thumbnailing '%s': %s" % (image_path, str(error))
         )
     else:
         image_rgba = Image.new("RGBA", image.size)
@@ -102,9 +101,7 @@ def preview_gdk_pixbuf_from_thumbnail(thumbnail_path, size=64):
 
     :rtype: GdkPixbuf.Pixbuff
     """
-    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-        thumbnail_path, size, size, True
-    )
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(thumbnail_path, size, size, True)
     return pixbuf
 
 
@@ -121,8 +118,7 @@ def get_cached_thumbnail_path(file_path):
     _THULBNAIL_SIZE = ["normal", "large", "x-large", "xx-large"]
 
     for thumbnail_path in (
-        helpers.get_thumbnail_path_for_file(file_path, size)
-        for size in _THULBNAIL_SIZE
+        helpers.get_thumbnail_path_for_file(file_path, size) for size in _THULBNAIL_SIZE
     ):
         if os.path.isfile(thumbnail_path):
             return thumbnail_path
@@ -167,9 +163,7 @@ class Thumbnailer:
                 preview_gdk_pixbuf_from_thumbnail, cached_thumbnail_path
             )
         else:
-            future = self._executor.submit(
-                preview_gdk_pixbuf_from_image, image_path
-            )
+            future = self._executor.submit(preview_gdk_pixbuf_from_image, image_path)
         future.add_done_callback(_thumbnail_callback)
 
         self._pending[uuid] = {

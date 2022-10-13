@@ -44,9 +44,7 @@ class StoppableProcessPoolExecutor(ProcessPoolExecutor):
             **kwargs,
         )
         # Monkey patch future.running to return the real running state
-        future.running = functools.partial(
-            _future_running_override, future, is_running
-        )
+        future.running = functools.partial(_future_running_override, future, is_running)
         return future
 
     submit.__doc__ = ProcessPoolExecutor.submit.__doc__
