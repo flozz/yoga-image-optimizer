@@ -197,6 +197,7 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
+  * Fix wrong width and height on rotated JPEGs
   * Fix a crash when generating thumbnails for JPEGs with an invalid
     orientation EXIF tag (#29)
   * Generate thumbnails asynchronously to not freeze the interface when

@@ -24,29 +24,12 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
 
     :rtype: GdkPixbuf.Pixbuff
     """
-
     # Since Pillow v9.1.0, constants on the Image object are deprecated and
     # will be removed in Pillow v10.0.0. This code ansure the compatibility
     # with all versions.
     # See: https://pillow.readthedocs.io/en/stable/deprecations.html#constants
-    Transpose = Image
-    if hasattr(Image, "Transpose"):
-        Transpose = Image.Transpose
-    Resampling = Image
     if hasattr(Image, "Resampling"):
         Resampling = Image.Resampling
-
-    EXIF_TAG_ORIENTATION = 274
-    ORIENTATION_OPERATIONS = {
-        1: [],
-        2: [Transpose.FLIP_LEFT_RIGHT],
-        3: [Transpose.ROTATE_180],
-        4: [Transpose.FLIP_TOP_BOTTOM],
-        5: [Transpose.FLIP_LEFT_RIGHT, Transpose.ROTATE_90],
-        6: [Transpose.ROTATE_270],
-        7: [Transpose.FLIP_LEFT_RIGHT, Transpose.ROTATE_270],
-        8: [Transpose.ROTATE_90],
-    }
 
     image = None
     image_rgba = None
@@ -61,17 +44,6 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
         image_rgba = Image.new("RGBA", image.size)
         image_rgba.paste(image)
         image_rgba.thumbnail([size, size], Resampling.BOX, reducing_gap=1.0)
-
-        # Handle JPEG orientation
-        if image.format == "JPEG":
-            exif = image.getexif()
-            if (
-                EXIF_TAG_ORIENTATION in exif
-                and exif[EXIF_TAG_ORIENTATION] in ORIENTATION_OPERATIONS
-            ):
-                orientation = exif[EXIF_TAG_ORIENTATION]
-                for operation in ORIENTATION_OPERATIONS[orientation]:
-                    image_rgba = image_rgba.transpose(operation)
 
         # fmt: off
         pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
