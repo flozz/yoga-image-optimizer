@@ -189,7 +189,7 @@ class YogaImageOptimizerApplication(Gtk.Application):
             print("E: %s" % str(error))
         except OSError as error:
             print(
-                "E: An error occured when reading '%s': %s",
+                "E: An error occurred when reading '%s': %s",
                 (input_path, str(error)),
             )
         else:
@@ -331,12 +331,12 @@ class YogaImageOptimizerApplication(Gtk.Application):
                         future.result()
                     except Exception as error:
                         print(
-                            "E: An error occured when optimizing '%s': %s"
+                            "E: An error occurred when optimizing '%s': %s"
                             % (image_data["input_file"], str(error))
                         )
                     else:
                         print(
-                            "E: An unknown error occured when optimizing '%s'"
+                            "E: An unknown error occurred when optimizing '%s'"
                             % image_data["input_file"]
                         )
                     self.image_store.update(

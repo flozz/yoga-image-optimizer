@@ -268,7 +268,7 @@ Changelog
     * Use the Adwaita theme by default on Windows as the Windows10 GTK theme
       looks buggy
 
-  * Translations udpated:
+  * Translations updated:
 
     * French
     * Italian (partial)

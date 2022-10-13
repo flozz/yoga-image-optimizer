@@ -55,7 +55,7 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
         image = helpers.open_image_from_path(image_path)
     except Exception as error:
         print(
-            "E: An error occured when thumbnailing '%s': %s"
+            "E: An error occurred when thumbnailing '%s': %s"
             % (image_path, str(error))
         )
     else:
@@ -152,7 +152,7 @@ class Thumbnailer:
                 pixbuf = future.result()
             except OSError as error:
                 print(
-                    "E: An error occured when generating thumbnail for '%s': %s"
+                    "E: An error occurred when generating thumbnail for '%s': %s"
                     % (image_path, str(error))
                 )
                 pixbuf = THUMBNAIL_BROKEN

@@ -5,11 +5,11 @@ Supported image formats.
 
     "<format_id>": {             # Internal ID for the format
         "display_name: str,      # The name of the format as displayed in the UI
-        "exts": [".ext"],        # Possible file extentions for the format (lowercase)
+        "exts": [".ext"],        # Possible file extensions for the format (lowercase)
         "mimetype": str,         # Mimetype (e.g. "image/jpeg")
         "input": bool,           # Is the format supported as input
         "output": bool,          # Is the format supported as output
-        "check_function": None,  # | A fonction to check if a file is in the given format
+        "check_function": None,  # | A function to check if a file is in the given format
                                  # | Check function definition: "def check(format_id, filename)"
     },
 """
@@ -26,7 +26,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/jpeg",
         "input": True,
         "output": True,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "png": {
         "display_name": "PNG",
@@ -34,7 +34,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/png",
         "input": True,
         "output": True,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "webp": {
         "display_name": "WebP",
@@ -42,7 +42,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/webp",
         "input": True,
         "output": True,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "webpl": {
         "display_name": _("WebP (lossless)"),
@@ -59,7 +59,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/bmp",
         "input": True,
         "output": False,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "eps": {
         "display_name": "EPS",
@@ -67,7 +67,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/x-eps",
         "input": True,
         "output": False,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "gif": {
         "display_name": "GIF",
@@ -75,7 +75,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/gif",
         "input": True,
         "output": False,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "icns": {
         "display_name": _("MacOS Icon (ICNS)"),
@@ -83,7 +83,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/x-icns",
         "input": True,
         "output": False,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "ico": {
         "display_name": _("Windows Icon (ICO)"),
@@ -91,7 +91,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/vnd.microsoft.icon",
         "input": True,
         "output": False,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "tga": {
         "display_name": "Truevision TGA",
@@ -99,7 +99,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/x-tga",
         "input": True,
         "output": False,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     "tiff": {
         "display_name": "TIFF",
@@ -107,7 +107,7 @@ IMAGES_FORMATS = {
         "mimetype": "image/tiff",
         "input": True,
         "output": False,
-        "check_function": "_check_extention",
+        "check_function": "_check_extension",
     },
     # ==== TODO ====
     # BLP
@@ -144,7 +144,7 @@ IMAGES_FORMATS = {
 }
 
 
-def _check_extention(format_id, filename):
+def _check_extension(format_id, filename):
     """Check if the given file name matches the format extension.
 
     :param str format_id: The internal format identifier to check.
@@ -153,15 +153,15 @@ def _check_extention(format_id, filename):
     :rtype: bool
     :return: whether or not the file name matches the format extensions.
 
-    >>> _check_extention("jpeg", "test.jpg")
+    >>> _check_extension("jpeg", "test.jpg")
     True
-    >>> _check_extention("jpeg", "test.jpeg")
+    >>> _check_extension("jpeg", "test.jpeg")
     True
-    >>> _check_extention("jpeg", "test.JPEG")
+    >>> _check_extension("jpeg", "test.JPEG")
     True
-    >>> _check_extention("png", "test.png")
+    >>> _check_extension("png", "test.png")
     True
-    >>> _check_extention("png", "test.jpg")
+    >>> _check_extension("png", "test.jpg")
     False
     """
     exts = IMAGES_FORMATS[format_id]["exts"]
