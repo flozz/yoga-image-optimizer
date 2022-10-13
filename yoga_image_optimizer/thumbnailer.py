@@ -28,6 +28,7 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
     # will be removed in Pillow v10.0.0. This code ansure the compatibility
     # with all versions.
     # See: https://pillow.readthedocs.io/en/stable/deprecations.html#constants
+    Resampling = Image
     if hasattr(Image, "Resampling"):
         Resampling = Image.Resampling
 
