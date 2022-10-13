@@ -1,5 +1,4 @@
 import os
-import subprocess
 from pathlib import Path
 
 from gi.repository import Gtk
@@ -621,4 +620,4 @@ class MainWindow(Gtk.ApplicationWindow):
         app = self.get_application()
         iters = self.get_selected_image_iters()
         for iter_ in iters:
-            subprocess.run(["xdg-open", app.image_store.get(iter_)["input_file"]])
+            helpers.open_file(app.image_store.get(iter_)["input_file"])
