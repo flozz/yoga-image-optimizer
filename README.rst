@@ -210,6 +210,7 @@ Changelog
   * Speedup thumbnail generation (at least on Linux) using already generated
     thumbnails from the cache instead of generating them from original images
   * Update the code to not use deprecated constants on newer Pillow versions
+  * Various typo fixed (@kianmeng, #31)
 
 * **v1.1.2:**
 
