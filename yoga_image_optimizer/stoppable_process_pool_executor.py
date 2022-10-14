@@ -1,3 +1,4 @@
+import sys
 import functools
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
@@ -28,9 +29,15 @@ class StoppableProcessPoolExecutor(ProcessPoolExecutor):
 
     def shutdown(self, *args, **kwargs):
         processes = self._processes
-        ProcessPoolExecutor.shutdown(self, *args, **kwargs)
+
+        # Python < 3.9: We should wait else we got an OSError:
+        # https://bugs.python.org/issue36281
+        if sys.version_info.major >= 3 and sys.version_info.minor < 9:
+            kwargs["wait"] = True
+
         for pid, process in processes.items():
             process.kill()
+        ProcessPoolExecutor.shutdown(self, *args, **kwargs)
         self._state_manager.shutdown()
 
     shutdown.__doc__ = ProcessPoolExecutor.shutdown.__doc__

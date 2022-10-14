@@ -1,4 +1,5 @@
 import os
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import CancelledError
 
@@ -152,6 +153,12 @@ class Thumbnailer:
         del self._pending[uuid]
 
     def cancel_all(self):
+        # Python < 3.9: futures must be cancelled manually
+        if sys.version_info.major >= 3 and sys.version_info.minor < 9:
+            for future in [p["future"] for p in self._pending.values()]:
+                future.cancel()
+            self._executor.shutdown(wait=False)
+        else:
+            self._executor.shutdown(wait=False, cancel_futures=True)
         self._pending = {}
-        self._executor.shutdown(wait=False, cancel_futures=True)
         self._executor = ThreadPoolExecutor(max_workers=self._MAX_WORKERS)
