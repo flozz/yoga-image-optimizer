@@ -1,4 +1,4 @@
-SET GVSBUILD_REV=ed2136815a33e33e3ff15e05576416aca704cefc
+SET GVSBUILD_REV=3562dd1de6817acf76f641d148f2c3ad0580407a
 SET ROOTDIR=%CD%
 
 :: Get or update gvsbuild
@@ -17,7 +17,7 @@ IF NOT EXIST build\gvsbuild (
 :: Install the Python version that will be used to build...
 python build.py build ^
     -p x64 ^
-    --vs-ver 19 ^
+    --vs-ver 17 ^
     python
 
 :: ... and patch it to allow our build to work
@@ -27,7 +27,7 @@ COPY %ROOTDIR%\winbuild\patch\cygwinccompiler.py ^
 :: build Gtk with introspection enabled and Adwaita
 python build.py build ^
     -p x64 ^
-    --vs-ver 16 ^
+    --vs-ver 17 ^
     --enable-gi ^
     gtk3 adwaita-icon-theme
 
