@@ -15,12 +15,12 @@ jobs:
     steps:
 
       - name: "Checkout the repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: "Set up Python"
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v3
         with:
-          python-version: 3.9
+          python-version: "3.10"
 
       - name: "Install MSYS2"
         uses: msys2/setup-msys2@v2
@@ -37,7 +37,7 @@ jobs:
           winbuild\build-gtk.bat
 
       - name: "Upload GTK build artifact"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: gtk-build
           path: C:\gtk-build\gtk\x64\release\
@@ -67,7 +67,7 @@ jobs:
           winbuild\build-zip.bat
 
       - name: "Upload the Windows Zip artifact"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: dist/*.zip
 
@@ -79,7 +79,7 @@ jobs:
           winbuild\build-installer.bat
 
       - name: "Upload the Windows Installer artifact"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: dist/*.exe
 
