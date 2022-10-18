@@ -197,24 +197,34 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * Allow opening input image in the default image viewer by double-clicking on
-    its row
-  * Fix wrong width and height on rotated JPEGs
-  * Fix a crash when generating thumbnails for JPEGs with an invalid
-    orientation EXIF tag (#29)
-  * Generate thumbnails asynchronously to not freeze the interface when
-    importing a lot of image (#26)
-  * Do not crash the import / optimization process when encountering broken
-    images (#27)
-  * More compact interface (#17)
-  * Dutch translation (incomplete) (@Vistaus, #25)
-  * German Translation (Jürgen Benvenuti)
-  * Speedup thumbnail generation using BOX sampling instead of LANCZOS
-  * Speedup thumbnail generation (at least on Linux) using already generated
-    thumbnails from the cache instead of generating them from original images
-  * Update the code to not use deprecated constants on newer Pillow versions
-  * Various typo fixed (@kianmeng, #31)
-  * Fix issues related to ``concurrent.futures`` on Python 3.7 and 3.8 (#32)
+  * Interface / User Experience:
+
+    * More compact and less bloated interface (#17)
+    * Allow opening input images in the default image viewer by double-clicking
+      on them
+    * Asynchronous generation and loading of thumbnails to not freeze the
+      interface when importing a lot of images (#26)
+    * Speeded up thumbnail loading on Linux by using already generated
+      thumbnails from the shared cache
+    * Speeded up thumbnail generation using BOX sampling instead of LANCZOS
+
+  * Bugfix / Code Improvement:
+
+    * Fix a crash when generating thumbnails for JPEGs with an invalid
+      orientation EXIF tag (#29)
+    * Fix inverted width and height with rotated JPEGs
+    * Fix a crash of the image import process when generating the thubmanil of
+      a broken image (#27)
+    * Fix a crash of the optimization batch if an error occurs when optimizing
+      an image (#27)
+    * Fix issues related to ``concurrent.futures`` on Python 3.7 and 3.8 (#32)
+    * Updated the code to not use deprecated constants on newer Pillow versions
+    * Various typo fixed (@kianmeng, #31)
+
+  * Translations:
+
+    * Dutch translation (incomplete) (@Vistaus, #25)
+    * German Translation (Jürgen Benvenuti)
 
 * **v1.1.2:**
 
