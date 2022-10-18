@@ -207,6 +207,7 @@ Changelog
     * Speeded up thumbnail loading on Linux by using already generated
       thumbnails from the shared cache
     * Speeded up thumbnail generation using BOX sampling instead of LANCZOS
+    * Displayed a warning icon if the output image is larger than the input one
 
   * Bugfix / Code Improvement:
 
