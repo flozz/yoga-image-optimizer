@@ -13,7 +13,7 @@ if os.path.isfile("README.rst"):
 
 setup(
     name="yoga_image_optimizer",
-    version="1.1.2",
+    version="1.2.0",
     description="A graphical interface to convert and optimize JPEG, PNG and WebP images (based on YOGA)",
     url="https://github.com/flozz/yoga-image-optimizer",
     license="GPLv3",

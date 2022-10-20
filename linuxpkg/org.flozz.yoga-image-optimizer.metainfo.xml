@@ -1,69 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>org.flozz.yoga-image-optimizer</id>
-  <name>YOGA Image Optimizer</name>
-  <project_license>GPL-3.0-or-later</project_license>
-  <summary>A graphical tool to convert and optimize JPEG, PNG and WebP images</summary>
-  <developer_name>Fabien LOISON</developer_name>
 
-  <url type="homepage">https://yoga.flozz.org/</url>
-  <url type="bugtracker">https://github.com/flozz/yoga-image-optimizer/issues</url>
-  <url type="contact">https://contact.flozz.fr/</url>
-  <url type="donation">https://github.com/flozz/yoga-image-optimizer#supporting-this-project</url>
+    <id>org.flozz.yoga-image-optimizer</id>
+    <name>YOGA Image Optimizer</name>
+    <project_license>GPL-3.0-or-later</project_license>
+    <summary>Convert and optimize JPEG, PNG and WebP images</summary>
+    <developer_name>Fabien LOISON</developer_name>
 
-  <categories>
-    <category>Utility</category>
-    <category>Graphics</category>
-  </categories>
+    <url type="homepage">https://yoga.flozz.org/</url>
+    <url type="bugtracker">https://github.com/flozz/yoga-image-optimizer/issues</url>
+    <url type="contact">https://contact.flozz.fr/</url>
+    <url type="donation">https://github.com/flozz/yoga-image-optimizer#supporting-this-project</url>
 
-  <description>
-    <p>
-      YOGA Image Optimizer is a graphical user interface for YOGA Image that
-      converts and optimizes the size of JPEGs, PNGs and WebP image files.
-    </p>
-    <p>
-      You will be able to save about 30 % of space on JPEGs and 20 % on PNGs.
-      Optimizing a WebP image will save you only few percents... but
-      converting a JPEG to a lossy WebP can reduce image size to a half and
-      converting a PNG to a lossy WebP can save you 35 % on average.
-    </p>
-    <p>
-      Please note that image optimization is slow and may require a lot of RAM
-      (for example, the JPEG encoder needs 300 MB of RAM per Mpix).
-    </p>
-  </description>
+    <categories>
+        <category>Utility</category>
+        <category>Graphics</category>
+    </categories>
 
-  <screenshots>
-    <screenshot type="default">
-      <caption>Main window while optimizing images</caption>
-      <image>https://yoga.flozz.org/images/screenshot.png</image>
-    </screenshot>
-  </screenshots>
+    <launchable type="desktop-id">org.flozz.yoga-image-optimizer.desktop</launchable>
+    <provides>
+        <binary>yoga-image-optimizer</binary>
+        <binary>yoga</binary>
+    </provides>
 
-  <releases>
-    <release version="1.1.2" date="2022-09-12">
-      <description>
-        <p>New translations:</p>
-        <ul>
-          <li>Spanish</li>
-          <li>Russian</li>
-        </ul>
-        <p>Updated translation:</p>
-        <ul>
-          <li>Turkish</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.1" date="2021-09-29"/>
-    <release version="1.1.0" date="2021-09-06"/>
-    <release version="1.0.0" date="2021-06-11"/>
-  </releases>
+    <description>
+        <p>
+            YOGA Image Optimizer is a free tool to convert and optimize images. It currently
+            supports JPEG, PNG and WebP as output formats and much more image formats
+            are supported as input.
+        </p>
+        <p>
+            With YOGA, you will be able to save about 30 % of space on JPEGs and 20 % on PNGs.
+            On WebP images, you will only save few percents... but converting a
+            JPEG to a lossy WebP can reduce image size to a half and converting
+            a PNG to a lossy WebP can save you 35 % on average.
+        </p>
+        <p>
+            Please note that image optimization can be slow and may require a lot of RAM, especially
+            for JPEGs. For example, the JPEG encoder needs 300 MB of RAM and 3 min
+            per Mpix (PNG and WebP encoders are less resource hungry).
+        </p>
+    </description>
 
-  <launchable type="desktop-id">org.flozz.yoga-image-optimizer.desktop</launchable>
-  <provides>
-    <binary>yoga-image-optimizer</binary>
-    <binary>yoga</binary>
-  </provides>
-  <metadata_license>CC0-1.0</metadata_license>
-  <content_rating type="oars-1.1" />
+    <screenshots>
+        <screenshot type="default">
+            <caption>Main windows</caption>
+            <image>https://raw.githubusercontent.com/flozz/yoga-image-optimizer/master/screenshot.png</image>
+        </screenshot>
+        <screenshot>
+            <caption>Main view with output options</caption>
+            <image>https://yoga.flozz.org/images/v1.2.0/yoga-image-optimizer_v1.2_output-options.png</image>
+        </screenshot>
+        <screenshot>
+            <caption>Main view with transformation options</caption>
+            <image>https://yoga.flozz.org/images/v1.2.0/yoga-image-optimizer_v1.2_transformations-options.png</image>
+        </screenshot>
+        <screenshot>
+            <caption>Optimization in progress</caption>
+            <image>https://yoga.flozz.org/images/v1.2.0/yoga-image-optimizer_v1.2_optimizing.png</image>
+        </screenshot>
+        <screenshot>
+            <caption>YOGA Image Optimizer settings</caption>
+            <image>https://yoga.flozz.org/images/v1.2.0/yoga-image-optimizer_v1.2_settings.png</image>
+        </screenshot>
+    </screenshots>
+
+    <releases>
+
+        <release version="1.2.0" date="2022-10-20">
+            <description>
+                <p>Interface / User Experience:</p>
+                <ul>
+                    <li>More compact and less bloated interface (#17)</li>
+                    <li>Allow opening input images in the default image viewer by double-clicking
+                        on them</li>
+                    <li>Asynchronous generation and loading of thumbnails to not freeze
+                        the interface when importing a lot of images (#26)</li>
+                    <li>Speeded up thumbnail loading on Linux by using already generated
+                        thumbnails from the shared cache</li>
+                    <li>Speeded up thumbnail generation using BOX sampling instead
+                        of LANCZOS</li>
+                    <li>Displayed a warning icon if the output image is larger than
+                        the input one</li>
+                </ul>
+                <p>Bugfix / Code Improvement:</p>
+                <ul>
+                    <li>Fix a crash when generating thumbnails for JPEGs with an invalid
+                        orientation EXIF tag (#29)</li>
+                    <li>Fix inverted width and height with rotated JPEGs</li>
+                    <li>Fix a crash of the image import process when generating the
+                        thumbnail of a broken image (#27)</li>
+                    <li>Fix a crash of the optimization batch if an error occurs when
+                        optimizing an image (#27)</li>
+                    <li>Fix issues related to "concurrent.futures" on Python 3.7 and
+                        3.8 (#32)</li>
+                    <li>Updated the code to not use deprecated constants on newer Pillow
+                        versions
+                    </li>
+                    <li>Various typo fixed (@kianmeng, #31)</li>
+                </ul>
+                <p>Translations:</p>
+                <ul>
+                    <li>Dutch translation (incomplete) (@Vistaus, #25)</li>
+                    <li>German Translation (Jürgen Benvenuti)</li>
+                </ul>
+            </description>
+        </release>
+
+        <release version="1.1.2" date="2022-09-12">
+            <description>
+                <p>New translations:</p>
+                <ul>
+                    <li>Spanish</li>
+                    <li>Russian</li>
+                </ul>
+                <p>Updated translation:</p>
+                <ul>
+                    <li>Turkish</li>
+                </ul>
+            </description>
+        </release>
+
+        <release version="1.1.1" date="2021-09-29" />
+        <release version="1.1.0" date="2021-09-06" />
+        <release version="1.0.0" date="2021-06-11" />
+
+    </releases>
+
+    <metadata_license>CC0-1.0</metadata_license>
+    <content_rating type="oars-1.1" />
+
 </component>

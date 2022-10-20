@@ -197,6 +197,10 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
+  * Nothing yet :)
+
+* **v1.2.0:**
+
   * Interface / User Experience:
 
     * More compact and less bloated interface (#17)
@@ -214,7 +218,7 @@ Changelog
     * Fix a crash when generating thumbnails for JPEGs with an invalid
       orientation EXIF tag (#29)
     * Fix inverted width and height with rotated JPEGs
-    * Fix a crash of the image import process when generating the thubmanil of
+    * Fix a crash of the image import process when generating the thumbnail of
       a broken image (#27)
     * Fix a crash of the optimization batch if an error occurs when optimizing
       an image (#27)

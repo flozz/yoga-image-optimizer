@@ -10,7 +10,6 @@ This file is a memo for the maintainer.
 * Check the locales list is up to date in ``winbuild/clean-gtk.sh``
 * Check Copyright years in the About dialog
 * Update screenshots
-* Check screenshot links in ``linuxpkg/org.flozz.yoga-image-optimizer.metainfo.xml``
 
 
 1. Release
@@ -19,6 +18,7 @@ This file is a memo for the maintainer.
 * Update version number in ``setup.py``
 * Update version number in ``yoga_image_optimizer/__init__.py``
 * Add release in ``linuxpkg/org.flozz.yoga-image-optimizer.metainfo``
+* Check appstream file: ``appstream-util validate-relax linuxpkg/org.flozz.yoga-image-optimizer.metainfo.xml``
 * Edit / update changelog in ``README.rst``
 * Commit / tag (``git commit -m vX.Y.Z && git tag vX.Y.Z && git push && git push --tags``)
 
