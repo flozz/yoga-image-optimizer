@@ -51,8 +51,8 @@ Package repo: https://github.com/flathub/org.flozz.yoga-image-optimizer
 * Update dependencies (``./update-dependencies.sh``)
 * Test the package:
 
-  * Install the SDK: ``flatpak install flathub org.freedesktop.Sdk//21.08``
-  * Install the runtime: ``flatpak install flathub org.freedesktop.Platform//21.08``
+  * Install the SDK: ``flatpak install flathub org.freedesktop.Sdk//22.08``
+  * Install the runtime: ``flatpak install flathub org.freedesktop.Platform//22.08``
   * Build/install: ``flatpak-builder --force-clean --install --user build org.flozz.yoga-image-optimizer.yml``
   * Run: ``flatpak run --user org.flozz.yoga-image-optimizer``
   * Clean ``flatpak remove --user org.flozz.yoga-image-optimizer``
