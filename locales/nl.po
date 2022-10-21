@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-29 13:56+0200\n"
-"PO-Revision-Date: 2022-09-19 20:25+0200\n"
+"PO-Revision-Date: 2022-10-21 17:45+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
 msgid "Custom Pattern"
@@ -161,7 +161,7 @@ msgstr "Uitvoerbestand"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:592
 msgid "Output"
-msgstr ""
+msgstr "Uitvoer"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:611
 msgid "Maximum size"
@@ -173,7 +173,7 @@ msgstr "Waarden instellen op oorspronkelijke afmetingen"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:715
 msgid "Transformations"
-msgstr ""
+msgstr "Aanpassingen"
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
@@ -223,23 +223,23 @@ msgstr "Afbeelding opslaan als…"
 
 #: yoga_image_optimizer/image_store.py:357
 msgid "Pending"
-msgstr ""
+msgstr "In wachtrij"
 
 #: yoga_image_optimizer/image_store.py:358
 msgid "In progress"
-msgstr ""
+msgstr "In behandeling"
 
 #: yoga_image_optimizer/image_store.py:359
 msgid "Done"
-msgstr ""
+msgstr "Afgerond"
 
 #: yoga_image_optimizer/image_store.py:360
 msgid "Canceled"
-msgstr ""
+msgstr "Afgebroken"
 
 #: yoga_image_optimizer/image_store.py:361
 msgid "Error"
-msgstr ""
+msgstr "Foutmelding"
 
 #: yoga_image_optimizer/main_window.py:242
 msgid "— Multiple files selected —"
