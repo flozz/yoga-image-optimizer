@@ -197,7 +197,7 @@ Changelog
 
 * **[NEXT]** (changes on ``master`` but not released yet):
 
-  * Nothing yet :)
+  * Completed Dutch translation (@Vistaus, #34)
 
 * **v1.2.0:**
 
