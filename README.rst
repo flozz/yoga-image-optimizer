@@ -208,21 +208,21 @@ Changelog
       on them
     * Asynchronous generation and loading of thumbnails to not freeze the
       interface when importing a lot of images (#26)
-    * Speeded up thumbnail loading on Linux by using already generated
+    * Sped up thumbnail loading on Linux by using already generated
       thumbnails from the shared cache
-    * Speeded up thumbnail generation using BOX sampling instead of LANCZOS
+    * Sped up thumbnail generation using BOX sampling instead of LANCZOS
     * Displayed a warning icon if the output image is larger than the input one
 
   * Bugfix / Code Improvement:
 
-    * Fix a crash when generating thumbnails for JPEGs with an invalid
+    * Fixed a crash when generating thumbnails for JPEGs with an invalid
       orientation EXIF tag (#29)
-    * Fix inverted width and height with rotated JPEGs
-    * Fix a crash of the image import process when generating the thumbnail of
+    * Fixed inverted width and height with rotated JPEGs
+    * Fixed a crash of the image import process when generating the thumbnail of
       a broken image (#27)
-    * Fix a crash of the optimization batch if an error occurs when optimizing
+    * Fixed a crash of the optimization batch if an error occurs when optimizing
       an image (#27)
-    * Fix issues related to ``concurrent.futures`` on Python 3.7 and 3.8 (#32)
+    * Fixed issues related to ``concurrent.futures`` on Python 3.7 and 3.8 (#32)
     * Updated the code to not use deprecated constants on newer Pillow versions
     * Various typo fixed (@kianmeng, #31)
 
@@ -244,7 +244,7 @@ Changelog
 
 * **v1.1.1:**
 
-  * Fix the abnormal amount of processes created (and not cleaned) when
+  * Fixed the abnormal amount of processes created (and not cleaned) when
     starting an optimization (#13)
 
 * **v1.1.0:**
@@ -280,7 +280,7 @@ Changelog
 
     * Do not allow to remove images with the ``<Del>`` key while an
       optimization is in progress
-    * Fix image previews: no more ugly thumbnails with indexed images
+    * Fixed image previews: no more ugly thumbnails with indexed images
     * Image previews now honor the JPEG orientation EXIF tag
 
   * Windows specific changes:
@@ -303,23 +303,23 @@ Changelog
 
 * **v1.0.1:**
 
-  * Fix PyPI packages
+  * Fixed PyPI packages
   * NOTE: no new release for Windows as nothing changed
 
 * **v1.0.0:**
 
-  * Fix ``[-]`` button do not remove selected image
+  * Fixed ``[-]`` button do not remove selected image
   * Update site URL
 
 * **v0.99.2 (beta):**
 
-  * Fix package data not installed while installing with pip (#3)
+  * Fixed package data not installed while installing with pip (#3)
   * NOTE: no new release for Windows as nothing changed
 
 * **v0.99.1 (beta):**
 
-  * Fix site URL in setup.py
-  * Fix version number
+  * Fixed site URL in setup.py
+  * Fixed version number
 
 * **v0.99.0 (beta):**
 

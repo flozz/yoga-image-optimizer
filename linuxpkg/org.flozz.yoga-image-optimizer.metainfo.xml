@@ -76,23 +76,23 @@
                         on them</li>
                     <li>Asynchronous generation and loading of thumbnails to not freeze
                         the interface when importing a lot of images (#26)</li>
-                    <li>Speeded up thumbnail loading on Linux by using already generated
+                    <li>Sped up thumbnail loading on Linux by using already generated
                         thumbnails from the shared cache</li>
-                    <li>Speeded up thumbnail generation using BOX sampling instead
+                    <li>Sped up thumbnail generation using BOX sampling instead
                         of LANCZOS</li>
                     <li>Displayed a warning icon if the output image is larger than
                         the input one</li>
                 </ul>
                 <p>Bugfix / Code Improvement:</p>
                 <ul>
-                    <li>Fix a crash when generating thumbnails for JPEGs with an invalid
+                    <li>Fixed a crash when generating thumbnails for JPEGs with an invalid
                         orientation EXIF tag (#29)</li>
-                    <li>Fix inverted width and height with rotated JPEGs</li>
-                    <li>Fix a crash of the image import process when generating the
+                    <li>Fixed inverted width and height with rotated JPEGs</li>
+                    <li>Fixed a crash of the image import process when generating the
                         thumbnail of a broken image (#27)</li>
-                    <li>Fix a crash of the optimization batch if an error occurs when
+                    <li>Fixed a crash of the optimization batch if an error occurs when
                         optimizing an image (#27)</li>
-                    <li>Fix issues related to "concurrent.futures" on Python 3.7 and
+                    <li>Fixed issues related to "concurrent.futures" on Python 3.7 and
                         3.8 (#32)</li>
                     <li>Updated the code to not use deprecated constants on newer Pillow
                         versions
