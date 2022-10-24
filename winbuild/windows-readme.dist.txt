@@ -11,7 +11,8 @@ Usage
 Just double-click on "yoga-image-optimizer.exe" to start the software.
 
 
-Project's page
---------------
+Project's pages
+---------------
 
-https://github.com/flozz/yoga-image-optimizer
+* https://yoga.flozz.org/
+* https://github.com/flozz/yoga-image-optimizer
