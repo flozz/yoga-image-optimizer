@@ -64,7 +64,7 @@ Package repo: https://github.com/flathub/org.flozz.yoga-image-optimizer
 
 
 5. Publish Github Release
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 * Make a release on Github
 * Add changelog
