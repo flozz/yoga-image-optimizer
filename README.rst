@@ -198,6 +198,7 @@ Changelog
 * **[NEXT]** (changes on ``master`` but not released yet):
 
   * Completed Dutch translation (@Vistaus, #34)
+  * Added Brazilian Portuguese translation (@Kazevic, #36)
   * Added Python 3.11 support
 
 * **v1.2.0:**
