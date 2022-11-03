@@ -1,3 +1,9 @@
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
 msgid "Custom Pattern"
 msgstr "Padrão customizado"
@@ -176,7 +182,7 @@ msgstr "Bitmap do Windows"
 
 #: yoga_image_optimizer/image_formats.py:81
 msgid "MacOS Icon (ICNS)"
-msgstr "Ícone do macOS (ICNS"
+msgstr "Ícone do macOS (ICNS)"
 
 #: yoga_image_optimizer/image_formats.py:89
 msgid "Windows Icon (ICO)"
