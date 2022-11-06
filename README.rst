@@ -1,9 +1,9 @@
 YOGA Image Optimizer
 ====================
 
-|Github| |Discord| |Github Actions| |Black| |License|
+|GitHub| |License| |Discord| |Github Actions| |Black|
 
-**YOGA Image Optimizer** is a graphical user interface for `YOGA Image <https://github.com/wanadev/yoga>`_ that **converts and optimizes** the size of **JPEGs, PNGs and WebP** image files.
+**YOGA Image Optimizer** is a graphical user interface for `YOGA Image <https://github.com/wanadev/yoga>`_ that **converts and optimizes** the size of **JPEG, PNG and WebP** image files.
 
 .. figure:: ./screenshot.png
    :alt: YOGA Image Optimizer screenshot
@@ -12,21 +12,22 @@ YOGA Image Optimizer
 Requirements
 ------------
 
-* Python >= 3.7,
-* YOGA >= 1.1.0,
-* PyCairo,
-* PyGObject >= 3.36,
+* PyCairo
+* PyGObject ≥ 3.36
+* Python ≥ 3.7
+* YOGA ≥ 1.1.0
 
 
-Install
--------
+Installation
+------------
 
-ArchLinux
-~~~~~~~~~
+Arch Linux
+~~~~~~~~~~
 
 The package is available on AUR (``yoga-image-optimizer``):
 
-* https://aur.archlinux.org/packages/yoga-image-optimizer/
+* https://aur.archlinux.org/packages/yoga-image-optimizer
+
 
 Flatpak (Linux)
 ~~~~~~~~~~~~~~~
@@ -35,10 +36,25 @@ A Flatpak package is available on Flathub. This is currently the simplest way to
 
 * https://flathub.org/apps/details/org.flozz.yoga-image-optimizer
 
+
+Linux (PyPI)
+~~~~~~~~~~~~
+
+You must install the dependencies on your system first. It can be done via the following command on Debian and Ubuntu::
+
+    sudo apt install git build-essential python3 python3-dev python3-pip libgirepository1.0-dev libcairo2-dev pkg-config gir1.2-gtk-3.0
+
+Then install YOGA Image Optimizer with pip::
+
+    sudo pip3 install yoga-image-optimizer
+
+**NOTE:** Installing from PyPI will not install ``.desktop`` file and manual page; you will not be able to run the software from your graphical app menu (GNOME Shell etc.).
+
+
 Linux (source)
 ~~~~~~~~~~~~~~
 
-First, you will need to install some dependencies on your system. On Debian and Ubuntu this can be achieved with the following command::
+You must install the dependencies on your system first. It can be done via the following command on Debian and Ubuntu::
 
     sudo apt install git build-essential python3 python3-dev python3-pip libgirepository1.0-dev libcairo2-dev pkg-config gir1.2-gtk-3.0
 
@@ -51,27 +67,15 @@ Then install YOGA Image Optimizer using pip::
 
     sudo pip3 install .
 
-Finally, you can install desktop file, icons and manual using the following command::
+Finally, you can install the ``.desktop`` file, icons and manual page using the following command::
 
     sudo ./linuxpkg/copy-data.sh /usr
 
-Linux (PyPI)
-~~~~~~~~~~~~
-
-First, you will need to install some dependencies on your system. On Debian and Ubuntu this can be achieved with the following command::
-
-    sudo apt install git build-essential python3 python3-dev python3-pip libgirepository1.0-dev libcairo2-dev pkg-config gir1.2-gtk-3.0
-
-Then install YOGA Image Optimizer using pip::
-
-    sudo pip3 install yoga-image-optimizer
-
-**NOTE:** Installing from PyPI will not install ``.desktop`` file and man page. You will not be able to run the software from your graphical app menu (GNOME Shell,...).
 
 Windows
 ~~~~~~~
 
-Download either the portable .zip version or the Windows installer from the release page:
+Download either the portable .zip version or the Windows installer from the releases page:
 
 * https://github.com/flozz/yoga-image-optimizer/releases
 
@@ -79,13 +83,18 @@ Download either the portable .zip version or the Windows installer from the rele
 Usage
 -----
 
-To run YOGA Image Optimizer, just type the following command::
+Just type the following command to run YOGA Image Optimizer::
 
     yoga-image-optimizer
 
-You can also pass some image files to open::
+You can also give some image files to open::
 
     yoga-image-optimizer  image1.png  image2.jpeg
+
+
+**NOTE:** If you installed YOGA Image Optimizer from Flathub, you will have to run the following command instead::
+
+    flatpak run org.flozz.yoga-image-optimizer  image1.png  image2.jpeg
 
 
 Contributing
@@ -96,39 +105,40 @@ Questions
 
 If you have any question, you can:
 
-* `open an issue <https://github.com/flozz/yoga-image-optimizer/issues>`_ on Github,
-* or `ask on Discord <https://discord.gg/P77sWhuSs4>`_ (I am not always available for chatting but I try to answer to everyone).
+* `Open an issue <https://github.com/flozz/yoga-image-optimizer/issues>`_ on GitHub
+* `Ask on Discord <https://discord.gg/P77sWhuSs4>`_ (I am not always available to chat, but I try to answer to everyone)
+
 
 Bugs
 ~~~~
 
-If you found a bug, please `open an issue <https://github.com/flozz/yoga-image-optimizer/issues>`_ on Github with as much information as possible:
+Please `open an issue <https://github.com/flozz/yoga-image-optimizer/issues>`_ on GitHub with as much information as possible if you found a bug:
 
-* What is your operating system / Linux distribution (and its version),
-* How you installed the software,
-* All the logs and message outputted by the software,
-* ...
+* Your operating system / Linux distribution (and its version)
+* How you installed the software
+* All the logs and message outputted by the software
+* etc.
 
-Pull Requests
+
+Pull requests
 ~~~~~~~~~~~~~
 
-Please consider `filing a bug <https://github.com/flozz/yoga-image-optimizer/issues>`_ before starting to work on a new feature. This will allow us to discuss the best way to do it. This is of course not necessary if you just want to fix some typo or small errors in the code.
+Please consider `filing a bug <https://github.com/flozz/yoga-image-optimizer/issues>`_ before starting to work on a new feature; it will allow us to discuss the best way to do it. It is obviously unnecessary if you just want to fix a typo or small errors in the code.
 
-Please note that your code must pass tests and follow the coding style defined by the `pep8 <https://pep8.org/>`_. `Flake8 <https://flake8.pycqa.org/en/latest/>`_ and `Black <https://black.readthedocs.io/en/stable/>`_ are used on this project to enforce coding style.
+Please note that your code must follow the coding style defined by the `pep8 <https://pep8.org>`_ and pass tests. `Black <https://black.readthedocs.io/en/stable>`_ and `Flake8 <https://flake8.pycqa.org/en/latest>`_ are used on this project to enforce the coding style.
 
-Translating YOGA Image Optimizer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the software is not available in your language, you can help translate it.
+Translate YOGA Image Optimizer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can help translating it if the software is not available on your language.
 
 To translate YOGA Image Optimizer, you can:
 
-* submit your translations using a Pull Request on Github,
-* or translate online using POEditor:
+* Submit your translations creating a pull request on GitHub
+* Translate online via `POEditor <https://poeditor.com/join/project/RoQ2r9rv89>`_
 
-  * →  https://poeditor.com/join/project/RoQ2r9rv89
-
-submit your translations using a Pull Request on Github. Do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, e-mail is optional)::
+If you submit your translations with a pull request on GitHub. Do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, email is optional)::
 
     #: yoga_image_optimizer/about_dialog.py:38
     msgid "translator-credits"
@@ -137,10 +147,10 @@ submit your translations using a Pull Request on Github. Do not forget to add yo
     "Other TRANSLATOR <foobar@example.org>\n"
 
 
-Running The Tests
-~~~~~~~~~~~~~~~~~
+Run the tests
+~~~~~~~~~~~~~
 
-You will first have to install `nox <https://nox.thea.codes/>`_::
+You must install `Nox <https://nox.thea.codes/>`_ first::
 
     pip3 install nox
 
@@ -152,24 +162,27 @@ or run the tests::
 
     nox --session test
 
-To run the tests only for a specific Python version, you can use following commands (the corresponding Python interpreter must be installed on your machine)::
+You can use following commands to run the tests only on a certain Python version (the corresponding Python interpreter must be installed on your machine)::
 
     nox --session test-3.7
     nox --session test-3.8
     nox --session test-3.9
+    nox --session test-3.10
+    nox --session test-3.11
 
-You can also fix automatically coding style errors with::
+You can also fix coding style errors automatically with::
 
     nox -s black_fix
 
-Extract, Update or Build Translations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You will first have to install `nox <https://nox.thea.codes/>`_::
+Build, extract or update build translations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You must install `nox <https://nox.thea.codes>`_ first::
 
     pip3 install nox
 
-To extract messages and update locales run::
+To extract messages and update locales, run::
 
     nox --session locales_update
 
@@ -177,68 +190,68 @@ To compile locales, run::
 
     nox --session locales_compile
 
-**NOTE:** you will need to have ``xgettext``, ``msgmerge`` and ``msgfmt`` executable installed on your system to run the above commands. On Debian / Ubuntu, they can be installed with the following command::
+**NOTE:** you must have ``msgfmt``, ``msgmerge`` and ``xgettext`` executable installed on your system to run the above commands. It can be done via the following command on Debian and Ubuntu::
 
     sudo apt install gettext
 
 
-Supporting this project
------------------------
+Support this project
+--------------------
 
-Wanna support this project?
+Want to support this project?
 
-* `☕️ Buy me a coffee <https://www.buymeacoffee.com/flozz>`__,
-* `❤️ sponsor me on Github <https://github.com/sponsors/flozz>`__,
-* `💵️ or give me a tip on PayPal <https://www.paypal.me/0xflozz>`__.
+* `☕️ Buy me a coffee <https://www.buymeacoffee.com/flozz>`__
+* `💵️ Give me a tip on PayPal <https://www.paypal.me/0xflozz>`__
+* `❤️ Sponsor me on GitHub <https://github.com/sponsors/flozz>`__
 
 
 Changelog
 ---------
 
-* **[NEXT]** (changes on ``master`` but not released yet):
+* **[NEXT]** (changes on ``master``, but not released yet):
 
-  * Completed Dutch translation (@Vistaus, #34)
   * Added Brazilian Portuguese translation (@Kazevic, #36)
+  * Completed Dutch translation (@Vistaus, #34)
   * Added Python 3.11 support
 
 * **v1.2.0:**
 
-  * Interface / User Experience:
+  * Interface / user experience:
 
     * More compact and less bloated interface (#17)
     * Allow opening input images in the default image viewer by double-clicking
-      on them
+      them
     * Asynchronous generation and loading of thumbnails to not freeze the
       interface when importing a lot of images (#26)
-    * Sped up thumbnail loading on Linux by using already generated
-      thumbnails from the shared cache
+    * Sped up thumbnail loading on Linux by using already generated thumbnails
+      from the shared cache
     * Sped up thumbnail generation using BOX sampling instead of LANCZOS
-    * Displayed a warning icon if the output image is larger than the input one
+    * Show a warning icon if the output image is larger than the input one
 
-  * Bugfix / Code Improvement:
+  * Fixes / improvements:
 
     * Fixed a crash when generating thumbnails for JPEGs with an invalid
       orientation EXIF tag (#29)
+    * Fixed a crash on the image import process when generating a broken
+      image's thumbnail (#27)
+    * Fixed a crash on the optimization batch if an error occurs when
+      optimizing an image (#27)
     * Fixed inverted width and height with rotated JPEGs
-    * Fixed a crash of the image import process when generating the thumbnail of
-      a broken image (#27)
-    * Fixed a crash of the optimization batch if an error occurs when optimizing
-      an image (#27)
-    * Fixed issues related to ``concurrent.futures`` on Python 3.7 and 3.8 (#32)
+    * Fixed issues related to ``concurrent.futures`` on Python 3.7 and 3.8
+      (#32)
     * Updated the code to not use deprecated constants on newer Pillow versions
-    * Various typo fixed (@kianmeng, #31)
 
-  * Translations:
+  * New translations:
 
-    * Dutch translation (incomplete) (@Vistaus, #25)
-    * German Translation (Jürgen Benvenuti)
+    * Dutch (incomplete) (@Vistaus, #25)
+    * German (Jürgen Benvenuti)
 
 * **v1.1.2:**
 
   * New translations:
 
-    * Spanish
     * Russian
+    * Spanish
 
   * Updated translation:
 
@@ -246,7 +259,7 @@ Changelog
 
 * **v1.1.1:**
 
-  * Fixed the abnormal amount of processes created (and not cleaned) when
+  * Fixed the abnormal amount of processes created and not cleaned when
     starting an optimization (#13)
 
 * **v1.1.0:**
@@ -254,20 +267,20 @@ Changelog
   * `YOGA <https://github.com/wanadev/yoga>`_ updated to v1.1.0:
 
     * Honor the JPEG orientation EXIF tag
-    * JPEG optimization improved: up to 7.3 % of additional size reduction
-      since previous version.
+    * JPEG optimization improved: up to 7.3% of additional size reduction since
+      previous version
     * YOGA can no more output a PNG larger than the input one when performing
       a PNG to PNG optimization
 
-  * Settings were added:
+  * Added a setting window:
 
-    * Theme selection / dark theme preference
     * Number of threads used to optimize images
-    * Setting the default output locations / name or pattern of output files
+    * Setting the default output locations / name or pattern of output files
+    * Theme selection / dark theme preference
 
   * "Optimize" and "Stop" buttons behaviour improved:
 
-    * The "Stop" button now stops the running optimizations and not only the
+    * The "Stop" button now stops the running optimizations, not just the
       pending ones
     * Display a "Canceled" status on non-optimized image while the "Stop"
       button is clicked
@@ -275,48 +288,48 @@ Changelog
 
   * Allow to resize images (downscale only, preserve ratio)
 
-  * Multiselection: Multiple files can now be selected and their parameters can
-    be edited all at once
-
-  * Bug fix / improvements:
-
-    * Do not allow to remove images with the ``<Del>`` key while an
-      optimization is in progress
-    * Fixed image previews: no more ugly thumbnails with indexed images
-    * Image previews now honor the JPEG orientation EXIF tag
+  * Multiselection: multiple files can now be selected and their parameters can
+    be edited all at once (multiselection)
 
   * Windows specific changes:
 
-    * Use the Adwaita theme by default on Windows as the Windows10 GTK theme
+    * Use the Adwaita theme by default on Windows; the Windows10 GTK theme
       looks buggy
 
-  * Translations updated:
+  * Fixes / improvements:
+
+    * Do not allow to remove images with the ``<Del>`` key while an
+      optimization is in progress
+    * Fixed image previews; no more ugly thumbnails with indexed images
+    * Image previews now honor the JPEG orientation EXIF tag
+
+  * Updated translations:
 
     * French
     * Italian (partial)
     * Occitan
     * Turkish (partial)
 
-  * **NOTE for packagers:**
+  * **Note for packagers:**
 
-    * YOGA >= 1.1.0 is now required
-    * YOGA v1.1.0 requires a new dependency: `mozjpeg-lossless-optimization
+    * YOGA ≥ 1.1.0 is now needed
+    * YOGA v1.1.0 has a new dependency: `mozjpeg-lossless-optimization
       <https://github.com/wanadev/mozjpeg-lossless-optimization>`_
 
 * **v1.0.1:**
 
   * Fixed PyPI packages
-  * NOTE: no new release for Windows as nothing changed
+  * **NOTE:** No new version for Windows; nothing changed
 
 * **v1.0.0:**
 
-  * Fixed ``[-]`` button do not remove selected image
-  * Update site URL
+  * Fixed ``[-]`` button not removing the chosen image
+  * Updated site URL
 
 * **v0.99.2 (beta):**
 
   * Fixed package data not installed while installing with pip (#3)
-  * NOTE: no new release for Windows as nothing changed
+  * **NOTE:** No new version for Windows; nothing changed
 
 * **v0.99.1 (beta):**
 
@@ -327,11 +340,14 @@ Changelog
 
   * Initial release
   * Linux and Windows support
-  * Optimizes PNG, JPEG and WebP image formats
+  * Optimizes JPEG, PNG and WebP image formats
 
 
-.. |Github| image:: https://img.shields.io/github/stars/flozz/yoga-image-optimizer?label=Github&logo=github
+.. |GitHub| image:: https://img.shields.io/github/stars/flozz/yoga-image-optimizer?label=GitHub&logo=github
    :target: https://github.com/flozz/yoga-image-optimizer
+
+.. |License| image:: https://img.shields.io/github/license/flozz/yoga-image-optimizer
+   :target: https://github.com/flozz/yoga-image-optimizer/blob/master/COPYING
 
 .. |Discord| image:: https://img.shields.io/badge/chat-Discord-8c9eff?logo=discord&logoColor=ffffff
    :target: https://discord.gg/P77sWhuSs4
@@ -340,7 +356,4 @@ Changelog
    :target: https://github.com/flozz/yoga-image-optimizer/actions
 
 .. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://black.readthedocs.io/en/stable/
-
-.. |License| image:: https://img.shields.io/github/license/flozz/yoga-image-optimizer
-   :target: https://github.com/flozz/yoga-image-optimizer/blob/master/COPYING
+   :target: https://black.readthedocs.io/en/stable
