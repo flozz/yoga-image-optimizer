@@ -21,7 +21,7 @@ setup(
         "News": "https://yoga.flozz.org/#news",
         "Issues": "https://github.com/flozz/yoga-image-optimizer/issues",
         "Chat": "https://discord.gg/P77sWhuSs4",
-        "Donate": "https://github.com/flozz/yoga-image-optimizer#supporting-this-project",
+        "Donate": "https://github.com/flozz/yoga-image-optimizer#support-this-project",
     },
     license="GPLv3",
     long_description=long_description,
