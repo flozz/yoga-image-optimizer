@@ -150,7 +150,7 @@ If you submit your translations with a pull request on GitHub. Do not forget to 
 Run the tests
 ~~~~~~~~~~~~~
 
-You must install `Nox <https://nox.thea.codes/>`_ first::
+You must install `Nox <https://nox.thea.codes/>`__ first::
 
     pip3 install nox
 
@@ -178,7 +178,7 @@ You can also fix coding style errors automatically with::
 Build, extract or update build translations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must install `nox <https://nox.thea.codes>`_ first::
+You must install `Nox <https://nox.thea.codes>`__ first::
 
     pip3 install nox
 
