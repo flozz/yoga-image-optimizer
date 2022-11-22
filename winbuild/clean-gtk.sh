@@ -55,7 +55,7 @@ cd -
 # Keep only supported locales
 cd yoga-image-optimizer.dist/gtk/share/
 mkdir -p locale.keep
-for l10n in fr en it oc tr es ru pt_BR de
+for l10n in fr en it oc tr es ru pt_BR de nl
 do
     mv locale/$l10n locale.keep/$l0n
 done
