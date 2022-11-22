@@ -57,7 +57,7 @@ Package repo: https://github.com/flathub/org.flozz.yoga-image-optimizer
   * Run: ``flatpak run --user org.flozz.yoga-image-optimizer``
   * Clean ``flatpak remove --user org.flozz.yoga-image-optimizer``
 
-* Create branch: ``git checkout -b release-vX.Y.Z && ``
+* Create branch: ``git checkout -b release-vX.Y.Z``
 * Publish: commit / tag / push: ``git commit -m vX.Y.Z && git tag vX.Y.Z && git push && git push --tags``
 * Create Pull Request
 * Merge Pull Request once tests passed
