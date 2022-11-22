@@ -74,6 +74,15 @@ def local_path_to_gvfs_uri(path):
     return gvfs.get_file_for_path(path).get_uri()
 
 
+def is_running_in_flatpak():
+    """Check if the application is running in Flatpak.
+
+    :rtype: bool
+    :return: True if running in Flatpak, False else.
+    """
+    return os.path.isfile("/app/manifest.json")
+
+
 def get_thumbnail_path_for_file(path, size="normal"):
     """Get the path of the cached thumbnail for the given file and size.
 
@@ -96,7 +105,11 @@ def get_thumbnail_path_for_file(path, size="normal"):
     """
     if size not in ["normal", "large", "x-large", "xx-large"]:
         raise ValueError("Invalid size '%s'" % str(size))
-    cache_dir = GLib.get_user_cache_dir()
+    cache_dir = None
+    if is_running_in_flatpak():
+        cache_dir = os.path.join(os.environ.get("HOME", ""), ".cache")
+    if not cache_dir or not os.path.isdir(cache_dir):
+        cache_dir = GLib.get_user_cache_dir()
     file_uri = local_path_to_gvfs_uri(path)
     file_uri_md5 = hashlib.md5(file_uri.encode("UTF-8")).hexdigest()
     return os.path.join(cache_dir, "thumbnails", size, "%s.png" % file_uri_md5)

@@ -212,7 +212,8 @@ Changelog
 
   * Added Brazilian Portuguese translation (@Kazevic, #36)
   * Completed Dutch translation (@Vistaus, #34)
-  * Added Python 3.11 support
+  * Added Python 3.11 support (@flozz)
+  * Flatpak: use the real user cache, not the one of the Flatpak application (@flozz)
 
 * **v1.2.0:**
 
