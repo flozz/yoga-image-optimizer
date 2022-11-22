@@ -17,9 +17,9 @@ This file is a memo for the maintainer.
 
 * Update version number in ``setup.py``
 * Update version number in ``yoga_image_optimizer/__init__.py``
+* Edit / update changelog in ``README.rst``
 * Add release in ``linuxpkg/org.flozz.yoga-image-optimizer.metainfo``
 * Check appstream file: ``appstream-util validate-relax linuxpkg/org.flozz.yoga-image-optimizer.metainfo.xml``
-* Edit / update changelog in ``README.rst``
 * Commit / tag (``git commit -m vX.Y.Z && git tag vX.Y.Z && git push && git push --tags``)
 
 

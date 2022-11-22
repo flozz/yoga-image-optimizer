@@ -210,10 +210,20 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
-  * Added Brazilian Portuguese translation (@Kazevic, #36)
-  * Completed Dutch translation (@Vistaus, #34)
-  * Added Python 3.11 support (@flozz)
-  * Flatpak: use the real user cache, not the one of the Flatpak application (@flozz)
+  * Nothing yet :)
+
+* **v1.2.1:**
+
+  * Fixes / improvements:
+
+    * Flatpak: use the real user cache, not the one of the Flatpak application
+      (@flozz)
+    * Added Python 3.11 support (@flozz)
+
+  * Translations:
+
+    * Added Brazilian Portuguese translation (@Kazevic, #36)
+    * Completed Dutch translation (@Vistaus, #34)
 
 * **v1.2.0:**
 

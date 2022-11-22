@@ -67,6 +67,22 @@
 
     <releases>
 
+        <release version="1.2.1" date="2022-11-22">
+            <description>
+                <p>Fixes / improvements:</p>
+                <ul>
+                    <li>Flatpak: use the real user cache, not the one of the Flatpak
+                        application (@flozz)</li>
+                    <li>Added Python 3.11 support (@flozz)</li>
+                </ul>
+                <p>Translations:</p>
+                <ul>
+                    <li>Added Brazilian Portuguese translation (@Kazevic, #36)</li>
+                    <li>Completed Dutch translation (@Vistaus, #34)</li>
+                </ul>
+            </description>
+        </release>
+
         <release version="1.2.0" date="2022-10-20">
             <description>
                 <p>Interface / User Experience:</p>
@@ -78,22 +94,22 @@
                         the interface when importing a lot of images (#26)</li>
                     <li>Sped up thumbnail loading on Linux by using already generated
                         thumbnails from the shared cache</li>
-                    <li>Sped up thumbnail generation using BOX sampling instead
-                        of LANCZOS</li>
+                    <li>Sped up thumbnail generation using BOX sampling instead of
+                        LANCZOS</li>
                     <li>Displayed a warning icon if the output image is larger than
                         the input one</li>
                 </ul>
                 <p>Bugfix / Code Improvement:</p>
                 <ul>
-                    <li>Fixed a crash when generating thumbnails for JPEGs with an invalid
-                        orientation EXIF tag (#29)</li>
+                    <li>Fixed a crash when generating thumbnails for JPEGs with an
+                        invalid orientation EXIF tag (#29)</li>
                     <li>Fixed inverted width and height with rotated JPEGs</li>
                     <li>Fixed a crash of the image import process when generating the
                         thumbnail of a broken image (#27)</li>
-                    <li>Fixed a crash of the optimization batch if an error occurs when
-                        optimizing an image (#27)</li>
-                    <li>Fixed issues related to "concurrent.futures" on Python 3.7 and
-                        3.8 (#32)</li>
+                    <li>Fixed a crash of the optimization batch if an error occurs
+                        when optimizing an image (#27)</li>
+                    <li>Fixed issues related to "concurrent.futures" on Python 3.7
+                        and 3.8 (#32)</li>
                     <li>Updated the code to not use deprecated constants on newer Pillow
                         versions
                     </li>
