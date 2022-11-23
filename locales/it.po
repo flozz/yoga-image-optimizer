@@ -1,14 +1,14 @@
 # ITALIAN TRANSLATION FOR YOGA-IMAGE-OPTIMIZER.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# ALBANO BATTISTELLA <albano_battistella@hotmail.com>, 2021.
+# ALBANO BATTISTELLA <albano_battistella@hotmail.com>, 2021,2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-29 13:56+0200\n"
-"PO-Revision-Date: 2022-09-18 16:33+0200\n"
+"PO-Revision-Date: 2022-11-22 21:33+0200\n"
 "Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language-Team: ITALIAN <LL@li.org>\n"
 "Language: it\n"
@@ -19,19 +19,19 @@ msgstr ""
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
 msgid "Custom Pattern"
-msgstr ""
+msgstr "Modello personalizzato"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:29
 msgid "Cancel"
-msgstr ""
+msgstr "Cancella"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:43
 msgid "Apply"
-msgstr ""
+msgstr "Applica"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:74
 msgid "Custom pattern"
-msgstr ""
+msgstr "Modello personalizzato"
 
 #. DO NOT translate "{FILENAME}" and "{EXT}"
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:98
@@ -42,61 +42,67 @@ msgid ""
 "・ <b>{EXT}</b> - the extension of the output file (depending of the "
 "selected output format)"
 msgstr ""
+"Nel modello, puoi utilizzare le seguenti variabili:\n"
+"・ <b>{FILENAME}</b> - il nome del file di input senza l'estensione\n"
+"・ <b>{EXT}</b> - l'estensione del file di output (a seconda del "
+"formato di output selezionato)"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:45
 msgid "Number of threads"
-msgstr ""
+msgstr "Numero di thread"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:56
 msgid ""
 "The number of threads determines the number of images that will be optimized "
 "at the same time. This value should not be higher than your CPU count."
 msgstr ""
+"Il numero di thread determina il numero di immagini che verranno ottimizzate"
+"allo stesso tempo. Questo valore non dovrebbe essere superiore al conteggio della tua CPU."
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:87
 msgid "Optimization"
-msgstr ""
+msgstr "Ottimizzazione"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:123
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "Preferisci il tema scuro"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:135
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:174
 msgid "Interface"
-msgstr ""
+msgstr "Interfaccia"
 
 #. Do not translate the '.opti.png' part of the example file name, it is not localized
 #: yoga_image_optimizer/data/ui/settings-window.glade:208
 #: yoga_image_optimizer/data/ui/main-window.glade:215
 msgid "Next to the input file (→ image.opti.png)"
-msgstr ""
+msgstr "Accanto al file di input (→ image.opti.png)"
 
 #. Do not translate the 'optimized/' part of the example file path, it is not localized
 #: yoga_image_optimizer/data/ui/settings-window.glade:224
 #: yoga_image_optimizer/data/ui/main-window.glade:229
 msgid "In a subfolder (→ optimized/image.png)"
-msgstr ""
+msgstr "In una sottocartella (→ ottimizzato/image.png)"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:241
 msgid "Custom pattern:"
-msgstr ""
+msgstr "Modello personalizzato:"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:300
 msgid "Default output files location"
-msgstr ""
+msgstr "Posizione predefinita dei file di output"
 
 #: yoga_image_optimizer/data/ui/settings-window.glade:320
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:46
 #: yoga_image_optimizer/settings_window.py:17
 msgid "Settings"
-msgstr ""
+msgstr "Impostazioni"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:61
 msgid "About"
@@ -128,11 +134,11 @@ msgstr "Ferma"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:243
 msgid "Custom pattern..."
-msgstr ""
+msgstr "Modello personalizzato..."
 
 #: yoga_image_optimizer/data/ui/main-window.glade:257
 msgid "Browse..."
-msgstr ""
+msgstr "Sfoglia..."
 
 #: yoga_image_optimizer/data/ui/main-window.glade:350
 msgid "Output format"
@@ -153,19 +159,19 @@ msgstr "File di output"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:592
 msgid "Output"
-msgstr ""
+msgstr "Output"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:611
 msgid "Maximum size"
-msgstr ""
+msgstr "Dimensione massima"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:683
 msgid "Reset values with the original image dimensions"
-msgstr ""
+msgstr "Ripristina i valori con le dimensioni dell'immagine originale"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:715
 msgid "Transformations"
-msgstr ""
+msgstr "Trasformazioni"
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
@@ -211,7 +217,7 @@ msgstr "Apri Immagini..."
 #: yoga_image_optimizer/file_chooser.py:49
 #: yoga_image_optimizer/file_chooser.py:84
 msgid "Save Image As..."
-msgstr ""
+msgstr "Salva immagine come..."
 
 #: yoga_image_optimizer/image_store.py:357
 msgid "Pending"
@@ -231,11 +237,11 @@ msgstr "Annullato"
 
 #: yoga_image_optimizer/image_store.py:361
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #: yoga_image_optimizer/main_window.py:242
 msgid "— Multiple files selected —"
-msgstr ""
+msgstr "— File multipli selezionati —"
 
 #: yoga_image_optimizer/main_window.py:318
 msgid "Input Image / Output Image"
