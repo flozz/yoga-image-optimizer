@@ -210,7 +210,7 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
-  * Nothing yet :)
+  * Updated Italian translation (@albanobattistella, #39)
 
 * **v1.2.1:**
 
