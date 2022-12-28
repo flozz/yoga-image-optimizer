@@ -172,7 +172,7 @@ msgstr "Restablecer los valores con las dimensiones originales de la imagen"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:715
 msgid "Transformations"
-msgstr "Redimensionar"
+msgstr "Transformaciones"
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
