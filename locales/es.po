@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-29 13:56+0200\n"
-"PO-Revision-Date: 2022-09-18 16:34+0200\n"
+"PO-Revision-Date: 2022-12-28 13:26-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: yoga_image_optimizer/data/ui/custom-pattern-dialog.glade:7
 msgid "Custom Pattern"
@@ -160,7 +160,7 @@ msgstr "Archivo de salida"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:592
 msgid "Output"
-msgstr ""
+msgstr "Salida"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:611
 msgid "Maximum size"
@@ -172,7 +172,7 @@ msgstr "Restablecer los valores con las dimensiones originales de la imagen"
 
 #: yoga_image_optimizer/data/ui/main-window.glade:715
 msgid "Transformations"
-msgstr ""
+msgstr "Transformaciones"
 
 #: yoga_image_optimizer/about_dialog.py:17
 msgid ""
@@ -238,7 +238,7 @@ msgstr "Cancelado"
 
 #: yoga_image_optimizer/image_store.py:361
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: yoga_image_optimizer/main_window.py:242
 msgid "— Multiple files selected —"
