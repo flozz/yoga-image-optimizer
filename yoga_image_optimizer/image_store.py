@@ -4,12 +4,18 @@ from pathlib import Path
 
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
+from gi.repository import Pango
 
 from . import helpers
 from .data_helpers import find_data_path
 from .image_formats import IMAGES_FORMATS
 from .translation import format_string
 from .translation import gettext as _
+
+
+_PANGO_MARKUP_SUPPORTS_RELATIVE_SIZE = (
+    Pango.VERSION_MAJOR >= 1 and Pango.VERSION_MINOR >= 49
+)
 
 
 THUMBNAIL_INPROGRESS = GdkPixbuf.Pixbuf.new_from_file(
@@ -268,12 +274,15 @@ class ImageStore(object):
                     self.get(index)["resize_height"] / self.get(index)["image_height"],
                 )
                 if ratio < 1.0:
-                    resize = (
-                        '<span font_size="75%%" font_weight="400">↓ %i×%i px</span>'
-                        % (
-                            self.get(index)["image_width"] * ratio,
-                            self.get(index)["image_height"] * ratio,
+                    if _PANGO_MARKUP_SUPPORTS_RELATIVE_SIZE:
+                        markup = (
+                            '<span font_size="75%%" font_weight="400">↓ %i×%i px</span>'
                         )
+                    else:
+                        markup = '<span font_weight="400">↓ %i×%i px</span>'
+                    resize = markup % (
+                        self.get(index)["image_width"] * ratio,
+                        self.get(index)["image_height"] * ratio,
                     )
 
             if resize:
@@ -354,13 +363,16 @@ class ImageStore(object):
 
             if output_size > 0:
                 size_delta = -(100 - output_size / input_size * 100)
-                output_size_display = (
-                    '%s\n<span font_size="75%%" font_weight="400">%s%s %%</span>'
-                    % (
-                        helpers.human_readable_file_size(output_size),
-                        "+" if output_size > input_size else "",
-                        format_string("%.1f", size_delta),
+                if _PANGO_MARKUP_SUPPORTS_RELATIVE_SIZE:
+                    markup = (
+                        '%s\n<span font_size="75%%" font_weight="400">%s%s %%</span>'
                     )
+                else:
+                    markup = '%s\n<span font_weight="400">%s%s %%</span>'
+                output_size_display = markup % (
+                    helpers.human_readable_file_size(output_size),
+                    "+" if output_size > input_size else "",
+                    format_string("%.1f", size_delta),
                 )
                 optimization_success = "⚠️ " if input_size < output_size else ""
             else:
