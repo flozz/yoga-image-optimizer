@@ -67,6 +67,21 @@
 
     <releases>
 
+        <release version="1.2.2" date="2022-12-30">
+            <description>
+                <p>Bug fix:</p>
+                <ul>
+                    <li>Fixed an issue that prevents the update of the view with older
+                        Pango versions (@flozz, #41)</li>
+                </ul>
+                <p>Translations:</p>
+                <ul>
+                    <li>Updated Italian translation (@albanobattistella, #39)</li>
+                    <li>Updated Spanish translation (@haggen88, #42)</li>
+                </ul>
+            </description>
+        </release>
+
         <release version="1.2.1" date="2022-11-22">
             <description>
                 <p>Fixes / improvements:</p>

@@ -210,10 +210,19 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
-  * Fixed an issue that prevents the update of the view with older Pango
-    versions (@flozz, #41)
-  * Updated Italian translation (@albanobattistella, #39)
-  * Updated Spanish translation (@haggen88, #42)
+  * Nothing yet ;)
+
+* **v1.2.2:**
+
+  * Bug fix:
+
+    * Fixed an issue that prevents the update of the view with older Pango
+      versions (@flozz, #41)
+
+  * Translations:
+
+    * Updated Italian translation (@albanobattistella, #39)
+    * Updated Spanish translation (@haggen88, #42)
 
 * **v1.2.1:**
 
