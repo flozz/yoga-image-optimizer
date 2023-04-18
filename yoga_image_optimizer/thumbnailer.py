@@ -26,7 +26,7 @@ def preview_gdk_pixbuf_from_image(image_path, size=64):
     :rtype: GdkPixbuf.Pixbuff
     """
     # Since Pillow v9.1.0, constants on the Image object are deprecated and
-    # will be removed in Pillow v10.0.0. This code ansure the compatibility
+    # will be removed in Pillow v10.0.0. This code ensures the compatibility
     # with all versions.
     # See: https://pillow.readthedocs.io/en/stable/deprecations.html#constants
     Resampling = Image
