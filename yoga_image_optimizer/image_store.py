@@ -24,7 +24,6 @@ THUMBNAIL_INPROGRESS = GdkPixbuf.Pixbuf.new_from_file(
 
 
 class ImageStore(object):
-
     # fmt: off
     FIELDS = {
         "input_file":            {"id":  0, "type": str,              "default": ""},

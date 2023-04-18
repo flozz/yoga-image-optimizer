@@ -24,7 +24,6 @@ from .thumbnailer import Thumbnailer
 
 
 class YogaImageOptimizerApplication(Gtk.Application):
-
     STATE_MANAGE_IMAGES = "manage"
     STATE_OPTIMIZE = "optimize"
     STATE_SHUTDOWN = "shutdown"
