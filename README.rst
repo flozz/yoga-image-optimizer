@@ -133,12 +133,9 @@ Translate YOGA Image Optimizer
 
 You can help translating it if the software is not available on your language.
 
-To translate YOGA Image Optimizer, you can:
+To translate YOGA Image Optimizer, you can submit your translations creating a pull request on GitHub.
 
-* Submit your translations creating a pull request on GitHub
-* Translate online via `POEditor <https://poeditor.com/join/project/RoQ2r9rv89>`_
-
-If you submit your translations with a pull request on GitHub. Do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, email is optional)::
+Do not forget to add your name as the translation of the ``translator-credits`` key (one name per line, email is optional)::
 
     #: yoga_image_optimizer/about_dialog.py:38
     msgid "translator-credits"
