@@ -8,7 +8,11 @@ from . import data_helpers
 
 if "LANG" not in os.environ:
     language, encoding = locale.getlocale()
-    os.environ["LANG"] = language
+    if language:
+        os.environ["LANG"] = language
+    else:
+        print("W: Unable to determine the current locale. Fallback to 'C'.")
+        os.environ["LANG"] = "C"
 
 translation = gettext.translation(
     APPLICATION_ID,
