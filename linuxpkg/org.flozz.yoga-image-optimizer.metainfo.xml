@@ -67,6 +67,16 @@
 
     <releases>
 
+        <release version="1.2.3" date="2023-09-02">
+            <description>
+                <p>Bug fix:</p>
+                <ul>
+                    <li>Fixed crash when the system local cannot be determined (@flozz,
+                        #43)</li>
+                </ul>
+            </description>
+        </release>
+
         <release version="1.2.2" date="2022-12-30">
             <description>
                 <p>Bug fix:</p>
@@ -110,7 +120,8 @@
                     <li>Sped up thumbnail loading on Linux by using already generated
                         thumbnails from the shared cache</li>
                     <li>Sped up thumbnail generation using BOX sampling instead of
-                        LANCZOS</li>
+                        LANCZOS
+                    </li>
                     <li>Displayed a warning icon if the output image is larger than
                         the input one</li>
                 </ul>

@@ -207,6 +207,10 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
+  * Nothing yet ;)
+
+* **v1.2.3:**
+
   * Fixed crash when the system local cannot be determined (@flozz, #43)
 
 * **v1.2.2:**
