@@ -71,8 +71,9 @@
             <description>
                 <p>Bug fix:</p>
                 <ul>
-                    <li>Fixed crash when the system local cannot be determined (@flozz,
-                        #43)</li>
+                    <li>Fixed crash when the system locale cannot be determined (@flozz,
+                        #43)
+                    </li>
                 </ul>
             </description>
         </release>

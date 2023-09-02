@@ -211,7 +211,7 @@ Changelog
 
 * **v1.2.3:**
 
-  * Fixed crash when the system local cannot be determined (@flozz, #43)
+  * Fixed crash when the system locale cannot be determined (@flozz, #43)
 
 * **v1.2.2:**
 
