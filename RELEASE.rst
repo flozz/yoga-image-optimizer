@@ -49,6 +49,7 @@ Package repo: https://github.com/flathub/org.flozz.yoga-image-optimizer
 
 * Update commit **tag and hash** in org.flozz.yoga-image-optimizer.yml
 * Update dependencies (``./update-dependencies.sh``)
+* Update Freedesktop SDK / Platform (https://gitlab.com/freedesktop-sdk/freedesktop-sdk/)
 * Test the package:
 
   * Install the SDK: ``flatpak install flathub org.freedesktop.Sdk//22.08``
