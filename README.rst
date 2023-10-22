@@ -14,7 +14,7 @@ Requirements
 
 * PyCairo
 * PyGObject ≥ 3.36
-* Python ≥ 3.7
+* Python ≥ 3.8
 * YOGA ≥ 1.1.0
 
 
@@ -161,11 +161,11 @@ or run the tests::
 
 You can use following commands to run the tests only on a certain Python version (the corresponding Python interpreter must be installed on your machine)::
 
-    nox --session test-3.7
     nox --session test-3.8
     nox --session test-3.9
     nox --session test-3.10
     nox --session test-3.11
+    nox --session test-3.12
 
 You can also fix coding style errors automatically with::
 
@@ -207,7 +207,8 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
-  * Nothing yet ;)
+  * chore: Added Python 3.12 support
+  * chore!: Removed Python 3.7 support
 
 * **v1.2.3:**
 
