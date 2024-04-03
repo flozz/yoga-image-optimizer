@@ -261,9 +261,11 @@ class ImageStore(object):
             elif output_format == "png":
                 format_ = "%s%s" % (
                     IMAGES_FORMATS["png"]["display_name"],
-                    (" (%s)" % "slow")
-                    if self.get(index)["png_slow_optimization"]
-                    else "",
+                    (
+                        (" (%s)" % "slow")
+                        if self.get(index)["png_slow_optimization"]
+                        else ""
+                    ),
                 )
 
             resize = ""
