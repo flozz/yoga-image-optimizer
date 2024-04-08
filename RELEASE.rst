@@ -70,3 +70,9 @@ Package repo: https://github.com/flathub/org.flozz.yoga-image-optimizer
 * Make a release on Github
 * Add changelog
 * Add Windows Zip and Installer files to the release
+
+
+6. Update website
+-----------------
+
+* Publish a news on yoga.flozz.org
