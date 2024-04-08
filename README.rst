@@ -207,6 +207,10 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
+  * Nothing yet ;)
+
+* **v1.2.4:**
+
   * i18n: Updated Occitan translation (@Mejans, #53)
   * misc: Added Python 3.12 support (@flozz)
   * misc!: Removed Python 3.7 support (@flozz)

@@ -18,7 +18,7 @@ class AboutDialog(Gtk.AboutDialog):
                 "JPEG, PNG and WebP images (based on YOGA)"
             ),
             version=VERSION,
-            copyright="Copyright (c) 2021-2023 Fabien LOISON",
+            copyright="Copyright (c) 2021-2024 Fabien LOISON",
             website_label="yoga.flozz.org",
             website="https://yoga.flozz.org/",
             license_type=Gtk.License.GPL_3_0,

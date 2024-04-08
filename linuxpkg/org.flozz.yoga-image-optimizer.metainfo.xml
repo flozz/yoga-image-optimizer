@@ -67,6 +67,16 @@
 
     <releases>
 
+        <release version="1.2.4" date="2024-04-08">
+            <description>
+                <ul>
+                    <li>i18n: Updated Occitan translation (@Mejans, #53)</li>
+                    <li>misc: Added Python 3.12 support (@flozz)</li>
+                    <li>misc!: Removed Python 3.7 support (@flozz)</li>
+                </ul>
+            </description>
+        </release>
+
         <release version="1.2.3" date="2023-09-02">
             <description>
                 <p>Bug fix:</p>
