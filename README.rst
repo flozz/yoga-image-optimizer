@@ -15,7 +15,7 @@ Requirements
 * PyCairo
 * PyGObject ≥ 3.36
 * Python >= 3.9
-* YOGA >= 1.1.0
+* `YOGA <https://github.com/wanadev/yoga>`_ >= 1.1.0
 
 
 Installation
